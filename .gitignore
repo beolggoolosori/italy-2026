@@ -1,0 +1,4 @@
+# Only track html files for GitHub Pages
+*
+!*.html
+!.gitignore

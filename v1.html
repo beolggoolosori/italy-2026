@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Italy Trip Planner 2026</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',-apple-system,'Noto Sans KR',sans-serif;background:#f5f5f5;color:#1a1a1a;line-height:1.6}
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-thumb{background:#bbb;border-radius:3px}
+
+/* Header */
+.header{background:#fff;padding:20px 28px;border-bottom:2px solid #e0e0e0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.header h1{font-size:22px;color:#1a1a1a}
+.header h1 .flag{font-size:26px}
+.badge{background:#2563eb;color:#fff;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700;margin-left:8px}
+.header-sub{color:#666;font-size:12px}
+
+/* Course Tabs */
+.course-tabs{display:flex;background:#fff;border-bottom:2px solid #e0e0e0;overflow-x:auto}
+.course-tab{padding:14px 24px;cursor:pointer;font-size:14px;font-weight:700;border-bottom:3px solid transparent;color:#888;transition:all .2s;white-space:nowrap}
+.course-tab:hover{color:#333;background:#f9f9f9}
+.course-tab.active{color:#2563eb;border-bottom-color:#2563eb;background:#f0f5ff}
+.course-tab .sub{font-size:10px;font-weight:400;color:#999;display:block}
+.course-tab.active .sub{color:#6b9eff}
+
+/* Section Tabs */
+.section-tabs{display:flex;background:#fafafa;border-bottom:1px solid #e0e0e0;overflow-x:auto}
+.sec-tab{padding:10px 18px;cursor:pointer;font-size:12px;font-weight:600;color:#999;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap}
+.sec-tab:hover{color:#555}
+.sec-tab.active{color:#d97706;border-bottom-color:#d97706}
+
+/* Content */
+.course-content{display:none}
+.course-content.active{display:block}
+.section-content{display:none}
+.section-content.active{display:block}
+
+/* Map */
+#map{width:100%;height:45vh;min-height:300px;border-bottom:1px solid #e0e0e0}
+
+/* Calendar */
+.cal-wrap{padding:20px 24px;background:#fff}
+.cal-wrap h3{font-size:15px;color:#333;margin-bottom:12px}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:16px}
+.cal-header{background:#f0f0f0;padding:6px;text-align:center;font-size:11px;font-weight:700;color:#666}
+.cal-header.sun{color:#dc2626}
+.cal-cell{min-height:80px;background:#fff;border:1px solid #e8e8e8;padding:4px 6px;font-size:10px;position:relative;transition:all .2s}
+.cal-cell.empty{background:#fafafa;border-color:#f0f0f0}
+.cal-cell.trip{background:#eff6ff;border-color:#93c5fd}
+.cal-cell.trip:hover{background:#dbeafe;box-shadow:0 2px 8px rgba(37,99,235,.12)}
+.cal-date{font-weight:700;font-size:12px;color:#333;margin-bottom:2px}
+.cal-cell.sun .cal-date{color:#dc2626}
+.cal-city{font-size:10px;font-weight:700;color:#2563eb;line-height:1.3}
+.cal-detail{font-size:9px;color:#666;line-height:1.3;margin-top:1px}
+.cal-transport{font-size:8px;color:#fff;background:#d97706;padding:1px 4px;border-radius:3px;display:inline-block;margin-top:2px}
+.cal-nights{position:absolute;top:3px;right:4px;font-size:8px;background:#2563eb;color:#fff;padding:0 4px;border-radius:3px}
+
+/* Route Overview */
+.route-section{padding:20px 24px;background:#fff;border-top:1px solid #e8e8e8}
+.route-section h3{font-size:15px;margin-bottom:12px}
+.route-flow{display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin-bottom:16px}
+.route-city{background:#eff6ff;border:1px solid #93c5fd;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;color:#1e40af}
+.route-city.overnight{background:#2563eb;color:#fff;border-color:#2563eb}
+.route-arrow{color:#999;font-size:14px}
+.route-transport{font-size:9px;color:#d97706;text-align:center;max-width:80px}
+
+/* Stats */
+.stats-row{display:flex;gap:10px;padding:16px 24px;overflow-x:auto;background:#fff;border-top:1px solid #e8e8e8}
+.stat{background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;padding:12px 16px;flex:1;min-width:120px}
+.stat .label{font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.stat .value{font-size:18px;font-weight:800;color:#1a1a1a;margin-top:2px}
+.stat .sub{font-size:10px;color:#6b7280}
+
+/* Transport Table */
+.transport-section{padding:20px 24px;background:#fff;border-top:1px solid #e8e8e8}
+.transport-section h3{font-size:15px;margin-bottom:12px}
+.t-table{width:100%;border-collapse:collapse;font-size:11px}
+.t-table th{background:#f3f4f6;padding:8px 10px;text-align:left;font-size:10px;color:#6b7280;font-weight:700;border-bottom:2px solid #e5e7eb;position:sticky;top:0}
+.t-table td{padding:8px 10px;border-bottom:1px solid #f3f4f6;vertical-align:top}
+.t-table tr:hover{background:#f9fafb}
+.t-table .day-col{font-weight:700;color:#2563eb;white-space:nowrap;width:55px}
+.t-table .route-col{font-weight:600;color:#1a1a1a}
+.t-table .mode-col{color:#d97706;font-weight:600}
+.t-table .time-col{color:#666}
+.t-table .cost-col{color:#059669;font-weight:600;white-space:nowrap}
+.book-link{display:inline-block;background:#2563eb;color:#fff;padding:2px 8px;border-radius:4px;text-decoration:none;font-size:9px;font-weight:600;transition:background .2s}
+.book-link:hover{background:#1d4ed8}
+
+/* Itinerary */
+.itin-section{padding:16px 24px;background:#fff;border-top:1px solid #e8e8e8}
+.day-block{background:#fff;border:1px solid #e5e7eb;border-radius:10px;margin-bottom:12px;overflow:hidden}
+.day-header{padding:12px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:background .2s}
+.day-header:hover{background:#f9fafb}
+.day-header.open{background:#eff6ff;border-bottom:1px solid #e0e0e0}
+.day-header .left{display:flex;align-items:center;gap:10px}
+.day-num{background:#2563eb;color:#fff;padding:2px 8px;border-radius:6px;font-size:12px;font-weight:700}
+.day-date{font-size:12px;color:#666}
+.day-city{font-size:14px;font-weight:700;color:#1a1a1a}
+.day-theme{font-size:11px;color:#d97706;font-style:italic}
+.day-toggle{font-size:18px;color:#999;transition:transform .2s}
+.day-header.open .day-toggle{transform:rotate(180deg)}
+.day-body{display:none;padding:0}
+.day-header.open+.day-body{display:block}
+.sched-table{width:100%;border-collapse:collapse}
+.sched-table td{padding:6px 12px;border-bottom:1px solid #f3f4f6;font-size:11px;vertical-align:top}
+.sched-table td:first-child{width:50px;font-weight:700;color:#d97706;white-space:nowrap}
+.sched-table td:nth-child(2){font-weight:600;color:#1a1a1a;min-width:140px}
+.sched-table td:nth-child(3){color:#555}
+.tag-food{background:#fef3c7;color:#92400e;padding:1px 5px;border-radius:3px;font-size:9px;font-weight:600;margin-left:4px}
+.tag-move{background:#dbeafe;color:#1e40af;padding:1px 5px;border-radius:3px;font-size:9px;font-weight:600;margin-left:4px}
+.tag-spot{background:#dcfce7;color:#166534;padding:1px 5px;border-radius:3px;font-size:9px;font-weight:600;margin-left:4px}
+.highlight-row td{background:#fff7ed}
+.cost-row td{background:#f0fdf4;color:#059669 !important;font-weight:600 !important;font-size:10px !important}
+.couple-mark{color:#ec4899;font-size:10px}
+
+/* Budget */
+.budget-section{padding:20px 24px;background:#fff;border-top:1px solid #e8e8e8}
+.budget-section h3{font-size:15px;margin-bottom:12px}
+.budget-bars{display:flex;flex-direction:column;gap:8px}
+.b-row{display:flex;align-items:center;gap:10px}
+.b-row .lbl{width:65px;font-size:11px;color:#666;text-align:right;font-weight:600}
+.b-bar-wrap{flex:1;height:24px;background:#f3f4f6;border-radius:4px;overflow:hidden}
+.b-bar{height:100%;border-radius:4px;display:flex;align-items:center;padding:0 8px;font-size:10px;font-weight:700;color:#fff}
+.b-row .amt{width:80px;font-size:11px;color:#666}
+.budget-total{margin-top:12px;padding:12px 16px;background:#f0f5ff;border-radius:8px;display:flex;justify-content:space-around;text-align:center}
+.budget-total .item .val{font-size:20px;font-weight:800;color:#1e40af}
+.budget-total .item .lbl{font-size:10px;color:#666}
+
+/* Compare */
+.compare-section{padding:20px 24px;background:#fff;border-top:1px solid #e8e8e8}
+.compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.compare-card{border:2px solid #e5e7eb;border-radius:12px;padding:16px;position:relative}
+.compare-card.current{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.compare-card .card-badge{position:absolute;top:-10px;right:12px;background:#2563eb;color:#fff;padding:2px 10px;border-radius:6px;font-size:10px;font-weight:700}
+.compare-card h4{font-size:15px;margin-bottom:2px}
+.compare-card .card-sub{font-size:11px;color:#666;margin-bottom:8px}
+.compare-card .card-route{font-size:10px;color:#888;margin-bottom:10px;line-height:1.4}
+.compare-card .pros{margin-top:8px}
+.compare-card .pros li{font-size:11px;margin-bottom:3px;color:#059669}
+.compare-card .cons li{font-size:11px;margin-bottom:3px;color:#dc2626}
+.compare-card .card-price{font-size:22px;font-weight:800;color:#1a1a1a;margin:8px 0}
+.compare-card .card-price small{font-size:12px;color:#666;font-weight:400}
+
+footer{text-align:center;padding:16px;color:#999;font-size:10px;border-top:1px solid #e8e8e8;background:#fff}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1><span class="flag">🇮🇹</span> Italy Trip Planner 2026 <span class="badge">12N 13D</span></h1>
+    <div class="header-sub">2026.09.16(수) ~ 09.28(월) | KE931/KE928 | Couple</div>
+  </div>
+</div>
+
+<div class="course-tabs" id="courseTabs">
+  <div class="course-tab active" data-course="A">코스 A: 풀코스<span class="sub">남부+마테라 포함</span></div>
+  <div class="course-tab" data-course="B">코스 B: 마테라 제외<span class="sub">나폴리/아말피까지만</span></div>
+  <div class="course-tab" data-course="C">코스 C: 남부 제외<span class="sub">중북부 집중</span></div>
+  <div class="course-tab" data-course="D">코스 D: 돌로미티 3박<span class="sub">산악 집중 + 렌터카</span></div>
+</div>
+
+<div class="section-tabs" id="secTabs">
+  <div class="sec-tab active" data-sec="overview">루트 & 지도</div>
+  <div class="sec-tab" data-sec="calendar">달력</div>
+  <div class="sec-tab" data-sec="itinerary">상세 일정</div>
+  <div class="sec-tab" data-sec="transport">이동수단 & 예매</div>
+  <div class="sec-tab" data-sec="budget">예산</div>
+  <div class="sec-tab" data-sec="compare">3코스 비교</div>
+</div>
+
+<!-- OVERVIEW -->
+<div class="section-content active" id="sec-overview">
+  <div id="map"></div>
+  <div class="route-section"><h3 id="routeTitle">이동 경로</h3><div class="route-flow" id="routeFlow"></div></div>
+  <div class="stats-row" id="statsRow"></div>
+</div>
+
+<!-- CALENDAR -->
+<div class="section-content" id="sec-calendar">
+  <div class="cal-wrap">
+    <h3>September 2026</h3>
+    <div class="cal-grid" id="calGrid"></div>
+  </div>
+</div>
+
+<!-- ITINERARY -->
+<div class="section-content" id="sec-itinerary">
+  <div class="itin-section" id="itinSection"></div>
+</div>
+
+<!-- TRANSPORT -->
+<div class="section-content" id="sec-transport">
+  <div class="transport-section">
+    <h3>이동수단 상세 & 예매 링크</h3>
+    <table class="t-table" id="transportTable">
+      <thead><tr><th>DAY</th><th>구간</th><th>수단</th><th>소요</th><th>비용(2인)</th><th>예매</th></tr></thead>
+      <tbody id="transportBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- BUDGET -->
+<div class="section-content" id="sec-budget">
+  <div class="budget-section">
+    <h3 id="budgetTitle">예산 (2인 기준)</h3>
+    <div class="budget-bars" id="budgetBars"></div>
+    <div class="budget-total" id="budgetTotal"></div>
+  </div>
+</div>
+
+<!-- COMPARE -->
+<div class="section-content" id="sec-compare">
+  <div class="compare-section">
+    <h3>3개 코스 비교</h3>
+    <div class="compare-grid" id="compareGrid"></div>
+  </div>
+</div>
+
+<footer>Italy Trip Planner 2026 | 3 Course Comparison Dashboard</footer>
+
+<script>
+// ===================== DATA =====================
+
+const COURSES = {
+A: {
+  name: "코스 A: 풀코스 (남부+마테라)",
+  route: "로마 → 나폴리 → 폼페이 → 소렌토 → 포지타노 → 아말피 → 살레르노 → 마테라 → 피렌체 → 베네치아 → 돌로미티 → 밀라노",
+  nights: "Roma(2)+Napoli(1)+Sorrento(2)+Matera(1)+Firenze(2)+Venezia(1)+Dolomiti(2)+Milano(1)=12N",
+  totalBudget: 5128, perPerson: 385,
+  budget: [{l:"교통",a:720,c:"#2563eb"},{l:"숙박",a:1620,c:"#7c3aed"},{l:"식비",a:1700,c:"#d97706"},{l:"입장료",a:788,c:"#059669"},{l:"기타",a:300,c:"#9ca3af"}],
+  cities: [
+    {name:"Roma",lat:41.9028,lng:12.4964,n:2,dates:"9/16~17",color:"#ef4444"},
+    {name:"Napoli",lat:40.8518,lng:14.2681,n:1,dates:"9/18",color:"#f97316"},
+    {name:"Pompei",lat:40.7509,lng:14.4866,n:0,dates:"9/19",color:"#d97706"},
+    {name:"Sorrento",lat:40.6263,lng:14.3758,n:2,dates:"9/19~20",color:"#eab308"},
+    {name:"Positano",lat:40.6281,lng:14.4850,n:0,dates:"9/20",color:"#fbbf24"},
+    {name:"Amalfi",lat:40.6340,lng:14.6027,n:0,dates:"9/20",color:"#fbbf24"},
+    {name:"Salerno",lat:40.6824,lng:14.7681,n:0,dates:"9/21",color:"#a3a3a3"},
+    {name:"Matera",lat:40.6664,lng:16.6044,n:1,dates:"9/21",color:"#a78bfa"},
+    {name:"Bari",lat:41.1171,lng:16.8719,n:0,dates:"9/22",color:"#a3a3a3"},
+    {name:"Firenze",lat:43.7696,lng:11.2558,n:2,dates:"9/22~23",color:"#22c55e"},
+    {name:"Venezia",lat:45.4408,lng:12.3155,n:1,dates:"9/24",color:"#06b6d4"},
+    {name:"Cortina",lat:46.5369,lng:12.1357,n:2,dates:"9/25~26",color:"#0ea5e9"},
+    {name:"Milano",lat:45.4642,lng:9.1900,n:1,dates:"9/27~28",color:"#ec4899"}
+  ],
+  calendar: {
+    16:{city:"인천→로마",detail:"KE931 13:20출발\n로마 19:30도착",transport:"Leonardo Exp",nights:"Roma 1N"},
+    17:{city:"로마",detail:"콜로세움+바티칸\n판테온+트레비분수",nights:"Roma 2N"},
+    18:{city:"로마→나폴리",detail:"피자+지하도시\n산세베로 예배당",transport:"Frecciarossa 1h10m",nights:"Napoli"},
+    19:{city:"폼페이→소렌토",detail:"폼페이 유적 3h\n소렌토 석양",transport:"Circumvesuviana",nights:"Sorrento 1N"},
+    20:{city:"아말피 해안",detail:"포지타노+아말피\n페리 해안일주",transport:"페리 3회",nights:"Sorrento 2N"},
+    21:{city:"→마테라",detail:"동굴도시 사시\n야경 산책",transport:"페리+Miccolis 4h",nights:"Matera"},
+    22:{city:"→피렌체",detail:"(이동일)\n두오모+베키오다리",transport:"FAL+열차 8h",nights:"Firenze 1N"},
+    23:{city:"피렌체",detail:"우피치+쿠폴라\n비스테카+미켈란젤로광장",nights:"Firenze 2N"},
+    24:{city:"→베네치아",detail:"곤돌라+치케티\n산마르코+두칼레",transport:"Frecciarossa 2h",nights:"Venezia"},
+    25:{city:"→돌로미티",detail:"코르티나 도착\n팔로리아 전망대",transport:"Cortina Exp 2.5h",nights:"Cortina 1N"},
+    26:{city:"돌로미티",detail:"트레치메 트레킹!\n브라이에스 보트",nights:"Cortina 2N"},
+    27:{city:"→밀라노",detail:"두오모+갤러리아\n나빌리 운하",transport:"버스+열차 6h",nights:"Milano"},
+    28:{city:"밀라노→귀국",detail:"쇼핑+브레라\nKE928 22:00출발",transport:"Malpensa Exp"}
+  },
+  transport: [
+    {day:"D1",route:"인천→로마 FCO",mode:"KE931 직항",time:"12시간",cost:"항공권 별도",link:"https://www.koreanair.com",linkText:"대한항공"},
+    {day:"D1",route:"FCO→Roma Termini",mode:"Leonardo Express",time:"32분",cost:"€28",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
+    {day:"D3",route:"Roma→Napoli",mode:"Frecciarossa",time:"1시간 10분",cost:"€38~90",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
+    {day:"D4",route:"Napoli→Pompei Scavi",mode:"Campania Express",time:"40분",cost:"€30",link:"https://www.eavsrl.it",linkText:"EAV"},
+    {day:"D4",route:"Pompei→Sorrento",mode:"Campania Express",time:"30분",cost:"€30",link:"https://www.eavsrl.it",linkText:"EAV"},
+    {day:"D5",route:"Sorrento→Positano",mode:"페리 (TravelMar)",time:"25분",cost:"€35",link:"https://www.travelmar.it",linkText:"TravelMar"},
+    {day:"D5",route:"Positano→Amalfi",mode:"페리",time:"25분",cost:"€20",link:"https://www.travelmar.it",linkText:"TravelMar"},
+    {day:"D5",route:"Amalfi→Sorrento",mode:"페리",time:"1시간",cost:"€20",link:"https://www.navlib.it",linkText:"NLG"},
+    {day:"D6",route:"Sorrento→Salerno",mode:"페리",time:"1시간",cost:"€30",link:"https://www.travelmar.it",linkText:"TravelMar"},
+    {day:"D6",route:"Salerno→Matera",mode:"Miccolis 직행버스",time:"3시간 10분",cost:"€24",link:"https://www.miccolis-spa.it",linkText:"Miccolis"},
+    {day:"D7",route:"Matera→Bari",mode:"FAL 버스",time:"1시간",cost:"€10",link:"https://ferrovieappulolucane.it",linkText:"FAL"},
+    {day:"D7",route:"Bari→Firenze",mode:"Frecciargento",time:"6시간",cost:"€80",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
+    {day:"D9",route:"Firenze→Venezia",mode:"Frecciarossa",time:"2시간",cost:"€60",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
+    {day:"D9",route:"베네치아 바포레토",mode:"ACTV 24h 패스",time:"종일",cost:"€50",link:"https://actv.avmspa.it",linkText:"ACTV"},
+    {day:"D10",route:"Venezia→Cortina",mode:"Cortina Express",time:"2시간 30분",cost:"€44",link:"https://www.cortinaexpress.it",linkText:"Cortina Exp"},
+    {day:"D12",route:"Cortina→Dobbiaco",mode:"SAD 버스 445",time:"50분",cost:"€13",link:"https://www.sad.it",linkText:"SAD"},
+    {day:"D12",route:"Dobbiaco→Bolzano",mode:"지역열차",time:"2시간 20분",cost:"€22",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
+    {day:"D12",route:"Bolzano→Milano",mode:"EuroCity",time:"3시간",cost:"€54",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
+    {day:"D13",route:"Milano C.→Malpensa",mode:"Malpensa Express",time:"51분",cost:"€30",link:"https://www.malpensaexpress.it",linkText:"Malpensa Exp"},
+    {day:"D13",route:"밀라노→인천",mode:"KE928 직항",time:"11시간",cost:"항공권 별도",link:"https://www.koreanair.com",linkText:"대한항공"},
+  ],
+  days: [
+    {day:1,date:"9/16 수",city:"인천→로마",theme:"로마의 첫 밤, 트라스테베레",
+     sched:[
+      ["13:20","인천 출발","KE931 직항 12시간","move"],
+      ["19:30","로마 FCO 도착","입국심사+수하물 30분",""],
+      ["20:15","FCO→Termini","Leonardo Express 32분 €14/인","move"],
+      ["21:00","호텔 체크인","Termini 근처 €130/박",""],
+      ["21:45","저녁: Flavio al Velavevodetto","카르보나라+카치오에페페+와인 €55","food"],
+      ["23:00","트라스테베레 야경 산책","산타마리아 광장","hl"]
+     ],cost:"€60"},
+    {day:2,date:"9/17 목",city:"로마",theme:"콜로세움 + 바티칸 + 4대 파스타",
+     sched:[
+      ["08:00","아침","카푸치노+코르네또 €10","food"],
+      ["09:00","콜로세움","€16~24/인, 1시간30분. 사전예약!","spot"],
+      ["10:30","포로 로마노+팔라티노","콜로세움 티켓 포함 1시간","spot"],
+      ["11:45","판테온","€5/인, 20분","spot"],
+      ["12:15","점심: Armando al Pantheon","아마트리치아나+살팀보카 €70","food"],
+      ["14:00","젤라토: Gelateria del Teatro","€8","food"],
+      ["14:30","호텔 riposo","시차적응 1시간",""],
+      ["16:00","바티칸 박물관","€21/인, 2시간. 시스티나!","spot"],
+      ["18:00","성 베드로 대성당","무료. 쿠폴라 €8/인","spot"],
+      ["19:00","산탄젤로 다리 석양","","hl"],
+      ["19:45","트레비 분수","야경이 더 아름다움","hl"],
+      ["20:30","아페리티보","Aperol Spritz €22","food"],
+      ["21:00","저녁: Felice a Testaccio","카치오에페페 €70","food"]
+     ],cost:"입장 €116 + 식비 €180 = €296"},
+    {day:3,date:"9/18 금",city:"로마→나폴리",theme:"피자 원조 + 스파카나폴리",
+     sched:[
+      ["08:00","아침","바에서 €10","food"],
+      ["09:10","Roma→Napoli","Frecciarossa 1시간10분","move"],
+      ["10:40","호텔 짐 맡기기","Centro Storico €100/박",""],
+      ["11:30","나폴리 지하도시","€12/인, 1시간30분","spot"],
+      ["13:00","점심: Pizzeria Sorbillo","Margherita+Pizza Fritta €25","food"],
+      ["14:00","스포글리아텔라","Attanasio €8","food"],
+      ["14:30","산세베로 예배당","'베일의 그리스도' €10/인","spot"],
+      ["15:30","카스텔 델로보","외관 (리노베이션중)",""],
+      ["16:30","룽고마레 산책","베수비오 배경","hl"],
+      ["18:30","아페리티보","키아이아 와인바 €18","food"],
+      ["19:30","저녁: Mattozzi","봉골레+해산물+Lacryma Christi €60","food"]
+     ],cost:"입장 €44 + 식비 €121 = €165"},
+    {day:4,date:"9/19 토",city:"폼페이→소렌토",theme:"고대 유적 + 소렌토 석양",
+     sched:[
+      ["08:00","아침: Caffe Gambrinus","1860년 명카페 €12","food"],
+      ["09:15","Napoli→Pompei Scavi","Campania Exp/Circumvesuviana 40분","move"],
+      ["10:00","폼페이 유적","€18/인, 3시간","spot"],
+      ["13:00","폼페이 점심","가지 파르미지아나 €35","food"],
+      ["14:00","Pompei→Sorrento","Circumvesuviana 30분","move"],
+      ["15:45","마리나 그란데","옛 어촌마을","hl"],
+      ["16:30","리몬첼로 시음","레몬밭 투어 €12/인","spot"],
+      ["17:30","Villa Comunale 전망대","나폴리만 파노라마","hl"],
+      ["19:30","저녁: 'O Parrucchiano","레몬나무 정원식당 €65","food"]
+     ],cost:"입장 €61 + 식비 €113 = €174"},
+    {day:5,date:"9/20 일",city:"아말피 해안",theme:"세계에서 가장 아름다운 해안",
+     sched:[
+      ["08:00","아침","€12","food"],
+      ["08:45","Sorrento→Positano","페리 25분 or SITA버스","move"],
+      ["10:00","포지타노 마을 산책","Via dei Mulini, 부티크","hl"],
+      ["10:45","스피아자 그란데 해변","해변 휴식",""],
+      ["12:00","점심: Da Vincenzo","레몬 리조또+해산물 €70","food"],
+      ["13:30","Positano→Amalfi","페리 25분 해안절경!","move"],
+      ["14:15","아말피 대성당","아랍-노르만 양식 €5/인","spot"],
+      ["15:15","제지박물관","13세기 수동제지 €5/인","spot"],
+      ["16:30","Amalfi→Sorrento","페리 1시간","move"],
+      ["19:30","저녁: Bagni Delfino","바다위 레스토랑 €65","food"]
+     ],cost:"입장 €19 + 식비 €161 = €180"},
+    {day:6,date:"9/21 월",city:"→마테라",theme:"동굴도시의 마법",
+     sched:[
+      ["07:30","아침","€10","food"],
+      ["08:30","Sorrento→Salerno","페리 1시간","move"],
+      ["10:15","Salerno→Matera","Miccolis 직행 3시간10분","move"],
+      ["14:00","동굴호텔 체크인","€160","hl"],
+      ["14:30","점심","오레키에테 파스타 €42","food"],
+      ["15:30","사시 디 마테라","UNESCO 세계문화유산","spot"],
+      ["16:30","Casa Grotta 동굴주거지","€5/인","spot"],
+      ["17:15","Belvedere 전망대","사시 파노라마","hl"],
+      ["19:30","석양: P.za San Pietro","사시에 금빛","hl"],
+      ["20:00","저녁: Regiacorte","테라스뷰 €55","food"],
+      ["22:00","마테라 야경 산책","조명 켜진 사시","hl"]
+     ],cost:"입장 €10 + 식비 €107 = €117"},
+    {day:7,date:"9/22 화",city:"마테라→피렌체",theme:"이동일 + 피렌체 첫 석양",
+     sched:[
+      ["07:30","마테라 일출 산책","Belvedere 새벽","hl"],
+      ["08:00","아침","호텔조식 €12","food"],
+      ["09:00","Matera→Bari","FAL 버스 1시간","move"],
+      ["10:30","Bari→Firenze","Frecciargento 6시간","move"],
+      ["16:30","피렌체 도착","",""],
+      ["17:00","호텔 체크인","€130/박",""],
+      ["17:15","두오모 광장","종탑 €15/인","spot"],
+      ["18:00","베키오 다리","아르노강 석양","hl"],
+      ["18:30","아페리티보","Negroni €22","food"],
+      ["19:30","저녁: Il Santo Bevitore","포르치니 리조또+키안티 €70","food"]
+     ],cost:"교통 €122 + 식비 €116 = €238"},
+    {day:8,date:"9/23 수",city:"피렌체",theme:"르네상스 + 비스테카",
+     sched:[
+      ["08:00","아침: Ditta Artigianale","스페셜티 커피 €12","food"],
+      ["08:30","우피치 미술관","€29/인, 2시간30분","spot"],
+      ["11:20","가죽 시장","가방 €50~150",""],
+      ["12:00","점심: All'Antico Vinaio","스키아챠타 €16","food"],
+      ["13:00","아카데미아 미술관","다비드 원본! €20/인","spot"],
+      ["14:30","riposo","1시간30분 휴식",""],
+      ["16:00","두오모 쿠폴라","€30/인, 463계단","spot"],
+      ["17:45","젤라토: Vivoli","€8","food"],
+      ["18:00","미켈란젤로 광장","피렌체 일몰 최고!","hl"],
+      ["19:30","저녁: Buca Mario","비스테카 1.2kg €90","food"]
+     ],cost:"입장 €176 + 식비 €138 = €314"},
+    {day:9,date:"9/24 목",city:"→베네치아",theme:"곤돌라 + 치케티 + 야경",
+     sched:[
+      ["08:00","아침+체크아웃","€10","food"],
+      ["09:10","Firenze→Venezia","Frecciarossa 2시간","move"],
+      ["11:20","바포레토","24h패스 €25/인","move"],
+      ["12:30","치케티 바 호핑","All'Arco→Do Mori €38","food"],
+      ["14:00","리알토 다리","대운하 뷰","hl"],
+      ["14:50","산마르코 종탑","€10/인 360° 파노라마","spot"],
+      ["15:30","두칼레 궁전","€30/인, 탄식의 다리","spot"],
+      ["17:00","Caffe Florian","1720년 명카페 €25","food"],
+      ["17:45","곤돌라","30분 €80 석양!","hl"],
+      ["18:30","산 조르조 마조레","종탑 €8/인 최고뷰","spot"],
+      ["20:00","저녁: Osteria Boccadoro","먹물리조또+해산물 €85","food"],
+      ["22:00","베네치아 야경","리알토+산마르코","hl"]
+     ],cost:"입장 €182 + 식비 €173 = €355"},
+    {day:10,date:"9/25 금",city:"→돌로미티",theme:"알프스로! 코르티나",
+     sched:[
+      ["07:30","아침+체크아웃","€12","food"],
+      ["09:00","Venezia→Cortina","Cortina Express 2.5시간","move"],
+      ["12:00","호텔 체크인","€150/박",""],
+      ["12:30","점심","카네데를리+폴렌타 €50","food"],
+      ["13:30","코르티나 마을 산책","Corso Italia",""],
+      ["14:30","팔로리아 전망대","케이블카 €28/인","spot"],
+      ["17:00","미수리나 호수(선택)","택시 30분","hl"],
+      ["19:00","알펜글로우","봉우리가 핑크~오렌지","hl"],
+      ["19:30","저녁: Baita Fraina","사슴고기+포르치니 €75","food"],
+      ["21:30","별 감상","돌로미티 밤하늘","hl"]
+     ],cost:"식비 €147 + 케이블카 €56 = €203"},
+    {day:11,date:"9/26 토",city:"돌로미티",theme:"트레치메 + 브라이에스 보트",
+     sched:[
+      ["06:30","아침","호텔조식 든든하게","food"],
+      ["07:15","코르티나→트레치메","버스/셔틀 1시간","move"],
+      ["08:15","트레치메 순환 트레킹","9.5km 3~3.5시간","spot"],
+      ["09:15","트레치메 포토스팟","인생샷!","hl"],
+      ["10:15","Rifugio Locatelli","핫초코+슈트루델 €10","food"],
+      ["12:00","점심: Rifugio Auronzo","카네데를리+맥주 €35","food"],
+      ["13:00","→브라이에스 호수","버스/택시 40분","move"],
+      ["14:00","보트 타기!","로잉보트 30분 €18","hl"],
+      ["14:45","호수 산책","3.5km 루프 1시간",""],
+      ["19:00","알펜글로우","","hl"],
+      ["19:30","저녁","폴렌타+사슴스튜 €68","food"]
+     ],cost:"식비 €121 + 교통/보트 €98 = €219"},
+    {day:12,date:"9/27 일",city:"→밀라노",theme:"돌로미티 작별 + 두오모",
+     sched:[
+      ["07:30","아침+체크아웃","호텔조식","food"],
+      ["08:30","Cortina→Dobbiaco","SAD버스 50분 €6.5/인","move"],
+      ["09:30","Dobbiaco→Bolzano","지역열차 2시간20분","move"],
+      ["12:15","Bolzano→Milano","EuroCity 3시간 €25/인","move"],
+      ["15:45","밀라노 두오모","옥상 €14/인","spot"],
+      ["16:45","갤러리아","프라다/구찌",""],
+      ["18:00","아페리티보 밀라네제","Bar Basso €22","food"],
+      ["19:00","나빌리 운하","운하지구","hl"],
+      ["19:30","저녁: Trattoria Milanese","리조또+오소부코 €75","food"]
+     ],cost:"교통 €95 + 식비 €111 = €206"},
+    {day:13,date:"9/28 월",city:"밀라노→귀국",theme:"쇼핑 + 귀국",
+     sched:[
+      ["08:30","아침: Marchesi 1824","1824년 명카페 €18","food"],
+      ["09:30","최후의 만찬(예약시)","€17/인 (월요일 휴관 가능!)","spot"],
+      ["10:00","브레라 지구","아트갤러리, 앤틱숍",""],
+      ["11:00","쇼핑","Via Montenapoleone",""],
+      ["12:30","점심: Luini Panzerotti","€48","food"],
+      ["15:00","마지막 젤라토","€8","food"],
+      ["16:00","Milano→Malpensa","Malpensa Express 51분 €15/인","move"],
+      ["17:30","Tax Free 환급","세관→환급카운터",""],
+      ["22:00","MXP 출발","KE928 직항",""],
+      ["+1 16:35","인천 도착","",""]
+     ],cost:"입장 €34 + 식비 €74 = €108"}
+  ]
+},
+
+B: {
+  name: "코스 B: 마테라 제외 (나폴리/아말피까지)",
+  route: "로마 → 나폴리 → 폼페이 → 소렌토 → 포지타노 → 아말피 → 피렌체(+피사) → 베네치아 → 돌로미티 → 밀라노",
+  nights: "Roma(2)+Napoli(1)+Sorrento(2)+Firenze(3)+Venezia(1)+Dolomiti(2)+Milano(1)=12N",
+  totalBudget: 4850, perPerson: 364,
+  budget: [{l:"교통",a:580,c:"#2563eb"},{l:"숙박",a:1590,c:"#7c3aed"},{l:"식비",a:1600,c:"#d97706"},{l:"입장료",a:780,c:"#059669"},{l:"기타",a:300,c:"#9ca3af"}],
+  cities: [
+    {name:"Roma",lat:41.9028,lng:12.4964,n:2,dates:"9/16~17",color:"#ef4444"},
+    {name:"Napoli",lat:40.8518,lng:14.2681,n:1,dates:"9/18",color:"#f97316"},
+    {name:"Pompei",lat:40.7509,lng:14.4866,n:0,dates:"9/19",color:"#d97706"},
+    {name:"Sorrento",lat:40.6263,lng:14.3758,n:2,dates:"9/19~20",color:"#eab308"},
+    {name:"Positano",lat:40.6281,lng:14.4850,n:0,dates:"9/20",color:"#fbbf24"},
+    {name:"Amalfi",lat:40.6340,lng:14.6027,n:0,dates:"9/20",color:"#fbbf24"},
+    {name:"Firenze",lat:43.7696,lng:11.2558,n:3,dates:"9/21~23",color:"#22c55e"},
+    {name:"Pisa",lat:43.7228,lng:10.4017,n:0,dates:"9/23",color:"#86efac"},
+    {name:"Venezia",lat:45.4408,lng:12.3155,n:1,dates:"9/24",color:"#06b6d4"},
+    {name:"Cortina",lat:46.5369,lng:12.1357,n:2,dates:"9/25~26",color:"#0ea5e9"},
+    {name:"Milano",lat:45.4642,lng:9.1900,n:1,dates:"9/27~28",color:"#ec4899"}
+  ],
+  calendar: {
+    16:{city:"인천→로마",detail:"KE931 13:20출발\n로마 19:30도착",transport:"Leonardo Exp",nights:"Roma 1N"},
+    17:{city:"로마",detail:"콜로세움+바티칸\n판테온+트레비분수",nights:"Roma 2N"},
+    18:{city:"로마→나폴리",detail:"피자+지하도시\n산세베로 예배당",transport:"Frecciarossa 1h10m",nights:"Napoli"},
+    19:{city:"폼페이→소렌토",detail:"폼페이 유적 3h\n소렌토 석양",transport:"Circumvesuviana",nights:"Sorrento 1N"},
+    20:{city:"아말피 해안",detail:"포지타노+아말피\n페리 해안일주",transport:"페리 3회",nights:"Sorrento 2N"},
+    21:{city:"→피렌체",detail:"소렌토→나폴리→피렌체\n두오모+베키오다리 석양",transport:"열차 4~5시간",nights:"Firenze 1N"},
+    22:{city:"피렌체",detail:"우피치+아카데미아\n비스테카+미켈란젤로광장",nights:"Firenze 2N"},
+    23:{city:"피사 당일치기",detail:"사탑+세례당 오전\n오후 피렌체 쇼핑",transport:"열차 왕복 2h",nights:"Firenze 3N"},
+    24:{city:"→베네치아",detail:"곤돌라+치케티\n산마르코+두칼레",transport:"Frecciarossa 2h",nights:"Venezia"},
+    25:{city:"→돌로미티",detail:"코르티나 도착\n팔로리아 전망대",transport:"Cortina Exp 2.5h",nights:"Cortina 1N"},
+    26:{city:"돌로미티",detail:"트레치메 트레킹!\n브라이에스 보트",nights:"Cortina 2N"},
+    27:{city:"→밀라노",detail:"두오모+갤러리아\n나빌리 운하",transport:"버스+열차 6h",nights:"Milano"},
+    28:{city:"밀라노→귀국",detail:"쇼핑+브레라\nKE928 22:00출발",transport:"Malpensa Exp"}
+  },
+  transport: [
+    {day:"D1",route:"인천→로마 FCO",mode:"KE931 직항",time:"12시간",cost:"항공권 별도",link:"https://www.koreanair.com",linkText:"대한항공"},
+    {day:"D1",route:"FCO→Roma Termini",mode:"Leonardo Express",time:"32분",cost:"€28",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
+    {day:"D3",route:"Roma→Napoli",mode:"Frecciarossa",time:"1시간 10분",cost:"€38~90",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
+    {day:"D4",route:"Napoli→Pompei Scavi",mode:"Campania Express",time:"40분",cost:"€30",link:"https://www.eavsrl.it",linkText:"EAV"},
+    {day:"D4",route:"Pompei→Sorrento",mode:"Campania Express",time:"30분",cost:"€30",link:"https://www.eavsrl.it",linkText:"EAV"},
+    {day:"D5",route:"Sorrento→Positano",mode:"페리 (TravelMar)",time:"25분",cost:"€35",link:"https://www.travelmar.it",linkText:"TravelMar"},
+    {day:"D5",route:"Positano→Amalfi",mode:"페리",time:"25분",cost:"€20",link:"https://www.travelmar.it",linkText:"TravelMar"},
+    {day:"D5",route:"Amalfi→Sorrento",mode:"페리",time:"1시간",cost:"€20",link:"https://www.navlib.it",linkText:"NLG"},
+    {day:"D6",route:"Sorrento→Napoli",mode:"Campania Exp/Circumvesuviana",time:"1시간",cost:"€10~30",link:"https://www.eavsrl.it",linkText:"EAV"},
+    {day:"D6",route:"Napoli→Firenze",mode:"Frecciarossa 직행",time:"2시간 55분",cost:"€50~90",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
+    {day:"D8",route:"Firenze→Pisa (왕복)",mode:"Regionale",time:"1시간 (편도)",cost:"€20",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
+    {day:"D9",route:"Firenze→Venezia",mode:"Frecciarossa",time:"2시간",cost:"€60",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
+    {day:"D9",route:"베네치아 바포레토",mode:"ACTV 24h 패스",time:"종일",cost:"€50",link:"https://actv.avmspa.it",linkText:"ACTV"},
+    {day:"D10",route:"Venezia→Cortina",mode:"Cortina Express",time:"2시간 30분",cost:"€44",link:"https://www.cortinaexpress.it",linkText:"Cortina Exp"},
+    {day:"D12",route:"Cortina→Dobbiaco",mode:"SAD 버스",time:"50분",cost:"€13",link:"https://www.sad.it",linkText:"SAD"},
+    {day:"D12",route:"Dobbiaco→Bolzano",mode:"지역열차",time:"2시간 20분",cost:"€22",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
+    {day:"D12",route:"Bolzano→Milano",mode:"EuroCity",time:"3시간",cost:"€54",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
+    {day:"D13",route:"Milano→Malpensa",mode:"Malpensa Express",time:"51분",cost:"€30",link:"https://www.malpensaexpress.it",linkText:"Malpensa Exp"},
+  ],
+  days: [
+    {day:1,date:"9/16 수",city:"인천→로마",theme:"로마의 첫 밤",
+     sched:[["13:20","인천 출발","KE931 직항","move"],["19:30","로마 FCO 도착","",""],["20:15","FCO→Termini","Leonardo Express €14/인","move"],["21:00","호텔 체크인","€130/박",""],["21:45","저녁: Flavio al Velavevodetto","카르보나라 €55","food"],["23:00","트라스테베레 산책","","hl"]],cost:"€60"},
+    {day:2,date:"9/17 목",city:"로마",theme:"콜로세움 + 바티칸",
+     sched:[["08:00","아침","€10","food"],["09:00","콜로세움","€16~24/인","spot"],["10:30","포로 로마노","콜로세움 티켓 포함","spot"],["11:45","판테온","€5/인","spot"],["12:15","점심: Armando al Pantheon","€70","food"],["14:00","젤라토","€8","food"],["14:30","riposo","1시간",""],["16:00","바티칸 박물관","€21/인, 시스티나","spot"],["18:00","성 베드로 대성당","쿠폴라 €8/인","spot"],["19:00","산탄젤로 다리","석양","hl"],["19:45","트레비 분수","야경","hl"],["21:00","저녁: Felice a Testaccio","€70","food"]],cost:"€296"},
+    {day:3,date:"9/18 금",city:"로마→나폴리",theme:"피자 + 스파카나폴리",
+     sched:[["08:00","아침","€10","food"],["09:10","Roma→Napoli","Frecciarossa 1h10m","move"],["10:40","호텔 짐맡기기","€100/박",""],["11:30","나폴리 지하도시","€12/인","spot"],["13:00","점심: Sorbillo","피자 €25","food"],["14:30","산세베로 예배당","€10/인","spot"],["16:30","룽고마레 산책","","hl"],["19:30","저녁: Mattozzi","€60","food"]],cost:"€165"},
+    {day:4,date:"9/19 토",city:"폼페이→소렌토",theme:"고대 유적 + 석양",
+     sched:[["08:00","아침: Gambrinus","€12","food"],["09:15","Napoli→Pompei","Campania Exp 40분","move"],["10:00","폼페이 유적","€18/인, 3시간","spot"],["13:00","점심","€35","food"],["14:00","Pompei→Sorrento","30분","move"],["15:45","마리나 그란데","","hl"],["16:30","리몬첼로 시음","€12/인","spot"],["17:30","Villa Comunale","석양","hl"],["19:30","저녁: 'O Parrucchiano","€65","food"]],cost:"€174"},
+    {day:5,date:"9/20 일",city:"아말피 해안",theme:"해안 일주",
+     sched:[["08:00","아침","€12","food"],["08:45","Sorrento→Positano","페리 25분","move"],["10:00","포지타노 산책","부티크","hl"],["12:00","점심: Da Vincenzo","€70","food"],["13:30","Positano→Amalfi","페리 25분","move"],["14:15","아말피 대성당","€5/인","spot"],["15:15","제지박물관","€5/인","spot"],["16:30","Amalfi→Sorrento","페리 1시간","move"],["19:30","저녁: Bagni Delfino","€65","food"]],cost:"€180"},
+    {day:6,date:"9/21 월",city:"소렌토→피렌체",theme:"직행 이동 + 피렌체 석양",
+     sched:[["07:30","아침","€10","food"],["08:30","Sorrento→Napoli","Campania Exp 1시간","move"],["10:00","Napoli→Firenze","Frecciarossa 직행 2시간55분","move"],["13:00","피렌체 도착!","점심 전 도착",""],["13:30","점심: Mercato Centrale","토스카나 푸드코트 €30","food"],["14:30","호텔 체크인","€130/박",""],["15:30","두오모 광장+종탑","€15/인","spot"],["17:00","베키오 다리","아르노강 석양","hl"],["18:00","아페리티보","Negroni €22","food"],["19:30","저녁: Il Santo Bevitore","포르치니+키안티 €70","food"]],cost:"€170"},
+    {day:7,date:"9/22 화",city:"피렌체",theme:"르네상스 + 비스테카",
+     sched:[["08:00","아침: Ditta Artigianale","€12","food"],["08:30","우피치 미술관","€29/인, 2시간30분","spot"],["11:20","가죽 시장","쇼핑",""],["12:00","점심: All'Antico Vinaio","€16","food"],["13:00","아카데미아","다비드! €20/인","spot"],["14:30","riposo","1.5시간",""],["16:00","두오모 쿠폴라","€30/인, 463계단","spot"],["17:45","젤라토: Vivoli","€8","food"],["18:00","미켈란젤로 광장","일몰!","hl"],["19:30","저녁: Buca Mario","비스테카 1.2kg €90","food"]],cost:"€314"},
+    {day:8,date:"9/23 수",city:"피사 당일치기",theme:"사탑 + 피렌체 쇼핑",
+     sched:[["08:00","아침","€10","food"],["08:45","Firenze→Pisa","Regionale 1시간","move"],["10:00","피사 사탑","€24/인 (사탑 등반 포함)","spot"],["10:30","세례당+두오모","기적의 광장","spot"],["11:30","피사 점심","해산물파스타 €40","food"],["13:00","Pisa→Firenze","열차 1시간","move"],["14:30","산타크로체 성당","미켈란젤로 묘 €8/인","spot"],["15:30","올트라르노 산책","장인 공방",""],["16:30","가죽시장 쇼핑","",""],["18:00","아페리티보","Golden View €22","food"],["19:30","저녁: Trattoria Mario","현지인 맛집 €50","food"]],cost:"€170"},
+    {day:9,date:"9/24 목",city:"→베네치아",theme:"곤돌라 + 치케티",
+     sched:[["08:00","아침+체크아웃","€10","food"],["09:10","Firenze→Venezia","Frecciarossa 2시간","move"],["11:20","바포레토","24h €25/인","move"],["12:30","치케티 바 호핑","€38","food"],["14:00","리알토 다리","","hl"],["14:50","산마르코 종탑","€10/인","spot"],["15:30","두칼레 궁전","€30/인","spot"],["17:00","Caffe Florian","€25","food"],["17:45","곤돌라","€80 석양!","hl"],["18:30","산 조르조 마조레","€8/인","spot"],["20:00","저녁: Boccadoro","먹물리조또 €85","food"],["22:00","야경","","hl"]],cost:"€355"},
+    {day:10,date:"9/25 금",city:"→돌로미티",theme:"코르티나 도착",
+     sched:[["07:30","아침+체크아웃","€12","food"],["09:00","Venezia→Cortina","Cortina Express 2.5시간","move"],["12:00","호텔 체크인","€150/박",""],["12:30","점심","카네데를리 €50","food"],["14:30","팔로리아 전망대","€28/인","spot"],["17:00","미수리나 호수","택시 선택","hl"],["19:00","알펜글로우","","hl"],["19:30","저녁: Baita Fraina","€75","food"]],cost:"€203"},
+    {day:11,date:"9/26 토",city:"돌로미티",theme:"트레치메 + 브라이에스",
+     sched:[["06:30","아침","호텔조식","food"],["07:15","→트레치메","셔틀 1시간","move"],["08:15","트레치메 트레킹","9.5km 3~3.5h","spot"],["10:15","Rifugio Locatelli","핫초코 €10","food"],["12:00","점심: Rifugio Auronzo","€35","food"],["13:00","→브라이에스","40분","move"],["14:00","보트","€18","hl"],["14:45","호수 산책","1시간",""],["19:30","저녁","€68","food"]],cost:"€219"},
+    {day:12,date:"9/27 일",city:"→밀라노",theme:"두오모 + 나빌리",
+     sched:[["07:30","아침+체크아웃","","food"],["08:30","Cortina→Dobbiaco","SAD 50분","move"],["09:30","Dobbiaco→Bolzano","열차 2h20m","move"],["12:15","Bolzano→Milano","EC 3시간","move"],["15:45","밀라노 두오모","옥상 €14/인","spot"],["18:00","아페리티보","€22","food"],["19:00","나빌리 운하","","hl"],["19:30","저녁: Trattoria Milanese","€75","food"]],cost:"€206"},
+    {day:13,date:"9/28 월",city:"밀라노→귀국",theme:"쇼핑 + 귀국",
+     sched:[["08:30","아침: Marchesi","€18","food"],["10:00","브레라 지구","",""],["11:00","쇼핑","Via Montenapoleone",""],["12:30","점심: Luini","€48","food"],["15:00","젤라토","€8","food"],["16:00","→Malpensa","Malpensa Exp €15/인","move"],["17:30","Tax Free","",""],["22:00","MXP 출발","KE928",""],
+      ["+1 16:35","인천 도착","",""]],cost:"€108"}
+  ]
+},
+
+C: {
+  name: "코스 C: 남부 제외 (중북부 집중)",
+  route: "로마 → 피렌체(+피사/시에나) → 친퀘테레 → 베네치아(+부라노) → 돌로미티 → 코모호수 → 밀라노",
+  nights: "Roma(3)+Firenze(3)+CinqueTerre(1)+Venezia(2)+Dolomiti(2)+Milano(1)=12N",
+  totalBudget: 4680, perPerson: 351,
+  budget: [{l:"교통",a:520,c:"#2563eb"},{l:"숙박",a:1500,c:"#7c3aed"},{l:"식비",a:1500,c:"#d97706"},{l:"입장료",a:680,c:"#059669"},{l:"기타",a:480,c:"#9ca3af"}],
+  cities: [
+    {name:"Roma",lat:41.9028,lng:12.4964,n:3,dates:"9/16~18",color:"#ef4444"},
+    {name:"Orvieto",lat:42.7186,lng:12.1107,n:0,dates:"9/18",color:"#fb923c"},
+    {name:"Firenze",lat:43.7696,lng:11.2558,n:3,dates:"9/19~21",color:"#22c55e"},
+    {name:"Pisa",lat:43.7228,lng:10.4017,n:0,dates:"9/21",color:"#86efac"},
+    {name:"Cinque Terre",lat:44.1461,lng:9.6535,n:1,dates:"9/22",color:"#f59e0b"},
+    {name:"Venezia",lat:45.4408,lng:12.3155,n:2,dates:"9/23~24",color:"#06b6d4"},
+    {name:"Burano",lat:45.4854,lng:12.4167,n:0,dates:"9/24",color:"#67e8f9"},
+    {name:"Cortina",lat:46.5369,lng:12.1357,n:2,dates:"9/25~26",color:"#0ea5e9"},
+    {name:"Lago di Como",lat:45.9875,lng:9.2573,n:0,dates:"9/27",color:"#a78bfa"},
+    {name:"Milano",lat:45.4642,lng:9.1900,n:1,dates:"9/27~28",color:"#ec4899"}
+  ],
+  calendar: {
+    16:{city:"인천→로마",detail:"KE931 13:20출발\n로마 19:30도착",transport:"Leonardo Exp",nights:"Roma 1N"},
+    17:{city:"로마",detail:"콜로세움+바티칸\n판테온+트레비분수",nights:"Roma 2N"},
+    18:{city:"로마",detail:"보르게세 미술관\n나보나+캄포데피오리\n(or 오르비에토 당일치기)",nights:"Roma 3N"},
+    19:{city:"→피렌체",detail:"Frecciarossa 1.5h\n두오모+베키오다리 석양",transport:"Frecciarossa 1.5h",nights:"Firenze 1N"},
+    20:{city:"피렌체",detail:"우피치+아카데미아\n비스테카+미켈란젤로광장",nights:"Firenze 2N"},
+    21:{city:"피사 당일치기",detail:"사탑+세례당 오전\n오후 피렌체",transport:"열차 왕복 2h",nights:"Firenze 3N"},
+    22:{city:"→친퀘테레",detail:"마나롤라+리오마조레\n절벽마을+해산물",transport:"열차 2.5h",nights:"Cinque Terre"},
+    23:{city:"→베네치아",detail:"곤돌라+치케티\n산마르코+두칼레",transport:"열차 4h",nights:"Venezia 1N"},
+    24:{city:"베네치아+부라노",detail:"부라노 컬러마을\n무라노 유리공예",nights:"Venezia 2N"},
+    25:{city:"→돌로미티",detail:"렌터카 픽업(메스트레)\n코르티나 도착",transport:"렌터카 2h",nights:"Cortina 1N"},
+    26:{city:"돌로미티",detail:"트레치메 트레킹!\n브라이에스+카레차 호수",transport:"렌터카",nights:"Cortina 2N"},
+    27:{city:"코모호수→밀라노",detail:"벨라지오 경유\n두오모+나빌리",transport:"렌터카 반납",nights:"Milano"},
+    28:{city:"밀라노→귀국",detail:"쇼핑+브레라\nKE928 22:00출발",transport:"Malpensa Exp"}
+  },
+  transport: [
+    {day:"D1",route:"인천→로마 FCO",mode:"KE931 직항",time:"12시간",cost:"항공권 별도",link:"https://www.koreanair.com",linkText:"대한항공"},
+    {day:"D1",route:"FCO→Roma Termini",mode:"Leonardo Express",time:"32분",cost:"€28",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
+    {day:"D4",route:"Roma→Firenze",mode:"Frecciarossa",time:"1시간 30분",cost:"€40~80",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
+    {day:"D6",route:"Firenze↔Pisa (왕복)",mode:"Regionale",time:"1시간 (편도)",cost:"€20",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
+    {day:"D7",route:"Firenze→La Spezia",mode:"Regionale/IC",time:"2시간 30분",cost:"€30",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
+    {day:"D7",route:"친퀘테레 마을간",mode:"Cinque Terre Card",time:"1일",cost:"€33",link:"https://www.cinqueterre.eu.com",linkText:"CinqueTerre"},
+    {day:"D8",route:"La Spezia→Venezia",mode:"IC/Frecciabianca",time:"4시간",cost:"€50~80",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
+    {day:"D8",route:"베네치아 바포레토",mode:"ACTV 48h 패스",time:"2일",cost:"€70",link:"https://actv.avmspa.it",linkText:"ACTV"},
+    {day:"D10",route:"Venezia(Mestre)→Cortina",mode:"렌터카 (3일)",time:"2시간",cost:"€210~300",link:"https://www.rentalcars.com",linkText:"RentalCars"},
+    {day:"D11",route:"코르티나→트레치메",mode:"렌터카 (톨 €30)",time:"40분",cost:"톨 €30",link:"",linkText:""},
+    {day:"D12",route:"Cortina→Como→Milano",mode:"렌터카 반납",time:"4~5시간",cost:"렌터카 포함",link:"",linkText:""},
+    {day:"D13",route:"Milano→Malpensa",mode:"Malpensa Express",time:"51분",cost:"€30",link:"https://www.malpensaexpress.it",linkText:"Malpensa Exp"},
+  ],
+  days: [
+    {day:1,date:"9/16 수",city:"인천→로마",theme:"로마의 첫 밤",
+     sched:[["13:20","인천 출발","KE931 직항","move"],["19:30","로마 FCO 도착","",""],["20:15","FCO→Termini","Leonardo Express €14/인","move"],["21:00","호텔 체크인","€120/박",""],["21:45","저녁: Flavio al Velavevodetto","카르보나라 €55","food"],["23:00","트라스테베레 산책","","hl"]],cost:"€60"},
+    {day:2,date:"9/17 목",city:"로마",theme:"콜로세움 + 바티칸",
+     sched:[["08:00","아침","€10","food"],["09:00","콜로세움","€16~24/인","spot"],["10:30","포로 로마노","콜로세움 포함","spot"],["11:45","판테온","€5/인","spot"],["12:15","점심: Armando al Pantheon","€70","food"],["14:30","riposo","1시간",""],["16:00","바티칸 박물관","€21/인","spot"],["18:00","성 베드로 대성당","쿠폴라 €8/인","spot"],["19:00","산탄젤로 다리","석양","hl"],["19:45","트레비 분수","","hl"],["21:00","저녁: Felice a Testaccio","€70","food"]],cost:"€296"},
+    {day:3,date:"9/18 금",city:"로마",theme:"보르게세 + 여유 (or 오르비에토)",
+     sched:[["08:00","아침","€10","food"],["09:00","보르게세 미술관","€15/인 사전예약!","spot"],["11:00","스페인광장+콘도띠 거리","쇼핑",""],["12:00","점심: Roscioli","살루메리아+파스타 €65","food"],["13:30","나보나 광장","4대강 분수","spot"],["14:00","캄포 데 피오리 시장","오후 산책",""],["15:00","캄피돌리오 광장","미켈란젤로 설계","spot"],["16:00","젤라토","€8","food"],["17:00","자유 시간","쇼핑 or 카페",""],["19:00","아페리티보","€22","food"],["20:00","저녁: Da Enzo al 29","트라스테베레 현지맛집 €60","food"]],cost:"€180"},
+    {day:4,date:"9/19 토",city:"로마→피렌체",theme:"르네상스 첫 만남",
+     sched:[["08:00","아침+체크아웃","€10","food"],["09:30","Roma→Firenze","Frecciarossa 1시간30분","move"],["11:00","피렌체 도착","",""],["11:30","호텔 체크인","€130/박",""],["12:00","점심: Mercato Centrale","€30","food"],["13:30","산 로렌조 성당","메디치 예배당 €9/인","spot"],["15:00","두오모 광장","외관 감상",""],["15:30","종탑 (조토의 종탑)","€15/인, 414계단","spot"],["17:00","베키오 다리","금세공+석양","hl"],["18:00","아페리티보","Negroni €22","food"],["19:30","저녁: Il Santo Bevitore","포르치니+키안티 €70","food"]],cost:"€200"},
+    {day:5,date:"9/20 일",city:"피렌체",theme:"르네상스 + 비스테카",
+     sched:[["08:00","아침: Ditta Artigianale","€12","food"],["08:30","우피치 미술관","€29/인, 2.5시간","spot"],["11:20","시뇨리아 광장","야외조각",""],["12:00","점심: All'Antico Vinaio","€16","food"],["13:00","아카데미아 미술관","다비드! €20/인","spot"],["14:30","riposo","1.5시간",""],["16:00","두오모 쿠폴라","€30/인, 463계단","spot"],["17:45","젤라토: Vivoli","€8","food"],["18:00","미켈란젤로 광장","일몰!","hl"],["19:30","저녁: Buca Mario","비스테카 1.2kg €90","food"]],cost:"€314"},
+    {day:6,date:"9/21 월",city:"피사 당일치기",theme:"사탑 + 피렌체 쇼핑",
+     sched:[["08:00","아침","€10","food"],["08:45","Firenze→Pisa","Regionale 1시간","move"],["10:00","피사 사탑","€24/인 등반","spot"],["10:45","세례당+캄포산토","기적의 광장","spot"],["12:00","피사 점심","해산물 €40","food"],["13:30","Pisa→Firenze","열차 1시간","move"],["15:00","산타크로체 성당","€8/인","spot"],["16:00","올트라르노 산책","장인 공방",""],["17:00","가죽시장 쇼핑","",""],["18:00","아페리티보","€22","food"],["19:30","저녁: Trattoria Mario","€50","food"]],cost:"€170"},
+    {day:7,date:"9/22 화",city:"→친퀘테레",theme:"절벽 위 5개 마을",
+     sched:[["07:30","아침+체크아웃","€10","food"],["08:30","Firenze→La Spezia","열차 2시간30분","move"],["11:00","숙소 짐맡기기","리오마조레/마나롤라 €120/박",""],["11:30","리오마조레","첫 번째 마을 탐험","spot"],["12:30","점심: 해산물 프리또","절벽 레스토랑 €50","food"],["14:00","마나롤라","가장 포토제닉한 마을!","hl"],["15:00","코르닐리아","계단마을 산책","spot"],["16:00","베르나차","해변+와인 €15","food"],["17:30","몬테로소","가장 큰 마을, 해변",""],["18:30","마나롤라 귀환","석양 포토스팟!","hl"],["19:30","저녁: 페스토 파스타+해산물","€55","food"]],cost:"€170"},
+    {day:8,date:"9/23 수",city:"→베네치아",theme:"곤돌라 + 치케티",
+     sched:[["07:30","아침","€10","food"],["08:30","La Spezia→Venezia","IC/Frecciabianca 4시간","move"],["12:30","베네치아 도착","바포레토 48h패스 €35/인","move"],["13:00","치케티 바 호핑","€38","food"],["14:30","리알토 다리","대운하 뷰","hl"],["15:00","산마르코 광장","대성당","spot"],["15:30","두칼레 궁전","€30/인","spot"],["17:00","Caffe Florian","€25","food"],["17:45","곤돌라","€80 석양!","hl"],["19:00","산 조르조 마조레","€8/인 석양뷰","spot"],["20:00","저녁: Boccadoro","먹물리조또 €85","food"],["22:00","야경 산책","","hl"]],cost:"€340"},
+    {day:9,date:"9/24 목",city:"베네치아+부라노",theme:"컬러풀 섬 투어",
+     sched:[["08:00","아침","€12","food"],["09:00","바포레토→부라노","45분","move"],["10:00","부라노 섬","레인보우 하우스! 인생샷","hl"],["11:00","레이스 박물관","€5/인","spot"],["11:30","부라노 점심","리지비지+해산물 €55","food"],["13:00","→무라노","바포레토 20분","move"],["13:30","무라노 유리공예","공방 견학 무료","spot"],["14:30","유리공예 쇼핑","",""],["15:30","베네치아 귀환","",""],["16:00","산마르코 종탑","€10/인","spot"],["17:00","자유 시간","카페+쇼핑",""],["19:00","아페리티보","도르소두로 €15","food"],["20:00","저녁: Antiche Carampane","€75","food"]],cost:"€180"},
+    {day:10,date:"9/25 금",city:"→돌로미티",theme:"렌터카로 알프스!",
+     sched:[["07:30","아침+체크아웃","€12","food"],["08:30","베네치아→메스트레","버스 15분","move"],["09:00","렌터카 픽업","메스트레역 근처","move"],["09:15","메스트레→코르티나","렌터카 2시간 (A27+SS51)","move"],["11:30","코르티나 도착","",""],["12:00","호텔 체크인","€150/박",""],["12:30","점심","카네데를리 €50","food"],["13:30","코르티나 마을","Corso Italia",""],["14:30","팔로리아 전망대","케이블카 €28/인","spot"],["17:00","미수리나 호수","렌터카 30분!","hl"],["19:00","알펜글로우","","hl"],["19:30","저녁: Baita Fraina","€75","food"]],cost:"€203"},
+    {day:11,date:"9/26 토",city:"돌로미티",theme:"트레치메 + 3개 호수",
+     sched:[["06:00","아침","호텔조식","food"],["07:00","렌터카→트레치메","Auronzo 주차장 (톨 €30)","move"],["08:00","트레치메 순환 트레킹","9.5km 3~3.5h","spot"],["09:00","트레치메 포토스팟","인생샷!","hl"],["10:00","Rifugio Locatelli","핫초코 €10","food"],["11:30","→브라이에스 호수","렌터카 40분","move"],["12:30","보트 타기!","€18","hl"],["13:00","호수 점심","€35","food"],["14:00","호수 산책","3.5km 1시간",""],["15:30","→카레차 호수","렌터카 1.5시간","move"],["17:00","카레차 호수","돌로미티+에메랄드 반영","hl"],["18:30","코르티나 귀환","",""],["19:30","저녁","€68","food"]],cost:"€230"},
+    {day:12,date:"9/27 일",city:"코모호수→밀라노",theme:"호반 드라이브 + 두오모",
+     sched:[["07:30","아침+체크아웃","호텔조식","food"],["08:00","Cortina→코모호수","렌터카 3.5시간 (A22경유)","move"],["11:30","벨라지오 도착","코모호수 가장 아름다운 마을","hl"],["12:00","점심: 호숫가 레스토랑","리조또+와인 €60","food"],["13:00","벨라지오 산책","빌라+정원+골목","hl"],["14:30","벨라지오→밀라노","렌터카 1시간","move"],["15:30","밀라노 렌터카 반납","중앙역 근처",""],["16:00","호텔 체크인","€150/박",""],["16:30","밀라노 두오모","옥상 €14/인","spot"],["17:30","갤러리아","프라다/구찌",""],["18:30","아페리티보","Bar Basso €22","food"],["19:30","저녁: Trattoria Milanese","€75","food"]],cost:"€220"},
+    {day:13,date:"9/28 월",city:"밀라노→귀국",theme:"쇼핑 + 귀국",
+     sched:[["08:30","아침: Marchesi 1824","€18","food"],["10:00","브레라 지구","아트갤러리",""],["11:00","쇼핑","Via Montenapoleone",""],["12:30","점심: Luini","€48","food"],["15:00","젤라토","€8","food"],["16:00","→Malpensa","Malpensa Exp €15/인","move"],["17:30","Tax Free","",""],["22:00","MXP 출발","KE928",""],
+      ["+1 16:35","인천 도착","",""]],cost:"€108"}
+  ]
+},
+
+D: {
+  name: "코스 D: 돌로미티 3박 + 피사 (남부 제외, 렌터카)",
+  route: "로마 → 피렌체(+피사) → 베네치아(+부라노) → 돌로미티(3박, 렌터카) → 밀라노",
+  nights: "Roma(3)+Firenze(3)+Venezia(2)+Dolomiti(3)+Milano(1)=12N",
+  totalBudget: 4750, perPerson: 356,
+  budget: [{l:"교통",a:530,c:"#2563eb"},{l:"숙박",a:1530,c:"#7c3aed"},{l:"식비",a:1500,c:"#d97706"},{l:"입장료",a:720,c:"#059669"},{l:"기타",a:470,c:"#9ca3af"}],
+  cities: [
+    {name:"Roma",lat:41.9028,lng:12.4964,n:3,dates:"9/16~18",color:"#ef4444"},
+    {name:"Firenze",lat:43.7696,lng:11.2558,n:3,dates:"9/19~21",color:"#22c55e"},
+    {name:"Pisa",lat:43.7228,lng:10.4017,n:0,dates:"9/21",color:"#86efac"},
+    {name:"Venezia",lat:45.4408,lng:12.3155,n:2,dates:"9/22~23",color:"#06b6d4"},
+    {name:"Burano",lat:45.4854,lng:12.4167,n:0,dates:"9/23",color:"#67e8f9"},
+    {name:"Cortina",lat:46.5369,lng:12.1357,n:3,dates:"9/24~26",color:"#0ea5e9"},
+    {name:"Seceda",lat:46.6019,lng:11.7269,n:0,dates:"9/26",color:"#38bdf8"},
+    {name:"Milano",lat:45.4642,lng:9.1900,n:1,dates:"9/27~28",color:"#ec4899"}
+  ],
+  calendar: {
+    16:{city:"인천→로마",detail:"KE931 13:20출발\n로마 19:30도착",transport:"Leonardo Exp",nights:"Roma 1N"},
+    17:{city:"로마",detail:"콜로세움+바티칸\n판테온+트레비분수",nights:"Roma 2N"},
+    18:{city:"로마",detail:"보르게세 미술관\n나보나+캄피돌리오\n(or 오르비에토 당일치기)",nights:"Roma 3N"},
+    19:{city:"→피렌체",detail:"Frecciarossa 1.5h\n두오모+베키오다리 석양",transport:"Frecciarossa 1.5h",nights:"Firenze 1N"},
+    20:{city:"피렌체",detail:"우피치+아카데미아\n비스테카+미켈란젤로광장",nights:"Firenze 2N"},
+    21:{city:"피사 당일치기",detail:"사탑+세례당 오전\n오후 피렌체 쇼핑",transport:"열차 왕복 2h",nights:"Firenze 3N"},
+    22:{city:"→베네치아",detail:"곤돌라+치케티\n산마르코+두칼레",transport:"Frecciarossa 2h",nights:"Venezia 1N"},
+    23:{city:"베네치아+부라노",detail:"부라노 컬러마을!\n무라노 유리공예",nights:"Venezia 2N"},
+    24:{city:"→돌로미티 DAY1",detail:"렌터카 픽업(메스트레)\n코르티나+팔로리아",transport:"렌터카 2h",nights:"Cortina 1N"},
+    25:{city:"돌로미티 DAY2",detail:"트레치메 트레킹!\n브라이에스 호수 보트",transport:"렌터카",nights:"Cortina 2N"},
+    26:{city:"돌로미티 DAY3",detail:"Seceda 2500m 전망대\n카레차 호수+알페디시우시",transport:"렌터카",nights:"Cortina 3N"},
+    27:{city:"→밀라노",detail:"코모호수 경유 가능\n두오모+나빌리",transport:"렌터카 반납",nights:"Milano"},
+    28:{city:"밀라노→귀국",detail:"쇼핑+브레라\nKE928 22:00출발",transport:"Malpensa Exp"}
+  },
+  transport: [
+    {day:"D1",route:"인천→로마 FCO",mode:"KE931 직항",time:"12시간",cost:"항공권 별도",link:"https://www.koreanair.com",linkText:"대한항공"},
+    {day:"D1",route:"FCO→Roma Termini",mode:"Leonardo Express",time:"32분",cost:"€28",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
+    {day:"D4",route:"Roma→Firenze",mode:"Frecciarossa",time:"1시간 30분",cost:"€40~80",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
+    {day:"D6",route:"Firenze↔Pisa (왕복)",mode:"Regionale",time:"1시간 (편도)",cost:"€20",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
+    {day:"D7",route:"Firenze→Venezia",mode:"Frecciarossa",time:"2시간",cost:"€60",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
+    {day:"D7",route:"베네치아 바포레토",mode:"ACTV 48h 패스",time:"2일",cost:"€70",link:"https://actv.avmspa.it",linkText:"ACTV"},
+    {day:"D9",route:"Venezia(Mestre)→Cortina",mode:"렌터카 (4일)",time:"2시간",cost:"€280~400",link:"https://www.rentalcars.com",linkText:"RentalCars"},
+    {day:"D10",route:"코르티나→트레치메",mode:"렌터카 (톨 €30)",time:"40분",cost:"톨 €30",link:"",linkText:""},
+    {day:"D10",route:"트레치메→브라이에스",mode:"렌터카",time:"40분",cost:"렌터카 포함",link:"",linkText:""},
+    {day:"D11",route:"코르티나→Seceda(오르티세이)",mode:"렌터카+케이블카",time:"1시간+20분",cost:"케이블카 €38/인",link:"https://www.seceda.it",linkText:"Seceda"},
+    {day:"D11",route:"→카레차 호수",mode:"렌터카",time:"50분",cost:"렌터카 포함",link:"",linkText:""},
+    {day:"D12",route:"Cortina→(Como)→Milano",mode:"렌터카 반납",time:"4~5시간",cost:"렌터카 포함",link:"",linkText:""},
+    {day:"D13",route:"Milano→Malpensa",mode:"Malpensa Express",time:"51분",cost:"€30",link:"https://www.malpensaexpress.it",linkText:"Malpensa Exp"},
+  ],
+  days: [
+    {day:1,date:"9/16 수",city:"인천→로마",theme:"로마의 첫 밤",
+     sched:[["13:20","인천 출발","KE931 직항","move"],["19:30","로마 FCO 도착","",""],["20:15","FCO→Termini","Leonardo Express €14/인","move"],["21:00","호텔 체크인","€120/박",""],["21:45","저녁: Flavio al Velavevodetto","카르보나라 €55","food"],["23:00","트라스테베레 산책","","hl"]],cost:"€60"},
+    {day:2,date:"9/17 목",city:"로마",theme:"콜로세움 + 바티칸",
+     sched:[["08:00","아침","€10","food"],["09:00","콜로세움","€16~24/인","spot"],["10:30","포로 로마노","콜로세움 포함","spot"],["11:45","판테온","€5/인","spot"],["12:15","점심: Armando al Pantheon","€70","food"],["14:30","riposo","1시간",""],["16:00","바티칸 박물관","€21/인, 시스티나","spot"],["18:00","성 베드로 대성당","쿠폴라 €8/인","spot"],["19:00","산탄젤로 다리","석양","hl"],["19:45","트레비 분수","","hl"],["21:00","저녁: Felice a Testaccio","€70","food"]],cost:"€296"},
+    {day:3,date:"9/18 금",city:"로마",theme:"보르게세 + 여유 (or 오르비에토)",
+     sched:[["08:00","아침","€10","food"],["09:00","보르게세 미술관","€15/인 사전예약!","spot"],["11:00","스페인광장+콘도띠 거리","쇼핑",""],["12:00","점심: Roscioli","살루메리아 €65","food"],["13:30","나보나 광장","4대강 분수","spot"],["14:00","캄포 데 피오리 시장","",""],["15:00","캄피돌리오 광장","미켈란젤로 설계","spot"],["16:00","젤라토","€8","food"],["17:00","자유 시간","쇼핑 or 카페",""],["19:00","아페리티보","€22","food"],["20:00","저녁: Da Enzo al 29","트라스테베레 €60","food"]],cost:"€180"},
+    {day:4,date:"9/19 토",city:"→피렌체",theme:"르네상스 첫 만남",
+     sched:[["08:00","아침+체크아웃","€10","food"],["09:30","Roma→Firenze","Frecciarossa 1시간30분","move"],["11:00","피렌체 도착","",""],["11:30","호텔 체크인","€130/박",""],["12:00","점심: Mercato Centrale","€30","food"],["13:30","산 로렌조 성당","메디치 예배당 €9/인","spot"],["15:00","두오모 광장","",""],["15:30","종탑 (조토)","€15/인, 414계단","spot"],["17:00","베키오 다리","석양","hl"],["18:00","아페리티보","Negroni €22","food"],["19:30","저녁: Il Santo Bevitore","포르치니+키안티 €70","food"]],cost:"€200"},
+    {day:5,date:"9/20 일",city:"피렌체",theme:"르네상스 + 비스테카",
+     sched:[["08:00","아침: Ditta Artigianale","€12","food"],["08:30","우피치 미술관","€29/인, 2.5시간","spot"],["11:20","시뇨리아 광장","야외조각",""],["12:00","점심: All'Antico Vinaio","€16","food"],["13:00","아카데미아","다비드! €20/인","spot"],["14:30","riposo","1.5시간",""],["16:00","두오모 쿠폴라","€30/인, 463계단","spot"],["17:45","젤라토: Vivoli","€8","food"],["18:00","미켈란젤로 광장","일몰!","hl"],["19:30","저녁: Buca Mario","비스테카 1.2kg €90","food"]],cost:"€314"},
+    {day:6,date:"9/21 월",city:"피사 당일치기",theme:"사탑 + 피렌체 쇼핑",
+     sched:[["08:00","아침","€10","food"],["08:45","Firenze→Pisa","Regionale 1시간","move"],["10:00","피사 사탑","€24/인 등반","spot"],["10:45","세례당+캄포산토","기적의 광장","spot"],["12:00","피사 점심","해산물 €40","food"],["13:30","Pisa→Firenze","열차 1시간","move"],["15:00","산타크로체 성당","€8/인","spot"],["16:00","올트라르노 산책","장인 공방",""],["17:00","가죽시장 쇼핑","",""],["18:00","아페리티보","€22","food"],["19:30","저녁: Trattoria Mario","€50","food"]],cost:"€170"},
+    {day:7,date:"9/22 화",city:"→베네치아",theme:"곤돌라 + 치케티",
+     sched:[["08:00","아침+체크아웃","€10","food"],["09:10","Firenze→Venezia","Frecciarossa 2시간","move"],["11:20","바포레토","48h €35/인","move"],["12:30","치케티 바 호핑","€38","food"],["14:00","리알토 다리","","hl"],["14:50","산마르코 종탑","€10/인","spot"],["15:30","두칼레 궁전","€30/인","spot"],["17:00","Caffe Florian","€25","food"],["17:45","곤돌라","€80 석양!","hl"],["18:30","산 조르조 마조레","€8/인","spot"],["20:00","저녁: Boccadoro","먹물리조또 €85","food"],["22:00","야경","","hl"]],cost:"€340"},
+    {day:8,date:"9/23 수",city:"베네치아+부라노",theme:"컬러풀 섬 투어",
+     sched:[["08:00","아침","€12","food"],["09:00","바포레토→부라노","45분","move"],["10:00","부라노 섬","레인보우 하우스! 인생샷","hl"],["11:00","레이스 박물관","€5/인","spot"],["11:30","부라노 점심","리지비지+해산물 €55","food"],["13:00","→무라노","20분","move"],["13:30","무라노 유리공예","공방 견학 무료","spot"],["15:00","베네치아 귀환","",""],["16:00","산마르코 광장","자유시간",""],["17:00","자유 쇼핑/카페","",""],["19:00","아페리티보","€15","food"],["20:00","저녁: Antiche Carampane","€75","food"]],cost:"€180"},
+    {day:9,date:"9/24 목",city:"→돌로미티 DAY1",theme:"렌터카로 알프스! 코르티나",
+     sched:[["07:30","아침+체크아웃","€12","food"],["08:30","→메스트레","버스 15분","move"],["09:00","렌터카 픽업","메스트레역 Hertz/Europcar","move"],["09:15","메스트레→코르티나","렌터카 2시간","move"],["11:30","코르티나 도착","",""],["12:00","호텔 체크인","€150/박",""],["12:30","점심","카네데를리 €50","food"],["13:30","코르티나 마을","Corso Italia",""],["14:30","팔로리아 전망대","케이블카 €28/인","spot"],["17:00","미수리나 호수","렌터카 30분","hl"],["19:00","알펜글로우","","hl"],["19:30","저녁: Baita Fraina","사슴고기+포르치니 €75","food"],["21:30","별 감상","","hl"]],cost:"€203"},
+    {day:10,date:"9/25 금",city:"돌로미티 DAY2",theme:"트레치메 트레킹 + 브라이에스 보트",
+     sched:[["06:00","아침","호텔조식","food"],["07:00","렌터카→트레치메","Auronzo 주차장 (톨 €30)","move"],["08:00","트레치메 순환 트레킹!","9.5km 3~3.5시간","spot"],["09:00","트레치메 포토스팟","인생샷!","hl"],["10:00","Rifugio Locatelli","핫초코 €10","food"],["11:30","트레킹 완료","",""],["12:00","점심: Rifugio Auronzo","€35","food"],["13:00","렌터카→브라이에스","40분","move"],["14:00","보트 타기!","€18","hl"],["14:45","호수 산책","3.5km 1시간",""],["16:00","코르티나 귀환","",""],["19:00","알펜글로우","","hl"],["19:30","저녁","€68","food"]],cost:"€219"},
+    {day:11,date:"9/26 토",city:"돌로미티 DAY3",theme:"Seceda 2500m + 카레차 호수",
+     sched:[["06:30","아침","호텔조식","food"],["07:30","렌터카→오르티세이","Passo Giau 경유 1시간 경치!","move"],["08:30","Seceda 케이블카","오르티세이→2,519m","move"],["09:00","Seceda 전망대","돌로미티 최고 뷰포인트!","hl"],["10:00","Seceda 산책","고산초원 파노라마","hl"],["11:00","하산","",""],["11:30","오르티세이 마을","티롤 목각인형",""],["12:00","점심: 티롤 레스토랑","슐츠크라펜+슈니첼 €50","food"],["13:30","→알페디시우시","유럽 최대 고산초원","move"],["14:00","알페디시우시 산책","초원+돌로미티 배경","hl"],["15:30","→카레차 호수","렌터카 1시간","move"],["16:30","카레차 호수","에메랄드+라테마르 반영","hl"],["17:30","코르티나 귀환","Falzarego 경유 1.5시간","move"],["19:00","알펜글로우","마지막 밤","hl"],["19:30","저녁: El Camineto","미슐랭 €85","food"],["21:30","별+와인","","hl"]],cost:"€240"},
+    {day:12,date:"9/27 일",city:"→밀라노",theme:"(코모호수 경유) + 두오모",
+     sched:[["07:30","아침+체크아웃","호텔조식","food"],["08:00","Cortina→코모호수","렌터카 A22 경유 3.5시간","move"],["11:30","벨라지오","코모호수 가장 아름다운 마을","hl"],["12:00","점심: 호숫가 레스토랑","리조또 €60","food"],["13:00","벨라지오 산책","빌라+정원","hl"],["14:30","→밀라노","렌터카 1시간","move"],["15:30","렌터카 반납","중앙역 근처",""],["16:00","호텔 체크인","€150/박",""],["16:30","밀라노 두오모","옥상 €14/인","spot"],["17:30","갤러리아","프라다/구찌",""],["18:30","아페리티보","Bar Basso €22","food"],["19:30","저녁: Trattoria Milanese","리조또+오소부코 €75","food"]],cost:"€220"},
+    {day:13,date:"9/28 월",city:"밀라노→귀국",theme:"쇼핑 + 귀국",
+     sched:[["08:30","아침: Marchesi 1824","€18","food"],["10:00","브레라 지구","",""],["11:00","쇼핑","Via Montenapoleone",""],["12:30","점심: Luini","€48","food"],["15:00","젤라토","€8","food"],["16:00","→Malpensa","Malpensa Exp €15/인","move"],["17:30","Tax Free","",""],["22:00","MXP 출발","KE928",""],
+      ["+1 16:35","인천 도착","",""]],cost:"€108"}
+  ]
+},
+
+};
+
+// Compare data
+const COMPARE = [
+  {id:"A",name:"코스 A: 풀코스",sub:"남부+마테라 포함",route:"로마→나폴리→폼페이→소렌토→아말피→마테라→피렌체→베네치아→돌로미티→밀라노",
+   price:"€5,128",krw:"769만원",pp:"385만원",
+   pros:["이탈리아 남부~북부 완전 종단","마테라 동굴도시 야경 (유일무이)","아말피 해안+폼페이 유적","나폴리 진짜 피자"],
+   cons:["마테라→피렌체 8~9시간 대이동","일정 빡빡 (여유 적음)","교통비 최고 €720"],current:false},
+  {id:"B",name:"코스 B: 마테라 제외",sub:"나폴리/아말피까지만",route:"로마→나폴리→폼페이→소렌토→아말피→피렌체(+피사)→베네치아→돌로미티→밀라노",
+   price:"€4,850",krw:"728만원",pp:"364만원",
+   pros:["대이동 없음 (최대 4시간)","피렌체 3박 여유 (피사 당일치기)","나폴리+아말피 해안 유지","예산 절약 ~€280"],
+   cons:["마테라 동굴도시 포기","남부 깊은 여행 축소"],current:false},
+  {id:"C",name:"코스 C: 남부 제외",sub:"중북부 집중",route:"로마→피렌체(+피사)→친퀘테레→베네치아(+부라노)→돌로미티(렌터카)→코모호수→밀라노",
+   price:"€4,680",krw:"702만원",pp:"351만원",
+   pros:["가장 여유로운 페이스","친퀘테레+코모호수+부라노 추가!","렌터카로 돌로미티 자유도 극대화","카레차 호수까지 3개 호수","예산 최저 (€450 절감)"],
+   cons:["나폴리 피자 포기","폼페이 유적 포기","아말피 해안 포기","마테라 동굴도시 포기"],current:false},
+  {id:"D",name:"코스 D: 돌로미티 3박",sub:"산악 집중 + 렌터카",route:"로마→나폴리→폼페이→소렌토→아말피→피렌체→베네치아→돌로미티(3박)→밀라노",
+   price:"€5,050",krw:"758만원",pp:"379만원",
+   pros:["돌로미티 3일 풀 활용 (Tre Cime+Braies+Seceda+Carezza)","렌터카로 자유도 극대화","마테라 빼고 남부 유지 (나폴리+아말피)","Seceda 2500m 최고 뷰포인트 추가","나폴리→피렌체 직행 (4시간, 대이동 해소)"],
+   cons:["마테라 동굴도시 포기","피렌체에서 피사 당일치기 불가 (2박)","렌터카 운전 필요"],current:false},
+];
+
+// ===================== RENDER =====================
+let currentCourse = 'A';
+let map, routeLine, markers = [];
+
+// Init map
+function initMap() {
+  map = L.map('map',{zoomControl:true}).setView([42.5,13],6);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
+    attribution:'OpenStreetMap/CARTO',maxZoom:18
+  }).addTo(map);
+}
+initMap();
+
+function updateMap(course) {
+  markers.forEach(m=>map.removeLayer(m));
+  markers=[];
+  if(routeLine)map.removeLayer(routeLine);
+  const cs=course.cities;
+  const coords=cs.map(c=>[c.lat,c.lng]);
+  routeLine=L.polyline(coords,{color:'#2563eb',weight:2.5,opacity:.5,dashArray:'8 6'}).addTo(map);
+  cs.forEach(c=>{
+    const r=c.n===0?4:Math.max(7,c.n*4+3);
+    const m=L.circleMarker([c.lat,c.lng],{radius:r,fillColor:c.color,color:'#333',weight:c.n?2:1,fillOpacity:c.n?.8:.4}).addTo(map);
+    m.bindPopup(`<b style="color:${c.color}">${c.name}</b><br>${c.dates}<br>${c.n?c.n+'박':'경유'}`);
+    markers.push(m);
+    if(c.n>0){
+      const lbl=L.marker([c.lat,c.lng],{icon:L.divIcon({className:'',html:`<div style="color:${c.color};font-size:10px;font-weight:700;text-shadow:1px 1px 2px #fff,-1px -1px 2px #fff,1px -1px 2px #fff,-1px 1px 2px #fff;white-space:nowrap">${c.name}(${c.n}N)</div>`,iconAnchor:[-10,5]})}).addTo(map);
+      markers.push(lbl);
+    }
+  });
+  map.fitBounds(coords,{padding:[30,30]});
+}
+
+function renderRouteFlow(course) {
+  const el=document.getElementById('routeFlow');
+  const cs=course.cities;
+  el.innerHTML='';
+  cs.forEach((c,i)=>{
+    const div=document.createElement('span');
+    div.className='route-city'+(c.n>0?' overnight':'');
+    div.textContent=c.name+(c.n>0?` (${c.n}N)`:'');
+    el.appendChild(div);
+    if(i<cs.length-1){const arrow=document.createElement('span');arrow.className='route-arrow';arrow.textContent='→';el.appendChild(arrow);}
+  });
+  document.getElementById('routeTitle').textContent=course.name;
+}
+
+function renderStats(course) {
+  const el=document.getElementById('statsRow');
+  const total=course.budget.reduce((a,b)=>a+b.a,0);
+  el.innerHTML=`
+    <div class="stat"><div class="label">총 예산(2인)</div><div class="value">${Math.round(total*1500/10000)}만원</div><div class="sub">€${total.toLocaleString()}</div></div>
+    <div class="stat"><div class="label">1인당</div><div class="value">${course.perPerson}만원</div><div class="sub">항공 제외</div></div>
+    <div class="stat"><div class="label">도시</div><div class="value">${course.cities.filter(c=>c.n>0).length}</div><div class="sub">숙박 도시</div></div>
+    <div class="stat"><div class="label">교통</div><div class="value">€${course.budget[0].a}</div><div class="sub">${course.cities.length>11?'열차+버스+페리':'열차+렌터카'}</div></div>
+    <div class="stat"><div class="label">숙박</div><div class="value">€${course.budget[1].a}</div><div class="sub">12박</div></div>
+  `;
+}
+
+function renderCalendar(course) {
+  const grid=document.getElementById('calGrid');
+  grid.innerHTML='';
+  const headers=['월','화','수','목','금','토','일'];
+  headers.forEach((h,i)=>{
+    const d=document.createElement('div');
+    d.className='cal-header'+(i===6?' sun':'');
+    d.textContent=h;
+    grid.appendChild(d);
+  });
+  // Sep 2026: starts on Tuesday (index 1)
+  // Fill empty Monday
+  const emptyStart=1;
+  for(let i=0;i<emptyStart;i++){
+    const d=document.createElement('div');d.className='cal-cell empty';grid.appendChild(d);
+  }
+  for(let day=1;day<=30;day++){
+    const d=document.createElement('div');
+    const dow=(emptyStart+day-1)%7; // 0=Mon...6=Sun
+    const isTrip=day>=16&&day<=28;
+    const cal=course.calendar[day];
+    d.className='cal-cell'+(isTrip&&cal?' trip':'')+(dow===6?' sun':'');
+    let html=`<div class="cal-date">${day}</div>`;
+    if(cal){
+      html+=`<div class="cal-city">${cal.city}</div>`;
+      if(cal.detail)html+=`<div class="cal-detail">${cal.detail.replace(/\n/g,'<br>')}</div>`;
+      if(cal.transport)html+=`<div class="cal-transport">${cal.transport}</div>`;
+      if(cal.nights)html+=`<div class="cal-nights">${cal.nights}</div>`;
+    }
+    d.innerHTML=html;
+    grid.appendChild(d);
+  }
+}
+
+function renderItinerary(course) {
+  const el=document.getElementById('itinSection');
+  el.innerHTML='<h3 style="font-size:15px;margin-bottom:12px">'+course.name+' — 상세 일정</h3>';
+  course.days.forEach(day=>{
+    const block=document.createElement('div');block.className='day-block';
+    let schedHtml='';
+    day.sched.forEach(s=>{
+      const tag=s[3]==='food'?'<span class="tag-food">FOOD</span>':s[3]==='move'?'<span class="tag-move">MOVE</span>':s[3]==='spot'?'<span class="tag-spot">SPOT</span>':'';
+      const hl=s[3]==='hl'?' highlight-row':'';
+      const couple=s[3]==='hl'?' <span class="couple-mark">💑</span>':'';
+      schedHtml+=`<tr class="${hl}"><td>${s[0]}</td><td>${s[1]}${tag}${couple}</td><td>${s[2]||''}</td></tr>`;
+    });
+    schedHtml+=`<tr class="cost-row"><td></td><td colspan="2">💰 ${day.cost}</td></tr>`;
+    block.innerHTML=`
+      <div class="day-header" onclick="this.classList.toggle('open')">
+        <div class="left">
+          <span class="day-num">D${day.day}</span>
+          <span class="day-date">${day.date}</span>
+          <span class="day-city">${day.city}</span>
+          <span class="day-theme">${day.theme}</span>
+        </div>
+        <span class="day-toggle">▼</span>
+      </div>
+      <div class="day-body"><table class="sched-table">${schedHtml}</table></div>
+    `;
+    el.appendChild(block);
+  });
+}
+
+function renderTransport(course) {
+  const tbody=document.getElementById('transportBody');
+  tbody.innerHTML='';
+  course.transport.forEach(t=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td class="day-col">${t.day}</td>
+      <td class="route-col">${t.route}</td>
+      <td class="mode-col">${t.mode}</td>
+      <td class="time-col">${t.time}</td>
+      <td class="cost-col">${t.cost}</td>
+      <td>${t.link?`<a class="book-link" href="${t.link}" target="_blank">${t.linkText}</a>`:''}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function renderBudget(course) {
+  const bars=document.getElementById('budgetBars');
+  const total=course.budget.reduce((a,b)=>a+b.a,0);
+  bars.innerHTML='';
+  course.budget.forEach(b=>{
+    const pct=Math.round(b.a/total*100);
+    const row=document.createElement('div');row.className='b-row';
+    row.innerHTML=`<div class="lbl">${b.l}</div><div class="b-bar-wrap"><div class="b-bar" style="width:${pct}%;background:${b.c}">€${b.a} (${pct}%)</div></div><div class="amt">${Math.round(b.a*1500/10000)}만원</div>`;
+    bars.appendChild(row);
+  });
+  document.getElementById('budgetTitle').textContent=course.name+' — 예산 (2인)';
+  document.getElementById('budgetTotal').innerHTML=`
+    <div class="item"><div class="val">€${total.toLocaleString()}</div><div class="lbl">총 예산 (2인)</div></div>
+    <div class="item"><div class="val">${Math.round(total*1500/10000)}만원</div><div class="lbl">원화 환산</div></div>
+    <div class="item"><div class="val">${course.perPerson}만원</div><div class="lbl">1인당</div></div>
+  `;
+}
+
+function renderCompare() {
+  const grid=document.getElementById('compareGrid');
+  grid.innerHTML='';
+  COMPARE.forEach(c=>{
+    const card=document.createElement('div');
+    card.className='compare-card'+(c.id===currentCourse?' current':'');
+    let prosHtml=c.pros.map(p=>`<li>✅ ${p}</li>`).join('');
+    let consHtml=c.cons.map(p=>`<li>❌ ${p}</li>`).join('');
+    card.innerHTML=`
+      ${c.id===currentCourse?'<div class="card-badge">현재 선택</div>':''}
+      <h4>${c.name}</h4>
+      <div class="card-sub">${c.sub}</div>
+      <div class="card-route">${c.route}</div>
+      <div class="card-price">${c.krw} <small>/ 2인 (${c.price})</small></div>
+      <div style="font-size:11px;color:#666">1인당 ${c.pp} (항공 제외)</div>
+      <ul class="pros">${prosHtml}</ul>
+      <ul class="cons" style="margin-top:6px">${consHtml}</ul>
+    `;
+    card.style.cursor='pointer';
+    card.onclick=()=>{switchCourse(c.id)};
+    grid.appendChild(card);
+  });
+}
+
+function switchCourse(id) {
+  currentCourse=id;
+  document.querySelectorAll('.course-tab').forEach(t=>{
+    t.classList.toggle('active',t.dataset.course===id);
+  });
+  const course=COURSES[id];
+  updateMap(course);
+  renderRouteFlow(course);
+  renderStats(course);
+  renderCalendar(course);
+  renderItinerary(course);
+  renderTransport(course);
+  renderBudget(course);
+  renderCompare();
+}
+
+// Course tab clicks
+document.querySelectorAll('.course-tab').forEach(t=>{
+  t.onclick=()=>switchCourse(t.dataset.course);
+});
+
+// Section tab clicks
+document.querySelectorAll('.sec-tab').forEach(t=>{
+  t.onclick=()=>{
+    document.querySelectorAll('.sec-tab').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.section-content').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('sec-'+t.dataset.sec).classList.add('active');
+    if(t.dataset.sec==='overview')map.invalidateSize();
+  };
+});
+
+// Initial render
+switchCourse('A');
+</script>
+</body>
+</html>
