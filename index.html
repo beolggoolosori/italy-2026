@@ -1150,11 +1150,31 @@ function clearDayMap(){
   dayMarkers.forEach(m=>dayMap.removeLayer(m));dayMarkers=[];
   if(dayLine){dayMap.removeLayer(dayLine);dayLine=null;}
 }
+let recMarkers=[];
 function toggleRecs(id,evt){
   if(evt)evt.stopPropagation();
   const el=document.getElementById(id);
   if(!el)return;
-  el.style.display=el.style.display==='none'?'table-row':'none';
+  const opening=el.style.display==='none';
+  el.style.display=opening?'table-row':'none';
+  // clear previous rec markers
+  recMarkers.forEach(m=>{if(dayMap)dayMap.removeLayer(m)});recMarkers=[];
+  if(opening){
+    const rk=el.dataset.rk;
+    if(rk&&FOOD_RECS[rk]&&dayMap){
+      const bounds=[];
+      FOOD_RECS[rk].forEach((r,i)=>{
+        if(!r.c)return;
+        const icon=L.divIcon({className:'',html:`<div style="background:#f97316;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.4)">${i+1}</div>`,iconSize:[22,22],iconAnchor:[11,11],popupAnchor:[0,-12]});
+        const mk=L.marker(r.c,{icon:icon}).addTo(dayMap);
+        mk.bindPopup(`<b>${r.n}</b><br><span style="color:#666;font-size:11px">${r.d}</span><br><span style="color:#059669;font-weight:700">${r.p}</span><br><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.n+' restaurant italy')}" target="_blank" style="display:inline-block;margin-top:4px;background:#1a73e8;color:#fff;padding:3px 8px;border-radius:4px;font-size:10px;font-weight:600;text-decoration:none">⭐ 구글 리뷰 보기</a>`);
+        recMarkers.push(mk);
+        bounds.push(r.c);
+      });
+      if(bounds.length>1)dayMap.flyToBounds(L.latLngBounds(bounds),{padding:[40,40],maxZoom:15,duration:0.5});
+      else if(bounds.length===1)dayMap.flyTo(bounds[0],15,{duration:0.5});
+    }
+  }
 }
 function flyToPoint(lat,lng,name){
   if(!dayMap)return;
@@ -1221,11 +1241,11 @@ function renderItinerary(c){
         const rowClick=s.coords?`flyToPoint(${s.coords[0]},${s.coords[1]},'${(s.name||'').replace(/'/g,"\\'")}');`:'';
         sh+=`<tr class="sched-row food-row${hl}" onclick="${rowClick}toggleRecs('${recId}',event)"><td>${s.t}</td><td>${s.name}${tag}${cp}<span class="food-more">▼ ${recs.length}곳 추천</span></td><td>${s.desc||''}</td></tr>`;
         let recsHtml=recs.map((r,ri)=>{
-          const mapLink=r.c?`<a class="rec-map" href="https://www.google.com/maps/search/?api=1&query=${r.c[0]},${r.c[1]}" target="_blank" onclick="event.stopPropagation()">📍</a>`:'';
+          const reviewLink=`<a class="rec-map" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.n+' restaurant italy')}" target="_blank" onclick="event.stopPropagation()">리뷰</a>`;
           const flyClick=r.c?`onclick="event.stopPropagation();flyToPoint(${r.c[0]},${r.c[1]},'${r.n.replace(/'/g,"\\'")}')" `:'';
-          return `<div class="rec-item${ri===0?' rec-picked':''}" ${flyClick}><span class="rec-num">${ri+1}</span><span class="rec-name">${r.n}</span> <span class="rec-desc">${r.d}</span> <span class="rec-price">${r.p}</span> ${mapLink}</div>`;
+          return `<div class="rec-item${ri===0?' rec-picked':''}" ${flyClick}><span class="rec-num">${ri+1}</span><span class="rec-name">${r.n}</span> <span class="rec-desc">${r.d}</span> <span class="rec-price">${r.p}</span> ${reviewLink}</div>`;
         }).join('');
-        sh+=`<tr class="food-recs-row" id="${recId}" style="display:none"><td></td><td colspan="2"><div class="food-recs">${recsHtml}</div></td></tr>`;
+        sh+=`<tr class="food-recs-row" id="${recId}" data-rk="${s.rk}" style="display:none"><td></td><td colspan="2"><div class="food-recs">${recsHtml}</div></td></tr>`;
       } else {
         const rowClick=s.coords?` onclick="flyToPoint(${s.coords[0]},${s.coords[1]},'${(s.name||'').replace(/'/g,"\\'")}')" style="cursor:pointer"`:'';
         sh+=`<tr class="sched-row${hl}"${rowClick}><td>${s.t}</td><td>${s.name}${tag}${cp}</td><td>${s.desc||''}</td></tr>`;
