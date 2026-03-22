@@ -958,6 +958,12 @@ function clearDayMap(){
   dayMarkers.forEach(m=>dayMap.removeLayer(m));dayMarkers=[];
   if(dayLine){dayMap.removeLayer(dayLine);dayLine=null;}
 }
+function toggleRecs(id,evt){
+  if(evt)evt.stopPropagation();
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.style.display=el.style.display==='none'?'table-row':'none';
+}
 function flyToPoint(lat,lng,name){
   if(!dayMap)return;
   dayMap.flyTo([lat,lng],16,{duration:0.5});
@@ -1013,12 +1019,25 @@ function renderItinerary(c){
   layout.appendChild(mapWrap);layout.appendChild(listWrap);el.appendChild(layout);
 
   c.days.forEach(day=>{const b=document.createElement('div');b.className='day-block';let sh='';
-    day.sched.forEach(s=>{
+    day.sched.forEach((s,si)=>{
       const tag=s.type==='food'?'<span class="tag-food">FOOD</span>':s.type==='move'?'<span class="tag-move">MOVE</span>':s.type==='spot'?'<span class="tag-spot">SPOT</span>':'';
       const hl=s.type==='hl'?' highlight-row':'';
       const cp=s.type==='hl'?' <span class="tag-couple">💑</span>':'';
-      const rowClick=s.coords?` onclick="flyToPoint(${s.coords[0]},${s.coords[1]},'${(s.name||'').replace(/'/g,"\\'")}')" style="cursor:pointer"`:'';
-      sh+=`<tr class="sched-row${hl}"${rowClick}><td>${s.t}</td><td>${s.name}${tag}${cp}</td><td>${s.desc||''}</td></tr>`;
+      const recs=s.rk?FOOD_RECS[s.rk]:null;
+      if(recs){
+        const recId=`rec-${currentCourse}-${day.day}-${si}`;
+        const rowClick=s.coords?`flyToPoint(${s.coords[0]},${s.coords[1]},'${(s.name||'').replace(/'/g,"\\'")}');`:'';
+        sh+=`<tr class="sched-row food-row${hl}" onclick="${rowClick}toggleRecs('${recId}',event)"><td>${s.t}</td><td>${s.name}${tag}${cp}<span class="food-more">▼ ${recs.length}곳 추천</span></td><td>${s.desc||''}</td></tr>`;
+        let recsHtml=recs.map((r,ri)=>{
+          const mapLink=r.c?`<a class="rec-map" href="https://www.google.com/maps/search/?api=1&query=${r.c[0]},${r.c[1]}" target="_blank" onclick="event.stopPropagation()">📍</a>`:'';
+          const flyClick=r.c?`onclick="event.stopPropagation();flyToPoint(${r.c[0]},${r.c[1]},'${r.n.replace(/'/g,"\\'")}')" `:'';
+          return `<div class="rec-item${ri===0?' rec-picked':''}" ${flyClick}><span class="rec-num">${ri+1}</span><span class="rec-name">${r.n}</span> <span class="rec-desc">${r.d}</span> <span class="rec-price">${r.p}</span> ${mapLink}</div>`;
+        }).join('');
+        sh+=`<tr class="food-recs-row" id="${recId}" style="display:none"><td></td><td colspan="2"><div class="food-recs">${recsHtml}</div></td></tr>`;
+      } else {
+        const rowClick=s.coords?` onclick="flyToPoint(${s.coords[0]},${s.coords[1]},'${(s.name||'').replace(/'/g,"\\'")}')" style="cursor:pointer"`:'';
+        sh+=`<tr class="sched-row${hl}"${rowClick}><td>${s.t}</td><td>${s.name}${tag}${cp}</td><td>${s.desc||''}</td></tr>`;
+      }
       if(s.tip){sh+=`<tr class="tip-row"><td></td><td colspan="2">${s.tip}</td></tr>`;}
     });
     sh+=`<tr class="cost-row"><td></td><td colspan="2">💰 ${day.cost}</td></tr>`;
