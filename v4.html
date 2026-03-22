@@ -1017,9 +1017,8 @@ function renderItinerary(c){
       const tag=s.type==='food'?'<span class="tag-food">FOOD</span>':s.type==='move'?'<span class="tag-move">MOVE</span>':s.type==='spot'?'<span class="tag-spot">SPOT</span>':'';
       const hl=s.type==='hl'?' highlight-row':'';
       const cp=s.type==='hl'?' <span class="tag-couple">💑</span>':'';
-      const mapBtn=s.coords?`<a class="map-link" href="https://www.google.com/maps/search/?api=1&query=${s.coords[0]},${s.coords[1]}" target="_blank" onclick="event.stopPropagation()">📍길찾기</a>`:'';
       const rowClick=s.coords?` onclick="flyToPoint(${s.coords[0]},${s.coords[1]},'${(s.name||'').replace(/'/g,"\\'")}')" style="cursor:pointer"`:'';
-      sh+=`<tr class="sched-row${hl}"${rowClick}><td>${s.t}</td><td>${s.name}${tag}${cp}${mapBtn}</td><td>${s.desc||''}</td></tr>`;
+      sh+=`<tr class="sched-row${hl}"${rowClick}><td>${s.t}</td><td>${s.name}${tag}${cp}</td><td>${s.desc||''}</td></tr>`;
       if(s.tip){sh+=`<tr class="tip-row"><td></td><td colspan="2">${s.tip}</td></tr>`;}
     });
     sh+=`<tr class="cost-row"><td></td><td colspan="2">💰 ${day.cost}</td></tr>`;
