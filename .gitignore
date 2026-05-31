@@ -1,4 +1,8 @@
 # Only track html files for GitHub Pages
 *
 !*.html
+!AGENTS.md
+!plan/
+plan/*
+!plan/VERSIONS.md
 !.gitignore
