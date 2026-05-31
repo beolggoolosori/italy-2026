@@ -321,7 +321,7 @@ footer{text-align:center;padding:16px;color:#999;font-size:10px;border-top:1px s
 </div>
 
 <div class="section-content" id="sec-compare">
-<div class="compare-section"><h3>3개 코스 비교</h3><div class="compare-grid" id="compareGrid"></div></div>
+<div class="compare-section"><h3>코스 B 요약 (확정)</h3><div class="compare-grid" id="compareGrid"></div></div>
 </div>
 
 <footer>Italy Trip Planner 2026 v4 | Google Maps 길찾기 + 바티칸 새벽 + 몬테로쏘 수영</footer>
@@ -329,193 +329,6 @@ footer{text-align:center;padding:16px;color:#999;font-size:10px;border-top:1px s
 <script>
 // ===================== DATA =====================
 const COURSES = {
-A: {
-  name:"코스 A: 나폴리/아말피 (마테라 제외)",sub:"피렌체 3박+피사 당일치기",
-  nights:"Roma(2)+Napoli(1)+Sorrento(2)+Firenze(3)+Venezia(1)+Dolomiti(2)+Milano(1)=12N",
-  totalBudget:4850,perPerson:364,
-  budget:[{l:"교통",a:580,c:"#2563eb"},{l:"숙박",a:1590,c:"#7c3aed"},{l:"식비",a:1600,c:"#d97706"},{l:"입장료",a:780,c:"#059669"},{l:"기타",a:300,c:"#9ca3af"}],
-  cities:[{name:"Roma",lat:41.9028,lng:12.4964,n:2,dates:"9/16~17",color:"#ef4444"},{name:"Napoli",lat:40.8518,lng:14.2681,n:1,dates:"9/18",color:"#f97316"},{name:"Pompei",lat:40.7509,lng:14.4866,n:0,dates:"9/19",color:"#d97706"},{name:"Sorrento",lat:40.6263,lng:14.3758,n:2,dates:"9/19~20",color:"#eab308"},{name:"Positano",lat:40.6281,lng:14.4850,n:0,dates:"9/20",color:"#fbbf24"},{name:"Amalfi",lat:40.6340,lng:14.6027,n:0,dates:"9/20",color:"#fbbf24"},{name:"Firenze",lat:43.7696,lng:11.2558,n:3,dates:"9/21~23",color:"#22c55e"},{name:"Pisa",lat:43.7228,lng:10.4017,n:0,dates:"9/23",color:"#86efac"},{name:"Venezia",lat:45.4408,lng:12.3155,n:1,dates:"9/24",color:"#06b6d4"},{name:"Cortina",lat:46.5369,lng:12.1357,n:2,dates:"9/25~26",color:"#0ea5e9"},{name:"Milano",lat:45.4642,lng:9.1900,n:1,dates:"9/27~28",color:"#ec4899"}],
-  calendar:{16:{city:"인천→로마",detail:"KE931 13:20출발\n로마 19:30도착",transport:"Leonardo Exp",nights:"Roma 1N"},17:{city:"로마",detail:"바티칸 새벽6시🌅\n콜로세움+판테온+트레비",nights:"Roma 2N"},18:{city:"로마→나폴리",detail:"피자+지하도시\n산세베로 예배당",transport:"Frecciarossa 1h10m",nights:"Napoli"},19:{city:"폼페이→소렌토",detail:"폼페이 유적 3h\n소렌토 석양",transport:"Circumvesuviana",nights:"Sorrento 1N"},20:{city:"아말피 해안",detail:"포지타노+아말피\n페리 해안일주",transport:"페리 3회",nights:"Sorrento 2N"},21:{city:"→피렌체",detail:"소렌토→나폴리→피렌체\n두오모+베키오다리",transport:"열차 4~5h",nights:"Firenze 1N"},22:{city:"피렌체",detail:"우피치+아카데미아\n비스테카+미켈란젤로광장",nights:"Firenze 2N"},23:{city:"피사 당일치기",detail:"사탑+세례당 오전\n오후 피렌체 쇼핑",transport:"열차 왕복 2h",nights:"Firenze 3N"},24:{city:"→베네치아",detail:"곤돌라+치케티\n산마르코+두칼레",transport:"Frecciarossa 2h",nights:"Venezia"},25:{city:"→돌로미티",detail:"코르티나 도착\n팔로리아 전망대",transport:"Cortina Exp 2.5h",nights:"Cortina 1N"},26:{city:"돌로미티",detail:"트레치메 트레킹!\n브라이에스 보트",nights:"Cortina 2N"},27:{city:"→밀라노",detail:"두오모+갤러리아\n나빌리 운하",transport:"버스+열차 6h",nights:"Milano"},28:{city:"밀라노→귀국",detail:"쇼핑+브레라\nKE928 22:00출발",transport:"Malpensa Exp"}},
-  transport:[{day:"D1",route:"인천→로마 FCO",mode:"KE931 직항",time:"12시간",cost:"항공권 별도",link:"https://www.koreanair.com",linkText:"대한항공"},{day:"D1",route:"FCO→Roma Termini",mode:"Leonardo Express",time:"32분",cost:"€28",link:"https://www.trenitalia.com",linkText:"Trenitalia"},{day:"D3",route:"Roma→Napoli",mode:"Frecciarossa",time:"1시간 10분",cost:"€38~90",link:"https://www.trenitalia.com",linkText:"Trenitalia"},{day:"D4",route:"Napoli→Pompei",mode:"Campania Express",time:"40분",cost:"€30",link:"https://www.eavsrl.it",linkText:"EAV"},{day:"D4",route:"Pompei→Sorrento",mode:"Campania Express",time:"30분",cost:"€30",link:"https://www.eavsrl.it",linkText:"EAV"},{day:"D5",route:"Sorrento→Positano",mode:"페리 (TravelMar)",time:"25분",cost:"€35",link:"https://www.travelmar.it",linkText:"TravelMar"},{day:"D5",route:"Positano→Amalfi",mode:"페리",time:"25분",cost:"€20",link:"https://www.travelmar.it",linkText:"TravelMar"},{day:"D5",route:"Amalfi→Sorrento",mode:"페리",time:"1시간",cost:"€20",link:"https://www.navlib.it",linkText:"NLG"},{day:"D6",route:"Sorrento→Napoli",mode:"Campania Exp",time:"1시간",cost:"€10~30",link:"https://www.eavsrl.it",linkText:"EAV"},{day:"D6",route:"Napoli→Firenze",mode:"Frecciarossa 직행",time:"2시간 55분",cost:"€50~90",link:"https://www.trenitalia.com",linkText:"Trenitalia"},{day:"D8",route:"Firenze↔Pisa (왕복)",mode:"Regionale",time:"1시간 (편도)",cost:"€20",link:"https://www.trenitalia.com",linkText:"Trenitalia"},{day:"D9",route:"Firenze→Venezia",mode:"Frecciarossa",time:"2시간",cost:"€60",link:"https://www.trenitalia.com",linkText:"Trenitalia"},{day:"D9",route:"베네치아 바포레토",mode:"ACTV 24h 패스",time:"종일",cost:"€50",link:"https://actv.avmspa.it",linkText:"ACTV"},{day:"D10",route:"Venezia→Cortina",mode:"Cortina Express",time:"2시간 30분",cost:"€44",link:"https://www.cortinaexpress.it",linkText:"Cortina Exp"},{day:"D12",route:"Cortina→Dobbiaco",mode:"SAD 버스",time:"50분",cost:"€13",link:"https://www.sad.it",linkText:"SAD"},{day:"D12",route:"Dobbiaco→Bolzano",mode:"지역열차",time:"2시간 20분",cost:"€22",link:"https://www.trenitalia.com",linkText:"Trenitalia"},{day:"D12",route:"Bolzano→Milano",mode:"EuroCity",time:"3시간",cost:"€54",link:"https://www.trenitalia.com",linkText:"Trenitalia"},{day:"D13",route:"Milano→Malpensa",mode:"Malpensa Express",time:"51분",cost:"€30",link:"https://www.malpensaexpress.it",linkText:"Malpensa Exp"}],
-  hotels:{
-    "Roma (2박)":[
-      {name:"Hotel Raffaello",stars:3,price:"€110~140/박",desc:"Termini역 도보 8분, 콜로세움 10분. 조용한 골목, 커플 평점 8.5",tags:["위치좋음","가성비","조식포함"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/raffaello.html",c:""},{t:"Expedia",u:"https://www.expedia.com/Rome-Hotels-Hotel-Raffaello.h52157.Hotel-Information",c:"expedia"}]},
-      {name:"Hotel Diocleziano",stars:4,price:"€140~180/박",desc:"Termini역 바로 맞은편, 사우나+피트니스 무료. 로마 유적 도보권",tags:["역세권","사우나","깨끗"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/diocleziano.html",c:""},{t:"Expedia",u:"https://www.expedia.com/Rome-Hotels-Hotel-Diocleziano.h41484.Hotel-Information",c:"expedia"}]},
-      {name:"Hotel Viminale",stars:4,price:"€150~200/박",desc:"Termini역 3분, 루프탑 테라스 조식. 커플 평점 9.0",tags:["루프탑","커플추천","모던"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/viminale.html",c:""}]}
-    ],
-    "Napoli (1박)":[
-      {name:"Hotel Piazza Bellini",stars:4,price:"€90~130/박",desc:"16세기 건물, 스파카나폴리 한복판. 나폴리 지하도시 도보 5분",tags:["역사건물","중심지","분위기"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/piazza-bellini.html",c:""}]},
-      {name:"Decumani Hotel De Charme",stars:4,price:"€100~150/박",desc:"Centro Storico, 왕궁풍 인테리어. 커플 평점 8.8",tags:["부티크","커플추천","조식맛집"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/decumani-de-charme.html",c:""},{t:"Expedia",u:"https://www.expedia.com/Naples-Hotels-Decumani-Hotel-De-Charme.h2596990.Hotel-Information",c:"expedia"}]}
-    ],
-    "Sorrento (2박)":[
-      {name:"Maison La Minervetta",stars:4,price:"€170~220/박",desc:"절벽 위 부티크호텔, 나폴리만+베수비오 뷰. 도보로 시내 접근",tags:["오션뷰","절벽위","인스타"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/maison-la-minervetta.html",c:""}]},
-      {name:"Hotel Antiche Mura",stars:4,price:"€130~170/박",desc:"구시가 도보 2분, 수영장+정원. 리몬첼로 웰컴드링크",tags:["수영장","정원","가성비"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/antichemura.html",c:""},{t:"Expedia",u:"https://www.expedia.com/Sorrento-Hotels-Hotel-Antiche-Mura.h2671.Hotel-Information",c:"expedia"}]}
-    ],
-    "Firenze (3박)":[
-      {name:"Hotel Spadai",stars:4,price:"€140~180/박",desc:"두오모 도보 2분! 현대적 디자인+역사건물. 커플 평점 9.2",tags:["두오모앞","디자인","커플추천"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/spadai.html",c:""}]},
-      {name:"Hotel Davanzati",stars:3,price:"€120~160/박",desc:"베키오다리 3분, 우피치 5분. 가족운영 따뜻한 서비스",tags:["위치최고","가성비","친절"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/davanzati.html",c:""},{t:"Expedia",u:"https://www.expedia.com/Florence-Hotels-Hotel-Davanzati.h35696.Hotel-Information",c:"expedia"}]},
-      {name:"Hotel La Gemma",stars:3,price:"€110~140/박",desc:"산타크로체 근처, 조용한 분위기. 루프탑에서 두오모 뷰",tags:["루프탑뷰","조용","가성비"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/la-gemma-florence.html",c:""}]}
-    ],
-    "Venezia (1박)":[
-      {name:"Hotel Saturnia & International",stars:4,price:"€170~230/박",desc:"산마르코 광장 도보 3분, 14세기 건물. 곤돌라 탑승장 근처",tags:["산마르코앞","역사건물","로맨틱"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/saturnia-international.html",c:""}]},
-      {name:"Palazzo Paruta",stars:4,price:"€180~250/박",desc:"산토 스테파노 광장, 스파+웰니스. 커플 평점 9.3",tags:["스파","커플추천","럭셔리"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/palazzo-paruta.html",c:""},{t:"Expedia",u:"https://www.expedia.com/Venice-Hotels-Palazzo-Paruta.h3117996.Hotel-Information",c:"expedia"}]}
-    ],
-    "Cortina d'Ampezzo (2박)":[
-      {name:"Hotel de Len",stars:4,price:"€140~190/박",desc:"코르티나 중심, 아늑한 분위기. 커플 특히 좋아하는 라운지+바",tags:["중심지","아늑","커플추천"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/de-len.html",c:""}]},
-      {name:"Grand Hotel Savoia",stars:5,price:"€200~300/박",desc:"돌로미티 뷰 발코니, 실내수영장+스파. 셔틀 서비스",tags:["5성급","수영장","스파","뷰"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/grand-savoia-cortina-d-ampezzo.html",c:""},{t:"Expedia",u:"https://www.expedia.com/Cortina-DAmpezzo-Hotels-Grand-Hotel-Savoia.h22636.Hotel-Information",c:"expedia"}]}
-    ],
-    "Milano (1박)":[
-      {name:"Hotel Spadari al Duomo",stars:4,price:"€150~200/박",desc:"두오모 도보 2분! 현대미술 인테리어. 커플 평점 9.1",tags:["두오모앞","아트호텔","커플추천"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/spadari-al-duomo.html",c:""}]},
-      {name:"Hotel La Madonnina",stars:3,price:"€100~140/박",desc:"두오모 도보 5분, 깔끔한 객실. 가성비 최고",tags:["가성비","깨끗","위치좋음"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/la-madonnina.html",c:""},{t:"Expedia",u:"https://www.expedia.com/Milan-Hotels-Hotel-La-Madonnina.h2709.Hotel-Information",c:"expedia"}]}
-    ]
-  },
-  days:[
-{day:1,date:"9/16 수",city:"인천→로마",theme:"로마의 첫 밤",routeSummary:"✈️ ICN→FCO (KE931 직항 12h)",sched:[
-  {t:"13:20",name:"인천 출발",desc:"KE931 직항",type:"move",coords:[41.8003,12.2389]},
-  {t:"19:30",name:"로마 FCO 도착",desc:"",type:""},
-  {t:"20:15",name:"FCO→Termini",desc:"Leonardo Express €14/인",type:"move",coords:[41.9009,12.5016]},
-  {t:"21:00",name:"호텔 체크인",desc:"€130/박",type:""},
-  {t:"21:45",name:"저녁: Flavio al Velavevodetto",rk:"roma-trastevere-dinner",desc:"카르보나라 €55",type:"food",coords:[41.8764,12.4753]},
-  {t:"23:00",name:"트라스테베레 산책",desc:"",type:"hl",coords:[41.8893,12.4699]}
-],cost:"€60"},
-{day:2,date:"9/17 목",city:"로마",theme:"바티칸 새벽🌅 + 콜로세움",routeSummary:"🚶 바티칸(새벽6시) → 콜로세움 → 로마 명소 종일",sched:[
-  {t:"05:30",name:"기상 → 택시/우버",desc:"바티칸까지 €10~15",type:"move",coords:[41.9022,12.4539]},
-  {t:"06:00",name:"⭐ 바티칸 도착 (줄서기)",desc:"개장 전 대기열 선점!",type:"spot",coords:[41.9022,12.4539],tip:"⚠️ 새벽 6시 도착 → 7:30 개장 시 1번째 입장! 온라인 예약 필수. 어깨+무릎 가려야 입장"},
-  {t:"07:30",name:"바티칸 박물관 입장",desc:"€21/인, 시스티나 예배당",type:"spot",coords:[41.9022,12.4539],tip:"💡 새벽 입장 = 시스티나 예배당 거의 독점! 오후 대비 인파 1/10"},
-  {t:"09:30",name:"성 베드로 대성당",desc:"쿠폴라 €8/인, 551계단",type:"spot",coords:[41.9022,12.4539],tip:"💡 쿠폴라 먼저 올라가기 - 오전이 대기줄 가장 짧음"},
-  {t:"11:00",name:"산탄젤로 다리",desc:"포토스팟",type:"hl",coords:[41.9010,12.4663]},
-  {t:"11:30",name:"점심: Armando al Pantheon",rk:"roma-pantheon-lunch",desc:"€70",type:"food",coords:[41.8986,12.4769]},
-  {t:"13:00",name:"판테온",desc:"€5/인",type:"spot",coords:[41.8986,12.4769]},
-  {t:"13:30",name:"젤라토",desc:"€8",type:"food"},
-  {t:"14:00",name:"콜로세움",desc:"€16~24/인, 1시간30분",type:"spot",coords:[41.8902,12.4922],tip:"⚠️ 사전예약 필수! 30일 전 오픈. 75분 제한. 오후가 역광 없이 사진 좋음"},
-  {t:"15:30",name:"포로 로마노",desc:"콜로세움 통합권",type:"spot",coords:[41.8925,12.4853]},
-  {t:"17:00",name:"나보나 광장",desc:"4대강 분수",type:"hl",coords:[41.8992,12.4731]},
-  {t:"18:00",name:"트레비 분수",desc:"석양 빛",type:"hl",coords:[41.9009,12.4833],tip:"💡 2026년부터 €2 입장료 (9AM 전 무료!)"},
-  {t:"19:00",name:"스페인 계단",desc:"야경",type:"hl",coords:[41.9058,12.4823],tip:"⚠️ 앉기 금지! €250 벌금"},
-  {t:"21:00",name:"저녁: Felice a Testaccio",rk:"roma-testaccio-dinner",desc:"€70",type:"food",coords:[41.8764,12.4753]}
-],cost:"€296"},
-{day:3,date:"9/18 금",city:"로마→나폴리",theme:"피자 + 스파카나폴리",routeSummary:"🚂 Roma→Napoli (Frecciarossa 1h10m)",sched:[
-  {t:"08:00",name:"아침",desc:"€10",type:"food"},
-  {t:"09:10",name:"Roma→Napoli",desc:"Frecciarossa 1h10m",type:"move",coords:[40.8530,14.2725]},
-  {t:"10:40",name:"호텔 짐맡기기",desc:"€100/박",type:""},
-  {t:"11:30",name:"나폴리 지하도시",desc:"€12/인",type:"spot",coords:[40.8508,14.2570]},
-  {t:"13:00",name:"점심: Sorbillo",rk:"napoli-pizza",desc:"피자 €25",type:"food",coords:[40.8517,14.2559],tip:"💡 11:30 전 방문 추천 (점심러시 전)"},
-  {t:"14:30",name:"산세베로 예배당",desc:"€10/인",type:"spot",coords:[40.8486,14.2533],tip:"⚠️ 사전예약 권장. 사진촬영 금지"},
-  {t:"16:30",name:"룽고마레 산책",desc:"",type:"hl",coords:[40.8350,14.2500]},
-  {t:"19:30",name:"저녁: Mattozzi",rk:"napoli-dinner",desc:"€60",type:"food",coords:[40.8440,14.2510]}
-],cost:"€165"},
-{day:4,date:"9/19 토",city:"폼페이→소렌토",theme:"고대 유적 + 석양",routeSummary:"🚂 Napoli→Pompei→Sorrento (Campania Express)",sched:[
-  {t:"08:00",name:"아침: Gambrinus",desc:"€12",type:"food",coords:[40.8377,14.2488]},
-  {t:"09:15",name:"Napoli→Pompei",desc:"Campania Exp 40분",type:"move",coords:[40.7509,14.4866]},
-  {t:"10:00",name:"폼페이 유적",desc:"€18/인, 3시간",type:"spot",coords:[40.7509,14.4866]},
-  {t:"13:00",name:"점심",desc:"€35",type:"food"},
-  {t:"14:00",name:"Pompei→Sorrento",desc:"30분",type:"move",coords:[40.6265,14.3755]},
-  {t:"15:45",name:"마리나 그란데",desc:"",type:"hl",coords:[40.6310,14.3724]},
-  {t:"16:30",name:"리몬첼로 시음",desc:"€12/인",type:"spot",coords:[40.6265,14.3755]},
-  {t:"17:30",name:"Villa Comunale",desc:"석양",type:"hl",coords:[40.6250,14.3720]},
-  {t:"19:30",name:"저녁: O Parrucchiano",rk:"sorrento-dinner",desc:"€65",type:"food",coords:[40.6260,14.3748]}
-],cost:"€174"},
-{day:5,date:"9/20 일",city:"아말피 해안",theme:"해안 일주",routeSummary:"⛴️ Sorrento→Positano→Amalfi→Sorrento (페리 3회)",sched:[
-  {t:"08:00",name:"아침",desc:"€12",type:"food"},
-  {t:"08:45",name:"Sorrento→Positano",desc:"페리 25분",type:"move",coords:[40.6281,14.4850]},
-  {t:"10:00",name:"포지타노 산책",desc:"",type:"hl",coords:[40.6281,14.4850]},
-  {t:"12:00",name:"점심: Da Vincenzo",rk:"positano-lunch",desc:"€70",type:"food",coords:[40.6281,14.4850]},
-  {t:"13:30",name:"Positano→Amalfi",desc:"페리 25분",type:"move",coords:[40.6340,14.6027]},
-  {t:"14:15",name:"아말피 대성당",desc:"€5/인",type:"spot",coords:[40.6346,14.6023]},
-  {t:"15:15",name:"제지박물관",desc:"€5/인",type:"spot",coords:[40.6340,14.6027]},
-  {t:"16:30",name:"Amalfi→Sorrento",desc:"페리 1시간",type:"move",coords:[40.6265,14.3755]},
-  {t:"19:30",name:"저녁: Bagni Delfino",rk:"sorrento-seafood",desc:"€65",type:"food",coords:[40.6260,14.3730]}
-],cost:"€180"},
-{day:6,date:"9/21 월",city:"소렌토→피렌체",theme:"직행 이동 + 피렌체 석양",routeSummary:"🚂 Sorrento→Napoli→Firenze (열차 4~5h)",sched:[
-  {t:"07:30",name:"아침",desc:"€10",type:"food"},
-  {t:"08:30",name:"Sorrento→Napoli",desc:"Campania Exp 1시간",type:"move"},
-  {t:"10:00",name:"Napoli→Firenze",desc:"Frecciarossa 2시간55분",type:"move",coords:[43.7763,11.2477]},
-  {t:"13:30",name:"점심: Mercato Centrale",desc:"€30",type:"food",coords:[43.7763,11.2537]},
-  {t:"14:30",name:"호텔 체크인",desc:"€130/박",type:""},
-  {t:"15:30",name:"두오모+종탑",desc:"€15/인",type:"spot",coords:[43.7731,11.2560]},
-  {t:"17:00",name:"베키오 다리",desc:"석양",type:"hl",coords:[43.7680,11.2532]},
-  {t:"18:00",name:"아페리티보",desc:"€22",type:"food"},
-  {t:"19:30",name:"저녁: Il Santo Bevitore",rk:"firenze-oltrarno-dinner",desc:"€70",type:"food",coords:[43.7680,11.2480]}
-],cost:"€170"},
-{day:7,date:"9/22 화",city:"피렌체",theme:"르네상스 + 비스테카",routeSummary:"🚶 피렌체 시내 종일 투어",sched:[
-  {t:"08:00",name:"아침: Ditta Artigianale",desc:"€12",type:"food"},
-  {t:"08:30",name:"우피치 미술관",desc:"€29/인, 2.5h",type:"spot",coords:[43.7677,11.2553],tip:"⚠️ 1개월 전 예약 필수. 15분 내 입장"},
-  {t:"12:00",name:"점심: All'Antico Vinaio",rk:"firenze-vinaio-lunch",desc:"€16",type:"food",coords:[43.7684,11.2563],tip:"💡 11:30 전 or 17:30 후 방문 (3개 매장 중 짧은 줄)"},
-  {t:"13:00",name:"아카데미아",desc:"다비드! €20/인",type:"spot",coords:[43.7769,11.2589]},
-  {t:"14:30",name:"riposo",desc:"1.5시간",type:""},
-  {t:"16:00",name:"두오모 쿠폴라",desc:"€30/인, 463계단",type:"spot",coords:[43.7731,11.2560],tip:"⚠️ 463계단 엘리베이터 없음. 시간 엄수 (5분 지각 입장불가)"},
-  {t:"17:45",name:"젤라토: Vivoli",desc:"€8",type:"food",coords:[43.7695,11.2593]},
-  {t:"18:00",name:"미켈란젤로 광장",desc:"일몰!",type:"hl",coords:[43.7629,11.2650],tip:"💡 일몰 19:15~19:30. 30분 전 도착!"},
-  {t:"19:30",name:"저녁: Buca Mario",rk:"firenze-bistecca",desc:"비스테카 1.2kg €90",type:"food",coords:[43.7718,11.2533],tip:"⚠️ 전화예약 필수 +39 055 214179"}
-],cost:"€314"},
-{day:8,date:"9/23 수",city:"피사 당일치기",theme:"사탑 + 피렌체 쇼핑",routeSummary:"🚂 Firenze↔Pisa (Regionale 왕복 2h)",sched:[
-  {t:"08:00",name:"아침",desc:"€10",type:"food"},
-  {t:"08:45",name:"Firenze→Pisa",desc:"Regionale 1시간",type:"move",coords:[43.7230,10.3966]},
-  {t:"10:00",name:"피사 사탑",desc:"€24/인",type:"spot",coords:[43.7230,10.3966],tip:"⚠️ 사전예약 필수 (opapisa.it). 30분 시간제한"},
-  {t:"10:30",name:"세례당+두오모",desc:"기적의 광장",type:"spot",coords:[43.7231,10.3941]},
-  {t:"11:30",name:"피사 점심",desc:"해산물 €40",type:"food"},
-  {t:"13:00",name:"Pisa→Firenze",desc:"열차 1시간",type:"move",coords:[43.7763,11.2477]},
-  {t:"14:30",name:"산타크로체 성당",desc:"€8/인",type:"spot",coords:[43.7685,11.2623]},
-  {t:"18:00",name:"아페리티보",desc:"€22",type:"food"},
-  {t:"19:30",name:"저녁: Trattoria Mario",rk:"firenze-trattoria",desc:"€50",type:"food",coords:[43.7748,11.2537]}
-],cost:"€170"},
-{day:9,date:"9/24 목",city:"→베네치아",theme:"곤돌라 + 치케티",routeSummary:"🚂 Firenze→Venezia (Frecciarossa 2h)",sched:[
-  {t:"08:00",name:"아침+체크아웃",desc:"€10",type:"food"},
-  {t:"09:10",name:"Firenze→Venezia",desc:"Frecciarossa 2시간",type:"move",coords:[45.4410,12.3215]},
-  {t:"11:20",name:"바포레토",desc:"24h €25/인",type:"move"},
-  {t:"12:30",name:"치케티 바 호핑",rk:"venezia-cicchetti",desc:"€38",type:"food",coords:[45.4389,12.3338]},
-  {t:"14:00",name:"리알토 다리",desc:"",type:"hl",coords:[45.4380,12.3360]},
-  {t:"14:50",name:"산마르코 종탑",desc:"€10/인",type:"spot",coords:[45.4345,12.3388]},
-  {t:"15:30",name:"두칼레 궁전",desc:"€30/인",type:"spot",coords:[45.4336,12.3404],tip:"💡 30일 전 예약시 €25 (현장 €30)"},
-  {t:"17:00",name:"Caffe Florian",desc:"€25",type:"food",coords:[45.4343,12.3386],tip:"💡 2인 €40~50 예상 (오케스트라 서차지 포함)"},
-  {t:"17:45",name:"곤돌라",desc:"€80 석양!",type:"hl",coords:[45.4380,12.3360],tip:"💡 €90/보트(5인). 석양 타이밍이 최고"},
-  {t:"18:30",name:"산 조르조 마조레",desc:"€8/인",type:"spot",coords:[45.4294,12.3432],tip:"💡 산마르코 종탑보다 뷰 좋고 한적!"},
-  {t:"20:00",name:"저녁: Boccadoro",rk:"venezia-dinner",desc:"먹물리조또 €85",type:"food",coords:[45.4440,12.3380]},
-  {t:"22:00",name:"야경",desc:"",type:"hl",coords:[45.4345,12.3388]}
-],cost:"€355"},
-{day:10,date:"9/25 금",city:"→돌로미티",theme:"코르티나 도착",routeSummary:"🚌 Venezia→Cortina (Cortina Express 2.5h)",sched:[
-  {t:"07:30",name:"아침+체크아웃",desc:"€12",type:"food"},
-  {t:"09:00",name:"Venezia→Cortina",desc:"Cortina Express 2.5시간",type:"move",coords:[46.5369,12.1357]},
-  {t:"12:00",name:"호텔 체크인",desc:"€150/박",type:""},
-  {t:"12:30",name:"점심",desc:"카네데를리 €50",type:"food",coords:[46.5369,12.1357]},
-  {t:"14:30",name:"팔로리아 전망대",desc:"€28/인",type:"spot",coords:[46.5225,12.1689]},
-  {t:"17:00",name:"미수리나 호수",desc:"",type:"hl",coords:[46.5828,12.2529]},
-  {t:"19:00",name:"알펜글로우",desc:"",type:"hl",coords:[46.5369,12.1357]},
-  {t:"19:30",name:"저녁: Baita Fraina",rk:"dolomiti-dinner",desc:"€75",type:"food",coords:[46.5330,12.1290]}
-],cost:"€203"},
-{day:11,date:"9/26 토",city:"돌로미티",theme:"트레치메 + 브라이에스",routeSummary:"🚗 셔틀→Tre Cime→Braies (종일)",sched:[
-  {t:"06:30",name:"아침",desc:"호텔조식",type:"food"},
-  {t:"07:15",name:"→트레치메",desc:"셔틀 1시간",type:"move",coords:[46.6172,12.2942],tip:"⚠️ 톨게이트 온라인 예약 필수 (2025~). 9AM 전 도착"},
-  {t:"08:15",name:"트레치메 트레킹",desc:"9.5km 3~3.5h",type:"spot",coords:[46.6172,12.2942]},
-  {t:"10:15",name:"Rifugio Locatelli",desc:"핫초코 €10",type:"food",coords:[46.6186,12.3045]},
-  {t:"12:00",name:"점심: Rifugio Auronzo",desc:"€35",type:"food",coords:[46.6097,12.2955]},
-  {t:"13:00",name:"→브라이에스",desc:"40분",type:"move",coords:[46.6942,12.0855],tip:"⚠️ 9/15까지 9AM~4PM 차량통제! 9:30 전 도착 or 4PM 후"},
-  {t:"14:00",name:"보트",desc:"€18",type:"hl",coords:[46.6942,12.0855]},
-  {t:"14:45",name:"호수 산책",desc:"1시간",type:""},
-  {t:"19:30",name:"저녁",desc:"€68",type:"food",coords:[46.5369,12.1357]}
-],cost:"€219"},
-{day:12,date:"9/27 일",city:"→밀라노",theme:"두오모 + 나빌리",routeSummary:"🚌🚂 Cortina→Dobbiaco→Bolzano→Milano (6h)",sched:[
-  {t:"07:30",name:"아침+체크아웃",desc:"",type:"food"},
-  {t:"08:30",name:"Cortina→Dobbiaco",desc:"SAD 50분",type:"move"},
-  {t:"09:30",name:"Dobbiaco→Bolzano",desc:"열차 2h20m",type:"move"},
-  {t:"12:15",name:"Bolzano→Milano",desc:"EC 3시간",type:"move",coords:[45.4853,9.2039]},
-  {t:"15:45",name:"밀라노 두오모",desc:"옥상 €14/인",type:"spot",coords:[45.4641,9.1919]},
-  {t:"18:00",name:"아페리티보",desc:"€22",type:"food"},
-  {t:"19:00",name:"나빌리 운하",desc:"",type:"hl",coords:[45.4488,9.1793]},
-  {t:"19:30",name:"저녁: Trattoria Milanese",rk:"milano-dinner",desc:"€75",type:"food",coords:[45.4620,9.1870]}
-],cost:"€206"},
-{day:13,date:"9/28 월",city:"밀라노→귀국",theme:"쇼핑 + 귀국",routeSummary:"✈️ MXP→ICN (KE928 22:00출발)",sched:[
-  {t:"08:30",name:"아침: Marchesi",desc:"€18",type:"food",coords:[45.4668,9.1910]},
-  {t:"10:00",name:"브레라 지구",desc:"",type:"",coords:[45.4722,9.1870]},
-  {t:"11:00",name:"쇼핑",desc:"Via Montenapoleone",type:""},
-  {t:"12:30",name:"점심: Luini",rk:"milano-lunch",desc:"€48",type:"food",coords:[45.4653,9.1889]},
-  {t:"15:00",name:"젤라토",desc:"€8",type:"food"},
-  {t:"16:00",name:"→Malpensa",desc:"Malpensa Exp €15/인",type:"move",coords:[45.6301,8.7231],tip:"💡 €15/인. 51분. 15분 간격 운행"},
-  {t:"17:30",name:"Tax Free",desc:"",type:"",tip:"💡 출발 3~4시간 전 도착. Check-in Area 12"},
-  {t:"22:00",name:"MXP 출발",desc:"KE928",type:""},
-  {t:"+1 16:35",name:"인천 도착",desc:"",type:""}
-],cost:"€108"}
-]},
 B: {
   name:"코스 B: 남부 제외 (중북부 집중)",sub:"친퀘테레+코모호수+렌터카",
   nights:"Roma(3)+Firenze(3)+CinqueTerre(1)+Venezia(2)+Dolomiti(2)+Milano(1)=12N",
@@ -703,195 +516,6 @@ B: {
   {t:"+1 16:35",name:"인천 도착",desc:"",type:""}
 ],cost:"€108"}
 ]},
-C: {
-  name:"코스 C: 돌로미티 3박 (렌터카)",sub:"Seceda+카레차+브라이에스 3일",
-  nights:"Roma(3)+Firenze(3)+Venezia(2)+Dolomiti(3)+Milano(1)=12N",
-  totalBudget:4750,perPerson:356,
-  budget:[{l:"교통",a:530,c:"#2563eb"},{l:"숙박",a:1530,c:"#7c3aed"},{l:"식비",a:1500,c:"#d97706"},{l:"입장료",a:720,c:"#059669"},{l:"기타",a:470,c:"#9ca3af"}],
-  cities:[{name:"Roma",lat:41.9028,lng:12.4964,n:3,dates:"9/16~18",color:"#ef4444"},{name:"Firenze",lat:43.7696,lng:11.2558,n:3,dates:"9/19~21",color:"#22c55e"},{name:"Pisa",lat:43.7228,lng:10.4017,n:0,dates:"9/21",color:"#86efac"},{name:"Venezia",lat:45.4408,lng:12.3155,n:2,dates:"9/22~23",color:"#06b6d4"},{name:"Burano",lat:45.4854,lng:12.4167,n:0,dates:"9/23",color:"#67e8f9"},{name:"Cortina",lat:46.5369,lng:12.1357,n:3,dates:"9/24~26",color:"#0ea5e9"},{name:"Seceda",lat:46.6019,lng:11.7269,n:0,dates:"9/26",color:"#38bdf8"},{name:"Milano",lat:45.4642,lng:9.1900,n:1,dates:"9/27~28",color:"#ec4899"}],
-  calendar:{16:{city:"인천→로마",detail:"KE931 13:20출발\n로마 19:30도착",transport:"Leonardo Exp",nights:"Roma 1N"},17:{city:"로마",detail:"바티칸 새벽6시🌅\n콜로세움+판테온+트레비",nights:"Roma 2N"},18:{city:"로마",detail:"보르게세 미술관\n캄피돌리오+트라스테베레",nights:"Roma 3N"},19:{city:"→피렌체",detail:"Frecciarossa 1.5h\n두오모+베키오다리",transport:"Frecciarossa 1.5h",nights:"Firenze 1N"},20:{city:"피렌체",detail:"우피치+아카데미아\n비스테카+미켈란젤로광장",nights:"Firenze 2N"},21:{city:"피사 당일치기",detail:"사탑+세례당 오전\n오후 피렌체 쇼핑",transport:"열차 왕복 2h",nights:"Firenze 3N"},22:{city:"→베네치아",detail:"곤돌라+치케티\n산마르코+두칼레",transport:"Frecciarossa 2h",nights:"Venezia 1N"},23:{city:"베네치아+부라노",detail:"부라노 컬러마을!\n무라노 유리공예",nights:"Venezia 2N"},24:{city:"→돌로미티 DAY1",detail:"렌터카 픽업(메스트레)\n코르티나+팔로리아",transport:"렌터카 2h",nights:"Cortina 1N"},25:{city:"돌로미티 DAY2",detail:"트레치메 트레킹!\n브라이에스 보트",transport:"렌터카",nights:"Cortina 2N"},26:{city:"돌로미티 DAY3",detail:"Seceda 2500m!\n카레차 호수+알페디시우시",transport:"렌터카",nights:"Cortina 3N"},27:{city:"→밀라노",detail:"코모호수 경유\n두오모+나빌리",transport:"렌터카 반납",nights:"Milano"},28:{city:"밀라노→귀국",detail:"쇼핑+브레라\nKE928 22:00출발",transport:"Malpensa Exp"}},
-  transport:[{day:"D1",route:"인천→로마 FCO",mode:"KE931 직항",time:"12시간",cost:"항공권 별도",link:"https://www.koreanair.com",linkText:"대한항공"},{day:"D1",route:"FCO→Roma Termini",mode:"Leonardo Express",time:"32분",cost:"€28",link:"https://www.trenitalia.com",linkText:"Trenitalia"},{day:"D4",route:"Roma→Firenze",mode:"Frecciarossa",time:"1시간 30분",cost:"€40~80",link:"https://www.trenitalia.com",linkText:"Trenitalia"},{day:"D6",route:"Firenze↔Pisa (왕복)",mode:"Regionale",time:"1시간 (편도)",cost:"€20",link:"https://www.trenitalia.com",linkText:"Trenitalia"},{day:"D7",route:"Firenze→Venezia",mode:"Frecciarossa",time:"2시간",cost:"€60",link:"https://www.trenitalia.com",linkText:"Trenitalia"},{day:"D7",route:"베네치아 바포레토",mode:"ACTV 48h 패스",time:"2일",cost:"€70",link:"https://actv.avmspa.it",linkText:"ACTV"},{day:"D9",route:"Venezia(Mestre)→Cortina",mode:"렌터카 (4일)",time:"2시간",cost:"€280~400",link:"https://www.rentalcars.com",linkText:"RentalCars"},{day:"D10",route:"코르티나→트레치메",mode:"렌터카 (톨 €30)",time:"40분",cost:"톨 €30",link:"",linkText:""},{day:"D11",route:"코르티나→Seceda",mode:"렌터카+케이블카",time:"1시간+20분",cost:"케이블카 €38/인",link:"https://www.seceda.it",linkText:"Seceda"},{day:"D12",route:"Cortina→(Como)→Milano",mode:"렌터카 반납",time:"4~5시간",cost:"렌터카 포함",link:"",linkText:""},{day:"D13",route:"Milano→Malpensa",mode:"Malpensa Express",time:"51분",cost:"€30",link:"https://www.malpensaexpress.it",linkText:"Malpensa Exp"}],
-  hotels:{
-    "Roma (3박)":[
-      {name:"Hotel Raffaello",stars:3,price:"€110~140/박",desc:"Termini역 8분, 콜로세움 10분. 커플 평점 8.5",tags:["위치좋음","가성비"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/raffaello.html",c:""}]},
-      {name:"Hotel Viminale",stars:4,price:"€150~200/박",desc:"Termini역 3분, 루프탑 테라스 조식. 커플 평점 9.0",tags:["루프탑","커플추천"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/viminale.html",c:""}]}
-    ],
-    "Firenze (3박)":[
-      {name:"Hotel Spadai",stars:4,price:"€140~180/박",desc:"두오모 2분! 커플 평점 9.2",tags:["두오모앞","커플추천"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/spadai.html",c:""}]},
-      {name:"Hotel La Gemma",stars:3,price:"€110~140/박",desc:"산타크로체 근처, 루프탑 두오모 뷰",tags:["루프탑뷰","가성비"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/la-gemma-florence.html",c:""}]}
-    ],
-    "Venezia (2박)":[
-      {name:"Hotel Saturnia & International",stars:4,price:"€170~230/박",desc:"산마르코 3분, 14세기 건물",tags:["산마르코앞","로맨틱"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/saturnia-international.html",c:""}]},
-      {name:"Palazzo Paruta",stars:4,price:"€180~250/박",desc:"스파+웰니스, 커플 평점 9.3",tags:["스파","커플추천"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/palazzo-paruta.html",c:""}]}
-    ],
-    "Cortina d'Ampezzo (3박)":[
-      {name:"Hotel de Len",stars:4,price:"€140~190/박",desc:"코르티나 중심, 아늑한 라운지. 커플 추천",tags:["중심지","커플추천"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/de-len.html",c:""}]},
-      {name:"Faloria Mountain Spa Resort",stars:5,price:"€220~350/박",desc:"돌로미티 파노라마 뷰, 럭셔리 스파",tags:["5성급","스파","절경"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/faloria-mountain-spa-resort.html",c:""}]}
-    ],
-    "Milano (1박)":[
-      {name:"Hotel Spadari al Duomo",stars:4,price:"€150~200/박",desc:"두오모 2분! 아트호텔, 커플 평점 9.1",tags:["두오모앞","커플추천"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/spadari-al-duomo.html",c:""}]},
-      {name:"Hotel La Madonnina",stars:3,price:"€100~140/박",desc:"두오모 5분, 가성비 최고",tags:["가성비","깨끗"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/la-madonnina.html",c:""}]}
-    ]
-  },
-  days:[
-{day:1,date:"9/16 수",city:"인천→로마",theme:"로마의 첫 밤",routeSummary:"✈️ ICN→FCO (KE931 직항 12h)",sched:[
-  {t:"13:20",name:"인천 출발",desc:"KE931 직항",type:"move",coords:[41.8003,12.2389]},
-  {t:"19:30",name:"로마 FCO 도착",desc:"",type:""},
-  {t:"20:15",name:"FCO→Termini",desc:"Leonardo Express €14/인",type:"move",coords:[41.9009,12.5016]},
-  {t:"21:00",name:"호텔 체크인",desc:"€120/박",type:""},
-  {t:"21:45",name:"저녁: Flavio al Velavevodetto",rk:"roma-trastevere-dinner",desc:"카르보나라 €55",type:"food",coords:[41.8764,12.4753]},
-  {t:"23:00",name:"트라스테베레 산책",desc:"",type:"hl",coords:[41.8893,12.4699]}
-],cost:"€60"},
-{day:2,date:"9/17 목",city:"로마",theme:"바티칸 새벽🌅 + 콜로세움",routeSummary:"🚶 바티칸(새벽6시) → 콜로세움 → 로마 명소 종일",sched:[
-  {t:"05:30",name:"기상 → 택시/우버",desc:"바티칸까지 €10~15",type:"move",coords:[41.9022,12.4539]},
-  {t:"06:00",name:"⭐ 바티칸 도착 (줄서기)",desc:"개장 전 대기열 선점!",type:"spot",coords:[41.9022,12.4539],tip:"⚠️ 새벽 6시 도착 → 7:30 개장 시 1번째 입장! 온라인 예약 필수. 어깨+무릎 가려야 입장"},
-  {t:"07:30",name:"바티칸 박물관 입장",desc:"€21/인, 시스티나 예배당",type:"spot",coords:[41.9022,12.4539],tip:"💡 새벽 입장 = 시스티나 예배당 거의 독점! 오후 대비 인파 1/10"},
-  {t:"09:30",name:"성 베드로 대성당",desc:"쿠폴라 €8/인, 551계단",type:"spot",coords:[41.9022,12.4539],tip:"💡 쿠폴라 먼저 올라가기 - 오전이 대기줄 가장 짧음"},
-  {t:"11:00",name:"산탄젤로 다리",desc:"포토스팟",type:"hl",coords:[41.9010,12.4663]},
-  {t:"11:30",name:"점심: Armando al Pantheon",rk:"roma-pantheon-lunch",desc:"€70",type:"food",coords:[41.8986,12.4769]},
-  {t:"13:00",name:"판테온",desc:"€5/인",type:"spot",coords:[41.8986,12.4769]},
-  {t:"13:30",name:"젤라토",desc:"€8",type:"food"},
-  {t:"14:00",name:"콜로세움",desc:"€16~24/인, 1시간30분",type:"spot",coords:[41.8902,12.4922],tip:"⚠️ 사전예약 필수! 30일 전 오픈. 75분 제한. 오후가 역광 없이 사진 좋음"},
-  {t:"15:30",name:"포로 로마노",desc:"콜로세움 통합권",type:"spot",coords:[41.8925,12.4853]},
-  {t:"17:00",name:"나보나 광장",desc:"4대강 분수",type:"hl",coords:[41.8992,12.4731]},
-  {t:"18:00",name:"트레비 분수",desc:"석양 빛",type:"hl",coords:[41.9009,12.4833],tip:"💡 2026년부터 €2 입장료 (9AM 전 무료!)"},
-  {t:"19:00",name:"스페인 계단",desc:"야경",type:"hl",coords:[41.9058,12.4823],tip:"⚠️ 앉기 금지! €250 벌금"},
-  {t:"21:00",name:"저녁: Felice a Testaccio",rk:"roma-testaccio-dinner",desc:"€70",type:"food",coords:[41.8764,12.4753]}
-],cost:"€296"},
-{day:3,date:"9/18 금",city:"로마",theme:"보르게세 + 여유",routeSummary:"🚶 보르게세→캄피돌리오→트라스테베레 (종일)",sched:[
-  {t:"08:00",name:"아침",desc:"€10",type:"food"},
-  {t:"09:00",name:"보르게세 미술관",desc:"€15/인 사전예약!",type:"spot",coords:[41.9142,12.4921],tip:"⚠️ 반드시 사전예약 (90일 전). 2시간 제한 엄격 집행"},
-  {t:"11:00",name:"스페인광장+콘도띠",desc:"쇼핑",type:"",coords:[41.9058,12.4823],tip:"⚠️ 앉기 금지! €250 벌금"},
-  {t:"12:00",name:"점심: Roscioli",rk:"roma-centro-lunch",desc:"살루메리아 €65",type:"food",coords:[41.8933,12.4729]},
-  {t:"13:30",name:"캄피돌리오 광장",desc:"로마 전경",type:"spot",coords:[41.8933,12.4829]},
-  {t:"15:00",name:"진실의 입",desc:"산타마리아 인 코스메딘",type:"spot",coords:[41.8882,12.4814]},
-  {t:"16:00",name:"젤라토",desc:"€8",type:"food"},
-  {t:"17:00",name:"치르코 마시모",desc:"전차 경기장 유적",type:"spot",coords:[41.8862,12.4853]},
-  {t:"19:00",name:"아페리티보",desc:"€22",type:"food"},
-  {t:"20:00",name:"저녁: Da Enzo al 29",rk:"roma-trastevere-dinner2",desc:"트라스테베레 €60",type:"food",coords:[41.8893,12.4699]}
-],cost:"€180"},
-{day:4,date:"9/19 토",city:"→피렌체",theme:"르네상스 첫 만남",routeSummary:"🚂 Roma→Firenze (Frecciarossa 1.5h)",sched:[
-  {t:"08:00",name:"아침+체크아웃",desc:"€10",type:"food"},
-  {t:"09:30",name:"Roma→Firenze",desc:"Frecciarossa 1.5h",type:"move",coords:[43.7763,11.2477]},
-  {t:"11:30",name:"호텔 체크인",desc:"€130/박",type:""},
-  {t:"12:00",name:"점심: Mercato Centrale",desc:"€30",type:"food",coords:[43.7763,11.2537]},
-  {t:"13:30",name:"산 로렌조 성당",desc:"€9/인",type:"spot",coords:[43.7748,11.2537]},
-  {t:"15:30",name:"종탑 (조토)",desc:"€15/인",type:"spot",coords:[43.7731,11.2560]},
-  {t:"17:00",name:"베키오 다리",desc:"석양",type:"hl",coords:[43.7680,11.2532]},
-  {t:"18:00",name:"아페리티보",desc:"€22",type:"food"},
-  {t:"19:30",name:"저녁: Il Santo Bevitore",rk:"firenze-oltrarno-dinner",desc:"€70",type:"food",coords:[43.7680,11.2480]}
-],cost:"€200"},
-{day:5,date:"9/20 일",city:"피렌체",theme:"르네상스 + 비스테카",routeSummary:"🚶 피렌체 시내 종일 투어",sched:[
-  {t:"08:00",name:"아침: Ditta Artigianale",desc:"€12",type:"food"},
-  {t:"08:30",name:"우피치 미술관",desc:"€29/인, 2.5h",type:"spot",coords:[43.7677,11.2553],tip:"⚠️ 1개월 전 예약 필수. 15분 내 입장"},
-  {t:"12:00",name:"점심: All'Antico Vinaio",rk:"firenze-vinaio-lunch",desc:"€16",type:"food",coords:[43.7684,11.2563],tip:"💡 11:30 전 or 17:30 후 방문 (3개 매장 중 짧은 줄)"},
-  {t:"13:00",name:"아카데미아",desc:"다비드! €20/인",type:"spot",coords:[43.7769,11.2589]},
-  {t:"14:30",name:"riposo",desc:"1.5시간",type:""},
-  {t:"16:00",name:"두오모 쿠폴라",desc:"€30/인, 463계단",type:"spot",coords:[43.7731,11.2560],tip:"⚠️ 463계단 엘리베이터 없음. 시간 엄수 (5분 지각 입장불가)"},
-  {t:"17:45",name:"젤라토: Vivoli",desc:"€8",type:"food",coords:[43.7695,11.2593]},
-  {t:"18:00",name:"미켈란젤로 광장",desc:"일몰!",type:"hl",coords:[43.7629,11.2650],tip:"💡 일몰 19:15~19:30. 30분 전 도착!"},
-  {t:"19:30",name:"저녁: Buca Mario",rk:"firenze-bistecca",desc:"비스테카 1.2kg €90",type:"food",coords:[43.7718,11.2533],tip:"⚠️ 전화예약 필수 +39 055 214179"}
-],cost:"€314"},
-{day:6,date:"9/21 월",city:"피사 당일치기",theme:"사탑 + 피렌체 쇼핑",routeSummary:"🚂 Firenze↔Pisa (Regionale 왕복 2h)",sched:[
-  {t:"08:00",name:"아침",desc:"€10",type:"food"},
-  {t:"08:45",name:"Firenze→Pisa",desc:"Regionale 1시간",type:"move",coords:[43.7230,10.3966]},
-  {t:"10:00",name:"피사 사탑",desc:"€24/인",type:"spot",coords:[43.7230,10.3966],tip:"⚠️ 사전예약 필수 (opapisa.it). 30분 시간제한"},
-  {t:"10:45",name:"세례당+캄포산토",desc:"",type:"spot",coords:[43.7231,10.3941]},
-  {t:"12:00",name:"피사 점심",desc:"해산물 €40",type:"food"},
-  {t:"13:30",name:"Pisa→Firenze",desc:"1시간",type:"move",coords:[43.7763,11.2477]},
-  {t:"15:00",name:"산타크로체 성당",desc:"€8/인",type:"spot",coords:[43.7685,11.2623]},
-  {t:"18:00",name:"아페리티보",desc:"€22",type:"food"},
-  {t:"19:30",name:"저녁: Trattoria Mario",rk:"firenze-trattoria",desc:"€50",type:"food",coords:[43.7748,11.2537]}
-],cost:"€170"},
-{day:7,date:"9/22 화",city:"→베네치아",theme:"곤돌라 + 치케티",routeSummary:"🚂 Firenze→Venezia (Frecciarossa 2h)",sched:[
-  {t:"08:00",name:"아침+체크아웃",desc:"€10",type:"food"},
-  {t:"09:10",name:"Firenze→Venezia",desc:"Frecciarossa 2시간",type:"move",coords:[45.4410,12.3215]},
-  {t:"11:20",name:"바포레토",desc:"48h €35/인",type:"move"},
-  {t:"12:30",name:"치케티 바 호핑",rk:"venezia-cicchetti",desc:"€38",type:"food",coords:[45.4389,12.3338]},
-  {t:"14:00",name:"리알토 다리",desc:"",type:"hl",coords:[45.4380,12.3360]},
-  {t:"14:50",name:"산마르코 종탑",desc:"€10/인",type:"spot",coords:[45.4345,12.3388]},
-  {t:"15:30",name:"두칼레 궁전",desc:"€30/인",type:"spot",coords:[45.4336,12.3404],tip:"💡 30일 전 예약시 €25 (현장 €30)"},
-  {t:"17:00",name:"Caffe Florian",desc:"€25",type:"food",coords:[45.4343,12.3386],tip:"💡 2인 €40~50 예상 (오케스트라 서차지 포함)"},
-  {t:"17:45",name:"곤돌라",desc:"€80 석양!",type:"hl",coords:[45.4380,12.3360],tip:"💡 €90/보트(5인). 석양 타이밍이 최고"},
-  {t:"18:30",name:"산 조르조 마조레",desc:"€8/인",type:"spot",coords:[45.4294,12.3432],tip:"💡 산마르코 종탑보다 뷰 좋고 한적!"},
-  {t:"20:00",name:"저녁: Boccadoro",rk:"venezia-dinner",desc:"먹물리조또 €85",type:"food",coords:[45.4440,12.3380]},
-  {t:"22:00",name:"야경",desc:"",type:"hl",coords:[45.4345,12.3388]}
-],cost:"€340"},
-{day:8,date:"9/23 수",city:"베네치아+부라노",theme:"컬러풀 섬 투어",routeSummary:"⛴️ Venezia→Burano→Murano→Venezia (바포레토)",sched:[
-  {t:"08:00",name:"아침",desc:"€12",type:"food"},
-  {t:"09:00",name:"바포레토→부라노",desc:"45분",type:"move",coords:[45.4854,12.4167]},
-  {t:"10:00",name:"부라노 섬",desc:"레인보우!",type:"hl",coords:[45.4854,12.4167]},
-  {t:"11:30",name:"부라노 점심",rk:"venezia-burano-lunch",desc:"해산물 €55",type:"food",coords:[45.4854,12.4167]},
-  {t:"13:00",name:"→무라노",desc:"20분",type:"move",coords:[45.4584,12.3518]},
-  {t:"13:30",name:"무라노 유리공예",desc:"",type:"spot",coords:[45.4584,12.3518]},
-  {t:"16:00",name:"산마르코 광장",desc:"자유시간",type:"",coords:[45.4345,12.3388]},
-  {t:"19:00",name:"아페리티보",desc:"€15",type:"food"},
-  {t:"20:00",name:"저녁: Antiche Carampane",rk:"venezia-dinner2",desc:"€75",type:"food",coords:[45.4389,12.3338]}
-],cost:"€180"},
-{day:9,date:"9/24 목",city:"→돌로미티 DAY1",theme:"렌터카로 알프스!",routeSummary:"🚗 Venezia(Mestre)→Cortina (렌터카 2h)",sched:[
-  {t:"07:30",name:"아침+체크아웃",desc:"€12",type:"food"},
-  {t:"08:30",name:"→메스트레",desc:"15분",type:"move"},
-  {t:"09:00",name:"렌터카 픽업",desc:"Hertz/Europcar",type:"move"},
-  {t:"09:15",name:"→코르티나",desc:"렌터카 2시간",type:"move",coords:[46.5369,12.1357]},
-  {t:"12:00",name:"호텔 체크인",desc:"€150/박",type:""},
-  {t:"12:30",name:"점심",desc:"카네데를리 €50",type:"food",coords:[46.5369,12.1357]},
-  {t:"14:30",name:"팔로리아 전망대",desc:"€28/인",type:"spot",coords:[46.5225,12.1689]},
-  {t:"17:00",name:"미수리나 호수",desc:"렌터카 30분",type:"hl",coords:[46.5828,12.2529]},
-  {t:"19:00",name:"알펜글로우",desc:"",type:"hl",coords:[46.5369,12.1357]},
-  {t:"19:30",name:"저녁: Baita Fraina",rk:"dolomiti-dinner",desc:"사슴고기 €75",type:"food",coords:[46.5330,12.1290]},
-  {t:"21:30",name:"별 감상",desc:"",type:"hl"}
-],cost:"€203"},
-{day:10,date:"9/25 금",city:"돌로미티 DAY2",theme:"트레치메 + 브라이에스 보트",routeSummary:"🚗 렌터카: Tre Cime→Braies (종일)",sched:[
-  {t:"06:00",name:"아침",desc:"호텔조식",type:"food"},
-  {t:"07:00",name:"렌터카→트레치메",desc:"톨 €30",type:"move",coords:[46.6172,12.2942],tip:"⚠️ 톨게이트 온라인 예약 필수 (2025~). 9AM 전 도착"},
-  {t:"08:00",name:"트레치메 트레킹!",desc:"9.5km 3~3.5h",type:"spot",coords:[46.6172,12.2942]},
-  {t:"10:00",name:"Rifugio Locatelli",desc:"핫초코 €10",type:"food",coords:[46.6186,12.3045]},
-  {t:"12:00",name:"점심: Rifugio Auronzo",desc:"€35",type:"food",coords:[46.6097,12.2955]},
-  {t:"13:00",name:"→브라이에스",desc:"40분",type:"move",coords:[46.6942,12.0855],tip:"⚠️ 9/15까지 9AM~4PM 차량통제! 9:30 전 도착 or 4PM 후"},
-  {t:"14:00",name:"보트!",desc:"€18",type:"hl",coords:[46.6942,12.0855]},
-  {t:"14:45",name:"호수 산책",desc:"3.5km 1h",type:""},
-  {t:"19:00",name:"알펜글로우",desc:"",type:"hl",coords:[46.5369,12.1357]},
-  {t:"19:30",name:"저녁",desc:"€68",type:"food",coords:[46.5369,12.1357]}
-],cost:"€219"},
-{day:11,date:"9/26 토",city:"돌로미티 DAY3",theme:"Seceda 2500m + 카레차 호수",routeSummary:"🚗 렌터카: Ortisei(Seceda)→Alpe di Siusi→Carezza",sched:[
-  {t:"06:30",name:"아침",desc:"호텔조식",type:"food"},
-  {t:"07:30",name:"렌터카→오르티세이",desc:"Passo Giau 1h",type:"move",coords:[46.5736,11.6714]},
-  {t:"08:30",name:"Seceda 케이블카",desc:"→2,519m",type:"move",coords:[46.6019,11.7269],tip:"💡 케이블카 €59 왕복 (2026 인상)"},
-  {t:"09:00",name:"Seceda 전망대",desc:"최고 뷰!",type:"hl",coords:[46.6019,11.7269]},
-  {t:"10:00",name:"Seceda 산책",desc:"고산초원",type:"hl",coords:[46.6019,11.7269]},
-  {t:"12:00",name:"점심: 티롤 레스토랑",rk:"ortisei-lunch",desc:"슐츠크라펜 €50",type:"food",coords:[46.5736,11.6714]},
-  {t:"13:30",name:"→알페디시우시",desc:"고산초원",type:"move",coords:[46.5467,11.6192]},
-  {t:"14:00",name:"알페디시우시 산책",desc:"",type:"hl",coords:[46.5467,11.6192]},
-  {t:"15:30",name:"→카레차 호수",desc:"1시간",type:"move",coords:[46.4101,11.5753],tip:"💡 오전 반영 사진이 베스트"},
-  {t:"16:30",name:"카레차 호수",desc:"에메랄드 반영",type:"hl",coords:[46.4101,11.5753]},
-  {t:"19:00",name:"알펜글로우",desc:"마지막 밤",type:"hl",coords:[46.5369,12.1357]},
-  {t:"19:30",name:"저녁: El Camineto",rk:"dolomiti-dinner2",desc:"미슐랭 €85",type:"food",coords:[46.5380,12.1340]},
-  {t:"21:30",name:"별+와인",desc:"",type:"hl"}
-],cost:"€240"},
-{day:12,date:"9/27 일",city:"→밀라노",theme:"(코모호수 경유) + 두오모",routeSummary:"🚗 Cortina→Como→Milano (렌터카 4~5h)",sched:[
-  {t:"07:30",name:"아침+체크아웃",desc:"호텔조식",type:"food"},
-  {t:"08:00",name:"Cortina→코모호수",desc:"렌터카 3.5h",type:"move",coords:[45.9875,9.2573]},
-  {t:"11:30",name:"벨라지오",desc:"코모호수 최고",type:"hl",coords:[45.9875,9.2573]},
-  {t:"12:00",name:"점심: 호숫가",rk:"como-lunch",desc:"리조또 €60",type:"food",coords:[45.9875,9.2573]},
-  {t:"13:00",name:"벨라지오 산책",desc:"",type:"hl",coords:[45.9875,9.2573]},
-  {t:"14:30",name:"→밀라노",desc:"1시간",type:"move",coords:[45.4641,9.1919]},
-  {t:"15:30",name:"렌터카 반납",desc:"",type:""},
-  {t:"16:30",name:"밀라노 두오모",desc:"옥상 €14/인",type:"spot",coords:[45.4641,9.1919]},
-  {t:"18:30",name:"아페리티보",desc:"€22",type:"food"},
-  {t:"19:30",name:"저녁: Trattoria Milanese",rk:"milano-dinner",desc:"€75",type:"food",coords:[45.4620,9.1870]}
-],cost:"€220"},
-{day:13,date:"9/28 월",city:"밀라노→귀국",theme:"쇼핑 + 귀국",routeSummary:"✈️ MXP→ICN (KE928 22:00출발)",sched:[
-  {t:"08:30",name:"아침: Marchesi",desc:"€18",type:"food",coords:[45.4668,9.1910]},
-  {t:"10:00",name:"브레라 지구",desc:"",type:"",coords:[45.4722,9.1870]},
-  {t:"11:00",name:"쇼핑",desc:"Via Montenapoleone",type:""},
-  {t:"12:30",name:"점심: Luini",rk:"milano-lunch",desc:"€48",type:"food",coords:[45.4653,9.1889]},
-  {t:"15:00",name:"젤라토",desc:"€8",type:"food"},
-  {t:"16:00",name:"→Malpensa",desc:"Malpensa Exp €15/인",type:"move",coords:[45.6301,8.7231],tip:"💡 €15/인. 51분. 15분 간격 운행"},
-  {t:"17:30",name:"Tax Free",desc:"",type:"",tip:"💡 출발 3~4시간 전 도착. Check-in Area 12"},
-  {t:"22:00",name:"MXP 출발",desc:"KE928",type:""},
-  {t:"+1 16:35",name:"인천 도착",desc:"",type:""}
-],cost:"€108"}
-]}
 };
 
 const FOOD_RECS={
@@ -1087,14 +711,12 @@ const FOOD_RECS={
 };
 
 const COMPARE=[
-{id:"A",name:"코스 A: 나폴리/아말피",sub:"마테라 제외, 피렌체 3박",route:"로마→나폴리→폼페이→소렌토→아말피→피렌체(+피사)→베네치아→돌로미티→밀라노",price:"€4,850",krw:"728만원",pp:"364만원",pros:["나폴리 진짜 피자+아말피 해안","대이동 없음 (최대 4시간)","피렌체 3박 여유 (피사 당일치기)"],cons:["마테라 동굴도시 포기","남부 이동 시간 다소 있음"]},
 {id:"B",name:"코스 B: 남부 제외 (중북부)",sub:"친퀘테레+코모호수+렌터카",route:"로마→피렌체(+피사)→친퀘테레→베네치아(+부라노)→돌로미티(렌터카)→코모호수→밀라노",price:"€4,680",krw:"702만원",pp:"351만원",pros:["가장 여유로운 페이스","친퀘테레+코모호수+부라노!","렌터카로 돌로미티 자유도 극대화","카레차 호수까지 3개 호수","예산 최저"],cons:["나폴리 피자 포기","폼페이/아말피 포기"]},
-{id:"C",name:"코스 C: 돌로미티 3박",sub:"Seceda+카레차+코모호수 경유",route:"로마→피렌체(+피사)→베네치아(+부라노)→돌로미티(3박)→코모호수→밀라노",price:"€4,750",krw:"713만원",pp:"356만원",pros:["돌로미티 3일 풀 활용","Seceda 2500m 최고 뷰포인트","렌터카 자유도 극대화","코모호수 벨라지오 경유"],cons:["나폴리/아말피 포기","렌터카 운전 필요"]}
 ];
 
 // ===================== STATE & RENDER =====================
-let currentCourse='A',map=null,routeLine=null,markers=[],dayMap=null,dayMarkers=[],dayLine=null;
-const SEC_LIST=[{id:'overview',l:'루트 & 지도'},{id:'calendar',l:'달력'},{id:'itinerary',l:'상세 일정'},{id:'transport',l:'이동수단 & 예매'},{id:'hotel',l:'숙소 추천'},{id:'budget',l:'예산'},{id:'compare',l:'3코스 비교'}];
+let currentCourse='B',map=null,routeLine=null,markers=[],dayMap=null,dayMarkers=[],dayLine=null;
+const SEC_LIST=[{id:'overview',l:'루트 & 지도'},{id:'calendar',l:'달력'},{id:'itinerary',l:'상세 일정'},{id:'transport',l:'이동수단 & 예매'},{id:'hotel',l:'숙소 추천'},{id:'budget',l:'예산'},{id:'compare',l:'코스 요약'}];
 
 const ICON_COLORS={food:'#f97316',spot:'#22c55e',move:'#2563eb',hl:'#ec4899',couple:'#ec4899'};
 
@@ -1109,7 +731,7 @@ function init(){
   const st=document.getElementById('secTabs');st.innerHTML='';
   SEC_LIST.forEach(s=>{const d=document.createElement('div');d.className='sec-tab'+(s.id==='overview'?' active':'');d.dataset.sec=s.id;d.textContent=s.l;d.onclick=()=>{document.querySelectorAll('.sec-tab').forEach(x=>x.classList.remove('active'));d.classList.add('active');document.querySelectorAll('.section-content').forEach(x=>x.classList.remove('active'));document.getElementById('sec-'+s.id).classList.add('active');if(s.id==='overview'&&map)map.invalidateSize();if(s.id==='itinerary'&&dayMap)setTimeout(()=>dayMap.invalidateSize(),100);};st.appendChild(d);});
   document.getElementById('sec-overview').classList.add('active');
-  switchCourse('A');
+  switchCourse('B');
 }
 
 function switchCourse(id){
