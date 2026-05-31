@@ -498,7 +498,7 @@ footer{text-align:center;padding:36px 20px;color:var(--faint);
     <div class="trip-meta">
       <span class="chip chip-route">로마 → 밀라노</span>
       <span class="chip">KE931 / KE928</span>
-      <span class="chip chip-fixed">코스 B 확정</span>
+      <span class="chip chip-fixed">확정 일정</span>
     </div>
   </div>
 </header>
@@ -536,17 +536,17 @@ footer{text-align:center;padding:36px 20px;color:var(--faint);
 </div>
 
 <div class="section-content" id="sec-compare">
-  <div class="compare-section card"><h3>코스 B 요약 (확정)</h3><div class="compare-grid" id="compareGrid"></div></div>
+  <div class="compare-section card"><h3>여행 요약</h3><div class="compare-grid" id="compareGrid"></div></div>
 </div>
 </main>
 
-<footer>이탈리아 2026 · 코스 B 확정 · 12박 13일 · 로마–밀라노</footer>
+<footer>이탈리아 2026 · 12박 13일 · 로마–밀라노</footer>
 
 <script>
 // ===================== DATA =====================
 const COURSES = {
 B: {
-  name:"코스 B: 남부 제외 (중북부 집중)",sub:"친퀘테레+코모호수+렌터카",
+  name:"로마–밀라노 12박 13일",sub:"친퀘테레+코모호수+렌터카",
   nights:"Roma(3)+Firenze(3)+CinqueTerre(1)+Venezia(2)+Dolomiti(2)+Milano(1)=12N",
   totalBudget:7317,perPerson:549,
   budget:[{l:"항공",a:2307,c:"#244F3B"},{l:"교통",a:520,c:"#2F6B4F"},{l:"숙박",a:1710,c:"#3F7D5E"},{l:"식비",a:1500,c:"#5E6B57"},{l:"입장료",a:680,c:"#7E8B6F"},{l:"도시세",a:120,c:"#9AA38C"},{l:"기타",a:480,c:"#B8B2A6"}],
@@ -931,12 +931,12 @@ const FOOD_RECS={
 };
 
 const COMPARE=[
-{id:"B",name:"코스 B: 남부 제외 (중북부)",sub:"친퀘테레+코모호수+렌터카",route:"로마→피렌체(+피사)→친퀘테레→베네치아(+부라노)→돌로미티(렌터카)→코모호수→밀라노",price:"€7,317",krw:"1,098만원",pp:"549만원",pros:["가장 여유로운 페이스","친퀘테레+코모호수+부라노!","렌터카로 돌로미티 자유도 극대화","카레차 호수까지 3개 호수","예산 최저"],cons:["나폴리 피자 포기","폼페이/아말피 포기"]},
+{id:"B",name:"로마–밀라노 12박 13일",sub:"친퀘테레+코모호수+렌터카",route:"로마→피렌체(+피사)→친퀘테레→베네치아(+부라노)→돌로미티(렌터카)→코모호수→밀라노",price:"€7,317",krw:"1,098만원",pp:"549만원",pros:["가장 여유로운 페이스","친퀘테레+코모호수+부라노!","렌터카로 돌로미티 자유도 극대화","카레차 호수까지 3개 호수","예산 최저"],cons:["나폴리 피자 포기","폼페이/아말피 포기"]},
 ];
 
 // ===================== STATE & RENDER =====================
 let currentCourse='B',map=null,routeLine=null,markers=[],dayMap=null,dayMarkers=[],dayLine=null;
-const SEC_LIST=[{id:'overview',l:'🗺️ 루트 & 지도'},{id:'calendar',l:'📅 달력'},{id:'itinerary',l:'📋 상세 일정'},{id:'transport',l:'🚆 이동수단'},{id:'hotel',l:'🏨 숙소'},{id:'budget',l:'💰 예산'},{id:'compare',l:'✅ 코스 요약'}];
+const SEC_LIST=[{id:'overview',l:'🗺️ 루트 & 지도'},{id:'calendar',l:'📅 달력'},{id:'itinerary',l:'📋 상세 일정'},{id:'transport',l:'🚆 이동수단'},{id:'hotel',l:'🏨 숙소'},{id:'budget',l:'💰 예산'},{id:'compare',l:'✅ 여행 요약'}];
 
 const ICON_COLORS={food:'#f97316',spot:'#22c55e',move:'#2563eb',hl:'#ec4899',couple:'#ec4899'};
 
@@ -1159,7 +1159,7 @@ function renderCompare(){
   const g=document.getElementById('compareGrid');g.innerHTML='';
   COMPARE.forEach(c=>{const card=document.createElement('div');card.className='compare-card'+(c.id===currentCourse?' current':'');
     let pros=c.pros.map(p=>`<li>✅ ${p}</li>`).join(''),cons=c.cons.map(p=>`<li>❌ ${p}</li>`).join('');
-    card.innerHTML=`${c.id===currentCourse?'<div class="card-badge">현재 선택</div>':''}<h4>${c.name}</h4><div class="card-sub">${c.sub}</div><div class="card-route">${c.route}</div><div class="card-price">${c.krw} <small>/ 2인 (${c.price})</small></div><div style="font-size:11px;color:#666">1인당 ${c.pp} (항공 포함)</div><ul class="pros">${pros}</ul><ul class="cons" style="margin-top:6px">${cons}</ul>`;
+    card.innerHTML=`${c.id===currentCourse?'<div class="card-badge">✅ 확정</div>':''}<h4>${c.name}</h4><div class="card-sub">${c.sub}</div><div class="card-route">${c.route}</div><div class="card-price">${c.krw} <small>/ 2인 (${c.price})</small></div><div style="font-size:11px;color:#666">1인당 ${c.pp} (항공 포함)</div><ul class="pros">${pros}</ul><ul class="cons" style="margin-top:6px">${cons}</ul>`;
     card.onclick=()=>switchCourse(c.id);g.appendChild(card);});
 }
 
