@@ -9,27 +9,23 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  /* Dolce Editoriale palette mapped 1:1 onto legacy tokens */
-  --paper:#F7F1E6;--paper-2:#FDF9F1;--paper-3:#F2EAD9;
-  --bg:#F7F1E6;--surface:#FDF9F1;--surface-2:#F2EAD9;
-  --ink:#2B2118;--muted:#6F6354;--faint:#9C8F7B;
-  --line:#E3D9C6;--line-2:#EDE4D2;
-  /* accent system */
-  --terracotta:#C25A3C;--terracotta-deep:#9E4329;--terracotta-soft:#F3E0D5;
-  --olive:#6E7A4E;--olive-soft:#E7E6D2;
-  --gold:#C99A3F;--gold-soft:#F2E6C8;
-  --blush:#D98E7A;--blush-soft:#F5E0D8;
-  --adriatic:#3F6B6E;--adriatic-soft:#DCE6E2;
-  /* legacy aliases (used by JS-injected markup) */
-  --brand:#C25A3C;--brand-d:#9E4329;--brand-soft:#F3E0D5;
-  --amber:#C99A3F;--amber-soft:#F2E6C8;
-  --green:#6E7A4E;--green-soft:#E7E6D2;--red:#B14A33;
-  --pink-soft:#F5E0D8;
+  --paper:#F7F6F3;--paper-2:#FFFFFF;--paper-3:#F0EFEA;
+  --bg:#F7F6F3;--surface:#FFFFFF;--surface-2:#F0EFEA;
+  --ink:#232826;--muted:#6F6B62;--faint:#9C988E;
+  --line:#E6E4DF;--line-2:#EFEDE8;
+  --terracotta:#2F6B4F;--terracotta-deep:#244F3B;--terracotta-soft:#E8EFEA;
+  --olive:#5E6B57;--olive-soft:#ECEEE8;
+  --gold:#7E8B6F;--gold-soft:#ECEFE8;
+  --blush:#9A8E84;--blush-soft:#F0EDE8;
+  --adriatic:#4A6B66;--adriatic-soft:#E8EEEC;
+  --brand:#2F6B4F;--brand-d:#244F3B;--brand-soft:#E8EFEA;
+  --amber:#7E8B6F;--amber-soft:#ECEFE8;
+  --green:#2F6B4F;--green-soft:#E8EFEA;--red:#A24A3A;
+  --pink-soft:#F0EDE8;
   --r:14px;--r-sm:10px;
-  /* navbar offset token — single source of truth for sticky offsets */
   --nav-h:52px;
-  --sh-sm:0 1px 2px rgba(43,33,24,.05);
-  --sh:0 1px 3px rgba(43,33,24,.06),0 14px 34px -22px rgba(43,33,24,.30);
+  --sh-sm:0 1px 2px rgba(30,33,30,.05);
+  --sh:0 1px 3px rgba(30,33,30,.06),0 14px 34px -22px rgba(30,33,30,.22);
   --maxw:1100px;
   --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
 }
@@ -44,7 +40,7 @@ body::before{
   background-image:var(--grain);background-size:160px;opacity:.05;mix-blend-mode:multiply;
 }
 ::-webkit-scrollbar{width:9px;height:9px}
-::-webkit-scrollbar-thumb{background:#D6C8AE;border-radius:5px}
+::-webkit-scrollbar-thumb{background:#D2D0C8;border-radius:5px}
 ::-webkit-scrollbar-track{background:transparent}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--terracotta);outline-offset:2px;border-radius:3px}
@@ -53,9 +49,8 @@ a{color:inherit}
 .topbar{
   position:relative;overflow:hidden;
   background:
-    radial-gradient(120% 130% at 78% -10%, rgba(201,154,63,.34) 0%, rgba(201,154,63,0) 46%),
-    radial-gradient(120% 120% at 18% 120%, rgba(110,122,78,.20) 0%, rgba(110,122,78,0) 50%),
-    linear-gradient(168deg,#FBF4E7 0%,#F4E2CC 45%,#ECC9B4 100%);
+    radial-gradient(120% 130% at 82% -20%, rgba(47,107,79,.10) 0%, rgba(47,107,79,0) 52%),
+    linear-gradient(168deg,#FBFBF9 0%,#F4F4F0 60%,#ECEFE9 100%);
   border-bottom:1px solid var(--line);
 }
 .topbar::before{
@@ -64,8 +59,8 @@ a{color:inherit}
 }
 /* faint line-illustration silhouettes */
 .topbar::after{
-  content:"";position:absolute;right:-30px;bottom:-22px;width:min(46%,520px);height:118%;pointer-events:none;opacity:.16;
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 300' fill='none' stroke='%239E4329' stroke-width='2'%3E%3Cellipse cx='110' cy='150' rx='70' ry='80'/%3E%3Cline x1='40' y1='110' x2='180' y2='110'/%3E%3Cline x1='40' y1='150' x2='180' y2='150'/%3E%3Cline x1='40' y1='190' x2='180' y2='190'/%3E%3Cline x1='75' y1='75' x2='75' y2='225'/%3E%3Cline x1='110' y1='71' x2='110' y2='229'/%3E%3Cline x1='145' y1='75' x2='145' y2='225'/%3E%3Cpath d='M300 230 L330 120 L360 230 Z'/%3E%3Cpath d='M330 120 L330 95'/%3E%3Cpath d='M312 175 h36'/%3E%3Cpath d='M470 235 q40 -30 110 -10 q-14 -34 -64 -30 q-20 -34 -52 -8 q-30 4 -24 30 q-10 6 30 18Z'/%3E%3C/svg%3E") right bottom/contain no-repeat;
+  content:"";position:absolute;right:-30px;bottom:-22px;width:min(46%,520px);height:118%;pointer-events:none;opacity:.08;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 300' fill='none' stroke='%232F6B4F' stroke-width='2'%3E%3Cellipse cx='110' cy='150' rx='70' ry='80'/%3E%3Cline x1='40' y1='110' x2='180' y2='110'/%3E%3Cline x1='40' y1='150' x2='180' y2='150'/%3E%3Cline x1='40' y1='190' x2='180' y2='190'/%3E%3Cline x1='75' y1='75' x2='75' y2='225'/%3E%3Cline x1='110' y1='71' x2='110' y2='229'/%3E%3Cline x1='145' y1='75' x2='145' y2='225'/%3E%3Cpath d='M300 230 L330 120 L360 230 Z'/%3E%3Cpath d='M330 120 L330 95'/%3E%3Cpath d='M312 175 h36'/%3E%3Cpath d='M470 235 q40 -30 110 -10 q-14 -34 -64 -30 q-20 -34 -52 -8 q-30 4 -24 30 q-10 6 30 18Z'/%3E%3C/svg%3E") right bottom/contain no-repeat;
 }
 .topbar-inner{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:34px 30px 30px}
 .brand{display:flex;flex-direction:column;gap:0}
@@ -80,9 +75,9 @@ a{color:inherit}
 .brand .flag::before{content:"";width:38px;height:2px;border-radius:2px;flex-shrink:0;
   background:linear-gradient(90deg,var(--terracotta),var(--gold) 60%,var(--olive));}
 .brand h1{
-  font-family:'Playfair Display',serif;font-style:italic;font-weight:800;
-  font-size:clamp(30px,6.4vw,58px);line-height:1.02;letter-spacing:-.01em;
-  color:var(--ink);margin:2px 0 6px;
+  font-family:'Playfair Display','Noto Sans KR',serif;font-weight:700;
+  font-size:clamp(28px,5.2vw,46px);line-height:1.06;letter-spacing:-.01em;
+  color:var(--ink);margin:0 0 8px;
 }
 .brand h1 em{font-style:italic;color:var(--terracotta-deep)}
 .brand .sub{
@@ -96,9 +91,9 @@ a{color:inherit}
   color:var(--muted);background:rgba(253,249,241,.7);border:1px solid var(--line);
   padding:6px 13px;border-radius:999px;white-space:nowrap;backdrop-filter:blur(2px);
 }
-.chip-route{color:var(--terracotta-deep);background:var(--terracotta-soft);border-color:#E6C4B2}
+.chip-route{color:var(--terracotta-deep);background:var(--terracotta-soft);border-color:#CFE0D4}
 .chip-fixed{color:#fff;background:var(--gold);border-color:var(--gold);
-  box-shadow:0 4px 12px -5px rgba(201,154,63,.7);font-weight:700}
+  box-shadow:0 4px 12px -5px rgba(47,107,79,.7);font-weight:700}
 
 /* ============ NAV ============ */
 .navbar{position:sticky;top:0;z-index:40;background:rgba(247,241,230,.94);
@@ -137,12 +132,12 @@ a{color:inherit}
 /* ============ OVERVIEW ============ */
 #map{
   width:100%;height:clamp(300px,48vh,560px);border-radius:var(--r);overflow:hidden;
-  border:1px solid var(--gold);box-shadow:0 0 0 4px rgba(201,154,63,.10),var(--sh);
+  border:1px solid var(--gold);box-shadow:0 0 0 4px rgba(47,107,79,.10),var(--sh);
   margin-bottom:26px;isolation:isolate;
-  background:linear-gradient(135deg,#F2EAD9,#FBF4E7);
+  background:linear-gradient(135deg,#EEEEEA,#F7F7F4);
 }
-.leaflet-container{background:#F2EAD9!important}
-.leaflet-tile{filter:saturate(.92) sepia(.06)}
+.leaflet-container{background:#EEEEEA!important}
+.leaflet-tile{filter:saturate(.95)}
 .route-flow{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
 .route-city{
   background:var(--paper);border:1px solid var(--line);padding:7px 14px;border-radius:999px;
@@ -150,7 +145,7 @@ a{color:inherit}
 }
 .route-city.overnight{
   background:var(--terracotta);color:#fff;border-color:var(--terracotta);font-weight:700;
-  box-shadow:0 4px 12px -6px rgba(194,90,60,.7);
+  box-shadow:0 4px 12px -6px rgba(47,107,79,.7);
 }
 .route-arrow{color:var(--gold);font-size:15px;font-family:'Spectral',serif}
 .stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:14px}
@@ -180,9 +175,9 @@ a{color:inherit}
   border-radius:9px;padding:7px 8px;font-size:10px;position:relative;transition:.18s;
 }
 .cal-cell.empty{background:transparent;border-color:transparent}
-.cal-cell.trip{background:var(--terracotta-soft);border-color:#E6C4B2}
+.cal-cell.trip{background:var(--terracotta-soft);border-color:#CFE0D4}
 .cal-cell.trip:hover{border-color:var(--terracotta);transform:translateY(-1px);
-  box-shadow:0 8px 18px -10px rgba(194,90,60,.45)}
+  box-shadow:0 8px 18px -10px rgba(47,107,79,.45)}
 .cal-date{font-family:'Inter',sans-serif;font-weight:700;font-size:13px;margin-bottom:4px;color:var(--ink)}
 .cal-cell.sun .cal-date{color:var(--terracotta-deep)}
 .cal-city{font-family:'Playfair Display','Noto Sans KR',serif;font-size:11.5px;
@@ -210,8 +205,8 @@ a{color:inherit}
 #dayMap{
   width:100%;height:clamp(280px,54vh,560px);border:1px solid var(--gold);
   border-radius:var(--r-sm);margin-bottom:18px;z-index:1;isolation:isolate;
-  box-shadow:0 0 0 3px rgba(201,154,63,.10),var(--sh-sm);
-  background:linear-gradient(135deg,#F2EAD9,#FBF4E7);
+  box-shadow:0 0 0 3px rgba(47,107,79,.10),var(--sh-sm);
+  background:linear-gradient(135deg,#EEEEEA,#F7F7F4);
 }
 .day-block{
   background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r-sm);
@@ -261,9 +256,9 @@ a{color:inherit}
   padding:2px 7px;border-radius:5px;margin-left:6px;border:1px solid transparent;
   display:inline-block;vertical-align:middle;text-transform:uppercase;
 }
-.tag-food{background:var(--gold-soft);color:#8A6A1F;border-color:#E4D2A4}
+.tag-food{background:var(--gold-soft);color:#8A6A1F;border-color:#D8DCCB}
 .tag-move{background:var(--olive-soft);color:#4E5836;border-color:#D2D2B4}
-.tag-spot{background:var(--terracotta-soft);color:var(--terracotta-deep);border-color:#E6C4B2}
+.tag-spot{background:var(--terracotta-soft);color:var(--terracotta-deep);border-color:#CFE0D4}
 .tag-couple{background:var(--blush-soft);color:#A8543F;border-color:#EBCBBF}
 .tag-hotel{background:var(--blush-soft);color:#A8543F;border-color:#EBCBBF}
 .tag-swim{background:var(--adriatic-soft);color:var(--adriatic);border-color:#C3D5CE}
@@ -278,7 +273,7 @@ a{color:inherit}
 .food-row:hover{background:var(--gold-soft)}
 .food-more{font-family:'Inter','Noto Sans KR',sans-serif;font-size:9px;color:#8A6A1F;
   font-weight:700;margin-left:7px;background:var(--gold-soft);padding:2px 8px;
-  border-radius:999px;border:1px solid #E4D2A4}
+  border-radius:999px;border:1px solid #D8DCCB}
 /* QA-fix: .food-recs-row 는 추천 식당이 펼쳐지는 확장 <tr>. 무스타일 방지를 위해
    행 전체를 살짝 함몰된 패널처럼 처리(좌측 강조선 + 안쪽 그림자), 셀 패딩/세로흐름 정의. */
 .food-recs-row{background:var(--gold-soft)}
@@ -316,7 +311,7 @@ a{color:inherit}
 .cost-row td{background:var(--olive-soft);color:#4E5836!important;
   font-family:'Playfair Display',serif!important;font-weight:700!important;font-size:13px!important}
 .tip-row{background:var(--gold-soft);font-size:11.5px!important;color:#7A5A14!important}
-.tip-row td{border-bottom:1px solid #E4D2A4!important;line-height:1.55}
+.tip-row td{border-bottom:1px solid #D8DCCB!important;line-height:1.55}
 
 /* ============ TRANSPORT ============ */
 .t-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--r-sm);border:1px solid var(--line)}
@@ -361,7 +356,7 @@ a{color:inherit}
 .hotel-card::before{
   content:"";display:block;height:78px;
   background:
-    radial-gradient(130% 130% at 80% 10%, rgba(201,154,63,.4) 0%, rgba(201,154,63,0) 55%),
+    radial-gradient(130% 130% at 80% 10%, rgba(47,107,79,.4) 0%, rgba(47,107,79,0) 55%),
     linear-gradient(135deg,var(--terracotta-soft),var(--paper-3));
   border-bottom:1px solid var(--line);
 }
@@ -401,7 +396,7 @@ a{color:inherit}
 .budget-total{
   margin-top:22px;padding:20px;background:var(--paper);
   border:1px solid var(--gold);border-radius:var(--r-sm);
-  box-shadow:0 0 0 3px rgba(201,154,63,.08);
+  box-shadow:0 0 0 3px rgba(47,107,79,.08);
   display:flex;justify-content:space-around;text-align:center;gap:14px;
 }
 .budget-total .item .val{font-family:'Playfair Display',serif;font-size:26px;font-weight:800;color:var(--terracotta-deep)}
@@ -412,7 +407,7 @@ a{color:inherit}
 .compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
 .compare-card{border:1px solid var(--line);border-radius:var(--r);padding:24px;
   position:relative;background:var(--paper-2);transition:border-color .2s}
-.compare-card.current{border-color:var(--gold);box-shadow:0 0 0 4px rgba(201,154,63,.12)}
+.compare-card.current{border-color:var(--gold);box-shadow:0 0 0 4px rgba(47,107,79,.12)}
 .card-badge{position:absolute;top:-12px;right:16px;background:var(--gold);color:#fff;
   padding:4px 13px;border-radius:999px;font-family:'Inter','Noto Sans KR',sans-serif;font-size:10.5px;font-weight:700}
 .compare-card h4{font-family:'Playfair Display','Noto Sans KR',serif;font-size:20px;margin-bottom:4px;color:var(--ink)}
@@ -498,9 +493,8 @@ footer{text-align:center;padding:36px 20px;color:var(--faint);
 <header class="topbar">
   <div class="topbar-inner">
     <div class="brand">
-      <span class="flag">ITINERARIO D'ITALIA</span>
-      <h1>로마에서 <em>밀라노</em>까지</h1>
-      <div class="sub">12박 13일 이탈리아 신혼 여정 · 2026.09.16(수) ~ 09.28(월)<span class="scribble">amore mio</span></div>
+      <h1>이탈리아 2026</h1>
+      <div class="sub">12박 13일 · 로마–밀라노 · 2026.09.16(수)~09.28(월)</div>
     </div>
     <div class="trip-meta">
       <span class="chip chip-route">로마 → 밀라노</span>
@@ -547,7 +541,7 @@ footer{text-align:center;padding:36px 20px;color:var(--faint);
 </div>
 </main>
 
-<footer>Itinerario d'Italia · 코스 B 확정 · 12박 13일 · 인터랙티브 지도 + 식당 추천 + Google Maps 길찾기</footer>
+<footer>이탈리아 2026 · 코스 B 확정 · 12박 13일 · 로마–밀라노</footer>
 
 <script>
 // ===================== DATA =====================
