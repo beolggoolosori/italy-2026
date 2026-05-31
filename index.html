@@ -337,6 +337,12 @@ a{color:inherit}
 .book-link:hover{background:var(--terracotta-deep)}
 
 /* ============ HOTELS ============ */
+.hotel-citynav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.hotel-citychip{font-family:inherit;font-size:13px;font-weight:700;color:var(--muted);background:var(--surface-2);border:1px solid var(--line);padding:8px 15px;border-radius:999px;cursor:pointer;white-space:nowrap;transition:.15s}
+.hotel-citychip:hover{color:var(--ink);border-color:#cdd5ce}
+.hotel-citychip.active{color:#fff;background:var(--brand);border-color:var(--brand);box-shadow:0 5px 14px -5px rgba(47,107,79,.5)}
+.hcount{font-size:12px;font-weight:600;color:var(--faint);margin-left:auto}
+.hotel-city[hidden]{display:none}
 .hotel-city{margin-bottom:32px}
 .hotel-city h4{
   font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;font-size:20px;color:var(--ink);
@@ -1129,21 +1135,26 @@ function renderTransport(c){
 // HOTELS
 function renderHotels(c){
   const el=document.getElementById('hotelContent');
-  document.getElementById('hotelTitle').textContent=c.name+' — 숙소 추천';
-  let html='';
-  Object.keys(c.hotels).forEach(city=>{
-    const hotels=c.hotels[city];
-    html+=`<div class="hotel-city"><h4>${city}</h4><div class="hotel-cards">`;
-    hotels.forEach(h=>{
+  document.getElementById('hotelTitle').textContent='숙소';
+  const cities=Object.keys(c.hotels);
+  const conf=city=>c.hotels[city].some(h=>/확정/.test(h.name)||(h.tags||[]).some(t=>/확정/.test(t)));
+  const nav='<div class="hotel-citynav">'+cities.map((city,i)=>`<button class="hotel-citychip${i===0?' active':''}" data-city="${city}" onclick="showHotelCity('${city}')">${city}${conf(city)?' ✅':''}</button>`).join('')+'</div>';
+  let blocks='';
+  cities.forEach((city,i)=>{
+    const cards=c.hotels[city].map(h=>{
       const stars='★'.repeat(h.stars)+'☆'.repeat(5-h.stars);
       const tags=h.tags.map(t=>`<span class="h-tag">${t}</span>`).join('');
       const links=h.links.map(l=>`<a href="${l.u}" target="_blank" class="${l.c}">${l.t}</a>`).join('');
-      html+=`<div class="hotel-card"><div class="h-name">${h.name}</div><div class="h-stars">${stars}</div><div class="h-desc">${h.desc}</div><div class="h-price">${h.price} <small>/2인 기준</small></div><div class="h-tags">${tags}</div><div class="h-links">${links}</div></div>`;
-    });
-    html+=`</div></div>`;
+      return `<div class="hotel-card"><div class="h-name">${h.name}</div><div class="h-stars">${stars}</div><div class="h-desc">${h.desc}</div><div class="h-price">${h.price} <small>/2인 기준</small></div><div class="h-tags">${tags}</div><div class="h-links">${links}</div></div>`;
+    }).join('');
+    blocks+=`<div class="hotel-city" data-cityblock="${city}"${i===0?'':' hidden'}><h4>${city} <span class="hcount">후보 ${c.hotels[city].length}곳</span></h4><div class="hotel-cards">${cards}</div></div>`;
   });
-  html+=`<div class="hotel-tip">💡 <strong>예약 팁:</strong> 9월은 성수기! 6개월 전 예약 추천. Booking.com 무료취소 옵션 활용하세요. 로마 Hotel Labelle은 확정가(₩854,164/3박·2인).<br>🏛️ <strong>이탈리아 도시세(tassa di soggiorno):</strong> 대부분 도시가 1인·1박당 €3~7을 체크인 시 숙소에서 현장 결제 — 예산 \'도시세\' 항목에 별도 계상. 로마(2성) ₩52,620 확정.</div>`;
-  el.innerHTML=html;
+  const tip=`<div class="hotel-tip">💡 <strong>예약 팁:</strong> 9월은 성수기! 6개월 전 예약 추천. 로마 Hotel Labelle은 확정가(₩854,164/3박·2인).<br>🏛️ <strong>이탈리아 도시세(tassa di soggiorno):</strong> 대부분 도시가 1인·1박당 €3~7을 체크인 시 숙소에서 현장 결제 — 예산 '도시세' 항목에 별도 계상. 로마(2성) ₩52,620 확정.</div>`;
+  el.innerHTML=nav+blocks+tip;
+}
+function showHotelCity(name){
+  document.querySelectorAll('.hotel-citychip').forEach(b=>b.classList.toggle('active',b.dataset.city===name));
+  document.querySelectorAll('[data-cityblock]').forEach(b=>{b.hidden=(b.dataset.cityblock!==name);});
 }
 
 // BUDGET
