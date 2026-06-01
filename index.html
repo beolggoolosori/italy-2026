@@ -1234,42 +1234,14 @@ function showDayOnMap(day){
   if(items.length===0){dayMap.setView([42.5,13],6);return;}
   const coords=items.map(s=>[Number(s.coords[0]),Number(s.coords[1])]);
   const mainCoords=items.filter(s=>!s.optional).map(s=>[Number(s.coords[0]),Number(s.coords[1])]);
-  const bounds=L.latLngBounds(coords);
-  if(bounds.isValid())dayMap.fitBounds(bounds,{padding:[64,64],maxZoom:14});
-  dayMap.invalidateSize();
   let num=0;
   const mapItems=items.map(s=>{
     if(!s.optional)num++;
     return {s,markerLabel:s.seq||(s.optional?`${num}-1`:num),latlng:[Number(s.coords[0]),Number(s.coords[1])]};
   });
-  function displayPositions(points){
-    const entries=points.map((p,i)=>({i,base:p.latlng,point:dayMap.latLngToLayerPoint(p.latlng)}));
-    const clusters=[];
-    entries.forEach(e=>{
-      const cluster=clusters.find(g=>g.some(x=>x.point.distanceTo(e.point)<42));
-      if(cluster)cluster.push(e);else clusters.push([e]);
-    });
-    const out=[];
-    clusters.forEach(group=>{
-      if(group.length===1){out[group[0].i]=group[0].base;return;}
-      const center=group.reduce((acc,e)=>({x:acc.x+e.point.x,y:acc.y+e.point.y}),{x:0,y:0});
-      center.x/=group.length;center.y/=group.length;
-      const radius=Math.min(62,28+group.length*6);
-      group.sort((a,b)=>a.point.y-b.point.y||a.point.x-b.point.x);
-      group.forEach((e,idx)=>{
-        const angle=(-Math.PI/2)+(Math.PI*2*idx/group.length);
-        const p=L.point(center.x+Math.cos(angle)*radius,center.y+Math.sin(angle)*radius);
-        const ll=dayMap.layerPointToLatLng(p);
-        out[e.i]=[ll.lat,ll.lng];
-      });
-    });
-    return out;
-  }
-  const displays=displayPositions(mapItems);
-  mapItems.forEach((item,i)=>{
+  mapItems.forEach(item=>{
     const {s,markerLabel,latlng}=item;
-    const display=displays[i]||latlng;
-    const mk=L.marker(display,{icon:createNumberedIcon(markerLabel,s.optional?'option':s.type||'spot')}).addTo(dayMap);
+    const mk=L.marker(latlng,{icon:createNumberedIcon(markerLabel,s.optional?'option':s.type||'spot')}).addTo(dayMap);
     mk._baseLatLng=latlng;mk._pointName=s.name;
     let popup=`<b>${s.name}</b>`;
     if(s.t)popup=`<span style="color:#d97706;font-weight:700">${s.t}</span> `+popup;
@@ -1283,6 +1255,8 @@ function showDayOnMap(day){
   if(mainCoords.length>1){
     dayLine=L.polyline(mainCoords,{color:'#2563eb',weight:2.5,opacity:.6,dashArray:'6 4'}).addTo(dayMap);
   }
+  const bounds=L.latLngBounds(coords);
+  if(bounds.isValid())dayMap.fitBounds(bounds,{padding:[40,40],maxZoom:14});
 }
 function showOverviewOnDayMap(c){
   if(!initDayMap())return;
