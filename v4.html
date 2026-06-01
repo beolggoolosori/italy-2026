@@ -187,6 +187,15 @@ a{color:inherit}
   padding:1px 6px;border-radius:5px;display:inline-block;margin-top:4px;font-weight:600;letter-spacing:.02em}
 .cal-nights{position:absolute;top:6px;right:6px;font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;font-size:8px;
   background:var(--gold);color:#fff;padding:1px 6px;border-radius:6px;font-weight:700}
+.cal-mobile-list{display:none}
+.cal-day-card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 13px}
+.cal-day-card.trip{background:var(--terracotta-soft);border-color:#CFE0D4}
+.cal-day-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
+.cal-day-date{font-weight:800;color:var(--terracotta-deep);font-size:13px}
+.cal-day-city{font-weight:800;color:var(--ink);font-size:14px}
+.cal-day-detail{font-size:12px;color:var(--muted);line-height:1.45}
+.cal-day-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.cal-day-pill{font-size:10px;font-weight:700;background:var(--paper-2);border:1px solid var(--line);border-radius:999px;padding:2px 8px;color:var(--olive)}
 
 /* ============ ITINERARY ============ */
 #itinSection > h3{font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,BlinkMacSystemFont,sans-serif!important}
@@ -335,6 +344,14 @@ a{color:inherit}
   font-size:11px;font-weight:600;transition:.16s}
 .book-link::after{content:"→";font-size:12px}
 .book-link:hover{background:var(--terracotta-deep)}
+.transport-cards{display:none}
+.transport-card{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:13px 14px}
+.transport-card .tc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px}
+.transport-card .tc-day{font-weight:900;color:var(--terracotta-deep);font-size:13px}
+.transport-card .tc-cost{font-weight:800;color:var(--terracotta);font-size:13px;text-align:right}
+.transport-card .tc-route{font-weight:800;color:var(--ink);font-size:14px;margin-bottom:4px}
+.transport-card .tc-meta{font-size:12px;color:var(--muted);line-height:1.45}
+.transport-card .book-link{margin-top:10px}
 
 /* ============ HOTELS ============ */
 .hotel-citynav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
@@ -408,6 +425,8 @@ a{color:inherit}
 .budget-total .item .val{font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;font-size:26px;font-weight:800;color:var(--terracotta-deep)}
 .budget-total .item .lbl{font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;font-size:11px;color:var(--muted);margin-top:3px}
 @media(prefers-reduced-motion:reduce){.b-bar{transition:none}.section-content{animation:none}.day-toggle{transition:none}}
+.b-bar-wrap{position:relative}
+.b-bar-label{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:11.5px;font-weight:700;color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums}
 
 /* ============ COMPARE / SUMMARY ============ */
 .compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
@@ -425,6 +444,20 @@ a{color:inherit}
 .pros,.cons{list-style:none}
 .pros li{font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;font-size:12.5px;margin-bottom:5px;color:var(--olive)}
 .cons li{font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;font-size:12.5px;margin-bottom:5px;color:var(--terracotta)}
+
+/* ============ BOOKING CHECKLIST ============ */
+.booking-meta{font-size:12px;color:var(--muted);margin:-6px 0 16px}
+.booking-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.booking-card{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:15px 16px}
+.booking-card.done{background:var(--terracotta-soft);border-color:#CFE0D4}
+.booking-card.warn{background:var(--gold-soft);border-color:#D8DCCB}
+.booking-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:8px}
+.booking-status{font-size:10px;font-weight:800;border-radius:999px;padding:3px 8px;background:var(--paper-2);border:1px solid var(--line);white-space:nowrap;color:var(--terracotta-deep)}
+.booking-title{font-size:15px;font-weight:800;line-height:1.35}
+.booking-cat{font-size:11px;color:var(--muted);font-weight:700;margin-bottom:5px}
+.booking-row{font-size:12px;color:var(--muted);line-height:1.55;margin-top:4px}
+.booking-row strong{color:var(--ink)}
+.booking-link{display:inline-flex;margin-top:10px;background:var(--terracotta);color:#fff;text-decoration:none;border-radius:7px;padding:7px 12px;font-size:11px;font-weight:700}
 
 footer{text-align:center;padding:36px 20px;color:var(--faint);
   font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;font-style:normal;font-size:12.5px;
@@ -453,34 +486,32 @@ footer{text-align:center;padding:36px 20px;color:var(--faint);
   .container{padding:24px 14px 20px}
   .card{padding:18px 16px;border-radius:13px;margin-bottom:18px}
   .card h3{font-size:19px}
-  .cal-grid{gap:3px}
-  .cal-cell{min-height:66px;padding:4px 5px}
-  .cal-date{font-size:11px}.cal-city{font-size:9.5px}.cal-detail{font-size:8px}
-  .cal-transport,.cal-nights{font-size:7.5px}
-  .sched-table td{padding:9px 11px;font-size:12.5px}
-  .day-route-summary{padding-left:0}
-  .t-table{min-width:600px}
-  .budget-total{flex-direction:column;gap:14px}
-  .b-row .lbl{width:64px;font-size:11.5px}.b-row .amt{width:64px;font-size:11.5px}
+	  .cal-grid{gap:3px}
+	  .cal-cell{min-height:66px;padding:4px 5px}
+	  .cal-date{font-size:11px}.cal-city{font-size:9.5px}.cal-detail{font-size:8px}
+	  .cal-transport,.cal-nights{font-size:7.5px}
+	  .sched-table td{padding:9px 11px;font-size:12.5px}
+	  .day-route-summary{padding-left:0}
+	  .t-table{min-width:600px}
+	  #sec-transport .t-scroll{display:none}
+	  .transport-cards{display:grid;grid-template-columns:1fr;gap:10px}
+	  .budget-total{flex-direction:column;gap:14px}
+	  .b-row .lbl{width:64px;font-size:11.5px}.b-row .amt{width:64px;font-size:11.5px}
   /* QA-fix: 모바일에서 food-recs-row 패딩 축소 */
   .food-recs-row > td{padding:0 11px 4px}
   .food-recs-row > td:first-child{width:52px}
 }
 @media(max-width:480px){
   .trip-meta .chip:not(.chip-fixed):not(.chip-route){display:none}
-  .stats-row{grid-template-columns:repeat(2,1fr)}
-  /* QA-fix: 480px 가독성 — 셀 높이 확보 + 텍스트 최소 가독 크기로 상향.
-     기존 cal-detail:display:none / city 8.5px / transport·nights 7.5px 모두 폐기. */
-  .cal-cell{min-height:64px;padding:4px 6px}
-  .cal-date{font-size:11px}
-  .cal-city{font-size:10px;line-height:1.2}
-  .cal-detail{display:block;font-size:9px;margin-top:2px}
-  .cal-transport{font-size:8.5px;padding:1px 5px;margin-top:3px}
-  .cal-nights{font-size:8px;padding:1px 5px;top:4px;right:4px}
-  .sched-table td:first-child{width:52px}
-  .day-num{font-size:20px;min-width:38px}
-  .day-city{font-size:15px}
-}
+	  .stats-row{grid-template-columns:repeat(2,1fr)}
+	  .cal-grid{display:none}
+	  .cal-mobile-list{display:flex;flex-direction:column;gap:10px}
+	  .sched-table td:first-child{width:52px}
+	  .day-num{font-size:20px;min-width:38px}
+	  .day-city{font-size:15px}
+	  .b-row{gap:9px}
+	  .b-bar-label{font-size:10.5px;left:9px}
+	}
 @media(hover:none){
   .sec-tab{min-height:44px;display:flex;align-items:center;justify-content:center}
   .day-header{min-height:52px}
@@ -504,7 +535,7 @@ footer{text-align:center;padding:36px 20px;color:var(--faint);
     <div class="trip-meta">
       <span class="chip chip-route">로마 → 밀라노</span>
       <span class="chip">KE931 / KE928</span>
-      <span class="chip chip-fixed">확정 일정</span>
+      <span class="chip chip-fixed">예약 진행중</span>
     </div>
   </div>
 </header>
@@ -520,7 +551,7 @@ footer{text-align:center;padding:36px 20px;color:var(--faint);
 </div>
 
 <div class="section-content" id="sec-calendar">
-  <div class="cal-wrap card"><h3>Settembre 2026 · 9월 캘린더</h3><div class="cal-grid" id="calGrid"></div></div>
+  <div class="cal-wrap card"><h3>Settembre 2026 · 9월 캘린더</h3><div class="cal-grid" id="calGrid"></div><div class="cal-mobile-list" id="calMobileList"></div></div>
 </div>
 
 <div class="section-content" id="sec-itinerary">
@@ -529,7 +560,11 @@ footer{text-align:center;padding:36px 20px;color:var(--faint);
 
 <div class="section-content" id="sec-transport">
   <div class="transport-section card"><h3>이동수단 · 예매 링크</h3>
-  <div class="t-scroll"><table class="t-table" id="transportTable"><thead><tr><th>DAY</th><th>구간</th><th>수단</th><th>소요</th><th>비용(2인)</th><th>예매</th></tr></thead><tbody id="transportBody"></tbody></table></div></div>
+  <div class="t-scroll"><table class="t-table" id="transportTable"><thead><tr><th>DAY</th><th>구간</th><th>수단</th><th>소요</th><th>비용(2인)</th><th>예매</th></tr></thead><tbody id="transportBody"></tbody></table></div><div class="transport-cards" id="transportCards"></div></div>
+</div>
+
+<div class="section-content" id="sec-booking">
+  <div class="booking-section card"><h3>예약 체크리스트</h3><div id="bookingContent"></div></div>
 </div>
 
 <div class="section-content" id="sec-hotel">
@@ -554,10 +589,10 @@ const COURSES = {
 B: {
   name:"로마–밀라노 12박 13일",sub:"친퀘테레+코모호수+렌터카",
   nights:"Roma(3)+Firenze(3)+CinqueTerre(1)+Venezia(2)+Dolomiti(2)+Milano(1)=12N",
-  totalBudget:7497,perPerson:562,
-  budget:[{l:"항공",a:2307,c:"#244F3B"},{l:"교통",a:520,c:"#2F6B4F"},{l:"숙박",a:1890,c:"#3F7D5E"},{l:"식비",a:1500,c:"#5E6B57"},{l:"입장료",a:680,c:"#7E8B6F"},{l:"도시세",a:120,c:"#9AA38C"},{l:"기타",a:480,c:"#B8B2A6"}],
+  totalBudget:7515,perPerson:564,
+  budget:[{l:"항공",a:2307,c:"#244F3B"},{l:"교통",a:530,c:"#2F6B4F"},{l:"숙박",a:1890,c:"#3F7D5E"},{l:"식비",a:1500,c:"#5E6B57"},{l:"입장료",a:688,c:"#7E8B6F"},{l:"도시세",a:120,c:"#9AA38C"},{l:"기타",a:480,c:"#B8B2A6"}],
   cities:[{name:"Roma",lat:41.9028,lng:12.4964,n:3,dates:"9/16~18",color:"#ef4444"},{name:"Firenze",lat:43.7696,lng:11.2558,n:3,dates:"9/19~21",color:"#22c55e"},{name:"Pisa",lat:43.7228,lng:10.4017,n:0,dates:"9/21",color:"#86efac"},{name:"Cinque Terre",lat:44.1461,lng:9.6535,n:1,dates:"9/22",color:"#f59e0b"},{name:"Monterosso",lat:44.1454,lng:9.6500,n:0,dates:"9/22",color:"#fbbf24"},{name:"Venezia",lat:45.4408,lng:12.3155,n:2,dates:"9/23~24",color:"#06b6d4"},{name:"Burano",lat:45.4854,lng:12.4167,n:0,dates:"9/24",color:"#67e8f9"},{name:"Cortina",lat:46.5369,lng:12.1357,n:2,dates:"9/25~26",color:"#0ea5e9"},{name:"Lago di Como",lat:45.9875,lng:9.2573,n:0,dates:"9/27",color:"#a78bfa"},{name:"Milano",lat:45.4642,lng:9.1900,n:1,dates:"9/27~28",color:"#ec4899"}],
-  calendar:{16:{city:"인천→로마",detail:"KE931 13:20출발\n로마 19:30도착",transport:"Leonardo Exp",nights:"Roma 1N"},17:{city:"로마",detail:"콜로세움+포로로마노\n판테온+트레비+나보나",nights:"Roma 2N"},18:{city:"로마",detail:"바티칸 새벽6시🌅\n성베드로+보르게세",nights:"Roma 3N"},19:{city:"→피렌체",detail:"Frecciarossa 1.5h\n두오모+베키오다리",transport:"Frecciarossa 1.5h",nights:"Firenze 1N"},20:{city:"피렌체",detail:"우피치+아카데미아\n비스테카+미켈란젤로광장",nights:"Firenze 2N"},21:{city:"피사 당일치기",detail:"사탑+세례당 오전\n오후 피렌체",transport:"열차 왕복 2h",nights:"Firenze 3N"},22:{city:"→친퀘테레",detail:"몬테로쏘 수영🏊\n마나롤라+리오마조레",transport:"열차 2.5h",nights:"Cinque Terre"},23:{city:"→베네치아",detail:"곤돌라+치케티\n산마르코+두칼레",transport:"열차 4h",nights:"Venezia 1N"},24:{city:"베네치아+부라노",detail:"부라노 컬러마을\n무라노 유리공예",nights:"Venezia 2N"},25:{city:"→돌로미티",detail:"렌터카 픽업(메스트레)\n코르티나 도착",transport:"렌터카 2h",nights:"Cortina 1N"},26:{city:"돌로미티",detail:"트레치메 트레킹!\n브라이에스+카레차",transport:"렌터카",nights:"Cortina 2N"},27:{city:"코모호수→밀라노",detail:"벨라지오 경유\n두오모+나빌리",transport:"렌터카 반납",nights:"Milano"},28:{city:"밀라노→귀국",detail:"쇼핑+브레라\nKE928 22:00출발",transport:"Malpensa Exp"}},
+  calendar:{16:{city:"인천→로마",detail:"KE931 13:20출발\n로마 19:30도착",transport:"Leonardo Exp",nights:"Roma 1N"},17:{city:"로마",detail:"콜로세움+포로로마노\n판테온+트레비+나보나",nights:"Roma 2N"},18:{city:"로마",detail:"바티칸 08시 입장\n성베드로+보르게세",nights:"Roma 3N"},19:{city:"→피렌체",detail:"Frecciarossa 1.5h\n두오모+베키오다리",transport:"Frecciarossa 1.5h",nights:"Firenze 1N"},20:{city:"피렌체",detail:"우피치+아카데미아\n비스테카+미켈란젤로광장",nights:"Firenze 2N"},21:{city:"피사 당일치기",detail:"사탑+세례당 오전\n오후 피렌체",transport:"열차 왕복 2h",nights:"Firenze 3N"},22:{city:"→친퀘테레",detail:"몬테로쏘 수영🏊\n마나롤라+리오마조레",transport:"열차 2.5h",nights:"Cinque Terre"},23:{city:"→베네치아",detail:"곤돌라+치케티\n산마르코+두칼레",transport:"열차 4h",nights:"Venezia 1N"},24:{city:"베네치아+부라노",detail:"부라노 컬러마을\n무라노 유리공예",nights:"Venezia 2N"},25:{city:"→돌로미티",detail:"렌터카 픽업(메스트레)\n코르티나 도착",transport:"렌터카 2h",nights:"Cortina 1N"},26:{city:"돌로미티",detail:"트레치메 트레킹!\n브라이에스(+카레차 선택)",transport:"렌터카",nights:"Cortina 2N"},27:{city:"코모호수→밀라노",detail:"벨라지오 짧게 경유\n밀라노 도착",transport:"렌터카 반납",nights:"Milano"},28:{city:"밀라노→귀국",detail:"쇼핑+브레라\nKE928 22:00출발",transport:"Malpensa Exp"}},
   transport:[{day:"D1",route:"인천→로마 FCO",mode:"KE931 직항",time:"12시간",cost:"왕복 173만원/인",link:"https://www.koreanair.com",linkText:"대한항공"},{day:"D1",route:"FCO→Roma Termini",mode:"Leonardo Express",time:"32분",cost:"€28",link:"https://www.trenitalia.com",linkText:"Trenitalia"},{day:"D4",route:"Roma→Firenze",mode:"Frecciarossa",time:"1시간 30분",cost:"€40~80",link:"https://www.trenitalia.com",linkText:"Trenitalia"},{day:"D6",route:"Firenze↔Pisa (왕복)",mode:"Regionale",time:"1시간 (편도)",cost:"€20",link:"https://www.trenitalia.com",linkText:"Trenitalia"},{day:"D7",route:"Firenze→La Spezia",mode:"Regionale/IC",time:"2시간 30분",cost:"€30",link:"https://www.trenitalia.com",linkText:"Trenitalia"},{day:"D7",route:"친퀘테레 마을간",mode:"Cinque Terre Card",time:"1일",cost:"€33",link:"https://www.cinqueterre.eu.com",linkText:"CinqueTerre"},{day:"D8",route:"La Spezia→Venezia",mode:"IC/Frecciabianca",time:"4시간",cost:"€50~80",link:"https://www.trenitalia.com",linkText:"Trenitalia"},{day:"D8",route:"베네치아 바포레토",mode:"ACTV 48h 패스",time:"2일",cost:"€70",link:"https://actv.avmspa.it",linkText:"ACTV"},{day:"D10",route:"Venezia(Mestre)→Cortina",mode:"렌터카 (3일)",time:"2시간",cost:"€210~300",link:"https://www.rentalcars.com",linkText:"RentalCars"},{day:"D12",route:"Cortina→Como→Milano",mode:"렌터카 반납",time:"4~5시간",cost:"렌터카 포함",link:"",linkText:""},{day:"D13",route:"Milano→Malpensa",mode:"Malpensa Express",time:"51분",cost:"€30",link:"https://www.malpensaexpress.it",linkText:"Malpensa Exp"}],
   hotels:{
     "Roma (3박)":[
@@ -585,7 +620,7 @@ B: {
   },
   days:[
 {day:1,date:"9/16 수",city:"인천→로마",theme:"로마의 첫 밤",routeSummary:"✈️ ICN→FCO (KE931 직항 12h)",sched:[
-  {t:"13:20",name:"인천 출발",desc:"KE931 직항",type:"move",coords:[41.8003,12.2389]},
+  {t:"13:20",name:"인천 출발",desc:"KE931 직항",type:"move"},
   {t:"19:30",name:"로마 FCO 도착",desc:"입국심사+수하물 약 45~60분",type:""},
   {t:"20:30",name:"FCO→Termini",desc:"Leonardo Express €14/인·32분 (2인 €28, 막차 23:23)",type:"move",coords:[41.9009,12.5016],tip:"💰 절약 동선: 택시 정액 €55보다 €27 저렴. 짐 많고 매우 피곤하면 택시도 옵션"},
   {t:"21:05",name:"Termini→몬티 숙소",desc:"Cavour 메트로 B선 1정거장 €1.5/인 (또는 도보 12분 무료)",type:"move",coords:[41.8934,12.4889]},
@@ -609,10 +644,10 @@ B: {
   {t:"21:00",name:"저녁: Felice a Testaccio",rk:"roma-testaccio-dinner",desc:"테스타치오 €70",type:"food",coords:[41.8764,12.4753]},
   {t:"22:30",name:"숙소 복귀 (몬티)",desc:"테스타치오→Hotel Labelle 택시 15분 €12 (또는 버스 75번)",type:"move",coords:[41.8934,12.4889]}
 ],cost:"€280"},
-{day:3,date:"9/18 금",city:"로마",theme:"바티칸 새벽🌅 + 보르게세",routeSummary:"🚶 바티칸(새벽6시)→성베드로→보르게세→트라스테베레",sched:[
-  {t:"05:30",name:"기상 → 택시/우버",desc:"몬티 숙소→바티칸 택시 €12~15",type:"move",coords:[41.9022,12.4539]},
-  {t:"06:00",name:"⭐ 바티칸 도착 (줄서기)",desc:"개장 전 대기열 선점!",type:"spot",coords:[41.9022,12.4539],tip:"⚠️ 새벽 6시 도착 → 7:30 개장 시 1번째 입장! 온라인 예약 필수. 어깨+무릎 가려야 입장"},
-  {t:"07:30",name:"바티칸 박물관 입장",desc:"€21/인, 시스티나 예배당",type:"spot",coords:[41.9022,12.4539],tip:"💡 새벽 입장 = 시스티나 예배당 거의 독점! 오후 대비 인파 1/10"},
+{day:3,date:"9/18 금",city:"로마",theme:"바티칸 오전 + 보르게세",routeSummary:"🚶 바티칸(08시)→성베드로→보르게세→트라스테베레",sched:[
+  {t:"06:30",name:"기상 → 택시/우버",desc:"몬티 숙소→바티칸 택시 €12~15",type:"move",coords:[41.9022,12.4539]},
+  {t:"07:30",name:"⭐ 바티칸 도착",desc:"08:00 입장 슬롯 기준, 보안검색 여유 확보",type:"spot",coords:[41.9022,12.4539],tip:"⚠️ 공식 운영시간 월-토 08:00~20:00 기준(2026-06-01 확인). 온라인 예약 필수. 어깨+무릎 가려야 입장"},
+  {t:"08:00",name:"바티칸 박물관 입장",desc:"€25/인(입장 €20+예약 €5), 시스티나 예배당",type:"spot",coords:[41.9022,12.4539],tip:"💡 첫 입장 슬롯 확보가 핵심. 새벽 대기보다 공식 예약 시간 엄수가 더 중요"},
   {t:"09:30",name:"성 베드로 대성당",desc:"쿠폴라 €8/인, 551계단",type:"spot",coords:[41.9022,12.4539],tip:"💡 쿠폴라 먼저 올라가기 - 오전이 대기줄 가장 짧음"},
   {t:"11:00",name:"산탄젤로 다리",desc:"포토스팟",type:"hl",coords:[41.9010,12.4663]},
   {t:"11:30",name:"점심: Roscioli",rk:"roma-centro-lunch",desc:"살루메리아 €65",type:"food",coords:[41.8933,12.4729]},
@@ -622,12 +657,12 @@ B: {
   {t:"18:00",name:"아페리티보",desc:"€22",type:"food"},
   {t:"20:00",name:"저녁: Da Enzo al 29",rk:"roma-trastevere-dinner2",desc:"트라스테베레 €60",type:"food",coords:[41.8893,12.4699]},
   {t:"22:00",name:"숙소 복귀 (몬티)",desc:"트라스테베레→Hotel Labelle 택시 18분 €14 (또는 H버스+도보)",type:"move",coords:[41.8934,12.4889]}
-],cost:"€220"},
+],cost:"€228"},
 {day:4,date:"9/19 토",city:"→피렌체",theme:"르네상스 첫 만남",routeSummary:"🚂 Roma→Firenze (Frecciarossa 1.5h)",sched:[
   {t:"08:00",name:"아침+체크아웃 (Hotel Labelle)",desc:"몬티 숙소 짐 정리·조식",type:"food",coords:[41.8934,12.4889]},
   {t:"08:45",name:"숙소→Roma Termini",desc:"Cavour역 메트로 B선 1정거장(2분)+도보, 총 약 15분",type:"move",coords:[41.9009,12.5016]},
   {t:"09:30",name:"Roma→Firenze",desc:"Frecciarossa 1시간 32분, 2인 €40~80",type:"move",coords:[43.7763,11.2477],tip:"⚠️ 출발 20~30분 전 Termini 도착. Frecciarossa는 trenitalia.com 사전예매 시 최저가(€19~) 확보"},
-  {t:"11:30",name:"호텔 체크인",desc:"€130/박",type:""},
+  {t:"11:30",name:"Plus Florence 짐 맡기기/체크인",desc:"가예약 ₩900,000/3박 · 6/17까지 무료취소",type:"hotel"},
   {t:"12:00",name:"점심: Mercato Centrale",desc:"€30",type:"food",coords:[43.7763,11.2537]},
   {t:"13:30",name:"산 로렌조 성당",desc:"€9/인",type:"spot",coords:[43.7748,11.2537]},
   {t:"15:30",name:"종탑 (조토)",desc:"€15/인",type:"spot",coords:[43.7731,11.2560]},
@@ -637,7 +672,7 @@ B: {
 ],cost:"€200"},
 {day:5,date:"9/20 일",city:"피렌체",theme:"르네상스 + 비스테카",routeSummary:"🚶 피렌체 시내 종일 투어",sched:[
   {t:"08:00",name:"아침: Ditta Artigianale",desc:"€12",type:"food"},
-  {t:"08:30",name:"우피치 미술관",desc:"€29/인, 2.5h",type:"spot",coords:[43.7677,11.2553],tip:"⚠️ 1개월 전 예약 필수. 15분 내 입장"},
+  {t:"08:30",name:"우피치 미술관",desc:"€29/인(성수기+예약비 기준), 2.5h",type:"spot",coords:[43.7677,11.2553],tip:"⚠️ 공식 티켓 판매일 확인 후 조기 예약. 시간 슬롯 15분 내 입장"},
   {t:"12:00",name:"점심: All'Antico Vinaio",rk:"firenze-vinaio-lunch",desc:"€16",type:"food",coords:[43.7684,11.2563],tip:"💡 11:30 전 or 17:30 후 방문 (3개 매장 중 짧은 줄)"},
   {t:"13:00",name:"아카데미아",desc:"다비드! €20/인",type:"spot",coords:[43.7769,11.2589]},
   {t:"14:30",name:"riposo",desc:"1.5시간",type:""},
@@ -706,26 +741,26 @@ B: {
   {t:"19:00",name:"알펜글로우",desc:"",type:"hl",coords:[46.5369,12.1357]},
   {t:"19:30",name:"저녁: Baita Fraina",rk:"dolomiti-dinner",desc:"€75",type:"food",coords:[46.5330,12.1290]}
 ],cost:"€203"},
-{day:11,date:"9/26 토",city:"돌로미티",theme:"트레치메 + 3개 호수",routeSummary:"🚗 렌터카: Tre Cime→Braies→Carezza (종일)",sched:[
+{day:11,date:"9/26 토",city:"돌로미티",theme:"트레치메 + 브라이에스",routeSummary:"🚗 렌터카: Tre Cime→Braies 중심, Carezza 선택",sched:[
   {t:"06:00",name:"아침",desc:"호텔조식",type:"food"},
-  {t:"07:00",name:"렌터카→트레치메",desc:"톨 €30",type:"move",coords:[46.6172,12.2942],tip:"⚠️ 톨게이트 온라인 예약 필수 (2025~). 9AM 전 도착"},
+  {t:"07:00",name:"렌터카→트레치메",desc:"주차/통행 예약 €40/차",type:"move",coords:[46.6172,12.2942],tip:"⚠️ Auronzo 공식 2026 차량 €40, 온라인 예약 필수(2026-06-01 확인). 9AM 전 도착"},
   {t:"08:00",name:"트레치메 트레킹",desc:"9.5km 3~3.5h",type:"spot",coords:[46.6172,12.2942]},
   {t:"10:00",name:"Rifugio Locatelli",desc:"핫초코 €10",type:"food",coords:[46.6186,12.3045]},
   {t:"11:30",name:"→브라이에스",desc:"40분",type:"move",coords:[46.6942,12.0855],tip:"⚠️ 9/15까지 9AM~4PM 차량통제! 9:30 전 도착 or 4PM 후"},
   {t:"12:30",name:"보트!",desc:"€18",type:"hl",coords:[46.6942,12.0855]},
   {t:"13:00",name:"호수 점심",desc:"€35",type:"food",coords:[46.6942,12.0855]},
-  {t:"15:30",name:"→카레차 호수",desc:"1.5시간",type:"move",coords:[46.4101,11.5753],tip:"💡 오전 반영 사진이 베스트"},
-  {t:"17:00",name:"카레차 호수",desc:"에메랄드 반영",type:"hl",coords:[46.4101,11.5753]},
+  {t:"15:30",name:"→카레차 호수 (선택)",desc:"편도 1.5시간, 피곤하면 코르티나 복귀",type:"move",coords:[46.4101,11.5753],tip:"💡 카레차는 이동 부담이 큼. 날씨/체력 좋을 때만 선택"},
+  {t:"17:00",name:"카레차 호수 (선택)",desc:"에메랄드 반영",type:"hl",coords:[46.4101,11.5753]},
   {t:"19:30",name:"저녁",desc:"€68",type:"food",coords:[46.5369,12.1357]}
-],cost:"€230"},
+],cost:"€240"},
 {day:12,date:"9/27 일",city:"코모호수→밀라노",theme:"호반 드라이브 + 두오모",routeSummary:"🚗 Cortina→Como→Milano (렌터카 4~5h)",sched:[
   {t:"07:30",name:"아침+체크아웃",desc:"호텔조식",type:"food"},
-  {t:"08:00",name:"Cortina→코모호수",desc:"렌터카 3.5h",type:"move",coords:[45.9875,9.2573]},
-  {t:"11:30",name:"벨라지오",desc:"코모호수 최고 마을",type:"hl",coords:[45.9875,9.2573]},
-  {t:"12:00",name:"점심: 호숫가",rk:"como-lunch",desc:"리조또 €60",type:"food",coords:[45.9875,9.2573]},
-  {t:"14:30",name:"→밀라노",desc:"1시간",type:"move",coords:[45.4641,9.1919]},
-  {t:"15:30",name:"렌터카 반납",desc:"",type:""},
-  {t:"16:30",name:"밀라노 두오모",desc:"옥상 €14/인",type:"spot",coords:[45.4641,9.1919]},
+  {t:"08:00",name:"Cortina→코모호수",desc:"렌터카 4.5~5h",type:"move",coords:[45.9875,9.2573]},
+  {t:"12:30",name:"벨라지오/바레나 중 택1",desc:"호수 경유는 짧게",type:"hl",coords:[45.9875,9.2573]},
+  {t:"13:00",name:"점심: 호숫가",rk:"como-lunch",desc:"리조또 €60",type:"food",coords:[45.9875,9.2573]},
+  {t:"15:00",name:"→밀라노",desc:"1.5시간",type:"move",coords:[45.4641,9.1919]},
+  {t:"16:30",name:"렌터카 반납",desc:"밀라노 시내/공항 지점 확인 필요",type:""},
+  {t:"17:30",name:"밀라노 두오모",desc:"외관+광장 우선, 옥상은 컨디션 따라",type:"spot",coords:[45.4641,9.1919]},
   {t:"18:30",name:"아페리티보",desc:"€22",type:"food"},
   {t:"19:30",name:"저녁: Trattoria Milanese",rk:"milano-dinner",desc:"€75",type:"food",coords:[45.4620,9.1870]}
 ],cost:"€220"},
@@ -941,14 +976,29 @@ const FOOD_RECS={
 };
 
 const COMPARE=[
-{id:"B",name:"로마–밀라노 12박 13일",sub:"친퀘테레+코모호수+렌터카",route:"로마→피렌체(+피사)→친퀘테레→베네치아(+부라노)→돌로미티(렌터카)→코모호수→밀라노",price:"€7,497",krw:"1,125만원",pp:"562만원",pros:["여유로운 페이스로 천천히 음미","친퀘테레 + 코모호수 + 부라노","렌터카로 돌로미티 자유 드라이브","돌로미티 3개 호수 (브라이에스·카레차)","로마·피렌체·베네치아 핵심까지"],cons:[]},
+{id:"B",status:"예약 진행중",name:"로마–밀라노 12박 13일",sub:"친퀘테레+코모호수+렌터카",route:"로마→피렌체(+피사)→친퀘테레→베네치아(+부라노)→돌로미티(렌터카)→코모호수→밀라노",price:"€7,515",krw:"1,127만원",pp:"564만원",pros:["여유로운 페이스로 천천히 음미","친퀘테레 + 코모호수 + 부라노","렌터카로 돌로미티 자유 드라이브","돌로미티 핵심 호수와 트레킹","로마·피렌체·베네치아 핵심까지"],cons:[]},
+];
+
+const BOOKING_ITEMS=[
+{status:"확정",tone:"done",cat:"항공",title:"KE931 / KE928",target:"완료",window:"예약 완료",note:"왕복 173만원/인 예산 반영",link:"https://www.koreanair.com",linkText:"대한항공"},
+{status:"확정",tone:"done",cat:"숙소",title:"로마 Hotel Labelle",target:"완료",window:"환불불가",note:"₩854,164/3박 + 도시세 ₩52,620 현장결제",link:"https://www.hotellabelle.it/",linkText:"공식"},
+{status:"가예약",tone:"warn",cat:"숙소",title:"피렌체 Plus Florence",target:"2026-06-17 전 결정",window:"무료취소 6/17까지",note:"₩900,000/3박. 위치/객실 조건 재확인",link:"https://www.plushostels.com/florence",linkText:"공식"},
+{status:"예약필요",tone:"warn",cat:"교통",title:"Roma → Firenze 고속열차",target:"일정 확정 후 조기 예매",window:"Trenitalia/Italo 비교",note:"D4 오전 이동. 좌석 지정/환불 조건 확인",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
+{status:"예약필요",tone:"warn",cat:"입장권",title:"콜로세움",target:"방문 30일 전",window:"공식 시간 슬롯",note:"D2 08:30 목표. 포로 로마노/팔라티노 포함권 확인",link:"https://colosseo.it/en/opening-times-and-tickets/",linkText:"공식"},
+{status:"예약필요",tone:"warn",cat:"입장권",title:"바티칸 박물관",target:"판매 오픈 즉시",window:"08:00 첫 슬롯 우선",note:"2026-06-01 공식 기준 €25/인(입장+예약)",link:"https://www.museivaticani.va/content/museivaticani/en.html",linkText:"공식"},
+{status:"예약필요",tone:"warn",cat:"입장권",title:"우피치 / 아카데미아 / 두오모",target:"피렌체 일정 확정 후",window:"공식 시간제 예약",note:"D5 동선. 쿠폴라는 지각 허용폭이 작음",link:"https://www.coopculture.it/en/products/gli-uffizi-entrance-ticket/",linkText:"우피치"},
+{status:"예약필요",tone:"warn",cat:"교통",title:"베네치아 → 코르티나 렌터카",target:"숙소 확정 후",window:"무료취소 조건 우선",note:"메스트레 픽업/밀라노 반납 수수료 확인",link:"https://www.rentalcars.com",linkText:"RentalCars"},
+{status:"예약필요",tone:"warn",cat:"돌로미티",title:"Tre Cime 주차/통행 예약",target:"방문 전 공식 예약",window:"2026 차량 €40",note:"Auronzo 공식 2026-06-01 확인. 9AM 전 도착 목표",link:"https://auronzo.info/en/parking-tre-cime-di-lavaredo/",linkText:"공식"},
+{status:"후보선정",tone:"",cat:"숙소",title:"친퀘테레/베네치아/코르티나/밀라노",target:"다음 결정 대상",window:"무료취소 우선",note:"가격 변동 크므로 도시별 1순위와 백업 1곳 필요",link:"",linkText:""}
 ];
 
 // ===================== STATE & RENDER =====================
 let currentCourse='B',map=null,routeLine=null,markers=[],dayMap=null,dayMarkers=[],dayLine=null;
-const SEC_LIST=[{id:'overview',l:'🗺️ 루트 & 지도'},{id:'calendar',l:'📅 달력'},{id:'itinerary',l:'📋 상세 일정'},{id:'transport',l:'🚆 이동수단'},{id:'hotel',l:'🏨 숙소'},{id:'budget',l:'💰 예산'},{id:'compare',l:'✅ 여행 요약'}];
+const SEC_LIST=[{id:'overview',l:'🗺️ 루트 & 지도'},{id:'calendar',l:'📅 달력'},{id:'itinerary',l:'📋 상세 일정'},{id:'transport',l:'🚆 이동수단'},{id:'booking',l:'🧾 예약 체크'},{id:'hotel',l:'🏨 숙소'},{id:'budget',l:'💰 예산'},{id:'compare',l:'✅ 여행 요약'}];
 
 const ICON_COLORS={food:'#f97316',spot:'#22c55e',move:'#2563eb',hl:'#ec4899',couple:'#ec4899'};
+function isCoord(v){return Array.isArray(v)&&v.length>=2&&Number.isFinite(Number(v[0]))&&Number.isFinite(Number(v[1]));}
+function isItineraryVisible(){const el=document.getElementById('sec-itinerary');return !!(el&&el.classList.contains('active')&&el.offsetParent!==null);}
 
 function createNumberedIcon(num,type){
   const color=ICON_COLORS[type]||'#6b7280';
@@ -959,7 +1009,7 @@ function init(){
   const ct=document.getElementById('courseTabs');ct.innerHTML='';
   Object.keys(COURSES).forEach(id=>{const c=COURSES[id];const d=document.createElement('div');d.className='course-tab'+(id===currentCourse?' active':'');d.dataset.course=id;d.innerHTML=`코스 ${id}<span class="sub">${c.sub}</span>`;d.onclick=()=>switchCourse(id);ct.appendChild(d);});
   const st=document.getElementById('secTabs');st.innerHTML='';
-  SEC_LIST.forEach(s=>{const d=document.createElement('div');d.className='sec-tab'+(s.id==='overview'?' active':'');d.dataset.sec=s.id;d.textContent=s.l;d.onclick=()=>{document.querySelectorAll('.sec-tab').forEach(x=>x.classList.remove('active'));d.classList.add('active');document.querySelectorAll('.section-content').forEach(x=>x.classList.remove('active'));document.getElementById('sec-'+s.id).classList.add('active');if(s.id==='overview'&&map)map.invalidateSize();if(s.id==='itinerary'&&dayMap)setTimeout(()=>dayMap.invalidateSize(),100);};st.appendChild(d);});
+  SEC_LIST.forEach(s=>{const d=document.createElement('button');d.type='button';d.className='sec-tab'+(s.id==='overview'?' active':'');d.dataset.sec=s.id;d.textContent=s.l;d.onclick=()=>{document.querySelectorAll('.sec-tab').forEach(x=>x.classList.remove('active'));d.classList.add('active');document.querySelectorAll('.section-content').forEach(x=>x.classList.remove('active'));document.getElementById('sec-'+s.id).classList.add('active');if(s.id==='overview'&&map)setTimeout(()=>map.invalidateSize(),80);if(s.id==='itinerary')setTimeout(()=>showOverviewOnDayMap(COURSES[currentCourse]),120);};st.appendChild(d);});
   document.getElementById('sec-overview').classList.add('active');
   switchCourse('B');
 }
@@ -968,17 +1018,18 @@ function switchCourse(id){
   currentCourse=id;
   document.querySelectorAll('.course-tab').forEach(t=>t.classList.toggle('active',t.dataset.course===id));
   const c=COURSES[id];
-  updateMap(c);renderRouteFlow(c);renderStats(c);renderCalendar(c);renderItinerary(c);renderTransport(c);renderHotels(c);renderBudget(c);renderCompare();
+  updateMap(c);renderRouteFlow(c);renderStats(c);renderCalendar(c);renderItinerary(c);renderTransport(c);renderBooking();renderHotels(c);renderBudget(c);renderCompare();
+  if(isItineraryVisible())setTimeout(()=>showOverviewOnDayMap(c),120);
 }
 
 // OVERVIEW MAP
 function updateMap(c){
   if(!map){map=L.map('map',{zoomControl:true}).setView([42.5,13],6);L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{attribution:'OSM/CARTO',maxZoom:18}).addTo(map);}
   markers.forEach(m=>map.removeLayer(m));markers=[];if(routeLine)map.removeLayer(routeLine);
-  const cs=c.cities,coords=cs.map(x=>[x.lat,x.lng]);
+  const cs=c.cities.filter(x=>Number.isFinite(Number(x.lat))&&Number.isFinite(Number(x.lng))),coords=cs.map(x=>[Number(x.lat),Number(x.lng)]);
   routeLine=L.polyline(coords,{color:'#2563eb',weight:2.5,opacity:.5,dashArray:'8 6'}).addTo(map);
-  cs.forEach(x=>{const r=x.n===0?4:Math.max(7,x.n*4+3);const m=L.circleMarker([x.lat,x.lng],{radius:r,fillColor:x.color,color:'#333',weight:x.n?2:1,fillOpacity:x.n?.8:.4}).addTo(map);m.bindPopup(`<b style="color:${x.color}">${x.name}</b><br>${x.dates}<br>${x.n?x.n+'박':'경유'}`);markers.push(m);if(x.n>0){const lbl=L.marker([x.lat,x.lng],{icon:L.divIcon({className:'',html:`<div style="color:${x.color};font-size:10px;font-weight:700;text-shadow:1px 1px 2px #fff,-1px -1px 2px #fff;white-space:nowrap">${x.name}(${x.n}N)</div>`,iconAnchor:[-10,5]})}).addTo(map);markers.push(lbl);}});
-  map.fitBounds(coords,{padding:[30,30]});
+  cs.forEach(x=>{const r=x.n===0?4:Math.max(7,x.n*4+3);const latlng=[Number(x.lat),Number(x.lng)];const m=L.circleMarker(latlng,{radius:r,fillColor:x.color,color:'#333',weight:x.n?2:1,fillOpacity:x.n?.8:.4}).addTo(map);m.bindPopup(`<b style="color:${x.color}">${x.name}</b><br>${x.dates}<br>${x.n?x.n+'박':'경유'}`);markers.push(m);if(x.n>0){const lbl=L.marker(latlng,{icon:L.divIcon({className:'',html:`<div style="color:${x.color};font-size:10px;font-weight:700;text-shadow:1px 1px 2px #fff,-1px -1px 2px #fff;white-space:nowrap">${x.name}(${x.n}N)</div>`,iconAnchor:[-10,5]})}).addTo(map);markers.push(lbl);}});
+  const bounds=L.latLngBounds(coords);if(bounds.isValid())map.fitBounds(bounds,{padding:[30,30]});
 }
 
 // ROUTE FLOW
@@ -997,19 +1048,25 @@ function renderStats(c){
 // CALENDAR
 function renderCalendar(c){
   const g=document.getElementById('calGrid');g.innerHTML='';
+  const list=document.getElementById('calMobileList');list.innerHTML='';
   ['월','화','수','목','금','토','일'].forEach((h,i)=>{const d=document.createElement('div');d.className='cal-header'+(i===6?' sun':'');d.textContent=h;g.appendChild(d);});
   for(let i=0;i<1;i++){const d=document.createElement('div');d.className='cal-cell empty';g.appendChild(d);}
   for(let day=1;day<=30;day++){const d=document.createElement('div');const dow=(1+day-1)%7;const isTrip=day>=16&&day<=28;const cal=c.calendar[day];d.className='cal-cell'+(isTrip&&cal?' trip':'')+(dow===6?' sun':'');let html=`<div class="cal-date">${day}</div>`;if(cal){html+=`<div class="cal-city">${cal.city}</div>`;if(cal.detail)html+=`<div class="cal-detail">${cal.detail.replace(/\n/g,'<br>')}</div>`;if(cal.transport)html+=`<div class="cal-transport">${cal.transport}</div>`;if(cal.nights)html+=`<div class="cal-nights">${cal.nights}</div>`;}d.innerHTML=html;g.appendChild(d);}
+  for(let day=16;day<=28;day++){const cal=c.calendar[day];if(!cal)continue;const card=document.createElement('div');card.className='cal-day-card trip';card.innerHTML=`<div class="cal-day-top"><div><div class="cal-day-date">9/${day}</div><div class="cal-day-city">${cal.city}</div></div>${cal.nights?`<span class="cal-day-pill">${cal.nights}</span>`:''}</div>${cal.detail?`<div class="cal-day-detail">${cal.detail.replace(/\n/g,'<br>')}</div>`:''}${cal.transport?`<div class="cal-day-meta"><span class="cal-day-pill">${cal.transport}</span></div>`:''}`;list.appendChild(card);}
 }
 
 // DAY MAP
 function initDayMap(){
+  if(!isItineraryVisible())return false;
   if(!dayMap){
     dayMap=L.map('dayMap',{zoomControl:true}).setView([42.5,13],6);
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{attribution:'OSM/CARTO',maxZoom:18}).addTo(dayMap);
   }
+  dayMap.invalidateSize();
+  return true;
 }
 function clearDayMap(){
+  if(!dayMap)return;
   dayMarkers.forEach(m=>dayMap.removeLayer(m));dayMarkers=[];
   if(dayLine){dayMap.removeLayer(dayLine);dayLine=null;}
 }
@@ -1027,7 +1084,7 @@ function toggleRecs(id,evt){
     if(rk&&FOOD_RECS[rk]&&dayMap){
       const bounds=[];
       FOOD_RECS[rk].forEach((r,i)=>{
-        if(!r.c)return;
+        if(!isCoord(r.c))return;
         const abc='ABCDE'[i];
         const icon=L.divIcon({className:'',html:`<div style="background:#f97316;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.4)">${abc}</div>`,iconSize:[22,22],iconAnchor:[11,11],popupAnchor:[0,-12]});
         const mk=L.marker(r.c,{icon:icon}).addTo(dayMap);
@@ -1035,30 +1092,34 @@ function toggleRecs(id,evt){
         recMarkers.push(mk);
         bounds.push(r.c);
       });
-      if(bounds.length>1)dayMap.flyToBounds(L.latLngBounds(bounds),{padding:[40,40],maxZoom:15,duration:0.5});
+      const recBounds=L.latLngBounds(bounds);
+      if(bounds.length>1&&recBounds.isValid())dayMap.fitBounds(recBounds,{padding:[40,40],maxZoom:15});
       else if(bounds.length===1)dayMap.flyTo(bounds[0],15,{duration:0.5});
     }
   }
 }
 function flyToPoint(lat,lng,name){
-  if(!dayMap)return;
-  dayMap.flyTo([lat,lng],16,{duration:0.5});
+  if(!dayMap||!Number.isFinite(Number(lat))||!Number.isFinite(Number(lng)))return;
+  dayMap.invalidateSize();
+  dayMap.flyTo([Number(lat),Number(lng)],16,{duration:0.5});
   dayMarkers.forEach(m=>{if(m.getLatLng){const ll=m.getLatLng();if(Math.abs(ll.lat-lat)<0.001&&Math.abs(ll.lng-lng)<0.001)m.openPopup();}});
 }
 function showDayOnMap(day){
-  initDayMap();clearDayMap();
-  const items=day.sched.filter(s=>s.coords);
+  if(!initDayMap())return;
+  clearDayMap();
+  const items=day.sched.filter(s=>isCoord(s.coords));
   if(items.length===0){dayMap.setView([42.5,13],6);return;}
-  const coords=items.map(s=>s.coords);
+  const coords=items.map(s=>[Number(s.coords[0]),Number(s.coords[1])]);
   let num=0;
   items.forEach(s=>{
     num++;
-    const mk=L.marker(s.coords,{icon:createNumberedIcon(num,s.type||'spot')}).addTo(dayMap);
+    const latlng=[Number(s.coords[0]),Number(s.coords[1])];
+    const mk=L.marker(latlng,{icon:createNumberedIcon(num,s.type||'spot')}).addTo(dayMap);
     let popup=`<b>${s.name}</b>`;
     if(s.t)popup=`<span style="color:#d97706;font-weight:700">${s.t}</span> `+popup;
     if(s.desc)popup+=`<br><span style="color:#555;font-size:11px">${s.desc}</span>`;
     if(s.tip)popup+=`<br><span style="color:#92400e;font-size:11px;background:#fffbeb;padding:1px 4px;border-radius:3px">${s.tip}</span>`;
-    popup+=`<br><a href="https://www.google.com/maps/search/?api=1&query=${s.coords[0]},${s.coords[1]}" target="_blank" style="display:inline-block;margin-top:4px;background:#1a73e8;color:#fff;padding:3px 8px;border-radius:4px;font-size:10px;font-weight:600;text-decoration:none">📍 Google Maps 열기</a>`;
+    popup+=`<br><a href="https://www.google.com/maps/search/?api=1&query=${latlng[0]},${latlng[1]}" target="_blank" style="display:inline-block;margin-top:4px;background:#1a73e8;color:#fff;padding:3px 8px;border-radius:4px;font-size:10px;font-weight:600;text-decoration:none">📍 Google Maps 열기</a>`;
     mk.bindPopup(popup);
     dayMarkers.push(mk);
   });
@@ -1066,25 +1127,28 @@ function showDayOnMap(day){
     dayLine=L.polyline(coords,{color:'#2563eb',weight:2.5,opacity:.6,dashArray:'6 4'}).addTo(dayMap);
   }
   const bounds=L.latLngBounds(coords);
-  dayMap.flyToBounds(bounds,{padding:[40,40],maxZoom:14,duration:0.8});
+  if(bounds.isValid())dayMap.fitBounds(bounds,{padding:[40,40],maxZoom:14});
 }
 function showOverviewOnDayMap(c){
-  initDayMap();clearDayMap();
-  const cs=c.cities,coords=cs.map(x=>[x.lat,x.lng]);
+  if(!initDayMap())return;
+  clearDayMap();
+  const cs=c.cities.filter(x=>Number.isFinite(Number(x.lat))&&Number.isFinite(Number(x.lng))),coords=cs.map(x=>[Number(x.lat),Number(x.lng)]);
   cs.forEach(x=>{
     const r=x.n===0?4:Math.max(6,x.n*3+3);
-    const m=L.circleMarker([x.lat,x.lng],{radius:r,fillColor:x.color,color:'#333',weight:x.n?2:1,fillOpacity:x.n?.7:.3}).addTo(dayMap);
+    const m=L.circleMarker([Number(x.lat),Number(x.lng)],{radius:r,fillColor:x.color,color:'#333',weight:x.n?2:1,fillOpacity:x.n?.7:.3}).addTo(dayMap);
     m.bindPopup(`<b>${x.name}</b><br>${x.dates}<br>${x.n?x.n+'박':'경유'}`);
     dayMarkers.push(m);
   });
   if(coords.length>1){
     dayLine=L.polyline(coords,{color:'#2563eb',weight:2,opacity:.4,dashArray:'8 6'}).addTo(dayMap);
   }
-  dayMap.flyToBounds(coords,{padding:[30,30],maxZoom:7,duration:0.5});
+  const bounds=L.latLngBounds(coords);if(bounds.isValid())dayMap.fitBounds(bounds,{padding:[30,30],maxZoom:7});
 }
 
 // ITINERARY
 function renderItinerary(c){
+  if(dayMap){dayMap.remove();}
+  dayMap=null;dayMarkers=[];dayLine=null;recMarkers=[];
   const el=document.getElementById('itinSection');
   el.innerHTML='<h3 style="font-size:15px;margin-bottom:12px">'+c.name+' — 상세 일정</h3>';
   // layout: map + list
@@ -1123,17 +1187,21 @@ function renderItinerary(c){
     listWrap.appendChild(b);
   });
 
-  // init dayMap after DOM is ready
-  setTimeout(()=>{
-    dayMap=null;dayMarkers=[];dayLine=null;
-    showOverviewOnDayMap(c);
-  },50);
+  // 상세 지도는 숨겨진 탭에서 초기화하지 않는다. 탭이 열릴 때 showOverviewOnDayMap()로 lazy init.
 }
 
 // TRANSPORT
 function renderTransport(c){
-  const tb=document.getElementById('transportBody');tb.innerHTML='';
-  c.transport.forEach(t=>{const tr=document.createElement('tr');tr.innerHTML=`<td class="day-col">${t.day}</td><td class="route-col">${t.route}</td><td class="mode-col">${t.mode}</td><td>${t.time}</td><td class="cost-col">${t.cost}</td><td>${t.link?`<a class="book-link" href="${t.link}" target="_blank">${t.linkText}</a>`:''}</td>`;tb.appendChild(tr);});
+  const tb=document.getElementById('transportBody'),cards=document.getElementById('transportCards');tb.innerHTML='';cards.innerHTML='';
+  c.transport.forEach(t=>{const tr=document.createElement('tr');tr.innerHTML=`<td class="day-col">${t.day}</td><td class="route-col">${t.route}</td><td class="mode-col">${t.mode}</td><td>${t.time}</td><td class="cost-col">${t.cost}</td><td>${t.link?`<a class="book-link" href="${t.link}" target="_blank">${t.linkText}</a>`:''}</td>`;tb.appendChild(tr);
+    const card=document.createElement('div');card.className='transport-card';card.innerHTML=`<div class="tc-top"><span class="tc-day">${t.day}</span><span class="tc-cost">${t.cost}</span></div><div class="tc-route">${t.route}</div><div class="tc-meta">${t.mode} · ${t.time}</div>${t.link?`<a class="book-link" href="${t.link}" target="_blank">${t.linkText}</a>`:''}`;cards.appendChild(card);
+  });
+}
+
+function renderBooking(){
+  const el=document.getElementById('bookingContent');
+  const cards=BOOKING_ITEMS.map(item=>`<div class="booking-card ${item.tone||''}"><div class="booking-top"><div><div class="booking-cat">${item.cat}</div><div class="booking-title">${item.title}</div></div><span class="booking-status">${item.status}</span></div><div class="booking-row"><strong>목표:</strong> ${item.target}</div><div class="booking-row"><strong>조건:</strong> ${item.window}</div><div class="booking-row">${item.note}</div>${item.link?`<a class="booking-link" href="${item.link}" target="_blank">${item.linkText}</a>`:''}</div>`).join('');
+  el.innerHTML=`<div class="booking-meta">공식 정보 검증 기준일: 2026-06-01 · 변동 가능 항목은 예약 전 재확인</div><div class="booking-grid">${cards}</div>`;
 }
 
 // HOTELS
@@ -1164,7 +1232,7 @@ function showHotelCity(name){
 // BUDGET
 function renderBudget(c){
   const bars=document.getElementById('budgetBars'),tot=c.budget.reduce((a,b)=>a+b.a,0);bars.innerHTML='';
-  c.budget.forEach(b=>{const pct=Math.round(b.a/tot*100);const r=document.createElement('div');r.className='b-row';r.innerHTML=`<div class="lbl">${b.l}</div><div class="b-bar-wrap"><div class="b-bar" style="width:${pct}%;background:${b.c}">€${b.a} (${pct}%)</div></div><div class="amt">${Math.round(b.a*1500/10000)}만원</div>`;bars.appendChild(r);});
+  c.budget.forEach(b=>{const pct=Math.round(b.a/tot*100);const r=document.createElement('div');r.className='b-row';r.innerHTML=`<div class="lbl">${b.l}</div><div class="b-bar-wrap"><div class="b-bar" style="width:${pct}%;background:${b.c}"></div><span class="b-bar-label">€${b.a} (${pct}%)</span></div><div class="amt">${Math.round(b.a*1500/10000)}만원</div>`;bars.appendChild(r);});
   document.getElementById('budgetTitle').textContent=c.name+' — 예산 (2인)';
   document.getElementById('budgetTotal').innerHTML=`<div class="item"><div class="val">€${tot.toLocaleString()}</div><div class="lbl">총 예산 (2인)</div></div><div class="item"><div class="val">${Math.round(tot*1500/10000)}만원</div><div class="lbl">원화 환산</div></div><div class="item"><div class="val">${c.perPerson}만원</div><div class="lbl">1인당</div></div>`;
 }
@@ -1174,7 +1242,7 @@ function renderCompare(){
   const g=document.getElementById('compareGrid');g.innerHTML='';
   COMPARE.forEach(c=>{const card=document.createElement('div');card.className='compare-card'+(c.id===currentCourse?' current':'');
     let pros=c.pros.map(p=>`<li>✅ ${p}</li>`).join(''),cons=c.cons.map(p=>`<li>❌ ${p}</li>`).join('');
-    card.innerHTML=`${c.id===currentCourse?'<div class="card-badge">✅ 확정</div>':''}<h4>${c.name}</h4><div class="card-sub">${c.sub}</div><div class="card-route">${c.route}</div><div class="card-price">${c.krw} <small>/ 2인 (${c.price})</small></div><div style="font-size:11px;color:#666">1인당 ${c.pp} (항공 포함)</div><ul class="pros">${pros}</ul><ul class="cons" style="margin-top:6px">${cons}</ul>`;
+    card.innerHTML=`${c.id===currentCourse?`<div class="card-badge">${c.status||'검토중'}</div>`:''}<h4>${c.name}</h4><div class="card-sub">${c.sub}</div><div class="card-route">${c.route}</div><div class="card-price">${c.krw} <small>/ 2인 (${c.price})</small></div><div style="font-size:11px;color:#666">1인당 ${c.pp} (항공 포함)</div><ul class="pros">${pros}</ul><ul class="cons" style="margin-top:6px">${cons}</ul>`;
     card.onclick=()=>switchCourse(c.id);g.appendChild(card);});
 }
 
