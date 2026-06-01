@@ -527,6 +527,23 @@ footer{text-align:center;padding:36px 20px;color:var(--faint);
 .leaflet-popup-tip{background:var(--paper-2)}
 .leaflet-bar a{background:var(--paper-2);color:var(--ink);border-color:var(--line)}
 .leaflet-bar a:hover{background:var(--terracotta-soft)}
+.day-marker-icon{overflow:visible!important}
+.day-marker-wrap{position:relative;width:1px;height:1px;overflow:visible;pointer-events:none}
+.day-marker-label{
+  position:absolute;left:calc(var(--dx) - var(--hw));top:calc(var(--dy) - 12px);
+  width:var(--w);height:24px;border-radius:999px;background:var(--c);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;
+  border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3);z-index:2;pointer-events:auto;
+  font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+}
+.day-marker-dot{
+  position:absolute;left:-4px;top:-4px;width:8px;height:8px;border-radius:50%;background:var(--c);
+  border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35);z-index:3;
+}
+.day-marker-leader{
+  position:absolute;left:0;top:0;height:2px;background:rgba(39,76,91,.45);
+  transform-origin:0 50%;z-index:1;pointer-events:none;
+}
 
 /* ============ RESPONSIVE ============ */
 @media(max-width:1024px){
@@ -1112,11 +1129,16 @@ const ICON_COLORS={food:'#f97316',spot:'#22c55e',move:'#2563eb',hl:'#ec4899',cou
 function isCoord(v){return Array.isArray(v)&&v.length>=2&&Number.isFinite(Number(v[0]))&&Number.isFinite(Number(v[1]));}
 function isItineraryVisible(){const el=document.getElementById('sec-itinerary');return !!(el&&el.classList.contains('active')&&el.offsetParent!==null);}
 
-function createNumberedIcon(num,type){
+function createNumberedIcon(num,type,offset={dx:0,dy:0}){
   const color=ICON_COLORS[type]||'#6b7280';
   const label=String(num);
   const width=label.length>2?34:24;
-  return L.divIcon({className:'',html:`<div style="background:${color};color:#fff;width:${width}px;height:24px;border-radius:${label.length>2?'999px':'50%'};display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3)">${label}</div>`,iconSize:[width,24],iconAnchor:[width/2,12],popupAnchor:[0,-14]});
+  const dx=Number(offset.dx)||0,dy=Number(offset.dy)||0;
+  const shifted=Math.abs(dx)>1||Math.abs(dy)>1;
+  const angle=Math.atan2(dy,dx)*180/Math.PI;
+  const leaderWidth=Math.max(0,Math.hypot(dx,dy)-10);
+  const leader=shifted?`<span class="day-marker-leader" style="width:${leaderWidth}px;transform:rotate(${angle}deg)"></span><span class="day-marker-dot"></span>`:'';
+  return L.divIcon({className:'day-marker-icon',html:`<div class="day-marker-wrap${shifted?' shifted':''}" style="--dx:${dx}px;--dy:${dy}px;--w:${width}px;--hw:${width/2}px;--c:${color}">${leader}<span class="day-marker-label">${label}</span></div>`,iconSize:[1,1],iconAnchor:[0,0],popupAnchor:[dx,dy-16]});
 }
 
 function init(){
@@ -1234,14 +1256,52 @@ function showDayOnMap(day){
   if(items.length===0){dayMap.setView([42.5,13],6);return;}
   const coords=items.map(s=>[Number(s.coords[0]),Number(s.coords[1])]);
   const mainCoords=items.filter(s=>!s.optional).map(s=>[Number(s.coords[0]),Number(s.coords[1])]);
+  const bounds=L.latLngBounds(coords);
+  if(bounds.isValid())dayMap.fitBounds(bounds,{padding:[72,72],maxZoom:14});
+  dayMap.invalidateSize();
   let num=0;
   const mapItems=items.map(s=>{
     if(!s.optional)num++;
     return {s,markerLabel:s.seq||(s.optional?`${num}-1`:num),latlng:[Number(s.coords[0]),Number(s.coords[1])]};
   });
-  mapItems.forEach(item=>{
+  function markerLabelOffsets(points){
+    const mapSize=dayMap.getSize();
+    const entries=points.map((p,i)=>({i,point:dayMap.latLngToLayerPoint(p.latlng),width:String(p.markerLabel).length>2?34:24}));
+    const clusters=[];
+    entries.forEach(e=>{
+      const group=clusters.find(g=>g.some(x=>x.point.distanceTo(e.point)<38));
+      if(group)group.push(e);else clusters.push([e]);
+    });
+    const offsets=points.map(()=>({dx:0,dy:0}));
+    clusters.forEach(group=>{
+      if(group.length<2)return;
+      group.sort((a,b)=>a.i-b.i);
+      const center=group.reduce((acc,e)=>({x:acc.x+e.point.x,y:acc.y+e.point.y}),{x:0,y:0});
+      center.x/=group.length;center.y/=group.length;
+      const below=center.y<72;
+      const perRow=group.length<=5?group.length:Math.ceil(group.length/2);
+      for(let start=0,row=0;start<group.length;start+=perRow,row++){
+        const rowItems=group.slice(start,start+perRow);
+        const rowWidth=rowItems.reduce((sum,e)=>sum+e.width,0)+(rowItems.length-1)*8;
+        let left=-rowWidth/2;
+        if(center.x+left<14)left=14-center.x;
+        if(center.x+left+rowWidth>mapSize.x-14)left=mapSize.x-14-center.x-rowWidth;
+        const y=(below?34:-34)+(below?row*30:-row*30);
+        let cursor=left;
+        rowItems.forEach(e=>{
+          const labelX=center.x+cursor+e.width/2;
+          const labelY=center.y+y;
+          offsets[e.i]={dx:labelX-e.point.x,dy:labelY-e.point.y};
+          cursor+=e.width+8;
+        });
+      }
+    });
+    return offsets;
+  }
+  const offsets=markerLabelOffsets(mapItems);
+  mapItems.forEach((item,i)=>{
     const {s,markerLabel,latlng}=item;
-    const mk=L.marker(latlng,{icon:createNumberedIcon(markerLabel,s.optional?'option':s.type||'spot')}).addTo(dayMap);
+    const mk=L.marker(latlng,{icon:createNumberedIcon(markerLabel,s.optional?'option':s.type||'spot',offsets[i])}).addTo(dayMap);
     mk._baseLatLng=latlng;mk._pointName=s.name;
     let popup=`<b>${s.name}</b>`;
     if(s.t)popup=`<span style="color:#d97706;font-weight:700">${s.t}</span> `+popup;
@@ -1255,8 +1315,6 @@ function showDayOnMap(day){
   if(mainCoords.length>1){
     dayLine=L.polyline(mainCoords,{color:'#2563eb',weight:2.5,opacity:.6,dashArray:'6 4'}).addTo(dayMap);
   }
-  const bounds=L.latLngBounds(coords);
-  if(bounds.isValid())dayMap.fitBounds(bounds,{padding:[40,40],maxZoom:14});
 }
 function showOverviewOnDayMap(c){
   if(!initDayMap())return;
