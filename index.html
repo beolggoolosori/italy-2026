@@ -502,6 +502,16 @@ a{color:inherit}
 .booking-row{font-size:12px;color:var(--muted);line-height:1.55;margin-top:4px}
 .booking-row strong{color:var(--ink)}
 .booking-link{display:inline-flex;margin-top:10px;background:var(--terracotta);color:#fff;text-decoration:none;border-radius:7px;padding:7px 12px;font-size:11px;font-weight:700}
+.ticket-title{font-size:13px;font-weight:900;margin:18px 0 10px;color:var(--ink)}
+.ticket-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-bottom:18px}
+.ticket-card{border:1px solid var(--line);border-radius:9px;background:var(--paper-2);padding:13px 14px}
+.ticket-card.critical{border-color:#E0D5B7;background:var(--gold-soft)}
+.ticket-date{font-size:12px;font-weight:900;color:var(--terracotta-deep);margin-bottom:6px}
+.ticket-name{font-size:14px;font-weight:900;line-height:1.35;margin-bottom:5px}
+.ticket-meta{font-size:11.5px;color:var(--muted);line-height:1.5}
+.ticket-meta strong{color:var(--ink)}
+.ticket-links{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.ticket-links a{font-size:10.5px;font-weight:800;text-decoration:none;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:5px 8px;color:var(--terracotta-deep)}
 
 footer{text-align:center;padding:36px 20px;color:var(--faint);
   font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;font-style:normal;font-size:12.5px;
@@ -699,14 +709,14 @@ B: {
   {t:"08:30",name:"⭐ 콜로세움",desc:"€16~24/인 · 1시간30분",type:"spot",coords:[41.8902,12.4922],tip:"공식 08:30 오픈. 시간제 예약은 30일 전 오픈, 여권/신분증 이름 확인 필요."},
   {t:"10:15",name:"포로 로마노 + 팔라티노",desc:"콜로세움 통합권 · 1시간45분",type:"spot",coords:[41.8925,12.4853],tip:"포로/팔라티노는 09:00 오픈. 출구를 캄피돌리오·Piazza Venezia 쪽으로 잡으면 다음 동선이 부드러움."},
   {t:"12:15",name:"캄피돌리오 광장",desc:"포로 로마노 전망 포인트 · 20~30분",type:"spot",coords:[41.8933,12.4829]},
-  {t:"13:00",name:"점심: 판테온 근처",rk:"roma-pantheon-lunch",desc:"Armando 예약 성공 시 우선 · €60~70",type:"food",coords:[41.8986,12.4769],tip:"Armando는 예약 난이도가 높으니 실패하면 같은 추천 목록의 Roscioli/Da Baffetto 등으로 전환."},
+  {t:"13:00",name:"점심: 판테온 근처",rk:"roma-pantheon-lunch",desc:"빠른 파니노부터 정찬까지 · €18~90",type:"food",coords:[41.8986,12.4769],tip:"동선상 판테온 전후 5~10분권만 선별. 가성비는 Pane e Salame/Il Panino, 예약 정찬은 Armando, 미식 선택은 RetroVino."},
   {t:"14:30",name:"판테온",desc:"€5/인 · 30~40분",type:"spot",coords:[41.8986,12.4769],tip:"공식 기준 09:00~19:00 운영. 종교 행사로 변동 가능하니 당일 재확인."},
   {t:"15:20",name:"나보나 광장",desc:"판테온→도보 5~7분 · 4대강 분수",type:"hl",coords:[41.8992,12.4731]},
   {t:"16:10",name:"트레비 분수",desc:"나보나→도보 15분 · 사진+동전",type:"hl",coords:[41.9009,12.4833],tip:"목요일 16시대는 catino(분수 가까운 구역) 접근 시 €2/인 유료 시간대. 멀리서 보는 광장 뷰는 무료."},
   {t:"17:10",name:"몬티 숙소 복귀 + 휴식",desc:"트레비→Hotel Labelle 도보 15~18분",type:"move",coords:[41.8934,12.4889],tip:"첫 풀데이라 여기서 60~90분 쉬는 게 핵심. 진실의 입/치르코 마시모는 남쪽으로 빠져 D2 기본 동선에서 제외."},
-  {t:"19:30",name:"저녁: 몬티/콜로세움 근처",rk:"roma-monti-d2-dinner",desc:"La Taverna 우선, 특별한 날은 Aroma 선택 · 도보 3~10분",type:"food",coords:[41.8939729,12.4883814],tip:"테스타치오까지 내려가지 않음. 맛집 후보는 모두 숙소 반경 안이라 식후 바로 복귀 가능."},
+  {t:"19:30",name:"저녁: 몬티/콜로세움 근처",rk:"roma-monti-d2-dinner",desc:"피자/와인바/트라토리아 중 선택 · €25~95",type:"food",coords:[41.8959560,12.4938805],tip:"테스타치오까지 내려가지 않음. 가볍게는 Trieste Pizza, 분위기는 Ai Tre Scalini/Urbana 47, 예약 정찬은 La Taverna/Broccoletti."},
   {t:"21:30",name:"숙소 복귀",desc:"다음날 바티칸 06:30 출발 대비 일찍 휴식",type:"move",coords:[41.8934,12.4889]}
-],cost:"기본 €210~245 / Aroma 선택 시 €500+"},
+],cost:"€190~245"},
 {day:3,date:"9/18 금",city:"로마",theme:"바티칸 오전 + 보르게세",routeSummary:"🚶 바티칸(08시)→성베드로→보르게세→트라스테베레",sched:[
   {t:"06:30",name:"기상 → 택시/우버",desc:"몬티 숙소→바티칸 택시 €12~15",type:"move",coords:[41.9022,12.4539]},
   {t:"07:30",name:"⭐ 바티칸 도착",desc:"08:00 입장 슬롯 기준, 보안검색 여유 확보",type:"spot",coords:[41.9022,12.4539],tip:"⚠️ 공식 운영시간 월-토 08:00~20:00 기준(2026-06-01 확인). 온라인 예약 필수. 어깨+무릎 가려야 입장"},
@@ -850,11 +860,11 @@ const FOOD_RECS={
 {n:"L'Archetto di Cavour",d:"Via Cavour 197 도보 8분·Google 4.4(2,121)·수 11:30~23:30·파스타/피자 백업",p:"€35~55",c:[41.89514,12.49353],q:"L'Archetto di Cavour Via Cavour 197 Rome"}
 ],
 "roma-monti-d2-dinner":[
-{n:"La Taverna dei Fori Imperiali",d:"숙소 도보 3분·공식 로마 전통 메뉴·Quandoo 기준 목 19:30~22:30·예약 권장",p:"€70~95",c:[41.8939729,12.4883814],q:"La Taverna dei Fori Imperiali Via della Madonna dei Monti 9 Rome"},
-{n:"Aroma at Palazzo Manfredi",d:"콜로세움 뷰 미쉐린 1스타·공식 저녁 매일 19:00·공식 예약 필수",p:"€360~540+/2인",c:[41.8901360,12.4955298],q:"Aroma at Palazzo Manfredi Via Labicana 125 Rome"},
-{n:"Ai Tre Scalini",d:"1895년 몬티 와인바·공식 예약 불가·가벼운 저녁/와인",p:"€45~70",c:[41.8962767,12.4904433],q:"Ai Tre Scalini Via Panisperna 251 Rome"},
-{n:"Cavour 313",d:"숙소 바로 옆·와인+작은 접시·피곤한 날 최단거리",p:"€45~65",c:[41.8931,12.4904],q:"Enoteca Cavour 313 Via Cavour 313 Rome"},
-{n:"Benso 215",d:"도보 7분·파스타/피자·캐주얼 백업",p:"€45~65",c:[41.8951,12.4931],q:"Benso 215 Via Cavour 215 Rome"}
+{n:"Trieste Pizza",d:"Google 4.7(5천+), Via Urbana·가벼운 피자/수플리·가격 좋음",p:"€25~40",c:[41.8963273,12.4940708],q:"Trieste Pizza Via Urbana 112 Rome"},
+{n:"Ai Tre Scalini",d:"Google 4.5(4.9천+), 1895년 몬티 와인바·분위기 좋은 캐주얼",p:"€45~70",c:[41.8962767,12.4904433],q:"Ai Tre Scalini Via Panisperna 251 Rome"},
+{n:"La Taverna dei Fori Imperiali",d:"Google 4.4(2.5천+), 숙소 도보 3분·로마 전통 정찬·예약 권장",p:"€70~95",c:[41.8939729,12.4883814],q:"La Taverna dei Fori Imperiali Via della Madonna dei Monti 9 Rome"},
+{n:"Urbana 47",d:"Google 4.3(2천+), Via Urbana·모던 이탈리안·파스타/메인 선택 폭 좋음",p:"€55~85",c:[41.8959560,12.4938805],q:"Urbana 47 Via Urbana 47 Rome"},
+{n:"Broccoletti",d:"Google 4.4(900+), Via Urbana·차분한 로컬 레스토랑·예약식 백업",p:"€55~85",c:[41.8961257,12.4938990],q:"Broccoletti Via Urbana 104 Rome"}
 ],
 "roma-trastevere-dinner":[
 {n:"Flavio al Velavevodetto",d:"카르보나라 명가, 테스타초 동굴식당",p:"€55",c:[41.8764,12.4753]},
@@ -864,11 +874,11 @@ const FOOD_RECS={
 {n:"Nannarella",d:"소규모 가정식, 현지인만 아는 골목 맛집",p:"€40",c:[41.8895,12.4695]}
 ],
 "roma-pantheon-lunch":[
-{n:"Armando al Pantheon",d:"판테온 바로 옆, 가족 3대 운영 1961년~",p:"€70",c:[41.8986,12.4769]},
-{n:"Da Baffetto",d:"로마 최고 화덕피자, 줄 서서 먹는 맛",p:"€25",c:[41.8988,12.4724]},
-{n:"Osteria dell Ingegno",d:"판테온 뷰 테라스, 현대적 로마 요리",p:"€60",c:[41.8983,12.4773]},
-{n:"Salumeria Roscioli",d:"살루메리아+와인바, 로마 미식가 성지",p:"€65",c:[41.8933,12.4729]},
-{n:"Ginger Sapori e Salute",d:"건강식+이탈리안, 판테온 뷰 루프탑",p:"€50",c:[41.8988,12.4765]}
+{n:"Pane e Salame",d:"Google 4.8(1만+), 판테온→트레비 사이·샤퀴테리/파니노 가성비 최고",p:"€18~35",c:[41.9006367,12.4817632],q:"Pane e Salame Via di Santa Maria in Via 19 Rome"},
+{n:"Il Panino Ingegnoso",d:"Google 4.7(1.9천+), Piazza di Pietra·빠르고 저렴한 파니노",p:"€15~25",c:[41.9000308,12.4793813],q:"Il Panino Ingegnoso Piazza di Pietra 35 Rome"},
+{n:"Armando al Pantheon",d:"Google 4.4(2천+), 판테온 바로 옆 1961년 전통 정찬·예약 난이도 높음",p:"€70~90",c:[41.8990605,12.4761990],q:"Armando al Pantheon Salita de Crescenzi 31 Rome"},
+{n:"Come 'na Vorta",d:"Google 4.6(1.5천+), Torre Argentina·파스타 캐주얼 정찬·가격 안정적",p:"€35~55",c:[41.8952903,12.4762236],q:"Come na Vorta Pasta e Vino Torre Argentina Rome"},
+{n:"RetroVino / Retrobottega",d:"Google 4.5(1천+), 판테온 북쪽·모던 미식 선택지·예약 권장",p:"€80~120",c:[41.9019065,12.4753023],q:"RetroVino Retrobottega Via d'Ascanio 26A Rome"}
 ],
 "roma-testaccio-dinner":[
 {n:"Felice a Testaccio",d:"까치오에페페 원조! 1936년~ 예약필수",p:"€70",c:[41.8764,12.4753]},
@@ -1055,14 +1065,29 @@ const BOOKING_ITEMS=[
 {status:"확정",tone:"done",cat:"항공",title:"KE931 / KE928",target:"완료",window:"예약 완료",note:"왕복 173만원/인 예산 반영",link:"https://www.koreanair.com",linkText:"대한항공"},
 {status:"확정",tone:"done",cat:"숙소",title:"로마 Hotel Labelle",target:"완료",window:"환불불가",note:"₩854,164/3박 + 도시세 ₩52,620 현장결제",link:"https://www.hotellabelle.it/",linkText:"공식"},
 {status:"가예약",tone:"warn",cat:"숙소",title:"피렌체 Plus Florence",target:"2026-06-17 전 결정",window:"무료취소 6/17까지",note:"₩900,000/3박. 위치/객실 조건 재확인",link:"https://www.plushostels.com/florence",linkText:"공식"},
-{status:"예약필요",tone:"warn",cat:"교통",title:"Roma → Firenze 고속열차",target:"일정 확정 후 조기 예매",window:"Trenitalia/Italo 비교",note:"D4 오전 이동. 좌석 지정/환불 조건 확인",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
-{status:"예약필요",tone:"warn",cat:"입장권",title:"콜로세움",target:"방문 30일 전",window:"공식 시간 슬롯",note:"D2 08:30 목표. 포로 로마노/팔라티노 포함권 확인",link:"https://colosseo.it/en/opening-times-and-tickets/",linkText:"공식"},
-{status:"선택예약",tone:"warn",cat:"식당",title:"D2 몬티 저녁",target:"여행 2~4주 전",window:"La Taverna 또는 Aroma",note:"기본은 숙소 도보 3분 La Taverna. 특별한 저녁이면 Aroma는 공식 예약/카드 보증 필요",link:"https://www.latavernadeiforiimperiali.com/",linkText:"La Taverna"},
-{status:"예약필요",tone:"warn",cat:"입장권",title:"바티칸 박물관",target:"판매 오픈 즉시",window:"08:00 첫 슬롯 우선",note:"2026-06-01 공식 기준 €25/인(입장+예약)",link:"https://www.museivaticani.va/content/museivaticani/en.html",linkText:"공식"},
-{status:"예약필요",tone:"warn",cat:"입장권",title:"우피치 / 아카데미아 / 두오모",target:"피렌체 일정 확정 후",window:"공식 시간제 예약",note:"D5 동선. 쿠폴라는 지각 허용폭이 작음",link:"https://www.coopculture.it/en/products/gli-uffizi-entrance-ticket/",linkText:"우피치"},
+{status:"예약필요",tone:"warn",cat:"교통",title:"장거리 열차",target:"지금부터 1차 조회",window:"좌석 지정/환불 조건 비교",note:"Roma→Firenze, Firenze→La Spezia, La Spezia→Venezia 우선. 늦어도 각 이동 60일 전 확정",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
+{status:"예약필요",tone:"warn",cat:"입장권",title:"콜로세움",target:"2026-08-18(화)",window:"방문 30일 전",note:"D2 08:30 목표. 07:00 KST부터 조회, 08:30 슬롯은 15:30 KST에도 재확인",link:"https://colosseo.it/en/opening-times-and-tickets/",linkText:"공식"},
+{status:"선택예약",tone:"warn",cat:"식당",title:"D2 점심/저녁",target:"2026-08-20~09-03",window:"인기 정찬만 예약",note:"Armando/La Taverna/Broccoletti 선택 시 예약. Pane e Salame/Trieste는 현장 대기 가능",link:"https://www.google.com/maps/search/?api=1&query=Pantheon+Monti+restaurants+Rome",linkText:"지도"},
+{status:"예약필요",tone:"warn",cat:"입장권",title:"바티칸 + 보르게세",target:"2026-07-20(월)",window:"D3 시간제 예약",note:"바티칸 08:00, 보르게세 14:30 슬롯 우선 확보",link:"https://www.museivaticani.va/content/museivaticani/en.html",linkText:"바티칸"},
+{status:"예약필요",tone:"warn",cat:"입장권",title:"우피치 / 아카데미아 / 두오모",target:"2026-06-22(월)",window:"D5 핵심 시간제 예약",note:"08:30 우피치, 13:00 아카데미아, 16:00 두오모 쿠폴라 순서로 확보",link:"https://www.uffizi.it/en/tickets",linkText:"우피치"},
 {status:"예약필요",tone:"warn",cat:"교통",title:"베네치아 → 코르티나 렌터카",target:"숙소 확정 후",window:"무료취소 조건 우선",note:"메스트레 픽업/밀라노 반납 수수료 확인",link:"https://www.rentalcars.com",linkText:"RentalCars"},
 {status:"예약필요",tone:"warn",cat:"돌로미티",title:"Tre Cime 주차/통행 예약",target:"방문 전 공식 예약",window:"2026 차량 €40",note:"Auronzo 공식 2026-06-01 확인. 9AM 전 도착 목표",link:"https://auronzo.info/en/parking-tre-cime-di-lavaredo/",linkText:"공식"},
 {status:"후보선정",tone:"",cat:"숙소",title:"친퀘테레/베네치아/코르티나/밀라노",target:"다음 결정 대상",window:"무료취소 우선",note:"가격 변동 크므로 도시별 1순위와 백업 1곳 필요",link:"",linkText:""}
+];
+
+const TICKETING_ITEMS=[
+{date:"2026.06.01(월) 지금",tone:"critical",name:"장거리 열차/렌터카 1차 조회",target:"Roma→Firenze, Firenze→La Spezia, La Spezia→Venezia, 메스트레 렌터카",note:"할인 좌석과 원웨이 렌터카는 빨리 움직일수록 유리. 아직 시간표가 비어 있으면 매주 월요일 재확인.",links:[["Trenitalia","https://www.trenitalia.com"],["Italo","https://www.italotreno.com/en"],["RentalCars","https://www.rentalcars.com"]]},
+{date:"2026.06.22(월)",tone:"critical",name:"D5 피렌체 핵심 3종",target:"우피치 08:30, 아카데미아 13:00, 두오모 쿠폴라 16:00",note:"D5가 일요일이라 오전 슬롯 경쟁이 큼. 쿠폴라는 시간 엄수형이라 마지막으로 남기지 말 것.",links:[["Uffizi","https://www.uffizi.it/en/tickets"],["Accademia","https://www.galleriaaccademiafirenze.it/tickets/"],["Duomo","https://tickets.duomo.firenze.it/en"]]},
+{date:"2026.06.23(화) 09:00 KST",tone:"critical",name:"D6 피사 사탑",target:"9/21 10:00 Leaning Tower",note:"공식 기준 GMT 90일 전 오픈. 한국은 GMT보다 9시간 빠르므로 09:00 KST부터 확인.",links:[["OPAPISA","https://www.opapisa.it/en/tickets/buy/"]]},
+{date:"2026.07.20(월) 07:00 KST",tone:"critical",name:"D3 바티칸 + 보르게세",target:"바티칸 08:00, 보르게세 14:30",note:"이탈리아 00:00은 한국 07:00. 바티칸은 첫 슬롯, 보르게세는 2시간 제한 슬롯으로 고정.",links:[["Vatican","https://www.museivaticani.va/content/museivaticani/en.html"],["Borghese","https://galleriaborghese.beniculturali.it/en/visita/"]]},
+{date:"2026.08.18(화)",tone:"critical",name:"D2 콜로세움",target:"9/17 08:30 Colosseum + Forum/Palatine",note:"공식 30일 전 오픈. 07:00 KST부터 확인하고, 08:30 슬롯은 15:30 KST에도 다시 확인.",links:[["Colosseo","https://colosseo.it/en/opening-times-and-tickets/"]]},
+{date:"2026.08.18(화)",tone:"",name:"D2 판테온",target:"9/17 14:30 Pantheon",note:"필수 매진형은 아니지만 €5 공식 티켓을 미리 사두면 현장 줄 리스크를 줄일 수 있음.",links:[["Pantheon","https://www.pantheonroma.com/en/openings-info/"]]},
+{date:"2026.08.24(월)",tone:"",name:"D8 베네치아 두칼레 궁전",target:"9/23 15:30 Doge's Palace",note:"30일 전 온라인 예매가 유리한 구간. 산마르코권 동선 확정 후 같이 처리.",links:[["MUVE","https://palazzoducale.visitmuve.it/en/tickets/"]]},
+{date:"2026.08.25(화)",tone:"",name:"D9 산마르코 종탑/대성당 선택",target:"9/24 오후 San Marco",note:"종탑은 줄 회피용 온라인 티켓, 대성당은 시간대 예약 여부를 동선 확정 후 결정.",links:[["Campanile","https://basilicasanmarco.skiperformance.com/en/store#/en/buy"],["Basilica","https://basilicasanmarco.skiperformance.com/en/store#/en/buy"]]},
+{date:"2026.08.27(목)",tone:"critical",name:"D11 트레치메 주차/통행",target:"9/26 07:00 Tre Cime",note:"차량 예약이 막히면 일정 전체가 흔들림. 번호판 미확정이면 예약 후 입력 마감 시간 별도 확인.",links:[["Auronzo","https://auronzo.info/en/parking-tre-cime-di-lavaredo/"]]},
+{date:"2026.08.28(금)",tone:"",name:"D12 밀라노 두오모 옥상 선택",target:"9/27 17:30 Duomo rooftop",note:"현재 일정은 외관 우선. 옥상까지 갈 거면 30일 전 시간제 티켓으로 확정.",links:[["Duomo Milano","https://ticket.duomomilano.it/en/"]]},
+{date:"2026.09.21(월)",tone:"",name:"D7 친퀘테레 카드",target:"9/22 마을 열차/트레일",note:"날씨 영향을 받으므로 전날 구매가 합리적. 열차만 탈지 트레일 포함할지 당일 컨디션으로 결정.",links:[["Cinque Terre Card","https://card.parconazionale5terre.it/en"]]},
+{date:"2026.09.22(화)",tone:"",name:"D8~D9 베네치아 바포레토 48h",target:"9/23 12:30부터 48시간",note:"온라인 구매 후 첫 사용 때 활성화. 현장 구매도 가능하지만 도착 직후 동선 단축용.",links:[["Venezia Unica","https://www.veneziaunica.it/en/e-commerce/services"]]}
 ];
 
 // ===================== STATE & RENDER =====================
@@ -1318,7 +1343,11 @@ function renderTransport(c){
 function renderBooking(){
   const el=document.getElementById('bookingContent');
   const cards=BOOKING_ITEMS.map(item=>`<div class="booking-card ${item.tone||''}"><div class="booking-top"><div><div class="booking-cat">${item.cat}</div><div class="booking-title">${item.title}</div></div><span class="booking-status">${item.status}</span></div><div class="booking-row"><strong>목표:</strong> ${item.target}</div><div class="booking-row"><strong>조건:</strong> ${item.window}</div><div class="booking-row">${item.note}</div>${item.link?`<a class="booking-link" href="${item.link}" target="_blank" rel="noopener">${item.linkText}</a>`:''}</div>`).join('');
-  el.innerHTML=`<div class="booking-meta">공식 정보 검증 기준일: 2026-06-01 · 변동 가능 항목은 예약 전 재확인</div><div class="booking-grid">${cards}</div>`;
+  const ticketCards=TICKETING_ITEMS.map(item=>{
+    const links=(item.links||[]).map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${t}</a>`).join('');
+    return `<div class="ticket-card ${item.tone||''}"><div class="ticket-date">${item.date}</div><div class="ticket-name">${item.name}</div><div class="ticket-meta"><strong>대상:</strong> ${item.target}</div><div class="ticket-meta">${item.note}</div>${links?`<div class="ticket-links">${links}</div>`:''}</div>`;
+  }).join('');
+  el.innerHTML=`<div class="booking-meta">공식 정보 검증 기준일: 2026-06-01 · 한국 기준 날짜(KST) · 이탈리아 9월은 CEST로 한국보다 7시간 느림</div><div class="ticket-title">한국 날짜 기준 티케팅 캘린더</div><div class="ticket-grid">${ticketCards}</div><div class="ticket-title">예약 체크리스트</div><div class="booking-grid">${cards}</div>`;
 }
 
 // HOTELS
