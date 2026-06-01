@@ -724,25 +724,27 @@ B: {
   {t:"17:10",name:"몬티 숙소 복귀 + 휴식",desc:"트레비→Hotel Labelle 도보 15~18분",type:"move",coords:[41.8934,12.4889],tip:"첫 풀데이라 여기서 60~90분 쉬는 게 핵심. 진실의 입/치르코 마시모는 남쪽으로 빠져 D2 기본 동선에서 제외."},
   {t:"선택",seq:"8-1",name:"선택: 산 피에트로 인 빈콜리",desc:"숙소/몬티 바로 옆 · 미켈란젤로 모세상 20~30분",type:"spot",optional:true,coords:[41.8938510,12.4931577],tip:"D2에서 놓치기 아까운 고효율 후보. 저녁 전 체력이 남고 개방 중이면 추천."},
   {t:"19:30",name:"저녁: 몬티/콜로세움 근처",rk:"roma-monti-d2-dinner",desc:"피자/와인바/트라토리아 중 선택 · €25~95",type:"food",coords:[41.8959560,12.4938805],tip:"테스타치오까지 내려가지 않음. 가볍게는 Trieste Pizza, 분위기는 Ai Tre Scalini/Urbana 47, 예약 정찬은 La Taverna/Broccoletti."},
-  {t:"21:30",name:"숙소 복귀",desc:"다음날 바티칸 06:30 출발 대비 일찍 휴식",type:"move",coords:[41.8934,12.4889]}
+  {t:"21:30",name:"숙소 복귀",desc:"다음날 05:45 기상·06:10 바티칸 택시 대비 일찍 휴식",type:"move",coords:[41.8934,12.4889]}
 ],cost:"€190~245"},
-{day:3,date:"9/18 금",city:"로마",theme:"바티칸 오전 + 보르게세",routeSummary:"🚶 바티칸(08시)→성베드로→보르게세→트라스테베레",sched:[
-  {t:"06:30",name:"기상 → 택시/우버",desc:"몬티 숙소→바티칸 택시 €12~15",type:"move",coords:[41.9022,12.4539]},
-  {t:"07:30",name:"⭐ 바티칸 도착",desc:"08:00 입장 슬롯 기준, 보안검색 여유 확보",type:"spot",coords:[41.9022,12.4539],tip:"⚠️ 공식 운영시간 월-토 08:00~20:00 기준(2026-06-01 확인). 온라인 예약 필수. 어깨+무릎 가려야 입장"},
-  {t:"08:00",name:"바티칸 박물관 입장",desc:"€25/인(입장 €20+예약 €5), 시스티나 예배당까지 2시간 압축 관람",type:"spot",coords:[41.9022,12.4539],tip:"💡 첫 입장 슬롯 확보가 핵심. 라파엘로의 방+시스티나 중심으로 보지 않으면 보르게세 오후 일정이 밀림"},
-  {t:"10:15",name:"성 베드로 대성당",desc:"대성당 내부 중심 · 쿠폴라는 컨디션 따라 선택",type:"spot",coords:[41.9022,12.4539],tip:"쿠폴라까지 올라가면 60~90분이 추가되어 보르게세가 빡빡해짐. 기본은 내부+광장."},
-  {t:"선택",seq:"4-1",name:"선택: 성 베드로 광장",desc:"대성당 전후 10~15분 · 베르니니 열주와 광장 사진",type:"spot",optional:true,coords:[41.9022,12.4539],tip:"실제로는 대성당 동선에 포함되지만, 놓치지 않도록 별도 후보로 표기."},
-  {t:"11:45",name:"산탄젤로 다리",desc:"바티칸→점심 이동 중 포토스팟",type:"hl",coords:[41.9010,12.4663]},
+{day:3,date:"9/18 금",city:"로마",theme:"바티칸 새벽 이동 + 보르게세",routeSummary:"🚕 몬티→바티칸 06:45대기→성베드로→산탄젤로→보르게세→스페인광장→몬티",sched:[
+  {t:"05:45",name:"기상 + 초간단 아침",desc:"물·간식·여권/신분증·바티칸 QR 준비. 숙소 조식보다 입장 안정성 우선",type:"food"},
+  {t:"06:10",name:"Hotel Labelle → 바티칸 택시 출발",desc:"목적지: Musei Vaticani entrance, Viale Vaticano · 미터 택시 20~30분",type:"move",coords:[41.8934,12.4889],tip:"1순위는 전날 밤 프런트에 06:10 호출 예약. 실패하면 로마 공식 060609/CHIAMA TAXI, FreeNow/itTaxi 순서로 호출. 탑승 후 미터 켜짐 확인, 기사에게 San Pietro가 아니라 Musei Vaticani / Viale Vaticano라고 말하기."},
+  {t:"백업",name:"Metro B+A로 바티칸 이동",desc:"택시가 안 잡히는 경우의 대체 루트",type:"backup",backup:true,badge:"백업",fields:[{k:"출발 목표",v:"05:55~06:05 Hotel Labelle 출발"},{k:"경로",v:"Cavour(B)→Termini 환승→Ottaviano(A)→도보 12분"},{k:"주의",v:"첫차/공사/파업은 ATAC 앱에서 당일 재확인"}],steps:["전날 택시 예약 실패 시만 선택","Ottaviano 하차 후 Viale Vaticano 입구로 이동","08:00 슬롯 QR·신분증 바로 꺼낼 수 있게 준비"],avoid:"버스 단독 이동은 새벽 변수 커서 비추천"},
+  {t:"06:45",name:"⭐ 바티칸 박물관 입구 도착",desc:"08:00 첫 입장 슬롯 기준 75분 전 대기",type:"spot",coords:[41.9065233,12.4517731],tip:"공식 박물관 입구는 Viale Vaticano. 예약자 줄/보안검색 줄을 구분하고, QR·신분증 이름 확인 대비."},
+  {t:"08:00",name:"바티칸 박물관 입장",desc:"€25/인(입장 €20+예약 €5) · 라파엘로의 방+시스티나 중심 2시간15분",type:"spot",coords:[41.9065233,12.4517731],tip:"공식 운영은 월~토 08:00~20:00. 첫 슬롯을 잡아도 내부가 길어지면 뒤 일정이 밀리므로 핵심 동선만."},
+  {t:"10:45",name:"성 베드로 대성당",desc:"박물관→대성당 이동/보안 포함 · 내부 중심 60~75분",type:"spot",coords:[41.9018541,12.4557603],tip:"개별 관람은 시스티나→성베드로 직결 통로가 항상 보장되지 않음. 쿠폴라는 60~90분 추가라 기본 일정에서는 제외."},
+  {t:"선택",seq:"4-1",name:"선택: 성 베드로 광장",desc:"대성당 전후 10~15분 · 베르니니 열주와 광장 사진",type:"spot",optional:true,coords:[41.9022351,12.4573573],tip:"실제로는 대성당 동선에 포함되지만, 놓치지 않도록 별도 후보로 표기."},
+  {t:"12:15",name:"산탄젤로 다리",desc:"성베드로→도보 12~15분 · 포토스팟",type:"hl",coords:[41.9010,12.4663]},
   {t:"선택",seq:"5-1",name:"선택: 산탄젤로성 내부/테라스",desc:"다리 외관만 기본 · 내부는 60~75분 필요",type:"spot",optional:true,coords:[41.9031178,12.4663427],tip:"꼭 들어가고 싶으면 Roscioli 점심/휴식을 줄이거나 보르게세 시간을 뒤로 밀어야 함."},
-  {t:"12:30",name:"점심: Roscioli",rk:"roma-centro-lunch",desc:"살루메리아 €65",type:"food",coords:[41.8933,12.4729]},
-  {t:"13:45",name:"보르게세 이동 + 짧은 휴식",desc:"택시 15~20분 또는 버스/도보 조합. 20~30분 숨 고르기",type:"move",coords:[41.9142,12.4921]},
+  {t:"12:45",name:"점심: Roscioli",rk:"roma-centro-lunch",desc:"산탄젤로→도보 15~20분 · 살루메리아 €65",type:"food",coords:[41.8933,12.4729]},
+  {t:"14:15",name:"보르게세 이동 + 짧은 휴식",desc:"Roscioli→보르게세 택시 15~20분. 15:30 입장 전 30분 버퍼",type:"move",coords:[41.9142,12.4921]},
   {t:"15:30",name:"보르게세 미술관",desc:"€15/인 사전예약! 2시간 슬롯",type:"spot",coords:[41.9142,12.4921],tip:"⚠️ 반드시 사전예약. 15시대 슬롯 우선, 없으면 17시 슬롯로 조정하고 저녁을 늦추기"},
   {t:"선택",seq:"8-1",name:"선택: 핀초 전망대",desc:"보르게세→스페인광장 이동길 · 로마 전경 10~15분",type:"hl",optional:true,coords:[41.9111966,12.4784418],tip:"해가 좋으면 D3에서 가장 자연스러운 추가 후보. Piazza del Popolo까지 내려가면 시간이 더 걸림."},
   {t:"17:45",name:"스페인광장+콘도띠",desc:"쇼핑/산책",type:"",coords:[41.9058,12.4823],tip:"⚠️ 앉기 금지! €250 벌금"},
-  {t:"19:00",name:"아페리티보",desc:"€22",type:"food"},
-  {t:"20:00",name:"저녁: Da Enzo al 29",rk:"roma-trastevere-dinner2",desc:"트라스테베레 €60",type:"food",coords:[41.8893,12.4699]},
-  {t:"22:00",name:"숙소 복귀 (몬티)",desc:"트라스테베레→Hotel Labelle 택시 18분 €14 (또는 H버스+도보)",type:"move",coords:[41.8934,12.4889]}
-],cost:"€228"},
+  {t:"18:45",name:"몬티 복귀 + 저녁",rk:"roma-monti-d2-dinner",desc:"스페인광장→몬티 택시/Metro A+B 15~25분 · €45~85",type:"food",coords:[41.8959560,12.4938805],tip:"새벽부터 움직인 날이라 트라스테베레까지 내려가지 않는 쪽이 동선상 좋음. 체력이 남으면 트라스테베레는 별도 선택."},
+  {t:"선택",seq:"10-1",name:"선택: 트라스테베레 야경/저녁",desc:"꼭 가고 싶을 때만 택시로 왕복 · Da Enzo/Tonnarello 후보",type:"hl",optional:true,coords:[41.8893,12.4699],tip:"분위기는 좋지만 D3 기본 동선에서는 남서쪽으로 빠짐. 새벽 바티칸 후에는 무리하지 않는 쪽 추천."},
+  {t:"21:00",name:"숙소 복귀 (몬티)",desc:"다음날 피렌체 이동 준비 · 짐 정리 후 취침",type:"move",coords:[41.8934,12.4889]}
+],cost:"€230~260"},
 {day:4,date:"9/19 토",city:"→피렌체",theme:"르네상스 첫 만남",routeSummary:"🚂 Roma→Firenze (Frecciarossa 1.5h)",sched:[
   {t:"08:00",name:"아침+체크아웃 (Hotel Labelle)",desc:"몬티 숙소 짐 정리·조식",type:"food",coords:[41.8934,12.4889]},
   {t:"08:45",name:"숙소→Roma Termini",desc:"Cavour역 메트로 B선 1정거장(2분)+도보, 총 약 15분",type:"move",coords:[41.9009,12.5016]},
@@ -1080,7 +1082,7 @@ const BOOKING_ITEMS=[
 {status:"예약필요",tone:"warn",cat:"교통",title:"장거리 열차",target:"지금부터 1차 조회",window:"좌석 지정/환불 조건 비교",note:"Roma→Firenze, Firenze→La Spezia, La Spezia→Venezia 우선. 늦어도 각 이동 60일 전 확정",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
 {status:"예약필요",tone:"warn",cat:"입장권",title:"콜로세움",target:"2026-08-18(화)",window:"방문 30일 전",note:"D2 08:30 목표. 07:00 KST부터 조회, 08:30 슬롯은 15:30 KST에도 재확인",link:"https://colosseo.it/en/opening-times-and-tickets/",linkText:"공식"},
 {status:"선택예약",tone:"warn",cat:"식당",title:"D2 점심/저녁",target:"2026-08-20~09-03",window:"인기 정찬만 예약",note:"Armando/La Taverna/Broccoletti 선택 시 예약. Pane e Salame/Trieste는 현장 대기 가능",link:"https://www.google.com/maps/search/?api=1&query=Pantheon+Monti+restaurants+Rome",linkText:"지도"},
-{status:"예약필요",tone:"warn",cat:"입장권",title:"바티칸 + 보르게세",target:"2026-07-20(월)",window:"D3 시간제 예약",note:"바티칸 08:00, 보르게세 15시대 슬롯 우선 확보",link:"https://www.museivaticani.va/content/museivaticani/en.html",linkText:"바티칸"},
+{status:"예약필요",tone:"warn",cat:"입장권",title:"바티칸 + 보르게세",target:"2026-07-20(월)",window:"D3 시간제 예약",note:"바티칸 08:00, 보르게세 15:30 슬롯 우선 확보",link:"https://www.museivaticani.va/content/museivaticani/en.html",linkText:"바티칸"},
 {status:"예약필요",tone:"warn",cat:"입장권",title:"우피치 / 아카데미아 / 두오모",target:"2026-06-22(월)",window:"D5 핵심 시간제 예약",note:"08:30 우피치, 13:00 아카데미아, 16:00 두오모 쿠폴라 순서로 확보",link:"https://www.uffizi.it/en/tickets",linkText:"우피치"},
 {status:"예약필요",tone:"warn",cat:"교통",title:"베네치아 → 코르티나 렌터카",target:"숙소 확정 후",window:"무료취소 조건 우선",note:"메스트레 픽업/밀라노 반납 수수료 확인",link:"https://www.rentalcars.com",linkText:"RentalCars"},
 {status:"예약필요",tone:"warn",cat:"돌로미티",title:"Tre Cime 주차/통행 예약",target:"방문 전 공식 예약",window:"2026 차량 €40",note:"Auronzo 공식 2026-06-01 확인. 9AM 전 도착 목표",link:"https://auronzo.info/en/parking-tre-cime-di-lavaredo/",linkText:"공식"},
@@ -1091,7 +1093,7 @@ const TICKETING_ITEMS=[
 {date:"2026.06.01(월) 지금",tone:"critical",name:"장거리 열차/렌터카 1차 조회",target:"Roma→Firenze, Firenze→La Spezia, La Spezia→Venezia, 메스트레 렌터카",note:"할인 좌석과 원웨이 렌터카는 빨리 움직일수록 유리. 아직 시간표가 비어 있으면 매주 월요일 재확인.",links:[["Trenitalia","https://www.trenitalia.com"],["Italo","https://www.italotreno.com/en"],["RentalCars","https://www.rentalcars.com"]]},
 {date:"2026.06.22(월)",tone:"critical",name:"D5 피렌체 핵심 3종",target:"우피치 08:30, 아카데미아 13:00, 두오모 쿠폴라 16:00",note:"D5가 일요일이라 오전 슬롯 경쟁이 큼. 쿠폴라는 시간 엄수형이라 마지막으로 남기지 말 것.",links:[["Uffizi","https://www.uffizi.it/en/tickets"],["Accademia","https://www.galleriaaccademiafirenze.it/tickets/"],["Duomo","https://tickets.duomo.firenze.it/en"]]},
 {date:"2026.06.23(화) 09:00 KST",tone:"critical",name:"D6 피사 사탑",target:"9/21 10:00 Leaning Tower",note:"공식 기준 GMT 90일 전 오픈. 한국은 GMT보다 9시간 빠르므로 09:00 KST부터 확인.",links:[["OPAPISA","https://www.opapisa.it/en/tickets/buy/"]]},
-{date:"2026.07.20(월) 07:00 KST",tone:"critical",name:"D3 바티칸 + 보르게세",target:"바티칸 08:00, 보르게세 15시대",note:"이탈리아 00:00은 한국 07:00. 바티칸은 첫 슬롯, 보르게세는 2시간 제한 슬롯이라 오후 늦은 슬롯이 더 현실적.",links:[["Vatican","https://www.museivaticani.va/content/museivaticani/en.html"],["Borghese","https://galleriaborghese.beniculturali.it/en/visita/"]]},
+{date:"2026.07.20(월) 07:00 KST",tone:"critical",name:"D3 바티칸 + 보르게세",target:"바티칸 08:00, 보르게세 15:30",note:"이탈리아 00:00은 한국 07:00. 바티칸은 첫 슬롯, 보르게세는 2시간 제한 슬롯이라 15:30 전후가 더 현실적.",links:[["Vatican","https://www.museivaticani.va/content/museivaticani/en.html"],["Borghese","https://galleriaborghese.beniculturali.it/en/visita/"]]},
 {date:"2026.08.18(화)",tone:"critical",name:"D2 콜로세움",target:"9/17 08:30 Colosseum + Forum/Palatine",note:"공식 30일 전 오픈. 07:00 KST부터 확인하고, 08:30 슬롯은 15:30 KST에도 다시 확인.",links:[["Colosseo","https://colosseo.it/en/opening-times-and-tickets/"]]},
 {date:"2026.08.18(화)",tone:"",name:"D2 판테온",target:"9/17 14:30 Pantheon",note:"필수 매진형은 아니지만 €5 공식 티켓을 미리 사두면 현장 줄 리스크를 줄일 수 있음.",links:[["Pantheon","https://www.pantheonroma.com/en/openings-info/"]]},
 {date:"2026.08.24(월)",tone:"",name:"D8 베네치아 두칼레 궁전",target:"9/23 15:30 Doge's Palace",note:"30일 전 온라인 예매가 유리한 구간. 산마르코권 동선 확정 후 같이 처리.",links:[["MUVE","https://palazzoducale.visitmuve.it/en/tickets/"]]},
@@ -1242,8 +1244,8 @@ function showDayOnMap(day){
     const total=coordCounts[key]||1;
     if(total===1)return base;
     const seen=coordSeen[key]||0;coordSeen[key]=seen+1;
-    const angle=(Math.PI*2*seen)/total;
-    const radius=.00016;
+    const angle=(-Math.PI/2)+(Math.PI*2*seen)/total;
+    const radius=Math.min(.00055,.00022+total*.000055);
     return [base[0]+Math.sin(angle)*radius,base[1]+Math.cos(angle)*radius];
   }
   let num=0;
