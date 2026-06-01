@@ -553,7 +553,23 @@ footer{text-align:center;padding:36px 20px;color:var(--faint);
 	  .stats-row{grid-template-columns:repeat(2,1fr)}
 	  .cal-grid{display:none}
 	  .cal-mobile-list{display:flex;flex-direction:column;gap:10px}
-	  .sched-table td:first-child{width:52px}
+	  .sched-table,.sched-table tbody{display:block;width:100%}
+	  .sched-table tr.sched-row{display:grid;grid-template-columns:56px minmax(0,1fr);width:100%}
+	  .sched-table tr.sched-row td{display:block;border-bottom:none}
+	  .sched-table tr.sched-row td:first-child{
+	    grid-row:1 / span 2;width:auto;border-left:none;border-right:2px solid var(--olive-soft);
+	    padding:11px 9px 8px 0;text-align:right;
+	  }
+	  .sched-table tr.sched-row td:first-child::before{display:none}
+	  .sched-table tr.sched-row td:nth-child(2){grid-column:2;min-width:0;padding:10px 11px 3px}
+	  .sched-table tr.sched-row td:nth-child(3){grid-column:2;padding:0 11px 10px}
+	  .backup-strategy-row,.cost-row,.food-recs-row{display:block;width:100%}
+	  .backup-strategy-row > td:first-child,.cost-row > td:first-child,.food-recs-row > td:first-child{display:none}
+	  .backup-strategy-row > td:nth-child(2),.cost-row > td:nth-child(2),.food-recs-row > td:nth-child(2){
+	    display:block;width:auto;padding:9px 11px 12px;border-left:none;
+	  }
+	  .backup-card{padding:12px}
+	  .step-title{align-items:flex-start}
 	  .day-num{font-size:20px;min-width:38px}
 	  .day-city{font-size:15px}
 	  .b-row{gap:9px}
@@ -1140,7 +1156,7 @@ function toggleRecs(id,evt){
         const icon=L.divIcon({className:'',html:`<div style="background:#f97316;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.4)">${abc}</div>`,iconSize:[22,22],iconAnchor:[11,11],popupAnchor:[0,-12]});
         const mk=L.marker(r.c,{icon:icon}).addTo(dayMap);
         const reviewQuery=r.q||`${r.n} restaurant italy`;
-        mk.bindPopup(`<b>${r.n}</b><br><span style="color:#666;font-size:11px">${r.d}</span><br><span style="color:#059669;font-weight:700">${r.p}</span><br><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(reviewQuery)}" target="_blank" style="display:inline-block;margin-top:4px;background:#1a73e8;color:#fff;padding:3px 8px;border-radius:4px;font-size:10px;font-weight:600;text-decoration:none">⭐ 구글 리뷰 보기</a>`);
+        mk.bindPopup(`<b>${r.n}</b><br><span style="color:#666;font-size:11px">${r.d}</span><br><span style="color:#059669;font-weight:700">${r.p}</span><br><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(reviewQuery)}" target="_blank" rel="noopener" style="display:inline-block;margin-top:4px;background:#1a73e8;color:#fff;padding:3px 8px;border-radius:4px;font-size:10px;font-weight:600;text-decoration:none">⭐ 구글 리뷰 보기</a>`);
         recMarkers.push(mk);
         bounds.push(r.c);
       });
@@ -1154,7 +1170,15 @@ function flyToPoint(lat,lng,name){
   if(!dayMap||!Number.isFinite(Number(lat))||!Number.isFinite(Number(lng)))return;
   dayMap.invalidateSize();
   dayMap.flyTo([Number(lat),Number(lng)],16,{duration:0.5});
-  dayMarkers.forEach(m=>{if(m.getLatLng){const ll=m.getLatLng();if(Math.abs(ll.lat-lat)<0.001&&Math.abs(ll.lng-lng)<0.001)m.openPopup();}});
+  let opened=false;
+  dayMarkers.forEach(m=>{
+    if(opened||!m.getLatLng)return;
+    const base=m._baseLatLng||[m.getLatLng().lat,m.getLatLng().lng];
+    const nameMatch=!name||m._pointName===name;
+    if(nameMatch&&Math.abs(base[0]-lat)<0.001&&Math.abs(base[1]-lng)<0.001){
+      m.openPopup();opened=true;
+    }
+  });
 }
 function showDayOnMap(day){
   if(!initDayMap())return;
@@ -1162,16 +1186,32 @@ function showDayOnMap(day){
   const items=day.sched.filter(s=>isCoord(s.coords));
   if(items.length===0){dayMap.setView([42.5,13],6);return;}
   const coords=items.map(s=>[Number(s.coords[0]),Number(s.coords[1])]);
+  const coordCounts=items.reduce((acc,s)=>{
+    const key=`${Number(s.coords[0]).toFixed(5)},${Number(s.coords[1]).toFixed(5)}`;
+    acc[key]=(acc[key]||0)+1;return acc;
+  },{});
+  const coordSeen={};
+  function displayLatLng(base){
+    const key=`${base[0].toFixed(5)},${base[1].toFixed(5)}`;
+    const total=coordCounts[key]||1;
+    if(total===1)return base;
+    const seen=coordSeen[key]||0;coordSeen[key]=seen+1;
+    const angle=(Math.PI*2*seen)/total;
+    const radius=.00016;
+    return [base[0]+Math.sin(angle)*radius,base[1]+Math.cos(angle)*radius];
+  }
   let num=0;
   items.forEach(s=>{
     num++;
     const latlng=[Number(s.coords[0]),Number(s.coords[1])];
-    const mk=L.marker(latlng,{icon:createNumberedIcon(num,s.type||'spot')}).addTo(dayMap);
+    const display=displayLatLng(latlng);
+    const mk=L.marker(display,{icon:createNumberedIcon(num,s.type||'spot')}).addTo(dayMap);
+    mk._baseLatLng=latlng;mk._pointName=s.name;
     let popup=`<b>${s.name}</b>`;
     if(s.t)popup=`<span style="color:#d97706;font-weight:700">${s.t}</span> `+popup;
     if(s.desc)popup+=`<br><span style="color:#555;font-size:11px">${s.desc}</span>`;
-    if(s.tip)popup+=`<br><span style="color:#92400e;font-size:11px;background:#fffbeb;padding:1px 4px;border-radius:3px">${s.tip}</span>`;
-    popup+=`<br><a href="https://www.google.com/maps/search/?api=1&query=${latlng[0]},${latlng[1]}" target="_blank" style="display:inline-block;margin-top:4px;background:#1a73e8;color:#fff;padding:3px 8px;border-radius:4px;font-size:10px;font-weight:600;text-decoration:none">📍 Google Maps 열기</a>`;
+    if(s.tip)popup+=`<br><span style="color:#92400e;font-size:11px;background:#fffbeb;padding:1px 4px;border-radius:3px">체크포인트는 리스트에서 확인</span>`;
+    popup+=`<br><a href="https://www.google.com/maps/search/?api=1&query=${latlng[0]},${latlng[1]}" target="_blank" rel="noopener" style="display:inline-block;margin-top:4px;background:#1a73e8;color:#fff;padding:3px 8px;border-radius:4px;font-size:10px;font-weight:600;text-decoration:none">📍 Google Maps 열기</a>`;
     mk.bindPopup(popup);
     dayMarkers.push(mk);
   });
@@ -1241,7 +1281,7 @@ function renderItinerary(c){
         sh+=`<tr class="sched-row food-row${hl}" onclick="${rowClick}toggleRecs('${recId}',event)"><td>${s.t}</td><td>${renderStepTitle(s,pointNum,tag,cp,more)}</td><td>${renderStepDesc(s)}</td></tr>`;
         let recsHtml=recs.map((r,ri)=>{
           const reviewQuery=r.q||`${r.n} restaurant italy`;
-          const reviewLink=`<a class="rec-map" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(reviewQuery)}" target="_blank" onclick="event.stopPropagation()">리뷰</a>`;
+          const reviewLink=`<a class="rec-map" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(reviewQuery)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">리뷰</a>`;
           const flyClick=r.c?`onclick="event.stopPropagation();flyToPoint(${r.c[0]},${r.c[1]},'${r.n.replace(/'/g,"\\'")}')" `:'';
           const abc='ABCDE'[ri];
           return `<div class="rec-item${ri===0?' rec-picked':''}" ${flyClick}><span class="rec-num">${abc}</span><span class="rec-name">${r.n}</span> <span class="rec-desc">${r.d}</span> <span class="rec-price">${r.p}</span> ${reviewLink}</div>`;
@@ -1264,14 +1304,14 @@ function renderItinerary(c){
 // TRANSPORT
 function renderTransport(c){
   const tb=document.getElementById('transportBody'),cards=document.getElementById('transportCards');tb.innerHTML='';cards.innerHTML='';
-  c.transport.forEach(t=>{const tr=document.createElement('tr');tr.innerHTML=`<td class="day-col">${t.day}</td><td class="route-col">${t.route}</td><td class="mode-col">${t.mode}</td><td>${t.time}</td><td class="cost-col">${t.cost}</td><td>${t.link?`<a class="book-link" href="${t.link}" target="_blank">${t.linkText}</a>`:''}</td>`;tb.appendChild(tr);
-    const card=document.createElement('div');card.className='transport-card';card.innerHTML=`<div class="tc-top"><span class="tc-day">${t.day}</span><span class="tc-cost">${t.cost}</span></div><div class="tc-route">${t.route}</div><div class="tc-meta">${t.mode} · ${t.time}</div>${t.link?`<a class="book-link" href="${t.link}" target="_blank">${t.linkText}</a>`:''}`;cards.appendChild(card);
+  c.transport.forEach(t=>{const tr=document.createElement('tr');tr.innerHTML=`<td class="day-col">${t.day}</td><td class="route-col">${t.route}</td><td class="mode-col">${t.mode}</td><td>${t.time}</td><td class="cost-col">${t.cost}</td><td>${t.link?`<a class="book-link" href="${t.link}" target="_blank" rel="noopener">${t.linkText}</a>`:''}</td>`;tb.appendChild(tr);
+    const card=document.createElement('div');card.className='transport-card';card.innerHTML=`<div class="tc-top"><span class="tc-day">${t.day}</span><span class="tc-cost">${t.cost}</span></div><div class="tc-route">${t.route}</div><div class="tc-meta">${t.mode} · ${t.time}</div>${t.link?`<a class="book-link" href="${t.link}" target="_blank" rel="noopener">${t.linkText}</a>`:''}`;cards.appendChild(card);
   });
 }
 
 function renderBooking(){
   const el=document.getElementById('bookingContent');
-  const cards=BOOKING_ITEMS.map(item=>`<div class="booking-card ${item.tone||''}"><div class="booking-top"><div><div class="booking-cat">${item.cat}</div><div class="booking-title">${item.title}</div></div><span class="booking-status">${item.status}</span></div><div class="booking-row"><strong>목표:</strong> ${item.target}</div><div class="booking-row"><strong>조건:</strong> ${item.window}</div><div class="booking-row">${item.note}</div>${item.link?`<a class="booking-link" href="${item.link}" target="_blank">${item.linkText}</a>`:''}</div>`).join('');
+  const cards=BOOKING_ITEMS.map(item=>`<div class="booking-card ${item.tone||''}"><div class="booking-top"><div><div class="booking-cat">${item.cat}</div><div class="booking-title">${item.title}</div></div><span class="booking-status">${item.status}</span></div><div class="booking-row"><strong>목표:</strong> ${item.target}</div><div class="booking-row"><strong>조건:</strong> ${item.window}</div><div class="booking-row">${item.note}</div>${item.link?`<a class="booking-link" href="${item.link}" target="_blank" rel="noopener">${item.linkText}</a>`:''}</div>`).join('');
   el.innerHTML=`<div class="booking-meta">공식 정보 검증 기준일: 2026-06-01 · 변동 가능 항목은 예약 전 재확인</div><div class="booking-grid">${cards}</div>`;
 }
 
@@ -1287,7 +1327,7 @@ function renderHotels(c){
     const cards=c.hotels[city].map(h=>{
       const stars='★'.repeat(h.stars)+'☆'.repeat(5-h.stars);
       const tags=h.tags.map(t=>`<span class="h-tag">${t}</span>`).join('');
-      const links=h.links.map(l=>`<a href="${l.u}" target="_blank" class="${l.c}">${l.t}</a>`).join('');
+      const links=h.links.map(l=>`<a href="${l.u}" target="_blank" rel="noopener" class="${l.c}">${l.t}</a>`).join('');
       return `<div class="hotel-card"><div class="h-name">${h.name}</div><div class="h-stars">${stars}</div><div class="h-desc">${h.desc}</div><div class="h-price">${h.price} <small>/2인 기준</small></div><div class="h-tags">${tags}</div><div class="h-links">${links}</div></div>`;
     }).join('');
     blocks+=`<div class="hotel-city" data-cityblock="${city}"${i===0?'':' hidden'}><h4>${city} <span class="hcount">후보 ${c.hotels[city].length}곳</span></h4><div class="hotel-cards">${cards}</div></div>`;
