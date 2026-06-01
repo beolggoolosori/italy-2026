@@ -1269,7 +1269,7 @@ function showDayOnMap(day){
     const entries=points.map((p,i)=>({i,point:dayMap.latLngToLayerPoint(p.latlng),width:String(p.markerLabel).length>2?34:24}));
     const clusters=[];
     entries.forEach(e=>{
-      const group=clusters.find(g=>g.some(x=>x.point.distanceTo(e.point)<38));
+      const group=clusters.find(g=>g.some(x=>x.point.distanceTo(e.point)<76));
       if(group)group.push(e);else clusters.push([e]);
     });
     const offsets=points.map(()=>({dx:0,dy:0}));
