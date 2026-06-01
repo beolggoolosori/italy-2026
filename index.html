@@ -258,6 +258,50 @@ a{color:inherit}
   border:2px solid var(--paper-2)}
 .sched-table td:nth-child(2){font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;font-weight:700;min-width:150px}
 .sched-table td:nth-child(3){color:var(--muted);font-size:12.5px}
+.step-title{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0}
+.step-name{min-width:0}
+.map-num{
+  display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;
+  border-radius:50%;background:var(--adriatic);color:#fff;border:2px solid var(--paper);
+  font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+  font-size:11px;font-weight:900;line-height:1;box-shadow:0 2px 6px rgba(39,76,91,.22);
+  flex-shrink:0;
+}
+.step-desc{color:var(--muted);font-size:12.5px}
+.step-detail{
+  margin-top:7px;border:1px solid #D8DCCB;background:var(--gold-soft);
+  border-radius:8px;padding:6px 8px;color:#7A5A14;
+}
+.step-detail summary{
+  cursor:pointer;font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+  font-size:11px;font-weight:800;color:#7A5A14;list-style:none;
+}
+.step-detail summary::-webkit-details-marker{display:none}
+.step-detail summary::after{content:"+";float:right;font-weight:900;color:#8A6A1F}
+.step-detail[open] summary::after{content:"-"}
+.step-detail div{margin-top:6px;font-size:11.5px;line-height:1.55}
+.backup-strategy-row td{background:var(--paper);padding:8px 16px 12px;border-bottom:1px solid var(--line-2)}
+.backup-strategy-row td:first-child{color:var(--gold);border-left:2px solid var(--gold)}
+.backup-card{
+  border:1px solid #D8DCCB;background:var(--gold-soft);border-radius:10px;
+  padding:13px 14px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.45);
+}
+.backup-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+.backup-kicker{
+  font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+  font-size:10px;font-weight:900;color:#8A6A1F;letter-spacing:.08em;text-transform:uppercase;
+}
+.backup-title{font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;font-size:14px;font-weight:900;color:var(--ink);margin-top:2px}
+.backup-desc{font-size:12px;color:#6B5A32;margin-top:3px}
+.backup-badge{background:var(--paper);border:1px solid #D8DCCB;border-radius:999px;padding:5px 9px;font-size:10px;font-weight:900;color:#8A6A1F;white-space:nowrap}
+.backup-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.backup-item{background:var(--paper);border:1px solid #E0D5B7;border-radius:8px;padding:9px 10px}
+.backup-item strong{display:block;font-size:10px;color:#8A6A1F;margin-bottom:3px}
+.backup-item span{font-size:11.5px;color:var(--ink);line-height:1.45}
+.backup-steps{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.backup-steps span{background:rgba(255,255,255,.65);border:1px solid #E0D5B7;border-radius:999px;padding:5px 8px;font-size:11px;color:#6B5A32}
+.backup-steps b{display:inline-flex;align-items:center;justify-content:center;width:17px;height:17px;margin-right:5px;border-radius:50%;background:var(--gold);color:#fff;font-size:10px}
+.backup-avoid{margin-top:9px;font-size:11.5px;color:#9A3412;font-weight:800}
 
 /* tags — 4-token system: food=gold / move=olive / spot=terracotta / couple=blush */
 .tag-food,.tag-move,.tag-spot,.tag-couple,.tag-hotel,.tag-swim{
@@ -492,6 +536,9 @@ footer{text-align:center;padding:36px 20px;color:var(--faint);
 	  .cal-transport,.cal-nights{font-size:7.5px}
 	  .sched-table td{padding:9px 11px;font-size:12.5px}
 	  .day-route-summary{padding-left:0}
+	  .backup-grid{grid-template-columns:1fr}
+	  .backup-head{flex-direction:column;align-items:flex-start;gap:7px}
+	  .backup-steps span{border-radius:8px}
 	  .t-table{min-width:600px}
 	  #sec-transport .t-scroll{display:none}
 	  .transport-cards{display:grid;grid-template-columns:1fr;gap:10px}
@@ -621,14 +668,14 @@ B: {
   days:[
 {day:1,date:"9/16 수",city:"인천→로마",theme:"로마의 첫 밤",routeSummary:"✈️ ICN→FCO (KE931 직항 13h10)",sched:[
   {t:"13:20",name:"인천 출발",desc:"KE931 직항 · ICN T2 출발 · 비행 약 13시간 10분",type:"move"},
-  {t:"19:30",name:"로마 FCO 도착",desc:"입국심사+수하물 45~75분 예상 · 도착 터미널은 출발 전 대한항공/FCO 앱 재확인",type:"",tip:"🧭 수하물 찾고 나오면 노란/파란 안내판의 Train 또는 Railway Station / Stazione ferroviaria 표지를 따라 공항역으로 이동. FCO 기차역은 공항 구역 안, 도착·출발 터미널 가까이에 있음."},
-  {t:"20:30",name:"공항역 이동 + 표 구매",desc:"목적지 Roma Termini · Trenitalia 앱/역 매표기/창구에서 Leonardo Express 선택",type:"move",coords:[41.7937,12.2518],tip:"🎫 현장 구매가 편함: 입국 지연 때문에 고정 시간표를 미리 끊지 말고, 수하물 받은 뒤 다음 열차를 구매. Metrebus/로마 시내권은 Leonardo Express에 사용 불가."},
-  {t:"20:53",name:"Leonardo Express 목표 탑승",desc:"Fiumicino Aeroporto→Roma Termini 무정차 32분 · €14/인(2인 €28) · 약 15분 간격",type:"move",coords:[41.9009,12.5016],tip:"🚆 전광판에서 Leonardo Express / Roma Termini 확인 후 탑승. 20:53을 놓치면 21:08, 21:23, 21:38로 밀어도 됨. 최신 공식 시간표 기준 공항→Termini 막차는 23:53."},
-  {t:"택시",name:"백업: 공식 택시로 숙소 직행",desc:"비행 지연·비·짐 많음·컨디션 저하 시 FCO→Hotel Labelle 직행 40~55분",type:"move",tip:"🚕 예약 필요 없음. T1/T3 Arrivals 공식 Taxi 승강장 줄에 서기 → 흰색 TAXI 차량, 지붕 TAXI 표시, Comune 문장, 면허번호 확인 → 타기 전 'Rome city center fixed fare 55 euro?' 확인. 공항 안에서 호객하는 차량/NCC는 거절. 앱 예약은 시내 이동용 ChiamaTaxi 060609 참고, 공항 도착은 공식 승강장이 가장 단순함."},
-  {t:"21:25",name:"Termini 도착 → 몬티 숙소",desc:"1순위 Metro B Cavour 1정거장 + 도보 2분 · 2순위 공식 택시 10분 · 도보 12분은 짐 적을 때만",type:"move",coords:[41.8934,12.4889],tip:"🚇 Metro BIT €1.50/인. Termini 안팎은 소매치기 많은 구간이라 휴대폰·여권·지갑은 안쪽 보관. 큰 캐리어 2개면 숙소까지 택시가 더 편함."},
-  {t:"21:50",name:"Hotel Labelle 체크인",desc:"확정 ₩854,164/3박(2인) · Via Cavour 310, 몬티 · 도시세 ₩52,620 현장결제",type:"hotel",coords:[41.8934,12.4889],tip:"💡 호텔에 21:30~22:30 도착 가능성 사전 메시지. 늦어질 때는 FCO 수하물 수령 후 바로 한 번 더 연락."},
-  {t:"22:10",name:"가벼운 저녁: 숙소 주변 운영 확인 후보",rk:"roma-monti-d1",desc:"파니노/피자/파스타 중심 · Google 지도+공식 사이트 기준 22시 전후 가능 후보",type:"food",coords:[41.89365,12.48979],tip:"🍽️ D1은 코스요리보다 빠르게 먹고 쉬는 날. 1순위는 도보 2~3분의 La Fraschetta, 도착이 늦으면 24:00까지인 Benso 215 또는 Pizza Forum으로 전환."},
-  {t:"23:00",name:"콜로세움 야경 산책 (완전 선택)",desc:"숙소 도보 7분 · 왕복 15~20분만 · 피곤하면 바로 취침",type:"hl",coords:[41.8902,12.4922],tip:"💡 장거리 비행 직후라 사진 2~3장만 찍고 복귀. 콜로세움은 D2 아침에 제대로 보는 일정이 있음."},
+  {t:"19:30",name:"로마 FCO 도착",desc:"입국심사+수하물 45~75분 예상",type:"",tip:"도착 터미널은 출발 전 대한항공/FCO 앱 재확인. 수하물 찾고 Train / Railway Station / Stazione ferroviaria 표지 따라 이동."},
+  {t:"20:30",name:"공항역 이동 + 표 구매",desc:"Leonardo Express · 목적지 Roma Termini",type:"move",coords:[41.7937,12.2518],tip:"입국 지연이 있으니 수하물 받은 뒤 Trenitalia 앱/역 매표기/창구에서 다음 열차 구매. Metrebus/로마 시내권은 사용 불가."},
+  {t:"20:53",name:"Leonardo Express 목표 탑승",desc:"FCO 공항역→Termini 무정차 32분 · €14/인",type:"move",coords:[41.9009,12.5016],tip:"놓치면 21:08, 21:23, 21:38 순서로 밀기. 최신 공식 시간표 기준 공항→Termini 막차 23:53."},
+  {t:"백업",name:"공식 택시로 Hotel Labelle 직행",desc:"기차가 불편해지는 순간 바로 전환",type:"backup",backup:true,badge:"백업",fields:[{k:"전환 조건",v:"공항역 도착이 21:15 이후이거나 비/피로/짐 부담이 큰 경우"},{k:"타는 곳",v:"T1/T3 Arrivals 공식 Taxi 승강장"},{k:"요금",v:"FCO→로마 중심 정액 €55"}],steps:["흰색 TAXI 줄에 서기","Comune 문장·면허번호 확인","타기 전 fixed fare €55 확인"],avoid:"공항 안 호객 차량/NCC는 거절"},
+  {t:"21:25",name:"Termini 도착 → 몬티 숙소",desc:"Metro B Cavour 1정거장 + 도보 2분",type:"move",coords:[41.8934,12.4889],tip:"BIT €1.50/인. 큰 캐리어 2개면 Termini에서 숙소까지 공식 택시가 더 편함. 휴대폰·여권·지갑은 안쪽 보관."},
+  {t:"21:50",name:"Hotel Labelle 체크인",desc:"확정 ₩854,164/3박 · Via Cavour 310",type:"hotel",coords:[41.8934,12.4889],tip:"21:30~22:30 도착 가능성 사전 메시지. 늦어지면 FCO 수하물 수령 후 바로 한 번 더 연락."},
+  {t:"22:10",name:"가벼운 저녁: 숙소 주변 운영 확인 후보",rk:"roma-monti-d1",desc:"파니노/피자/파스타 중심 · 22시 전후 가능 후보",type:"food",coords:[41.89365,12.48979],tip:"1순위 La Fraschetta. 도착이 늦으면 24:00까지인 Benso 215 또는 Pizza Forum으로 전환."},
+  {t:"23:00",name:"콜로세움 야경 산책 (완전 선택)",desc:"왕복 15~20분만 · 피곤하면 바로 취침",type:"hl",coords:[41.8902,12.4922],tip:"장거리 비행 직후라 사진 2~3장만 찍고 복귀. 콜로세움은 D2 아침에 제대로 보는 일정."},
   {t:"23:20",name:"숙소 복귀 → 휴식",desc:"다음날 콜로세움 08:30 목표라 첫날은 수면 우선",type:"move",coords:[41.8934,12.4889]}
 ],cost:"기본 €85~115 / 택시 선택 시 €110~135"},
 {day:2,date:"9/17 목",city:"로마",theme:"고대 로마 + 로마 중심",routeSummary:"🚶 콜로세움→포로로마노→판테온→트레비 (종일)",sched:[
@@ -1092,7 +1139,8 @@ function toggleRecs(id,evt){
         const abc='ABCDE'[i];
         const icon=L.divIcon({className:'',html:`<div style="background:#f97316;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.4)">${abc}</div>`,iconSize:[22,22],iconAnchor:[11,11],popupAnchor:[0,-12]});
         const mk=L.marker(r.c,{icon:icon}).addTo(dayMap);
-        mk.bindPopup(`<b>${r.n}</b><br><span style="color:#666;font-size:11px">${r.d}</span><br><span style="color:#059669;font-weight:700">${r.p}</span><br><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.n+' restaurant italy')}" target="_blank" style="display:inline-block;margin-top:4px;background:#1a73e8;color:#fff;padding:3px 8px;border-radius:4px;font-size:10px;font-weight:600;text-decoration:none">⭐ 구글 리뷰 보기</a>`);
+        const reviewQuery=r.q||`${r.n} restaurant italy`;
+        mk.bindPopup(`<b>${r.n}</b><br><span style="color:#666;font-size:11px">${r.d}</span><br><span style="color:#059669;font-weight:700">${r.p}</span><br><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(reviewQuery)}" target="_blank" style="display:inline-block;margin-top:4px;background:#1a73e8;color:#fff;padding:3px 8px;border-radius:4px;font-size:10px;font-weight:600;text-decoration:none">⭐ 구글 리뷰 보기</a>`);
         recMarkers.push(mk);
         bounds.push(r.c);
       });
@@ -1150,6 +1198,22 @@ function showOverviewOnDayMap(c){
 }
 
 // ITINERARY
+function renderTipDetail(tip){
+  if(!tip)return '';
+  return `<details class="step-detail" onclick="event.stopPropagation()"><summary>체크포인트</summary><div>${tip}</div></details>`;
+}
+function renderStepTitle(s,mapNum,tag,cp,extra=''){
+  const badge=mapNum?`<span class="map-num">${mapNum}</span>`:'';
+  return `<div class="step-title">${badge}<span class="step-name">${s.name}</span>${tag}${cp}${extra}</div>`;
+}
+function renderStepDesc(s){
+  return `<div class="step-desc">${s.desc||''}</div>${renderTipDetail(s.tip)}`;
+}
+function renderBackupStrategy(s){
+  const fields=(s.fields||[]).map(f=>`<div class="backup-item"><strong>${f.k}</strong><span>${f.v}</span></div>`).join('');
+  const steps=(s.steps||[]).map((x,i)=>`<span><b>${i+1}</b>${x}</span>`).join('');
+  return `<tr class="backup-strategy-row"><td>${s.t||'백업'}</td><td colspan="2"><div class="backup-card"><div class="backup-head"><div><div class="backup-kicker">백업 전략</div><div class="backup-title">${s.name}</div><div class="backup-desc">${s.desc||''}</div></div><span class="backup-badge">${s.badge||'백업'}</span></div>${fields?`<div class="backup-grid">${fields}</div>`:''}${steps?`<div class="backup-steps">${steps}</div>`:''}${s.avoid?`<div class="backup-avoid">${s.avoid}</div>`:''}</div></td></tr>`;
+}
 function renderItinerary(c){
   if(dayMap){dayMap.remove();}
   dayMap=null;dayMarkers=[];dayLine=null;recMarkers=[];
@@ -1162,16 +1226,19 @@ function renderItinerary(c){
   const listWrap=document.createElement('div');listWrap.className='itin-list-wrap';
   layout.appendChild(mapWrap);layout.appendChild(listWrap);el.appendChild(layout);
 
-  c.days.forEach(day=>{const b=document.createElement('div');b.className='day-block';let sh='';
+  c.days.forEach(day=>{const b=document.createElement('div');b.className='day-block';let sh='',mapNum=0;
     day.sched.forEach((s,si)=>{
       const tag=s.type==='food'?'<span class="tag-food">FOOD</span>':s.type==='move'?'<span class="tag-move">MOVE</span>':s.type==='spot'?'<span class="tag-spot">SPOT</span>':'';
       const hl=s.type==='hl'?' highlight-row':'';
       const cp=s.type==='hl'?' <span class="tag-couple">💑</span>':'';
       const recs=s.rk?FOOD_RECS[s.rk]:null;
+      if(s.backup){sh+=renderBackupStrategy(s);return;}
+      const pointNum=isCoord(s.coords)?++mapNum:null;
       if(recs){
         const recId=`rec-${currentCourse}-${day.day}-${si}`;
         const rowClick=s.coords?`flyToPoint(${s.coords[0]},${s.coords[1]},'${(s.name||'').replace(/'/g,"\\'")}');`:'';
-        sh+=`<tr class="sched-row food-row${hl}" onclick="${rowClick}toggleRecs('${recId}',event)"><td>${s.t}</td><td>${s.name}${tag}${cp}<span class="food-more">▼ ${recs.length}곳 추천</span></td><td>${s.desc||''}</td></tr>`;
+        const more=`<span class="food-more">▼ ${recs.length}곳 추천</span>`;
+        sh+=`<tr class="sched-row food-row${hl}" onclick="${rowClick}toggleRecs('${recId}',event)"><td>${s.t}</td><td>${renderStepTitle(s,pointNum,tag,cp,more)}</td><td>${renderStepDesc(s)}</td></tr>`;
         let recsHtml=recs.map((r,ri)=>{
           const reviewQuery=r.q||`${r.n} restaurant italy`;
           const reviewLink=`<a class="rec-map" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(reviewQuery)}" target="_blank" onclick="event.stopPropagation()">리뷰</a>`;
@@ -1182,9 +1249,8 @@ function renderItinerary(c){
         sh+=`<tr class="food-recs-row" id="${recId}" data-rk="${s.rk}" style="display:none"><td></td><td colspan="2"><div class="food-recs">${recsHtml}</div></td></tr>`;
       } else {
         const rowClick=s.coords?` onclick="flyToPoint(${s.coords[0]},${s.coords[1]},'${(s.name||'').replace(/'/g,"\\'")}')" style="cursor:pointer"`:'';
-        sh+=`<tr class="sched-row${hl}"${rowClick}><td>${s.t}</td><td>${s.name}${tag}${cp}</td><td>${s.desc||''}</td></tr>`;
+        sh+=`<tr class="sched-row${hl}"${rowClick}><td>${s.t}</td><td>${renderStepTitle(s,pointNum,tag,cp)}</td><td>${renderStepDesc(s)}</td></tr>`;
       }
-      if(s.tip){sh+=`<tr class="tip-row"><td></td><td colspan="2">${s.tip}</td></tr>`;}
     });
     sh+=`<tr class="cost-row"><td></td><td colspan="2">💰 ${day.cost}</td></tr>`;
     const routeInfo=day.routeSummary?`<span class="day-route-summary">${day.routeSummary}</span>`:'';
