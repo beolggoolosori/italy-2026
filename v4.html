@@ -586,14 +586,14 @@ B: {
   days:[
 {day:1,date:"9/16 수",city:"인천→로마",theme:"로마의 첫 밤",routeSummary:"✈️ ICN→FCO (KE931 직항 12h)",sched:[
   {t:"13:20",name:"인천 출발",desc:"KE931 직항",type:"move",coords:[41.8003,12.2389]},
-  {t:"19:30",name:"로마 FCO 도착",desc:"",type:""},
-  {t:"20:15",name:"FCO→Termini",desc:"Leonardo Express €14/인, 32분",type:"move",coords:[41.9009,12.5016]},
-  {t:"20:55",name:"Termini→몬티 숙소",desc:"Cavour 메트로 1정거장 또는 도보 12분",type:"move",coords:[41.8934,12.4889]},
-  {t:"21:15",name:"Hotel Labelle 체크인",desc:"확정 ₩854,164/3박(2인) · Via Cavour 310, 몬티 · 도시세 ₩52,620 현장결제",type:"hotel",coords:[41.8934,12.4889],tip:"💡 콜로세움·포로 로마노 도보 7분, Cavour 메트로 1분. 3박 고정 베이스캠프"},
-  {t:"21:45",name:"저녁: La Taverna dei Fori Imperiali",desc:"몬티 정통 트라토리아, 숙소 도보 3분 · €55",type:"food",coords:[41.8939,12.4881]},
-  {t:"22:45",name:"콜로세움 야경 산책",desc:"숙소에서 도보 7분",type:"hl",coords:[41.8902,12.4922],tip:"💡 몬티 숙소 바로 아래가 고대 로마 — 첫날 밤 콜로세움 야경 산책"},
+  {t:"19:30",name:"로마 FCO 도착",desc:"입국심사+수하물 약 45~60분",type:""},
+  {t:"20:30",name:"FCO→Termini",desc:"Leonardo Express €14/인·32분 (2인 €28, 막차 23:23)",type:"move",coords:[41.9009,12.5016],tip:"💰 절약 동선: 택시 정액 €55보다 €27 저렴. 짐 많고 매우 피곤하면 택시도 옵션"},
+  {t:"21:05",name:"Termini→몬티 숙소",desc:"Cavour 메트로 B선 1정거장 €1.5/인 (또는 도보 12분 무료)",type:"move",coords:[41.8934,12.4889]},
+  {t:"21:25",name:"Hotel Labelle 체크인",desc:"확정 ₩854,164/3박(2인) · Via Cavour 310, 몬티 · 도시세 ₩52,620 현장결제",type:"hotel",coords:[41.8934,12.4889],tip:"💡 도착시간 21~22시 통보와 일치. 콜로세움·Cavour 메트로 도보권 베이스캠프"},
+  {t:"21:50",name:"저녁: 몬티 (숙소 근처 3곳 추천)",rk:"roma-monti-d1",desc:"Cavour 313(도보 1분)·da Valentino·Taverna · €40~70",type:"food",coords:[41.8931,12.4904]},
+  {t:"22:50",name:"콜로세움 야경 산책 (선택)",desc:"숙소 도보 7분 · 피곤하면 생략(콜로세움 D2 아침)",type:"hl",coords:[41.8902,12.4922],tip:"💡 12시간 비행 직후 — 컨디션 보고 결정, 무리 금지"},
   {t:"23:20",name:"숙소 복귀 → 휴식",desc:"콜로세움→Hotel Labelle 도보 7분",type:"move",coords:[41.8934,12.4889]}
-],cost:"€60"},
+],cost:"€85"},
 {day:2,date:"9/17 목",city:"로마",theme:"고대 로마 + 로마 중심",routeSummary:"🚶 콜로세움→포로로마노→판테온→트레비 (종일)",sched:[
   {t:"08:00",name:"아침 (몬티 카페)",desc:"숙소 도보 · 콜로세움까지 7분 €10",type:"food"},
   {t:"08:30",name:"⭐ 콜로세움",desc:"€16~24/인, 1시간30분",type:"spot",coords:[41.8902,12.4922],tip:"⚠️ 사전예약 필수! 30일 전 오픈. 75분 제한. 오전 입장 = 인파 적음"},
@@ -744,6 +744,11 @@ B: {
 };
 
 const FOOD_RECS={
+"roma-monti-d1":[
+{n:"Cavour 313",d:"숙소 옆 도보 1분! 로마 전통+오랜 와인바 (월~토 19~23시)",p:"€45~60",c:[41.8931,12.4904]},
+{n:"Trattoria da Valentino",d:"Via del Boschetto, 도보 5분·가성비 정통 로마요리 (화~일)",p:"€40~55",c:[41.8956,12.4912]},
+{n:"La Taverna dei Fori Imperiali",d:"Via Madonna dei Monti, 도보 8분·자정까지·예약권장 (화 휴무)",p:"€55~70",c:[41.8937,12.4878]}
+],
 "roma-trastevere-dinner":[
 {n:"Flavio al Velavevodetto",d:"카르보나라 명가, 테스타초 동굴식당",p:"€55",c:[41.8764,12.4753]},
 {n:"Da Enzo al 29",d:"트라스테베레 로컬 1위, 까치오에페페 전설",p:"€50",c:[41.8893,12.4699]},
