@@ -1280,9 +1280,10 @@ function showDayOnMap(day){
       center.x/=group.length;center.y/=group.length;
       const below=center.y<72;
       const perRow=group.length<=5?group.length:Math.ceil(group.length/2);
+      const labelGap=18;
       for(let start=0,row=0;start<group.length;start+=perRow,row++){
         const rowItems=group.slice(start,start+perRow);
-        const rowWidth=rowItems.reduce((sum,e)=>sum+e.width,0)+(rowItems.length-1)*8;
+        const rowWidth=rowItems.reduce((sum,e)=>sum+e.width,0)+(rowItems.length-1)*labelGap;
         let left=-rowWidth/2;
         if(center.x+left<14)left=14-center.x;
         if(center.x+left+rowWidth>mapSize.x-14)left=mapSize.x-14-center.x-rowWidth;
@@ -1292,7 +1293,7 @@ function showDayOnMap(day){
           const labelX=center.x+cursor+e.width/2;
           const labelY=center.y+y;
           offsets[e.i]={dx:labelX-e.point.x,dy:labelY-e.point.y};
-          cursor+=e.width+8;
+          cursor+=e.width+labelGap;
         });
       }
     });
