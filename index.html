@@ -1376,9 +1376,12 @@ function showDayOnMap(day){
   function markerLabelOffsets(points){
     const mapSize=dayMap.getSize();
     const entries=points.map((p,i)=>({i,point:dayMap.latLngToLayerPoint(p.latlng),width:String(p.markerLabel).length>2?34:24}));
+    const markerBodyOverlap=(a,b)=>{
+      return a.point.distanceTo(b.point)<18;
+    };
     const clusters=[];
     entries.forEach(e=>{
-      const group=clusters.find(g=>g.some(x=>x.point.distanceTo(e.point)<76));
+      const group=clusters.find(g=>markerBodyOverlap(g[0],e));
       if(group)group.push(e);else clusters.push([e]);
     });
     const offsets=points.map(()=>({dx:0,dy:0}));
