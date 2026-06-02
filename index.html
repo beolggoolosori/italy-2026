@@ -770,12 +770,13 @@ B: {
   {t:"19:30",name:"저녁: 몬티/콜로세움 근처",rk:"roma-monti-d2-dinner",desc:"피자/와인바/트라토리아 중 선택 · €25~95",type:"food",coords:[41.8959560,12.4938805],tip:"테스타치오까지 내려가지 않음. 가볍게는 Trieste Pizza, 분위기는 Ai Tre Scalini/Urbana 47, 예약 정찬은 La Taverna/Broccoletti."},
   {t:"21:30",name:"숙소 복귀",desc:"다음날 05:45 기상·06:10 바티칸 택시 대비 일찍 휴식",type:"move",coords:[41.8934,12.4889]}
 ],cost:"€190~245"},
-{day:3,date:"9/18 금",city:"로마",theme:"바티칸 새벽 이동 + 보르게세",routeSummary:"🚕 몬티→바티칸→성베드로→산탄젤로→점심→보르게세→스페인광장→몬티",sched:[
+{day:3,date:"9/18 금",city:"로마",theme:"바티칸 새벽 이동 + 보르게세",routeSummary:"🚕 몬티→바티칸→보급→성베드로→산탄젤로→점심→보르게세→스페인광장→몬티",sched:[
   {t:"05:45",name:"기상 + 초간단 아침",desc:"물·간식·여권/신분증·바티칸 QR 준비. 숙소 조식보다 입장 안정성 우선",type:"food"},
   {t:"06:10",name:"Hotel Labelle → 바티칸 택시 출발",desc:"목적지: Musei Vaticani entrance, Viale Vaticano · 미터 택시 20~30분",type:"move",coords:[41.8934,12.4889],tip:"1순위는 전날 밤 프런트에 06:10 호출 예약. 실패하면 로마 공식 060609/CHIAMA TAXI, FreeNow/itTaxi 순서로 호출. 탑승 후 미터 켜짐 확인, 기사에게 San Pietro가 아니라 Musei Vaticani / Viale Vaticano라고 말하기."},
   {t:"백업",name:"Metro B+A로 바티칸 이동",desc:"택시가 안 잡히는 경우의 대체 루트",type:"backup",backup:true,badge:"백업",fields:[{k:"출발 목표",v:"05:55~06:05 Hotel Labelle 출발"},{k:"경로",v:"Cavour(B)→Termini 환승→Ottaviano(A)→도보 12분"},{k:"주의",v:"첫차/공사/파업은 ATAC 앱에서 당일 재확인"}],steps:["전날 택시 예약 실패 시만 선택","Ottaviano 하차 후 Viale Vaticano 입구로 이동","08:00 슬롯 QR·신분증 바로 꺼낼 수 있게 준비"],avoid:"버스 단독 이동은 새벽 변수 커서 비추천"},
   {t:"06:45",name:"⭐ 바티칸 박물관 입구 도착",desc:"08:00 첫 입장 슬롯 기준 75분 전 대기",type:"spot",coords:[41.9065233,12.4517731],tip:"공식 박물관 입구는 Viale Vaticano. 예약자 줄/보안검색 줄을 구분하고, QR·신분증 이름 확인 대비."},
   {t:"08:00",name:"바티칸 박물관 입장",desc:"€25/인(입장 €20+예약 €5) · 라파엘로의 방+시스티나 중심 2시간15분",type:"spot",coords:[41.9065233,12.4517731],tip:"공식 운영은 월~토 08:00~20:00. 첫 슬롯을 잡아도 내부가 길어지면 뒤 일정이 밀리므로 핵심 동선만."},
+  {t:"10:25",seq:"3-1",name:"보급 1: 바티칸 내부/트리온팔레 시장",rk:"roma-vatican-morning-snack",desc:"관람 후 당 떨어질 때만 · 커피/과일/피자 조각 10~15분",type:"food",optional:true,coords:[41.9081078,12.4534239],tip:"점심 직전 간식이 아니라 바티칸 4시간 구간 보급. 박물관 안이면 Caffetteria Centrale/자판기, Viale Vaticano로 나오면 Forno Feliziani 또는 Mercato Trionfale. 성베드로 직행 동선을 쓰면 생략."},
   {t:"10:45",name:"성 베드로 대성당",desc:"박물관→대성당 이동/보안 포함 · 내부 중심 60~75분",type:"spot",coords:[41.9018541,12.4557603],tip:"개별 관람은 시스티나→성베드로 직결 통로가 항상 보장되지 않음. 쿠폴라는 60~90분 추가라 기본 일정에서는 제외."},
   {t:"선택",seq:"4-1",name:"선택: 성 베드로 광장",desc:"대성당 전후 10~15분 · 베르니니 열주와 광장 사진",type:"spot",optional:true,coords:[41.9022351,12.4573573],tip:"실제로는 대성당 동선에 포함되지만, 놓치지 않도록 별도 후보로 표기."},
   {t:"12:15",name:"산탄젤로 다리",desc:"성베드로→도보 12~15분 · 포토스팟",type:"hl",coords:[41.9010,12.4663]},
@@ -785,11 +786,12 @@ B: {
   {t:"14:15",name:"보르게세 이동 + 짧은 휴식",desc:"Roscioli→보르게세 택시 15~20분. 15:30 입장 전 30분 버퍼",type:"move",coords:[41.9142,12.4921]},
   {t:"15:30",name:"보르게세 미술관",desc:"€15/인 사전예약! 2시간 슬롯",type:"spot",coords:[41.9142,12.4921],tip:"⚠️ 반드시 사전예약. 15시대 슬롯 우선, 없으면 17시 슬롯로 조정하고 저녁을 늦추기"},
   {t:"선택",seq:"8-1",name:"선택: 핀초 전망대",desc:"보르게세→스페인광장 이동길 · 로마 전경 10~15분",type:"hl",optional:true,coords:[41.9111966,12.4784418],tip:"해가 좋으면 D3에서 가장 자연스러운 추가 후보. Piazza del Popolo까지 내려가면 시간이 더 걸림."},
-  {t:"17:45",name:"스페인광장+콘도띠",desc:"쇼핑/산책",type:"",coords:[41.9058,12.4823],tip:"⚠️ 앉기 금지! €250 벌금"},
-  {t:"19:00",name:"몬티 복귀 + 저녁",rk:"roma-monti-d2-dinner",desc:"스페인광장→몬티 택시/Metro A+B 15~25분 · €45~85",type:"food",coords:[41.8959560,12.4938805],tip:"새벽부터 움직인 날이라 트라스테베레까지 내려가지 않는 쪽이 동선상 좋음. 체력이 남으면 트라스테베레는 별도 선택."},
+  {t:"17:35",seq:"8-2",name:"보급 2: 보르게세→스페인광장 당충전",rk:"roma-spagna-energy-snack",desc:"점심 후 4시간대 · 작은 젤라토/티라미수/에스프레소 10분",type:"food",optional:true,coords:[41.9040627,12.4826188],tip:"저녁 직전 과식 금지. 작은 컵 1개 공유 또는 에스프레소 정도만. 이걸 먹으면 몬티 저녁은 19:30로 늦춘다."},
+  {t:"18:00",name:"스페인광장+콘도띠",desc:"쇼핑/산책",type:"",coords:[41.9058,12.4823],tip:"⚠️ 앉기 금지! €250 벌금"},
+  {t:"19:30",name:"몬티 복귀 + 저녁",rk:"roma-monti-d2-dinner",desc:"스페인광장→몬티 택시/Metro A+B 15~25분 · €45~85",type:"food",coords:[41.8959560,12.4938805],tip:"새벽부터 움직인 날이라 트라스테베레까지 내려가지 않는 쪽이 동선상 좋음. 오후 간식을 먹었다면 19:30 이후 가볍게 시작."},
   {t:"선택",seq:"10-2",name:"선택: 저녁 후 몬티 젤라토",rk:"roma-monti-dessert",desc:"저녁 후 숙소 근처 10분 · Fatamorgana/Angeletto 후보",type:"food",optional:true,coords:[41.8956187,12.4932453],tip:"저녁 전 간식이 아니라 식후 디저트. 컨디션 좋을 때만 들르고, 닫혀 있으면 바로 숙소."},
   {t:"선택",seq:"10-1",name:"선택: 트라스테베레 야경/저녁",desc:"꼭 가고 싶을 때만 택시로 왕복 · Da Enzo/Tonnarello 후보",type:"hl",optional:true,coords:[41.8893,12.4699],tip:"분위기는 좋지만 D3 기본 동선에서는 남서쪽으로 빠짐. 새벽 바티칸 후에는 무리하지 않는 쪽 추천."},
-  {t:"21:20",name:"숙소 복귀 (몬티)",desc:"다음날 피렌체 이동 준비 · 짐 정리 후 취침",type:"move",coords:[41.8934,12.4889]}
+  {t:"21:40",name:"숙소 복귀 (몬티)",desc:"다음날 피렌체 이동 준비 · 짐 정리 후 취침",type:"move",coords:[41.8934,12.4889]}
 ],cost:"€230~260"},
 {day:4,date:"9/19 토",city:"→피렌체",theme:"르네상스 첫 만남",routeSummary:"🚂 Roma→Firenze (Frecciarossa 1.5h)",sched:[
   {t:"08:00",name:"아침+체크아웃 (Hotel Labelle)",desc:"몬티 숙소 짐 정리·조식",type:"food",coords:[41.8934,12.4889]},
@@ -947,10 +949,22 @@ const FOOD_RECS={
 {n:"Forno Campo de' Fiori",d:"시장 옆 역사 베이커리·피자 비앙카/포카치아·일요일 휴무",p:"€8~18",c:[41.8956,12.4720],q:"Forno Campo de Fiori Piazza Campo de Fiori 22 Roma"},
 {n:"Trapizzino Campo de' Fiori",d:"트라피치노 원조 계열·수플리 대신 든든한 길거리식",p:"€12~22",c:[41.8955,12.4714],q:"Trapizzino Campo de Fiori Roma"}
 ],
+"roma-vatican-morning-snack":[
+{n:"Caffetteria Centrale Musei Vaticani",d:"바티칸 박물관 내부 공식 카페·빠른 커피/샌드위치/디저트·밖으로 나가지 않는 보급",p:"€6~18",c:[41.9065233,12.4517731],q:"Caffetteria Centrale Musei Vaticani"},
+{n:"Forno Feliziani",d:"Via Candia 61·07:30~17:00권·박물관 출구 쪽 피자 조각/빵/커피",p:"€5~14",c:[41.9081078,12.4534239],q:"Forno Feliziani Via Candia 61 Roma"},
+{n:"Mercato Trionfale",d:"Via Andrea Doria·공식 관광정보 월~토 07:00~14:00·과일/빵/시장 구경 10분",p:"€5~15",c:[41.9093235,12.4527349],q:"Mercato Trionfale Via Andrea Doria Roma"},
+{n:"Gelateria dei Gracchi",d:"Via dei Gracchi 272·공식 매일 11:30~24:00·관람이 늦어져 점심을 미룰 때만",p:"€6~12",c:[41.9091879,12.4668700],q:"Gelateria dei Gracchi Via dei Gracchi 272 Roma"}
+],
 "roma-spagna-dessert":[
 {n:"Pompi Spagna",d:"공식 Via della Croce 88·10:00~22:30권·티라미수 테이크아웃",p:"€8~14",c:[41.9064505,12.4805093],q:"Pompi Via della Croce 88 Roma"},
 {n:"Venchi Cioccolato e Gelato",d:"스페인광장권 젤라토/초콜릿 백업·접근성 좋음",p:"€8~16",c:[41.9057,12.4820],q:"Venchi Piazza di Spagna Roma"},
 {n:"Giolitti",d:"트레비/판테온 쪽으로 다시 걸을 때 가능한 클래식 백업",p:"€6~14",c:[41.9009,12.4787],q:"Giolitti Via degli Uffici del Vicario 40 Roma"}
+],
+"roma-spagna-energy-snack":[
+{n:"La Strega Nocciola",d:"Via della Vite 100·13:00 오픈권·스페인광장 도보권 젤라토",p:"€6~12",c:[41.9040627,12.4826188],q:"La Strega Nocciola Via della Vite 100 Roma"},
+{n:"Pompi Spagna",d:"Via della Croce 88·10:00~22:30·티라미수 작은 컵 1개 공유",p:"€8~14",c:[41.9064505,12.4805093],q:"Pompi Via della Croce 88 Roma"},
+{n:"Ciampini",d:"Piazza San Lorenzo in Lucina·공식 카페/아페리티보·에스프레소/젤라토/가벼운 당충전",p:"€8~18",c:[41.9037400,12.4780300],q:"Ciampini Piazza San Lorenzo in Lucina 29 Roma"},
+{n:"Gelateria dei Gracchi Ripetta",d:"Via di Ripetta 261·Pincio/Popolo 쪽으로 내려올 때만·공식 수~일 12:00~22:00",p:"€6~12",c:[41.9096515,12.4761148],q:"Gelateria dei Gracchi Via di Ripetta 261 Roma"}
 ],
 "roma-monti-dessert":[
 {n:"Fatamorgana Monti",d:"Piazza degli Zingari 5·저녁 후 몬티권 젤라토·피스타치오/노촐라 후보",p:"€6~12",c:[41.8956187,12.4932453],q:"Fatamorgana Piazza degli Zingari 5 Roma"},
@@ -1175,6 +1189,11 @@ groups:[
 {n:"살팀보카 알라 로마나",d:"송아지고기·프로슈토·세이지. 파스타 외 메인 후보."},
 {n:"코다 알라 바치나라",d:"소꼬리찜. 무거운 전통요리라 저녁/테스타치오권에 적합."},
 {n:"트리파 알라 로마나",d:"내장 요리. 호불호가 있어 선택 후보로만."}
+]},
+{title:"시장/푸드마켓",items:[
+{n:"Mercato Trionfale",d:"바티칸 옆 오전 시장. D3는 박물관 출구가 Viale Vaticano일 때만 10~15분."},
+{n:"Campo de' Fiori",d:"Roscioli 근처 오전 시장. D3에서는 점심 직전이라 구경 후보, 간식 스톱은 비추천."},
+{n:"Mercato Testaccio",d:"로컬 푸드마켓으로 좋지만 D3 동선에서는 남쪽으로 빠져 별도 일정용."}
 ]}
 ],
 route:[
@@ -1182,13 +1201,22 @@ route:[
 {day:"D2",time:"07:45",name:"La Licata",dish:"에스프레소+코르네토",note:"숙소→콜로세움 길목. 06시대 오픈권이라 08:30 콜로세움 전 안전.",pick:true},
 {day:"D2",time:"14:10",name:"Sant'Eustachio / Tazza d'Oro",dish:"식후 에스프레소 또는 그라니타 디 카페",note:"점심 뒤 판테온 입장 전 10분. 식사 전 간식이 아니라 식후 커피 포지션."},
 {day:"D2",time:"선택",name:"Gelateria del Teatro",dish:"젤라토",note:"나보나 서쪽 골목. 동선이 밀리면 Giolitti로 대체."},
+{day:"D3",time:"10:25",name:"Vatican Caffetteria / Trionfale",dish:"커피·과일·피자 조각",note:"바티칸 4시간 구간 보급. 점심 2시간 전, 박물관 출구 동선일 때만.",pick:true},
 {day:"D3",time:"점심 대체",name:"Supplizio + Antico Forno",dish:"수플리·피자 알 탈리오",note:"Roscioli 예약이 없거나 가볍게 먹을 때만. Roscioli와 둘 다 먹지 않기.",pick:true},
+{day:"D3",time:"17:35",name:"Spagna 당충전",dish:"젤라토·티라미수·에스프레소",note:"점심 후 4시간대. 작은 컵 1개 공유 후 저녁은 19:30으로."},
 {day:"D3",time:"저녁 후",name:"Fatamorgana / Angeletto",dish:"몬티 젤라토",note:"저녁 뒤 숙소 근처에서 10분. 닫혀 있으면 바로 숙소."}
 ],
 sources:[
+["Vatican Museums Caffetteria 공식","https://www.museivaticani.va/content/museivaticani/en/organizza-visita/servizi-per-i-visitatori/ristorazione/bar-caffetteria.html"],
+["Mercato Trionfale 공식 관광정보","https://www.turismoroma.it/en/places/mercato-trionfale-local-market"],
+["Forno Feliziani 정보","https://menuweb.menu/restaurants/roma-3/forno-feliziani"],
 ["Supplizio 공식","https://www.supplizioroma.it/en/"],
 ["Antico Forno Roscioli 공식","https://www.anticofornoroscioli.it/contatti/"],
 ["Sant'Eustachio 공식","https://caffesanteustachio.com/"],
+["Gelateria dei Gracchi 공식","https://gelateriadeigracchi.it/contatti/"],
+["Pompi Via della Croce 정보","https://barpompi.it/pompi-roma-via-della-croce/"],
+["La Strega Nocciola 업체 정보","https://www.tuttiaffari.com/icecream-shop-la-strega-nocciola-06-8901-7096"],
+["Mercato Testaccio 공식","https://www.mercatoditestaccio.it/"],
 ["Gelateria dell'Angeletto 공식","https://gelateriadellangeletto.com/"],
 ["Fatamorgana Monti 정보","https://visitrome.com/rome/restaurants/gelateria-fatamorgana"],
 ["La Licata/Google 외부평점","https://spinach.guide/venues/la-licata-83339/"],
