@@ -758,7 +758,7 @@ B: {
   {t:"선택",seq:"3-1",name:"선택: 비토리오 에마누엘레 2세 기념관",desc:"캄피돌리오→판테온 이동길 · Piazza Venezia 외관/계단 10~15분",type:"spot",optional:true,coords:[41.8946867,12.4830664],tip:"흰 대리석 건물 외관만 봐도 충분. 내부/전망대까지 들어가면 D2가 밀림."},
   {t:"선택",seq:"3-2",name:"선택: 라르고 디 토레 아르젠티나",desc:"판테온 가는 길의 고대 유적 · 카이사르 암살 장소로 알려진 구역 5~10분",type:"spot",optional:true,coords:[41.8959948,12.4768388],tip:"길 위에서 내려다보는 짧은 후보. 동선은 좋지만 피곤하면 생략."},
   {t:"13:00",name:"점심: 판테온 근처",rk:"roma-pantheon-lunch",desc:"빠른 파니노부터 정찬까지 · €18~90",type:"food",coords:[41.8986,12.4769],tip:"동선상 판테온 전후 5~10분권만 선별. 가성비는 Pane e Salame/Il Panino, 예약 정찬은 Armando, 미식 선택은 RetroVino."},
-  {t:"14:10",name:"커피/그라니타: 판테온 카페",rk:"roma-pantheon-coffee",desc:"Sant'Eustachio 또는 Tazza d'Oro · 10분 스톱",type:"food",coords:[41.8982524,12.4754268],tip:"로마 카페는 바에서 서서 마시면 빠르고 저렴. Tazza d'Oro는 그라니타 디 카페 콘 판나 후보."},
+  {t:"14:10",name:"식후 커피/그라니타: 판테온 카페",rk:"roma-pantheon-coffee",desc:"점심 직후 Sant'Eustachio 또는 Tazza d'Oro · 10분 스톱",type:"food",coords:[41.8982524,12.4754268],tip:"식사 전 간식이 아니라 점심 후 커피 타이밍. 로마 카페는 바에서 서서 마시면 빠르고 저렴. Tazza d'Oro는 그라니타 디 카페 콘 판나 후보."},
   {t:"14:40",name:"판테온",desc:"€5/인 · 30~40분",type:"spot",coords:[41.8986,12.4769],tip:"공식 기준 09:00~19:00 운영. 종교 행사로 변동 가능하니 당일 재확인."},
   {t:"선택",seq:"5-1",name:"선택: 산 루이지 데이 프란체시",desc:"판테온→나보나 사이 · 카라바조 성 마태오 연작 15~20분",type:"spot",optional:true,coords:[41.8995875,12.4745426],tip:"D2에서 가장 추천하는 선택지. 무료지만 미사/행사 중에는 관람이 제한될 수 있음."},
   {t:"15:35",name:"나보나 광장",desc:"판테온→도보 5~7분 · 4대강 분수",type:"hl",coords:[41.8992,12.4731]},
@@ -770,7 +770,7 @@ B: {
   {t:"19:30",name:"저녁: 몬티/콜로세움 근처",rk:"roma-monti-d2-dinner",desc:"피자/와인바/트라토리아 중 선택 · €25~95",type:"food",coords:[41.8959560,12.4938805],tip:"테스타치오까지 내려가지 않음. 가볍게는 Trieste Pizza, 분위기는 Ai Tre Scalini/Urbana 47, 예약 정찬은 La Taverna/Broccoletti."},
   {t:"21:30",name:"숙소 복귀",desc:"다음날 05:45 기상·06:10 바티칸 택시 대비 일찍 휴식",type:"move",coords:[41.8934,12.4889]}
 ],cost:"€190~245"},
-{day:3,date:"9/18 금",city:"로마",theme:"바티칸 새벽 이동 + 보르게세",routeSummary:"🚕 몬티→바티칸→성베드로→산탄젤로→수플리→보르게세→스페인광장→몬티",sched:[
+{day:3,date:"9/18 금",city:"로마",theme:"바티칸 새벽 이동 + 보르게세",routeSummary:"🚕 몬티→바티칸→성베드로→산탄젤로→점심→보르게세→스페인광장→몬티",sched:[
   {t:"05:45",name:"기상 + 초간단 아침",desc:"물·간식·여권/신분증·바티칸 QR 준비. 숙소 조식보다 입장 안정성 우선",type:"food"},
   {t:"06:10",name:"Hotel Labelle → 바티칸 택시 출발",desc:"목적지: Musei Vaticani entrance, Viale Vaticano · 미터 택시 20~30분",type:"move",coords:[41.8934,12.4889],tip:"1순위는 전날 밤 프런트에 06:10 호출 예약. 실패하면 로마 공식 060609/CHIAMA TAXI, FreeNow/itTaxi 순서로 호출. 탑승 후 미터 켜짐 확인, 기사에게 San Pietro가 아니라 Musei Vaticani / Viale Vaticano라고 말하기."},
   {t:"백업",name:"Metro B+A로 바티칸 이동",desc:"택시가 안 잡히는 경우의 대체 루트",type:"backup",backup:true,badge:"백업",fields:[{k:"출발 목표",v:"05:55~06:05 Hotel Labelle 출발"},{k:"경로",v:"Cavour(B)→Termini 환승→Ottaviano(A)→도보 12분"},{k:"주의",v:"첫차/공사/파업은 ATAC 앱에서 당일 재확인"}],steps:["전날 택시 예약 실패 시만 선택","Ottaviano 하차 후 Viale Vaticano 입구로 이동","08:00 슬롯 QR·신분증 바로 꺼낼 수 있게 준비"],avoid:"버스 단독 이동은 새벽 변수 커서 비추천"},
@@ -780,16 +780,16 @@ B: {
   {t:"선택",seq:"4-1",name:"선택: 성 베드로 광장",desc:"대성당 전후 10~15분 · 베르니니 열주와 광장 사진",type:"spot",optional:true,coords:[41.9022351,12.4573573],tip:"실제로는 대성당 동선에 포함되지만, 놓치지 않도록 별도 후보로 표기."},
   {t:"12:15",name:"산탄젤로 다리",desc:"성베드로→도보 12~15분 · 포토스팟",type:"hl",coords:[41.9010,12.4663]},
   {t:"선택",seq:"5-1",name:"선택: 산탄젤로성 내부/테라스",desc:"다리 외관만 기본 · 내부는 60~75분 필요",type:"spot",optional:true,coords:[41.9031178,12.4663427],tip:"꼭 들어가고 싶으면 Roscioli 점심/휴식을 줄이거나 보르게세 시간을 뒤로 밀어야 함."},
-  {t:"12:40",name:"수플리 스톱: Supplizio",rk:"roma-campo-street",desc:"산탄젤로→Roscioli 길목 · 수플리 1개씩",type:"food",coords:[41.8974708,12.4679030],tip:"공식 월~토 12:00~15:30/17:00~21:30. 점심을 가볍게 가려면 Supplizio+Antico Forno로 대체 가능."},
-  {t:"13:15",name:"점심: Roscioli",rk:"roma-centro-lunch",desc:"산탄젤로→도보 15~20분 · 살루메리아 €65",type:"food",coords:[41.8933,12.4729]},
-  {t:"14:25",name:"보르게세 이동 + 짧은 휴식",desc:"Roscioli→보르게세 택시 15~20분. 15:30 입장 전 30분 버퍼",type:"move",coords:[41.9142,12.4921]},
+  {t:"12:45",name:"점심: Roscioli",rk:"roma-centro-lunch",desc:"산탄젤로→도보 15~20분 · 살루메리아 €65",type:"food",coords:[41.8933,12.4729],tip:"Roscioli를 먹는 날에는 Supplizio를 추가로 먹지 않기. 수플리/조각피자는 점심 대체안으로만 둔다."},
+  {t:"점심 대체",seq:"6-1",name:"대체 점심: Supplizio + Antico Forno",rk:"roma-campo-street",desc:"Roscioli 예약이 없거나 가볍게 먹을 때만 선택",type:"food",optional:true,coords:[41.8974708,12.4679030],tip:"공식 월~토 12:00~15:30/17:00~21:30인 Supplizio와 Antico Forno 조각피자를 점심으로 대체. Roscioli와 둘 다 먹는 구성은 비추천."},
+  {t:"14:15",name:"보르게세 이동 + 짧은 휴식",desc:"Roscioli→보르게세 택시 15~20분. 15:30 입장 전 30분 버퍼",type:"move",coords:[41.9142,12.4921]},
   {t:"15:30",name:"보르게세 미술관",desc:"€15/인 사전예약! 2시간 슬롯",type:"spot",coords:[41.9142,12.4921],tip:"⚠️ 반드시 사전예약. 15시대 슬롯 우선, 없으면 17시 슬롯로 조정하고 저녁을 늦추기"},
   {t:"선택",seq:"8-1",name:"선택: 핀초 전망대",desc:"보르게세→스페인광장 이동길 · 로마 전경 10~15분",type:"hl",optional:true,coords:[41.9111966,12.4784418],tip:"해가 좋으면 D3에서 가장 자연스러운 추가 후보. Piazza del Popolo까지 내려가면 시간이 더 걸림."},
   {t:"17:45",name:"스페인광장+콘도띠",desc:"쇼핑/산책",type:"",coords:[41.9058,12.4823],tip:"⚠️ 앉기 금지! €250 벌금"},
-  {t:"18:10",name:"티라미수: Pompi Spagna",rk:"roma-spagna-dessert",desc:"스페인광장 뒤 Via della Croce · 10분 테이크아웃",type:"food",coords:[41.9064505,12.4805093],tip:"공식 10:00~22:30 전후 운영. 저녁 전이라 작은 사이즈 1개 공유 정도가 적당."},
   {t:"19:00",name:"몬티 복귀 + 저녁",rk:"roma-monti-d2-dinner",desc:"스페인광장→몬티 택시/Metro A+B 15~25분 · €45~85",type:"food",coords:[41.8959560,12.4938805],tip:"새벽부터 움직인 날이라 트라스테베레까지 내려가지 않는 쪽이 동선상 좋음. 체력이 남으면 트라스테베레는 별도 선택."},
+  {t:"선택",seq:"10-2",name:"선택: 저녁 후 몬티 젤라토",rk:"roma-monti-dessert",desc:"저녁 후 숙소 근처 10분 · Fatamorgana/Angeletto 후보",type:"food",optional:true,coords:[41.8956187,12.4932453],tip:"저녁 전 간식이 아니라 식후 디저트. 컨디션 좋을 때만 들르고, 닫혀 있으면 바로 숙소."},
   {t:"선택",seq:"10-1",name:"선택: 트라스테베레 야경/저녁",desc:"꼭 가고 싶을 때만 택시로 왕복 · Da Enzo/Tonnarello 후보",type:"hl",optional:true,coords:[41.8893,12.4699],tip:"분위기는 좋지만 D3 기본 동선에서는 남서쪽으로 빠짐. 새벽 바티칸 후에는 무리하지 않는 쪽 추천."},
-  {t:"21:00",name:"숙소 복귀 (몬티)",desc:"다음날 피렌체 이동 준비 · 짐 정리 후 취침",type:"move",coords:[41.8934,12.4889]}
+  {t:"21:20",name:"숙소 복귀 (몬티)",desc:"다음날 피렌체 이동 준비 · 짐 정리 후 취침",type:"move",coords:[41.8934,12.4889]}
 ],cost:"€230~260"},
 {day:4,date:"9/19 토",city:"→피렌체",theme:"르네상스 첫 만남",routeSummary:"🚂 Roma→Firenze (Frecciarossa 1.5h)",sched:[
   {t:"08:00",name:"아침+체크아웃 (Hotel Labelle)",desc:"몬티 숙소 짐 정리·조식",type:"food",coords:[41.8934,12.4889]},
@@ -951,6 +951,11 @@ const FOOD_RECS={
 {n:"Pompi Spagna",d:"공식 Via della Croce 88·10:00~22:30권·티라미수 테이크아웃",p:"€8~14",c:[41.9064505,12.4805093],q:"Pompi Via della Croce 88 Roma"},
 {n:"Venchi Cioccolato e Gelato",d:"스페인광장권 젤라토/초콜릿 백업·접근성 좋음",p:"€8~16",c:[41.9057,12.4820],q:"Venchi Piazza di Spagna Roma"},
 {n:"Giolitti",d:"트레비/판테온 쪽으로 다시 걸을 때 가능한 클래식 백업",p:"€6~14",c:[41.9009,12.4787],q:"Giolitti Via degli Uffici del Vicario 40 Roma"}
+],
+"roma-monti-dessert":[
+{n:"Fatamorgana Monti",d:"Piazza degli Zingari 5·저녁 후 몬티권 젤라토·피스타치오/노촐라 후보",p:"€6~12",c:[41.8956187,12.4932453],q:"Fatamorgana Piazza degli Zingari 5 Roma"},
+{n:"Gelateria dell'Angeletto",d:"공식 Via dell'Angeletto 15·11:00~23:00권·숙소 도보 3~4분",p:"€6~12",c:[41.8947942,12.4915124],q:"Gelateria dell Angeletto Via dell Angeletto 15 Roma"},
+{n:"La Bottega del Caffe",d:"Piazza Madonna dei Monti·젤라토 대신 식후 에스프레소/가벼운 산책 백업",p:"€4~10",c:[41.8949549,12.4910693],q:"La Bottega del Caffe Piazza Madonna dei Monti 5 Roma"}
 ],
 "roma-trastevere-dinner":[
 {n:"Flavio al Velavevodetto",d:"카르보나라 명가, 테스타초 동굴식당",p:"€55",c:[41.8764,12.4753]},
@@ -1144,7 +1149,7 @@ const FOOD_RECS={
 };
 
 const FOOD_GUIDE={
-verified:"2026-06-01",
+verified:"2026-06-02",
 groups:[
 {title:"파스타 4대장",items:[
 {n:"카르보나라",d:"계란·페코리노·구안찰레. 크림 없는 로마식으로 1순위."},
@@ -1175,16 +1180,17 @@ groups:[
 route:[
 {day:"D1",time:"22:10",name:"몬티 첫 간식",dish:"피자 알 탈리오·파니노·수플리",note:"긴 비행 뒤라 정찬보다 La Fraschetta/Pizza Forum/Benso 215 중 가까운 곳.",pick:true},
 {day:"D2",time:"07:45",name:"La Licata",dish:"에스프레소+코르네토",note:"숙소→콜로세움 길목. 06시대 오픈권이라 08:30 콜로세움 전 안전.",pick:true},
-{day:"D2",time:"14:10",name:"Sant'Eustachio / Tazza d'Oro",dish:"에스프레소 또는 그라니타 디 카페",note:"판테온 바로 옆. 앉지 말고 바에서 10분 컷."},
+{day:"D2",time:"14:10",name:"Sant'Eustachio / Tazza d'Oro",dish:"식후 에스프레소 또는 그라니타 디 카페",note:"점심 뒤 판테온 입장 전 10분. 식사 전 간식이 아니라 식후 커피 포지션."},
 {day:"D2",time:"선택",name:"Gelateria del Teatro",dish:"젤라토",note:"나보나 서쪽 골목. 동선이 밀리면 Giolitti로 대체."},
-{day:"D3",time:"12:40",name:"Supplizio",dish:"수플리",note:"성베드로→산탄젤로→Roscioli 이동길에 들어맞는 로마 길거리 음식.",pick:true},
-{day:"D3",time:"18:10",name:"Pompi Spagna",dish:"티라미수",note:"스페인광장 뒤쪽. 저녁 전 작은 사이즈/공유 권장."}
+{day:"D3",time:"점심 대체",name:"Supplizio + Antico Forno",dish:"수플리·피자 알 탈리오",note:"Roscioli 예약이 없거나 가볍게 먹을 때만. Roscioli와 둘 다 먹지 않기.",pick:true},
+{day:"D3",time:"저녁 후",name:"Fatamorgana / Angeletto",dish:"몬티 젤라토",note:"저녁 뒤 숙소 근처에서 10분. 닫혀 있으면 바로 숙소."}
 ],
 sources:[
 ["Supplizio 공식","https://www.supplizioroma.it/en/"],
 ["Antico Forno Roscioli 공식","https://www.anticofornoroscioli.it/contatti/"],
-["Pompi 공식","https://barpompi.it/pompi-roma-via-della-croce/"],
 ["Sant'Eustachio 공식","https://caffesanteustachio.com/"],
+["Gelateria dell'Angeletto 공식","https://gelateriadellangeletto.com/"],
+["Fatamorgana Monti 정보","https://visitrome.com/rome/restaurants/gelateria-fatamorgana"],
 ["La Licata/Google 외부평점","https://spinach.guide/venues/la-licata-83339/"],
 ["Gelateria del Teatro 정보","https://www.allrome.it/listings/pasticcerie-e-gelaterie/gelateria-del-teatro-via-dei-coronari/"],
 ["Forno Campo de' Fiori 정보","https://www.arrivalguides.com/en/Travelguide/ROME/cafes/forno-campo-de-fiori-29336"]
