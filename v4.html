@@ -1363,6 +1363,7 @@ function initDayMap(){
   if(!dayMap){
     dayMap=L.map('dayMap',{zoomControl:true}).setView([42.5,13],6);
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{attribution:'OSM/CARTO',maxZoom:18}).addTo(dayMap);
+    dayMap.on('zoomend',()=>refreshDayPointMarkers());
   }
   dayMap.invalidateSize();
   return true;
@@ -1371,8 +1372,9 @@ function clearDayMap(){
   if(!dayMap)return;
   dayMarkers.forEach(m=>dayMap.removeLayer(m));dayMarkers=[];
   if(dayLine){dayMap.removeLayer(dayLine);dayLine=null;}
+  currentDayMapItems=[];
 }
-let recMarkers=[];
+let recMarkers=[],currentDayMapItems=[];
 function toggleRecs(id,evt){
   if(evt)evt.stopPropagation();
   const el=document.getElementById(id);
@@ -1415,6 +1417,79 @@ function flyToPoint(lat,lng,name){
     }
   });
 }
+function limitMarkerOffset(dx,dy,max=56){
+  const dist=Math.hypot(dx,dy);
+  if(dist<=max)return {dx,dy};
+  const scale=max/dist;
+  return {dx:dx*scale,dy:dy*scale};
+}
+function markerLabelOffsets(points){
+  if(!dayMap)return points.map(()=>({dx:0,dy:0}));
+  const mapSize=dayMap.getSize();
+  const entries=points.map((p,i)=>({i,point:dayMap.latLngToLayerPoint(p.latlng),width:String(p.markerLabel).length>2?34:24}));
+  const markerBodiesOverlap=(a,b)=>{
+    const dx=Math.abs(a.point.x-b.point.x);
+    const dy=Math.abs(a.point.y-b.point.y);
+    return dx<(a.width+b.width)/2+2&&dy<26;
+  };
+  const clusters=[];
+  entries.forEach(e=>{
+    const group=clusters.find(g=>g.some(x=>markerBodiesOverlap(x,e)));
+    if(group)group.push(e);else clusters.push([e]);
+  });
+  const offsets=points.map(()=>({dx:0,dy:0}));
+  clusters.forEach(group=>{
+    if(group.length<2)return;
+    group.sort((a,b)=>a.i-b.i);
+    const center=group.reduce((acc,e)=>({x:acc.x+e.point.x,y:acc.y+e.point.y}),{x:0,y:0});
+    center.x/=group.length;center.y/=group.length;
+    const nearTop=center.y<86;
+    const nearBottom=center.y>mapSize.y-86;
+    const perRow=group.length<=3?group.length:3;
+    const labelGap=18;
+    for(let start=0,row=0;start<group.length;start+=perRow,row++){
+      const rowItems=group.slice(start,start+perRow);
+      const rowWidth=rowItems.reduce((sum,e)=>sum+e.width,0)+(rowItems.length-1)*labelGap;
+      let left=-rowWidth/2;
+      if(center.x+left<14)left=14-center.x;
+      if(center.x+left+rowWidth>mapSize.x-14)left=mapSize.x-14-center.x-rowWidth;
+      let y;
+      if(nearTop)y=34+row*30;
+      else if(nearBottom)y=-34-row*30;
+      else y=(row%2===0?-1:1)*(34+Math.floor(row/2)*30);
+      let cursor=left;
+      rowItems.forEach(e=>{
+        const labelX=center.x+cursor+e.width/2;
+        const labelY=center.y+y;
+        offsets[e.i]=limitMarkerOffset(labelX-e.point.x,labelY-e.point.y);
+        cursor+=e.width+labelGap;
+      });
+    }
+  });
+  return offsets;
+}
+function renderDayPointMarkers(mapItems){
+  if(!dayMap)return;
+  dayMarkers.forEach(m=>dayMap.removeLayer(m));dayMarkers=[];
+  const offsets=markerLabelOffsets(mapItems);
+  mapItems.forEach((item,i)=>{
+    const {s,markerLabel,latlng}=item;
+    const mk=L.marker(latlng,{icon:createNumberedIcon(markerLabel,s.optional?'option':s.type||'spot',offsets[i])}).addTo(dayMap);
+    mk._baseLatLng=latlng;mk._pointName=s.name;
+    let popup=`<b>${s.name}</b>`;
+    if(s.t)popup=`<span style="color:#d97706;font-weight:700">${s.t}</span> `+popup;
+    if(s.optional)popup+=`<br><span style="color:#5F6B3D;font-size:11px;font-weight:700">선택 후보 ${markerLabel}</span>`;
+    if(s.desc)popup+=`<br><span style="color:#555;font-size:11px">${s.desc}</span>`;
+    if(s.tip)popup+=`<br><span style="color:#92400e;font-size:11px;background:#fffbeb;padding:1px 4px;border-radius:3px">체크포인트는 리스트에서 확인</span>`;
+    popup+=`<br><a href="https://www.google.com/maps/search/?api=1&query=${latlng[0]},${latlng[1]}" target="_blank" rel="noopener" style="display:inline-block;margin-top:4px;background:#1a73e8;color:#fff;padding:3px 8px;border-radius:4px;font-size:10px;font-weight:600;text-decoration:none">📍 Google Maps 열기</a>`;
+    mk.bindPopup(popup);
+    dayMarkers.push(mk);
+  });
+}
+function refreshDayPointMarkers(){
+  if(!dayMap||!currentDayMapItems.length)return;
+  renderDayPointMarkers(currentDayMapItems);
+}
 function showDayOnMap(day){
   if(!initDayMap())return;
   clearDayMap();
@@ -1430,61 +1505,11 @@ function showDayOnMap(day){
     if(!s.optional)num++;
     return {s,markerLabel:s.seq||(s.optional?`${num}-1`:num),latlng:[Number(s.coords[0]),Number(s.coords[1])]};
   });
-  function markerLabelOffsets(points){
-    const mapSize=dayMap.getSize();
-    const entries=points.map((p,i)=>({i,point:dayMap.latLngToLayerPoint(p.latlng),width:String(p.markerLabel).length>2?34:24}));
-    const markerBodyOverlap=(a,b)=>{
-      return a.point.distanceTo(b.point)<18;
-    };
-    const clusters=[];
-    entries.forEach(e=>{
-      const group=clusters.find(g=>markerBodyOverlap(g[0],e));
-      if(group)group.push(e);else clusters.push([e]);
-    });
-    const offsets=points.map(()=>({dx:0,dy:0}));
-    clusters.forEach(group=>{
-      if(group.length<2)return;
-      group.sort((a,b)=>a.i-b.i);
-      const center=group.reduce((acc,e)=>({x:acc.x+e.point.x,y:acc.y+e.point.y}),{x:0,y:0});
-      center.x/=group.length;center.y/=group.length;
-      const below=center.y<72;
-      const perRow=group.length<=5?group.length:Math.ceil(group.length/2);
-      const labelGap=18;
-      for(let start=0,row=0;start<group.length;start+=perRow,row++){
-        const rowItems=group.slice(start,start+perRow);
-        const rowWidth=rowItems.reduce((sum,e)=>sum+e.width,0)+(rowItems.length-1)*labelGap;
-        let left=-rowWidth/2;
-        if(center.x+left<14)left=14-center.x;
-        if(center.x+left+rowWidth>mapSize.x-14)left=mapSize.x-14-center.x-rowWidth;
-        const y=(below?34:-34)+(below?row*30:-row*30);
-        let cursor=left;
-        rowItems.forEach(e=>{
-          const labelX=center.x+cursor+e.width/2;
-          const labelY=center.y+y;
-          offsets[e.i]={dx:labelX-e.point.x,dy:labelY-e.point.y};
-          cursor+=e.width+labelGap;
-        });
-      }
-    });
-    return offsets;
-  }
-  const offsets=markerLabelOffsets(mapItems);
-  mapItems.forEach((item,i)=>{
-    const {s,markerLabel,latlng}=item;
-    const mk=L.marker(latlng,{icon:createNumberedIcon(markerLabel,s.optional?'option':s.type||'spot',offsets[i])}).addTo(dayMap);
-    mk._baseLatLng=latlng;mk._pointName=s.name;
-    let popup=`<b>${s.name}</b>`;
-    if(s.t)popup=`<span style="color:#d97706;font-weight:700">${s.t}</span> `+popup;
-    if(s.optional)popup+=`<br><span style="color:#5F6B3D;font-size:11px;font-weight:700">선택 후보 ${markerLabel}</span>`;
-    if(s.desc)popup+=`<br><span style="color:#555;font-size:11px">${s.desc}</span>`;
-    if(s.tip)popup+=`<br><span style="color:#92400e;font-size:11px;background:#fffbeb;padding:1px 4px;border-radius:3px">체크포인트는 리스트에서 확인</span>`;
-    popup+=`<br><a href="https://www.google.com/maps/search/?api=1&query=${latlng[0]},${latlng[1]}" target="_blank" rel="noopener" style="display:inline-block;margin-top:4px;background:#1a73e8;color:#fff;padding:3px 8px;border-radius:4px;font-size:10px;font-weight:600;text-decoration:none">📍 Google Maps 열기</a>`;
-    mk.bindPopup(popup);
-    dayMarkers.push(mk);
-  });
   if(mainCoords.length>1){
     dayLine=L.polyline(mainCoords,{color:'#2563eb',weight:2.5,opacity:.6,dashArray:'6 4'}).addTo(dayMap);
   }
+  currentDayMapItems=mapItems;
+  renderDayPointMarkers(currentDayMapItems);
 }
 function showOverviewOnDayMap(c){
   if(!initDayMap())return;
