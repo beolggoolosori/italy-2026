@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Italy Trip Planner 2026 v4</title>
+<link rel="icon" href="data:,">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
@@ -526,6 +527,40 @@ a{color:inherit}
 .booking-row{font-size:12px;color:var(--muted);line-height:1.55;margin-top:4px}
 .booking-row strong{color:var(--ink)}
 .booking-link{display:inline-flex;margin-top:10px;background:var(--terracotta);color:#fff;text-decoration:none;border-radius:7px;padding:7px 12px;font-size:11px;font-weight:700}
+.booking-view-toggle{display:inline-flex;gap:4px;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:4px;margin:0 0 16px}
+.booking-view-toggle button{border:0;background:transparent;color:var(--muted);font-size:12px;font-weight:900;border-radius:999px;padding:7px 13px;cursor:pointer}
+.booking-view-toggle button.active{background:var(--terracotta);color:#fff}
+.booking-view{display:none}
+.booking-view.active{display:block}
+.booking-calendar-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.booking-today-pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:900;color:var(--terracotta-deep);background:var(--terracotta-soft);border:1px solid #CFE0D4;border-radius:999px;padding:5px 9px;white-space:nowrap}
+.booking-swipe-hint{font-size:11px;font-weight:800;color:var(--muted);white-space:nowrap}
+.booking-calendar-grid{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:thin;-webkit-overflow-scrolling:touch;padding:0 2px 14px;margin-bottom:14px}
+.booking-calendar-grid::-webkit-scrollbar{height:8px}
+.booking-calendar-grid::-webkit-scrollbar-thumb{background:#D2D0C8;border-radius:999px}
+.booking-month{flex:0 0 min(100%,360px);border:1px solid var(--line);border-radius:10px;background:var(--paper-2);padding:13px 14px;scroll-snap-align:start}
+.booking-month.today-month{border-color:var(--terracotta);box-shadow:0 0 0 3px rgba(47,107,79,.10)}
+.booking-month-title{font-size:15px;font-weight:900;color:var(--ink);margin-bottom:10px}
+.booking-weekdays,.booking-days{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.booking-weekdays span{text-align:center;font-size:10px;font-weight:900;color:var(--faint)}
+.booking-day{min-height:86px;border:1px solid var(--line-2);border-radius:8px;background:var(--paper);padding:6px 6px;overflow:hidden}
+.booking-day.blank{background:transparent;border-color:transparent}
+.booking-day.has-events{background:var(--terracotta-soft);border-color:#CFE0D4}
+.booking-day.has-critical{background:var(--gold-soft);border-color:#D8DCCB}
+.booking-day.today{border-color:var(--terracotta);box-shadow:inset 0 0 0 1px var(--terracotta);background:#fff}
+.booking-day-num{display:flex;align-items:center;justify-content:space-between;gap:4px;font-size:11px;font-weight:900;color:var(--muted);line-height:1;margin-bottom:5px}
+.booking-today-tag{font-size:8px;font-weight:900;color:#fff;background:var(--terracotta);border-radius:999px;padding:2px 4px}
+.booking-event{display:block;width:100%;text-align:left;text-decoration:none;border-radius:6px;padding:4px 5px;margin-top:4px;background:var(--paper-2);border:1px solid var(--line);color:var(--terracotta-deep);font-size:10px;font-weight:900;line-height:1.25;cursor:pointer;font-family:inherit}
+.booking-event.critical{background:#fff;border-color:#D8C9AB;color:#6B5A32}
+.booking-event.active{background:var(--terracotta);border-color:var(--terracotta);color:#fff}
+.booking-detail-card{border:1px solid var(--line);border-radius:10px;background:var(--paper-2);padding:16px 17px;margin:0 0 20px;box-shadow:var(--sh-sm)}
+.booking-detail-date{font-size:12px;font-weight:900;color:var(--terracotta-deep);margin-bottom:5px}
+.booking-detail-name{font-size:17px;font-weight:900;line-height:1.35;margin-bottom:8px}
+.booking-detail-row{font-size:12px;color:var(--muted);line-height:1.55;margin-top:4px}
+.booking-detail-row strong{color:var(--ink)}
+.booking-detail-links{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.booking-detail-links a{font-size:11px;font-weight:900;text-decoration:none;background:var(--terracotta);color:#fff;border-radius:8px;padding:7px 11px}
+.booking-list-block{margin-top:2px}
 .ticket-title{font-size:13px;font-weight:900;margin:18px 0 10px;color:var(--ink)}
 .ticket-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-bottom:18px}
 .ticket-card{border:1px solid var(--line);border-radius:9px;background:var(--paper-2);padding:13px 14px}
@@ -593,6 +628,11 @@ footer{text-align:center;padding:36px 20px;color:var(--faint);
 	  .t-table{min-width:600px}
 	  #sec-transport .t-scroll{display:none}
 	  .transport-cards{display:grid;grid-template-columns:1fr;gap:10px}
+	  .booking-calendar-head{align-items:flex-start;flex-direction:column;gap:6px}
+	  .booking-calendar-grid{margin-left:-4px;margin-right:-4px;padding-left:4px;padding-right:4px}
+	  .booking-month{flex-basis:calc(100vw - 48px)}
+	  .booking-day{min-height:72px;padding:5px}
+	  .booking-event{font-size:9.5px;padding:4px}
 	  .budget-total{flex-direction:column;gap:14px}
 	  .b-row .lbl{width:64px;font-size:11.5px}.b-row .amt{width:64px;font-size:11.5px}
   /* QA-fix: 모바일에서 food-recs-row 패딩 축소 */
@@ -635,8 +675,6 @@ footer{text-align:center;padding:36px 20px;color:var(--faint);
   :root{--nav-h:60px}
 }
 </style>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendard-dynamic-subset.min.css">
 </head>
 <body>
 
@@ -710,14 +748,14 @@ B: {
   totalBudget:7553.8,perPerson:567,
   budget:[{l:"항공",a:2307,c:"#244F3B"},{l:"교통",a:568.8,c:"#2F6B4F"},{l:"숙박",a:1890,c:"#3F7D5E"},{l:"식비",a:1500,c:"#5E6B57"},{l:"입장료",a:688,c:"#7E8B6F"},{l:"도시세",a:120,c:"#9AA38C"},{l:"기타",a:480,c:"#B8B2A6"}],
   cities:[{name:"Roma",lat:41.9028,lng:12.4964,n:3,dates:"9/16~18",color:"#ef4444"},{name:"Firenze",lat:43.7696,lng:11.2558,n:3,dates:"9/19~21",color:"#22c55e"},{name:"Pisa",lat:43.7228,lng:10.4017,n:0,dates:"9/21",color:"#86efac"},{name:"Cinque Terre",lat:44.1461,lng:9.6535,n:1,dates:"9/22",color:"#f59e0b"},{name:"Monterosso",lat:44.1454,lng:9.6500,n:0,dates:"9/22",color:"#fbbf24"},{name:"Venezia",lat:45.4408,lng:12.3155,n:2,dates:"9/23~24",color:"#06b6d4"},{name:"Burano",lat:45.4854,lng:12.4167,n:0,dates:"9/24",color:"#67e8f9"},{name:"Cortina",lat:46.5369,lng:12.1357,n:2,dates:"9/25~26",color:"#0ea5e9"},{name:"Lago di Como",lat:45.9875,lng:9.2573,n:0,dates:"9/27",color:"#a78bfa"},{name:"Milano",lat:45.4642,lng:9.1900,n:1,dates:"9/27~28",color:"#ec4899"}],
-  calendar:{16:{city:"인천→로마",detail:"KE931 13:20출발\n로마 19:30도착",transport:"Leonardo Exp",nights:"Roma 1N"},17:{city:"로마",detail:"콜로세움+포로+캄피돌리오\n판테온→나보나→트레비",nights:"Roma 2N"},18:{city:"로마",detail:"바티칸 08시 입장\n성베드로+보르게세",nights:"Roma 3N"},19:{city:"→피렌체",detail:"09:17 도착\n시장+두오모+석양",transport:"Italo 07:40",nights:"Firenze 1N"},20:{city:"피렌체",detail:"우피치+아카데미아\n비스테카+미켈란젤로광장",nights:"Firenze 2N"},21:{city:"피사 당일치기",detail:"사탑+세례당 오전\n오후 피렌체",transport:"열차 왕복 2h",nights:"Firenze 3N"},22:{city:"→친퀘테레",detail:"몬테로쏘 수영🏊\n마나롤라+리오마조레",transport:"열차 2.5h",nights:"Cinque Terre"},23:{city:"→베네치아",detail:"곤돌라+치케티\n산마르코+두칼레",transport:"열차 4h",nights:"Venezia 1N"},24:{city:"베네치아+부라노",detail:"부라노 컬러마을\n무라노 유리공예",nights:"Venezia 2N"},25:{city:"→돌로미티",detail:"렌터카 픽업(메스트레)\n코르티나 도착",transport:"렌터카 2h",nights:"Cortina 1N"},26:{city:"돌로미티",detail:"트레치메 트레킹!\n브라이에스(+카레차 선택)",transport:"렌터카",nights:"Cortina 2N"},27:{city:"코모호수→밀라노",detail:"벨라지오 짧게 경유\n밀라노 도착",transport:"렌터카 반납",nights:"Milano"},28:{city:"밀라노→귀국",detail:"쇼핑+브레라\nKE928 22:00출발",transport:"Malpensa Exp"}},
+  calendar:{16:{city:"인천→로마",detail:"KE931 13:20출발\n로마 19:30도착",transport:"Leonardo Exp",nights:"Roma 1N"},17:{city:"로마",detail:"콜로세움+포로+캄피돌리오\n판테온→나보나→트레비",nights:"Roma 2N"},18:{city:"로마",detail:"바티칸 08시 입장\n성베드로+보르게세",nights:"Roma 3N"},19:{city:"→피렌체",detail:"09:17 도착\n두오모 숙소+시장+석양",transport:"Italo 07:40",nights:"Firenze 1N"},20:{city:"피렌체",detail:"우피치+아카데미아\n두오모 쿠폴라",nights:"Firenze 2N"},21:{city:"피사 당일치기",detail:"사탑 10:30권장\n오후 산타크로체",transport:"열차 왕복 2h",nights:"Firenze 3N"},22:{city:"→친퀘테레",detail:"몬테로쏘 수영🏊\n마나롤라+리오마조레",transport:"열차 2.5h",nights:"Cinque Terre"},23:{city:"→베네치아",detail:"곤돌라+치케티\n산마르코+두칼레",transport:"열차 4h",nights:"Venezia 1N"},24:{city:"베네치아+부라노",detail:"부라노 컬러마을\n무라노 유리공예",nights:"Venezia 2N"},25:{city:"→돌로미티",detail:"렌터카 픽업(메스트레)\n코르티나 도착",transport:"렌터카 2h",nights:"Cortina 1N"},26:{city:"돌로미티",detail:"트레치메 트레킹!\n브라이에스(+카레차 선택)",transport:"렌터카",nights:"Cortina 2N"},27:{city:"코모호수→밀라노",detail:"벨라지오 짧게 경유\n밀라노 도착",transport:"렌터카 반납",nights:"Milano"},28:{city:"밀라노→귀국",detail:"쇼핑+브레라\nKE928 22:00출발",transport:"Malpensa Exp"}},
   transport:[{day:"D1",route:"인천→로마 FCO",mode:"KE931 직항",time:"13시간 10분",cost:"왕복 173만원/인",link:"https://www.koreanair.com",linkText:"대한항공"},{day:"D1",route:"FCO 공항역→Roma Termini",mode:"Leonardo Express",time:"32분",cost:"€28",link:"https://www.trenitalia.com/en/services/leonardo-express.html",linkText:"Trenitalia"},{day:"D1",route:"FCO→Hotel Labelle",mode:"공식 택시 백업",time:"40~55분",cost:"정액 €55",link:"https://www.adr.it/web/aeroporti-di-roma-en/pax-fco-taxi",linkText:"ADR Taxi"},{day:"D4",route:"Roma Termini→Firenze SMN",mode:"Italo 9912 Prima Business",time:"07:40→09:17 (1h37)",cost:"€38.80",link:"https://www.italotreno.com/en/destinations-timetable/rome-florence-tickets",linkText:"Italo"},{day:"D6",route:"Firenze↔Pisa (왕복)",mode:"Regionale",time:"1시간 (편도)",cost:"€20",link:"https://www.trenitalia.com",linkText:"Trenitalia"},{day:"D7",route:"Firenze→La Spezia",mode:"Regionale/IC",time:"2시간 30분",cost:"€30",link:"https://www.trenitalia.com",linkText:"Trenitalia"},{day:"D7",route:"친퀘테레 마을간",mode:"Cinque Terre Card",time:"1일",cost:"€33",link:"https://www.cinqueterre.eu.com",linkText:"CinqueTerre"},{day:"D8",route:"La Spezia→Venezia",mode:"IC/Frecciabianca",time:"4시간",cost:"€50~80",link:"https://www.trenitalia.com",linkText:"Trenitalia"},{day:"D8",route:"베네치아 바포레토",mode:"ACTV 48h 패스",time:"2일",cost:"€70",link:"https://actv.avmspa.it",linkText:"ACTV"},{day:"D10",route:"Venezia(Mestre)→Cortina",mode:"렌터카 (3일)",time:"2시간",cost:"€210~300",link:"https://www.rentalcars.com",linkText:"RentalCars"},{day:"D12",route:"Cortina→Como→Milano",mode:"렌터카 반납",time:"4~5시간",cost:"렌터카 포함",link:"",linkText:""},{day:"D13",route:"Milano→Malpensa",mode:"Malpensa Express",time:"51분",cost:"€30",link:"https://www.malpensaexpress.it",linkText:"Malpensa Exp"}],
   hotels:{
     "Roma (3박)":[
       {name:"Hotel Labelle ✅확정",stars:2,price:"₩854,164 / 3박 (2인)",desc:"Via Cavour 310, 몬티(Monti) 지구. 콜로세움·포로 로마노 도보 7분, Cavour 메트로 1분. 예약 확정(환불불가) ₩854,164 · 도시세 ₩52,620 체크인 시 현장 결제 별도",tags:["✅확정","₩854,164/3박","콜로세움 도보","도시세 별도"],links:[{t:"공식 예약",u:"https://www.hotellabelle.it/",c:""},{t:"Booking.com",u:"https://www.booking.com/hotel/it/labelle.html",c:""}]}
     ],
     "Firenze (3박)":[
-      {name:"플러스 플로렌스 (Plus Florence)",stars:2,price:"₩900,000 / 3박 (2인)",desc:"Via Santa Caterina d'Alessandria 15, 피렌체 중심 북쪽. 루프탑 수영장·사우나·바, 두오모 도보 15분·SMN역 도보 12분. 평점 4.0(6.1천). 가예약 ₩900,000 — 6/17까지 무료취소 가능",tags:["⭐후보·가예약","6/17까지 무료취소","루프탑 수영장","2성급"],links:[{t:"공식",u:"https://www.plushostels.com/florence",c:""},{t:"Booking.com",u:"https://www.booking.com/hotel/it/plus-florence.html",c:""}]}
+      {name:"B&B Le Stanze del Duomo ✅확정",stars:3,price:"실결제 금액 입력 필요 / 3박 (2인)",desc:"Via de' Martelli 8, 두오모 바로 옆. 공식 기준 SMN역 도보 10분 또는 택시 5분, 두오모 130~200m권. 리셉션 08:00~21:00, 객실 14:00부터, 체크인 전 짐 보관 가능.",tags:["✅확정","두오모 1분","SMN 도보 10분","조식 Konnubio"],links:[{t:"공식",u:"https://www.lestanzedelduomo.it/en/",c:""},{t:"찾아가는 법",u:"https://www.lestanzedelduomo.it/en/how-to-reach-us.html",c:""}]}
     ],
     "Cinque Terre (1박)":[
       {name:"Affittacamere San Giorgio",stars:3,price:"€100~140/박",desc:"마나롤라 중심, 바다 테라스뷰. AC+WiFi",tags:["마나롤라","바다뷰","가성비"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/affittacamere-san-giorgio.html",c:""}]},
@@ -793,51 +831,60 @@ B: {
   {t:"선택",seq:"10-1",name:"선택: 트라스테베레 야경/저녁",desc:"꼭 가고 싶을 때만 택시로 왕복 · Da Enzo/Tonnarello 후보",type:"hl",optional:true,coords:[41.8893,12.4699],tip:"분위기는 좋지만 D3 기본 동선에서는 남서쪽으로 빠짐. 새벽 바티칸 후에는 무리하지 않는 쪽 추천."},
   {t:"21:40",name:"숙소 복귀 (몬티)",desc:"다음날 피렌체 이동 준비 · 짐 정리 후 취침",type:"move",coords:[41.8934,12.4889]}
 ],cost:"€230~260"},
-{day:4,date:"9/19 토",city:"→피렌체",theme:"아침 열차 + 두오모 첫인상 + 석양",routeSummary:"🚂 Roma 07:40→Firenze 09:17→Mercato→Duomo→Signoria→Ponte Vecchio→Oltrarno→Piazzale Michelangelo",sched:[
+{day:4,date:"9/19 토",city:"→피렌체",theme:"아침 열차 + 두오모 숙소 + 석양",routeSummary:"🚂 Roma 07:40→Firenze 09:17→B&B Le Stanze del Duomo→Mercato→Duomo→Signoria→Ponte Vecchio→Oltrarno→숙소 휴식→Piazzale",sched:[
   {t:"05:50",name:"기상 + 출발 준비",desc:"Italo 9912 07:40 출발 기준 · 세면/짐 마감 25~30분",type:"hotel",coords:[41.8934,12.4889],tip:"전날 밤 큰 짐은 90% 싸두기. 아침에는 여권·지갑·Italo QR·충전기·약만 최종 확인."},
   {t:"06:15",name:"체크아웃 + 짐 최종 확인",desc:"Hotel Labelle 키 반납·도시세/영수증 확인 · 10~15분",type:"hotel",coords:[41.8934,12.4889],tip:"06:25까지 로비 출발이 목표. 늦어도 06:35를 넘기면 Termini 여유가 줄어듦."},
   {t:"06:30",name:"Hotel Labelle → Roma Termini",desc:"택시 8~12분 우선 · Metro B Cavour→Termini 백업 15~20분",type:"move",coords:[41.9009,12.5016],tip:"아침 열차+캐리어라 택시가 가장 안전. 메트로는 첫차/배차/계단 변수 때문에 백업으로만 둔다."},
   {t:"06:55",name:"Termini 도착 + 간단 아침",desc:"플랫폼 전광판 확인 후 바에서 커피/코르네토 · 20분",type:"food",coords:[41.9009,12.5016],tip:"Italo도 플랫폼은 출발 10~15분 전 표시되는 경우가 많음. 먼저 전광판 확인, 그다음 바에서 빠르게."},
   {t:"07:20",name:"플랫폼 확인 + 탑승 대기",desc:"Italo 9912 / Firenze Santa Maria Novella 방향 · 2호차 9,10",type:"move",coords:[41.9009,12.5016],tip:"티켓 기준 N.Train 9912, 마차 2, 좌석 9·10. Prima Business라 좌석은 편하지만 승강장 이동 시간은 따로 잡는다."},
   {t:"07:40",name:"Italo 9912 출발",desc:"Roma Termini→Firenze SMN 직행 · 1시간37분 · Prima Business · 2인 €38.80",type:"move",coords:[41.9009,12.5016],tip:"사용자 티켓 기준. 출발 전날 Italo 앱에서 플랫폼·지연 여부 재확인."},
-  {t:"09:17",name:"Firenze SMN 도착",desc:"역→Plus Florence 도보 12~15분 또는 택시 5~8분",type:"move",coords:[43.7775719,11.2474177],tip:"SMN 역 주변은 혼잡. 캐리어 이동 시 도보도 가능하지만, 피곤하면 택시로 바로 숙소."},
-  {t:"09:40",name:"Plus Florence 짐 맡기기/프리체크인",desc:"Via Santa Caterina d'Alessandria 15 · 체크인은 15:00부터",type:"hotel",coords:[43.7815501,11.2558159],tip:"공식 FAQ 기준 체크인은 15:00부터. 먼저 짐을 맡기고, 여권/결제/도시세 처리 가능하면 프런트에서 미리 확인."},
-  {t:"10:10",name:"Mercato Centrale 아침 보강/브런치",rk:"firenze-mercato-lunch",desc:"공식 09:00 오픈 · 시장+푸드홀로 첫 피렌체 식사",type:"food",coords:[43.7765847,11.2532087],tip:"07:40 열차라 여기서 제대로 먹는 게 좋음. 1층 식재료 시장은 오전 분위기가 좋고, 2층 푸드홀은 선택지가 안정적."},
+  {t:"09:17",name:"Firenze SMN 도착",desc:"역→B&B Le Stanze del Duomo 도보 약 10분 또는 택시 5분",type:"move",coords:[43.7775719,11.2474177],tip:"공식 숙소 안내 기준 도보는 Via Panzani→Via Cerretani→Duomo→Via de' Martelli 순서. 캐리어가 무겁거나 비 오면 택시로 5분."},
+  {t:"09:40",name:"B&B Le Stanze del Duomo 짐 맡기기",desc:"Via de' Martelli 8 · 리셉션 08:00~21:00 · 객실 14:00부터",type:"hotel",coords:[43.7743554,11.2557735],tip:"공식 기준 객실은 14:00부터지만 체크인 전 짐 보관 가능. 여권/결제/도시세 처리 가능 여부를 먼저 확인하고 가볍게 출발."},
+  {t:"10:05",name:"Mercato Centrale 아침 보강/브런치",rk:"firenze-mercato-lunch",desc:"숙소→도보 6~8분 · 공식 09:00 오픈",type:"food",coords:[43.7765847,11.2532087],tip:"07:40 열차라 여기서 제대로 먹는 게 좋음. 1층 Da Nerbone/식재료 시장, 2층 푸드홀 중 줄 짧은 곳으로 선택."},
   {t:"11:10",name:"산 로렌조 시장 + 성당",desc:"가죽시장/메디치 지구 · 내부는 컨디션 좋을 때만 €9",type:"spot",coords:[43.7750715,11.2545718],tip:"산 로렌조 성당은 월~토 10:00~17:30. 도착일에는 성당 내부보다 시장/광장 분위기와 동선 파악이 우선."},
-  {t:"11:55",name:"두오모 광장 첫인상",desc:"대성당 외관·쿠폴라·세례당 문 · 45분",type:"spot",coords:[43.7731014,11.2554774],tip:"공식 기준 대성당 무료 입장은 월~토 10:15~15:45. 줄이 짧으면 내부를 보고, 길면 외관/사진만 하고 D5 유료 패스로 넘긴다."},
+  {t:"11:55",name:"두오모 광장 첫인상",desc:"숙소 바로 앞 · 대성당 외관·쿠폴라·세례당 문 · 45분",type:"spot",coords:[43.7731014,11.2554774],tip:"공식 기준 대성당 무료 입장은 월~토 10:15~15:45. 줄이 짧으면 내부를 보고, 길면 외관/사진만 하고 D5 유료 패스로 넘긴다."},
   {t:"13:00",name:"시뇨리아 광장 + 로지아 데이 란치",desc:"무료 야외 조각 갤러리 · 피렌체 핵심 첫날 스폿",type:"spot",coords:[43.7695737,11.2558641],tip:"우피치 내부는 D5로 미루고, D4는 광장/로지아/베키오궁 외관만 봐도 충분히 좋음."},
   {t:"13:35",name:"우피치 회랑 외관 → 아르노",desc:"시뇨리아→강변으로 자연스럽게 내려가기",type:"hl",coords:[43.7685539,11.2553036]},
-  {t:"14:00",name:"베키오 다리",desc:"상점가와 아르노 강 사진 · 낮 풍경",type:"hl",coords:[43.7680254,11.2531580],tip:"기존 일정의 17:00 석양 표기는 빠름. 2026-09-19 피렌체 일몰은 약 19:19 CEST라 석양은 미켈란젤로광장에서 보는 편이 낫다."},
+  {t:"14:00",name:"베키오 다리",desc:"상점가와 아르노 강 사진 · 낮 풍경",type:"hl",coords:[43.7680254,11.2531580],tip:"2026-09-19 피렌체 일몰은 약 19:17 CEST라 석양은 미켈란젤로광장에서 보는 편이 낫다."},
   {t:"14:25",name:"올트라르노 젤라토/커피",rk:"firenze-oltrarno-gelato",desc:"점심 후 당충전 · Gelateria della Passera/La Carraia 후보",type:"food",coords:[43.7671815,11.2506436],tip:"아침 출발이라 이 타이밍에 10~15분 쉬는 게 좋음. 저녁 전 과식은 피하고 작은 컵/에스프레소 정도."},
-  {t:"14:55",name:"Plus Florence 복귀",desc:"도보 20~25분 · 체크인 전 휴식 준비",type:"move",coords:[43.7815501,11.2558159],tip:"숙소 가는 길에 물/간식 보충. 15:00 체크인 전후로 샤워와 낮잠 시간을 확보."},
-  {t:"15:05",name:"Plus Florence 체크인 + 낮잠",desc:"공식 체크인 15:00 이후 · 샤워/정리/휴식 90분",type:"hotel",coords:[43.7815501,11.2558159],tip:"05:50 기상일이라 이 휴식은 필수. 쉬지 않으면 석양/저녁 퀄리티가 떨어짐."},
-  {t:"17:30",name:"미켈란젤로광장 이동",desc:"택시 12~15분 우선 · 도보는 45~55분",type:"move",coords:[43.7628279,11.2649932],tip:"아침 열차일이라 오르막 도보를 기본으로 잡지 않는다. 택시로 광장까지 가고, 내려올 때 걸어오는 편이 낫다."},
-  {t:"19:10",name:"⭐ 미켈란젤로광장 석양",desc:"피렌체 첫날 하이라이트 · 일몰 약 19:19",type:"hl",coords:[43.7628279,11.2649932],tip:"D5까지 기다리지 말고 날씨 좋은 D4에 먼저 보는 걸 추천. 비 오면 D5 저녁 백업으로 이동."},
+  {t:"14:55",name:"B&B 복귀",desc:"Ponte Vecchio권→숙소 도보 10~12분 · 체크인 준비",type:"move",coords:[43.7743554,11.2557735],tip:"숙소가 두오모 옆이라 기존 Plus Florence 왕복보다 훨씬 짧음. 길에 물만 보충하고 바로 방 배정 확인."},
+  {t:"15:05",name:"B&B 체크인 + 샤워/충전/휴식",desc:"객실 14:00 이후 · 정리/휴식 90분",type:"hotel",coords:[43.7743554,11.2557735],tip:"낮잠이 필수는 아님. 샤워, 휴대폰 충전, 발 쉬기, 저녁 예약 재확인 정도만 해도 충분."},
+  {t:"17:20",name:"미켈란젤로광장 이동",desc:"택시 12~15분 우선 · 도보는 35~45분",type:"move",coords:[43.7628279,11.2649932],tip:"아침 열차일이라 오르막 도보를 기본으로 잡지 않는다. 숙소에서 택시를 잡아 광장 또는 San Miniato al Monte까지 이동."},
+  {t:"선택",seq:"18-1",name:"선택: San Miniato al Monte",desc:"광장 위 성당+전망 · 20~30분",type:"spot",optional:true,coords:[43.7629650,11.2657780],tip:"컨디션 좋으면 택시 목적지를 San Miniato로 찍고 성당 외관/전망을 먼저 본 뒤 Piazzale로 내려오기. 미사/전례 중이면 내부 관람은 생략."},
+  {t:"19:05",name:"⭐ 미켈란젤로광장 석양",desc:"피렌체 첫날 하이라이트 · 일몰 약 19:17",type:"hl",coords:[43.7628279,11.2649932],tip:"D5까지 기다리지 말고 날씨 좋은 D4에 먼저 보는 걸 추천. 비 오면 D5 저녁 백업으로 이동."},
   {t:"20:15",name:"저녁: 올트라르노",rk:"firenze-oltrarno-dinner",desc:"Il Santo Bevitore / 4 Leoni / Cammillo 후보 · €55~90",type:"food",coords:[43.7680,11.2480],tip:"석양 후 내려와 먹는 흐름. Il Santo Bevitore는 예약 권장, 4 Leoni는 더 캐주얼한 백업."},
-  {t:"22:00",name:"Plus Florence 복귀",desc:"올트라르노→숙소 도보 25~30분 또는 택시",type:"move",coords:[43.7815501,11.2558159],tip:"다음날 우피치/아카데미아/두오모가 핵심이라 첫날은 22시대 정리."}
+  {t:"22:00",name:"B&B Le Stanze del Duomo 복귀",desc:"올트라르노→숙소 도보 12~18분 또는 택시",type:"move",coords:[43.7743554,11.2557735],tip:"다음날 우피치/아카데미아/두오모가 핵심이라 첫날은 22시대 정리."}
 ],cost:"€210~270"},
-{day:5,date:"9/20 일",city:"피렌체",theme:"르네상스 + 비스테카",routeSummary:"🚶 피렌체 시내 종일 투어",sched:[
-  {t:"08:00",name:"아침: Ditta Artigianale",desc:"€12",type:"food"},
-  {t:"08:30",name:"우피치 미술관",desc:"€29/인(성수기+예약비 기준), 2.5h",type:"spot",coords:[43.7677,11.2553],tip:"⚠️ 공식 티켓 판매일 확인 후 조기 예약. 시간 슬롯 15분 내 입장"},
-  {t:"12:00",name:"점심: All'Antico Vinaio",rk:"firenze-vinaio-lunch",desc:"€16",type:"food",coords:[43.7684,11.2563],tip:"💡 11:30 전 or 17:30 후 방문 (3개 매장 중 짧은 줄)"},
-  {t:"13:00",name:"아카데미아",desc:"다비드! €20/인",type:"spot",coords:[43.7769,11.2589]},
-  {t:"14:30",name:"riposo",desc:"1.5시간",type:""},
-  {t:"16:00",name:"두오모 쿠폴라",desc:"€30/인, 463계단",type:"spot",coords:[43.7731,11.2560],tip:"⚠️ 463계단 엘리베이터 없음. 시간 엄수 (5분 지각 입장불가)"},
-  {t:"17:45",name:"젤라토: Vivoli",desc:"€8",type:"food",coords:[43.7695,11.2593]},
-  {t:"18:00",name:"미켈란젤로 광장",desc:"일몰!",type:"hl",coords:[43.7629,11.2650],tip:"💡 일몰 19:15~19:30. 30분 전 도착!"},
-  {t:"19:30",name:"저녁: Buca Mario",rk:"firenze-bistecca",desc:"비스테카 1.2kg €90",type:"food",coords:[43.7718,11.2533],tip:"⚠️ 전화예약 필수 +39 055 214179"}
-],cost:"€314"},
-{day:6,date:"9/21 월",city:"피사 당일치기",theme:"사탑 + 피렌체 쇼핑",routeSummary:"🚂 Firenze↔Pisa (Regionale 왕복 2h)",sched:[
-  {t:"08:00",name:"아침",desc:"€10",type:"food"},
-  {t:"08:45",name:"Firenze→Pisa",desc:"Regionale 1시간",type:"move",coords:[43.7230,10.3966]},
-  {t:"10:00",name:"피사 사탑",desc:"€24/인",type:"spot",coords:[43.7230,10.3966],tip:"⚠️ 사전예약 필수 (opapisa.it). 30분 시간제한"},
-  {t:"10:45",name:"세례당+캄포산토",desc:"",type:"spot",coords:[43.7231,10.3941]},
-  {t:"12:00",name:"피사 점심",desc:"해산물 €40",type:"food"},
-  {t:"13:30",name:"Pisa→Firenze",desc:"1시간",type:"move",coords:[43.7763,11.2477]},
-  {t:"15:00",name:"산타크로체 성당",desc:"€8/인",type:"spot",coords:[43.7685,11.2623]},
-  {t:"18:00",name:"아페리티보",desc:"€22",type:"food"},
-  {t:"19:30",name:"저녁: Trattoria Mario",rk:"firenze-trattoria",desc:"€50",type:"food",coords:[43.7748,11.2537]}
-],cost:"€170"},
+{day:5,date:"9/20 일",city:"피렌체",theme:"르네상스 핵심 3종",routeSummary:"🚶 B&B→우피치→점심→아카데미아→B&B/두오모→쿠폴라→오페라 두오모→올트라르노 저녁",sched:[
+  {t:"07:30",name:"숙소 조식: Konnubio",desc:"B&B 조식 장소 · 숙소에서 도보 약 3분",type:"food",coords:[43.7752500,11.2560900],tip:"우피치 08:30 슬롯이면 07:55 전에는 식사 마무리. 호텔 조식이 지연되면 바에서 에스프레소+코르네토로 전환."},
+  {t:"08:10",name:"B&B → 우피치 이동",desc:"도보 10~12분 · 입장 15분 전 도착",type:"move",coords:[43.7677,11.2553],tip:"일요일 오전이라 우피치 주변 대기열이 길 수 있음. 예약자 줄/현장 줄을 구분하고 신분증 이름 확인 대비."},
+  {t:"08:30",name:"우피치 미술관",desc:"공식 사전권 €29/인 · 2시간30분",type:"spot",coords:[43.7677,11.2553],tip:"공식 기준 화~일 08:15~18:30, 월요일 휴관. 08:30 슬롯을 잡으면 보티첼리/레오나르도/카라바조 핵심만 봐도 밀도가 좋음."},
+  {t:"11:30",name:"점심: 우피치 뒤 빠른 식사",rk:"firenze-vinaio-lunch",desc:"All'Antico Vinaio / I Due Fratellini / Trattoria Mario 후보",type:"food",coords:[43.7684,11.2563],tip:"13:30 아카데미아라 12:30 이후 긴 대기는 위험. 줄이 길면 I Due Fratellini나 Mercato Centrale로 바로 전환."},
+  {t:"12:40",name:"B&B 짧은 복귀",desc:"숙소 도보 6~8분 · 물/화장실/충전 25분",type:"hotel",coords:[43.7743554,11.2557735],tip:"새 숙소의 가장 큰 장점. 점심 뒤 바로 다음 미술관으로 몰아붙이지 말고 발을 잠깐 쉬게 한다."},
+  {t:"13:20",name:"아카데미아 이동",desc:"숙소→아카데미아 도보 5~6분",type:"move",coords:[43.7769,11.2589]},
+  {t:"13:30",name:"아카데미아 미술관",desc:"다비드상 · 공식 €20 + 예약수수료 €4/인 · 75~90분",type:"spot",coords:[43.7769,11.2589],tip:"공식 기준 08:15~18:50, 월요일 휴관. 우피치 뒤라 오래 끌지 말고 다비드와 핵심 홀 중심."},
+  {t:"15:10",name:"두오모 전 에스프레소/물 보급",desc:"쿠폴라 463계단 전 15분 정비",type:"food",coords:[43.7731014,11.2554774],tip:"무거운 간식은 피하고 물/에스프레소 정도. 큰 가방은 두오모 공식 보관소 규정을 확인."},
+  {t:"16:00",name:"두오모 쿠폴라",desc:"Brunelleschi Pass · 463계단 · 시간 엄수",type:"spot",coords:[43.7731,11.2560],tip:"공식 기준 일요일 쿠폴라는 12:45~16:30 슬롯. 예약 시간 5분 초과 지각 시 입장 불가. 이름/신분증 확인 가능."},
+  {t:"17:15",name:"오페라 두오모 박물관",desc:"Brunelleschi Pass 포함 · 60~75분",type:"spot",coords:[43.7729630,11.2563860],tip:"쿠폴라 뒤 바로 이어 보기 좋은 구성. 너무 힘들면 D6 오후로 넘기고 숙소 휴식."},
+  {t:"18:45",name:"B&B 휴식",desc:"두오모→숙소 1~2분 · 샤워/옷 갈아입기",type:"hotel",coords:[43.7743554,11.2557735],tip:"D4에 석양을 봤다면 D5 미켈란젤로광장은 반복하지 않는다. 비로 D4 석양을 놓쳤을 때만 저녁 전 백업."},
+  {t:"20:00",name:"저녁: 일요일 영업 후보",rk:"firenze-oltrarno-dinner",desc:"4 Leoni / Il Santo Bevitore / Cammillo 후보 · 예약 권장",type:"food",coords:[43.7672,11.2488],tip:"Buca Mario는 공식 기준 일요일 휴무라 D5에서 제외. 올트라르노권은 숙소에서 도보 15~20분."}
+],cost:"€286~340"},
+{day:6,date:"9/21 월",city:"피사 당일치기",theme:"피사 오전 + 산타크로체 + 비스테카",routeSummary:"🚂 B&B→SMN→Pisa→사탑 10:30→Firenze→Santa Croce→Buca Mario",sched:[
+  {t:"07:30",name:"숙소 조식 + 피사 준비",desc:"Konnubio 조식 · 사탑 QR/신분증/작은 가방",type:"food",coords:[43.7752500,11.2560900],tip:"피사 사탑은 가방 보관/보안검색이 있으니 큰 가방 금지. 물, 모자, 보조배터리만 가볍게."},
+  {t:"08:25",name:"B&B → Firenze SMN",desc:"도보 약 10분 · 택시 5분 백업",type:"move",coords:[43.7775719,11.2474177],tip:"숙소 공식 안내 기준 SMN 도보 10분. 08:45 전후 Regionale를 타면 10:30 사탑이 현실적."},
+  {t:"08:45",name:"Firenze → Pisa",desc:"Regionale 약 1시간 · Pisa Centrale 도착 가정",type:"move",coords:[43.7161354,10.3985613],tip:"10:00 사탑은 Centrale 도착 후 이동까지 고려하면 빠듯함. 10:30~11:00 슬롯을 우선 예약."},
+  {t:"09:50",name:"Pisa Centrale → Piazza dei Miracoli",desc:"택시/버스 10~15분 또는 도보 25분",type:"move",coords:[43.7230,10.3966],tip:"사탑 시간제 입장 전에는 택시/버스가 안전. 도보는 여유 있을 때만."},
+  {t:"10:15",name:"사탑 보안/가방 보관",desc:"예약 시간 15분 전 도착",type:"move",coords:[43.7230,10.3966],tip:"공식 기준 Tower 방문은 시간 엄수, 지각 시 입장/환불 불가. 핸드백/가방/짐은 클로크룸 보관 후 입장."},
+  {t:"10:30",name:"피사 사탑",desc:"공식 시간제 예약 · 약 30분 · 251계단",type:"spot",coords:[43.7230,10.3966],tip:"공식 기준 온라인 티켓은 방문 90일 전 GMT부터 구매 가능. 타워 입장은 만 8세 이상, 신분증 확인 가능."},
+  {t:"11:15",name:"대성당 + 세례당 + 캄포산토",desc:"Piazza dei Miracoli 핵심 75~90분",type:"spot",coords:[43.7231,10.3941],tip:"Complete Visit+Tower면 다른 기념물은 선택일 기준 1년 내 운영시간 중 사용 가능. 대성당은 예배/행사로 제한 가능."},
+  {t:"12:45",name:"피사 점심",desc:"광장 근처는 짧게 · 역 이동 전 45분",type:"food",coords:[43.7197800,10.4001800],tip:"오후 피렌체 일정이 있으니 긴 코스보다 파스타/샌드위치/카페 정도로 끝내기."},
+  {t:"14:00",name:"Pisa → Firenze",desc:"Regionale 약 1시간",type:"move",coords:[43.7775719,11.2474177]},
+  {t:"15:10",name:"B&B 복귀 + 짧은 휴식",desc:"SMN→숙소 도보 10분 · 35~40분 버퍼",type:"hotel",coords:[43.7743554,11.2557735],tip:"새 숙소 덕분에 오후 일정 전 회복 가능. 산타크로체 마지막 입장 17:00 전에는 반드시 출발."},
+  {t:"16:00",name:"산타크로체 성당",desc:"공식 월~토 09:30~17:30 · 마지막 입장 17:00",type:"spot",coords:[43.7685,11.2623],tip:"미켈란젤로·갈릴레오·마키아벨리 묘와 파치 예배당 중심. 월요일에도 열려서 D6 오후 배치가 타당."},
+  {t:"17:30",name:"산타크로체→두오모 산책/아페리티보",desc:"Sant'Ambrogio권 또는 두오모권 60분",type:"food",coords:[43.7715120,11.2601450],tip:"Mercato Sant'Ambrogio는 보통 오전/점심 시장이라 이 시간엔 시장 구경보다 동네 바/카페 휴식으로 생각."},
+  {t:"19:30",name:"저녁: Buca Mario",rk:"firenze-bistecca",desc:"월요일 영업 · 비스테카 정찬 · 예약 필수",type:"food",coords:[43.7718,11.2533],tip:"공식 기준 19:00~00:00, 주방 22:00 종료, 일요일 휴무. D5 대신 D6 월요일 저녁으로 이동."},
+  {t:"21:45",name:"B&B Le Stanze del Duomo 복귀",desc:"Buca Mario→숙소 도보 8~10분",type:"move",coords:[43.7743554,11.2557735]}
+],cost:"€250~330"},
 {day:7,date:"9/22 화",city:"→친퀘테레",theme:"5개 마을 + 몬테로쏘 수영🏊",routeSummary:"🚂 Firenze→La Spezia (2.5h) + 마을 열차",sched:[
   {t:"07:30",name:"아침+체크아웃",desc:"€10",type:"food"},
   {t:"08:30",name:"Firenze→La Spezia",desc:"열차 2.5h",type:"move"},
@@ -1064,8 +1111,8 @@ const FOOD_RECS={
 {n:"Le Volpi e l'Uva",d:"Ponte Vecchio 남쪽 와인바. 젤라토 대신 작은 아페리티보 선택지",p:"€16~30",c:[43.7669929,11.2527824],q:"Le Volpi e l'Uva Firenze"}
 ],
 "firenze-oltrarno-dinner":[
-{n:"Il Santo Bevitore",d:"올트라르노 대표, 현대 토스칸 요리+와인",p:"€70",c:[43.7680,11.2480]},
-{n:"Trattoria 4 Leoni",d:"산토스피리토 광장, 배+리코타 파스타 유명",p:"€55",c:[43.7672,11.2488]},
+{n:"Trattoria 4 Leoni",d:"Piazza della Passera, 일요일 저녁 후보. 배+리코타 파스타/토스칸 요리, 예약 권장",p:"€55~75",c:[43.7672,11.2488],q:"Trattoria 4 Leoni Firenze"},
+{n:"Il Santo Bevitore",d:"올트라르노 대표, 현대 토스칸 요리+와인. 영업/예약 가능 시간 재확인",p:"€70~95",c:[43.7680,11.2480],q:"Il Santo Bevitore Firenze"},
 {n:"Il Latini",d:"비스테카+전통 토스칸, 와인 무한리필!",p:"€65",c:[43.7720,11.2500]},
 {n:"Osteria dell Enoteca",d:"와인바+식사, 로컬 분위기 최고",p:"€60",c:[43.7675,11.2485]},
 {n:"Trattoria Cammillo",d:"1945년~ 가족운영, 전통 피렌체 요리",p:"€65",c:[43.7678,11.2490]}
@@ -1078,14 +1125,14 @@ const FOOD_RECS={
 {n:"SandwiChic",d:"고급 재료 파니니, 올트라르노 숨은 맛집",p:"€12",c:[43.7680,11.2495]}
 ],
 "firenze-bistecca":[
-{n:"Buca Mario",d:"1886년 비스테카 원조, 지하 동굴식당 1.2kg",p:"€90",c:[43.7718,11.2533]},
+{n:"Buca Mario",d:"공식 19:00~00:00, 주방 22:00, 일요일 휴무. D6 월요일 저녁 비스테카 1순위",p:"€90~130",c:[43.7718,11.2533],q:"Buca Mario Firenze"},
 {n:"Trattoria dall Oste",d:"키아니나 비스테카, 가성비 좋은 대안",p:"€70",c:[43.7735,11.2545]},
 {n:"Il Latini",d:"토스칸 전통코스+비스테카, 와인 무한",p:"€75",c:[43.7720,11.2500]},
 {n:"Perseus",d:"로컬 비스테카 맛집, 관광객 거의 없음",p:"€60",c:[43.7830,11.2470]},
 {n:"Osteria de Benci",d:"비스테카+파스타, 산타크로체 가성비",p:"€65",c:[43.7685,11.2600]}
 ],
 "firenze-trattoria":[
-{n:"Trattoria Mario",d:"1953년 합석문화, 현금만, 빠른 회전",p:"€50",c:[43.7748,11.2537]},
+{n:"Trattoria Mario",d:"공식 월~토 점심 중심, 일요일/공휴일 휴무. 저녁 후보로 쓰지 말 것",p:"€35~55",c:[43.7748,11.2537],q:"Trattoria Mario Firenze"},
 {n:"Trattoria Sostanza",d:"버터 치킨 전설! 예약필수, 현금만",p:"€60",c:[43.7730,11.2475]},
 {n:"Buca Lapi",d:"1880년 지하 비스테카 명가, 분위기 최고",p:"€85",c:[43.7725,11.2515]},
 {n:"Osteria Vini e Vecchi Sapori",d:"7석뿐! 작은 로컬 맛집",p:"€45",c:[43.7700,11.2555]},
@@ -1185,7 +1232,7 @@ const FOOD_RECS={
 };
 
 const FOOD_GUIDE={
-verified:"2026-06-02",
+verified:"2026-06-06",
 groups:[
 {title:"파스타 4대장",items:[
 {n:"카르보나라",d:"계란·페코리노·구안찰레. 크림 없는 로마식으로 1순위."},
@@ -1227,8 +1274,8 @@ route:[
 {day:"D3",time:"점심 대체",name:"Supplizio + Antico Forno",dish:"수플리·피자 알 탈리오",note:"Roscioli 예약이 없거나 가볍게 먹을 때만. Roscioli와 둘 다 먹지 않기.",pick:true},
 {day:"D3",time:"17:35",name:"Spagna 당충전",dish:"젤라토·티라미수·에스프레소",note:"점심 후 4시간대. 작은 컵 1개 공유 후 저녁은 19:30으로."},
 {day:"D3",time:"저녁 후",name:"Fatamorgana / Angeletto",dish:"몬티 젤라토",note:"저녁 뒤 숙소 근처에서 10분. 닫혀 있으면 바로 숙소."},
-{day:"D4",time:"10:10",name:"Mercato Centrale",dish:"브런치·파니노·시장 푸드홀",note:"07:40 Italo라 피렌체 도착 후 첫 제대로 된 식사. 산 로렌조/두오모 동선 시작점.",pick:true},
-{day:"D4",time:"14:15",name:"Passera / La Carraia",dish:"젤라토 또는 에스프레소",note:"Ponte Vecchio 뒤, 점심 뒤 3시간대 당충전. 저녁 전 과식 없이 작은 컵."},
+{day:"D4",time:"10:05",name:"Mercato Centrale",dish:"브런치·파니노·시장 푸드홀",note:"B&B에 짐 맡긴 뒤 도보 6~8분. 산 로렌조/두오모 동선 시작점.",pick:true},
+{day:"D4",time:"14:25",name:"Passera / La Carraia",dish:"젤라토 또는 에스프레소",note:"Ponte Vecchio 뒤, 점심 뒤 3시간대 당충전. 저녁 전 과식 없이 작은 컵."},
 {day:"D4",time:"20:15",name:"Oltrarno dinner",dish:"토스칸 정찬·와인",note:"미켈란젤로광장 석양 후 내려와 먹는 흐름. Il Santo Bevitore는 예약 권장."}
 ],
 sources:[
@@ -1249,8 +1296,10 @@ sources:[
 ["Forno Campo de' Fiori 정보","https://www.arrivalguides.com/en/Travelguide/ROME/cafes/forno-campo-de-fiori-29336"],
 ["Mercato Centrale Firenze 공식","https://www.mercatocentrale.com/florence/info/"],
 ["San Lorenzo Basilica 공식 티켓","https://sanlorenzofirenze.it/prodotto/visita-basilica-completa/"],
-["Plus Florence FAQ 공식","https://plushostels.com/en/faq-terms"],
-["Florence Duomo 공식 시간표","https://tickets.duomo.firenze.it/en/support/service"]
+["Le Stanze del Duomo 공식 위치/서비스","https://www.lestanzedelduomo.it/en/how-to-reach-us.html"],
+["Florence Duomo 공식 시간표","https://tickets.duomo.firenze.it/en/support/service"],
+["Buca Mario 공식 연락처/영업시간","https://www.bucamario.com/contatti/"],
+["Trattoria Mario 공식 영업 안내","https://www.trattoriamario.com/"]
 ]
 };
 
@@ -1261,30 +1310,36 @@ const COMPARE=[
 const BOOKING_ITEMS=[
 {status:"확정",tone:"done",cat:"항공",title:"KE931 / KE928",target:"완료",window:"예약 완료",note:"왕복 173만원/인 예산 반영",link:"https://www.koreanair.com",linkText:"대한항공"},
 {status:"확정",tone:"done",cat:"숙소",title:"로마 Hotel Labelle",target:"완료",window:"환불불가",note:"₩854,164/3박 + 도시세 ₩52,620 현장결제",link:"https://www.hotellabelle.it/",linkText:"공식"},
-{status:"가예약",tone:"warn",cat:"숙소",title:"피렌체 Plus Florence",target:"2026-06-17 전 결정",window:"무료취소 6/17까지",note:"₩900,000/3박. 위치/객실 조건 재확인",link:"https://www.plushostels.com/florence",linkText:"공식"},
-{status:"예약필요",tone:"warn",cat:"교통",title:"장거리 열차",target:"지금부터 1차 조회",window:"좌석 지정/환불 조건 비교",note:"D4는 사용자 티켓 기준 Italo 9912 07:40→09:17 Prima Business (€38.80/2인, 2호차 9·10) 반영. 이후 Firenze→La Spezia, La Spezia→Venezia도 60일 전까지 확정",link:"https://www.italotreno.com/en/destinations-timetable/rome-florence-tickets",linkText:"Italo"},
+{status:"확정",tone:"done",cat:"숙소",title:"피렌체 B&B Le Stanze del Duomo",target:"완료",window:"두오모 바로 옆",note:"Via de' Martelli 8. 공식 기준 SMN 도보 10분/택시 5분, 리셉션 08:00~21:00, 객실 14:00부터, 짐 보관 가능. 실결제 금액/도시세는 예산에 추가 입력 필요",link:"https://www.lestanzedelduomo.it/en/contacts",linkText:"공식"},
+{status:"정리필요",tone:"warn",cat:"숙소",title:"Plus Florence 가예약 취소 확인",target:"지금",window:"이전 가예약 정리",note:"새 숙소가 Le Stanze del Duomo로 확정됐으므로 Plus Florence 예약/가예약이 남아 있으면 취소 완료 메일을 보관",link:"https://www.plushostels.com/florence",linkText:"Plus"},
+{status:"확정",tone:"done",cat:"교통",title:"D4 Roma→Firenze Italo",target:"완료",window:"사용자 티켓 기준",note:"Italo 9912 07:40→09:17 Prima Business, 2인 €38.80, 2호차 9·10. D4 기상/이동 시간 반영 완료",link:"https://www.italotreno.com/en/destinations-timetable/rome-florence-tickets",linkText:"Italo"},
+{status:"예약필요",tone:"warn",cat:"교통",title:"후속 장거리 열차",target:"지금부터 1차 조회",window:"좌석 지정/환불 조건 비교",note:"Firenze→La Spezia, La Spezia→Venezia 이동편은 60~90일 전까지 열차번호·환불 조건 확정",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
 {status:"예약필요",tone:"warn",cat:"입장권",title:"콜로세움",target:"2026-08-18(화)",window:"방문 30일 전",note:"D2 08:30 목표. 07:00 KST부터 조회, 08:30 슬롯은 15:30 KST에도 재확인",link:"https://colosseo.it/en/opening-times-and-tickets/",linkText:"공식"},
 {status:"선택예약",tone:"warn",cat:"식당",title:"D2 점심/저녁",target:"2026-08-20~09-03",window:"인기 정찬만 예약",note:"Armando/La Taverna/Broccoletti 선택 시 예약. Pane e Salame/Trieste는 현장 대기 가능",link:"https://www.google.com/maps/search/?api=1&query=Pantheon+Monti+restaurants+Rome",linkText:"지도"},
 {status:"예약필요",tone:"warn",cat:"입장권",title:"바티칸 + 보르게세",target:"2026-07-20(월)",window:"D3 시간제 예약",note:"바티칸 08:00, 보르게세 15:30 슬롯 우선 확보",link:"https://www.museivaticani.va/content/museivaticani/en.html",linkText:"바티칸"},
-{status:"예약필요",tone:"warn",cat:"입장권",title:"우피치 / 아카데미아 / 두오모",target:"2026-06-22(월)",window:"D5 핵심 시간제 예약",note:"08:30 우피치, 13:00 아카데미아, 16:00 두오모 쿠폴라 순서로 확보",link:"https://www.uffizi.it/en/tickets",linkText:"우피치"},
+{status:"예약필요",tone:"warn",cat:"입장권",title:"D5 우피치 / 아카데미아 / 두오모",target:"2026-06-22(월)",window:"D5 핵심 시간제 예약",note:"08:30 우피치, 13:30 아카데미아, 16:00 두오모 쿠폴라 순서. Le Stanze del Duomo 기준 중간 숙소 휴식 가능",link:"https://www.uffizi.it/en/tickets",linkText:"우피치"},
+{status:"예약필요",tone:"warn",cat:"입장권",title:"D6 피사 사탑",target:"2026-06-23(화) 09:00 KST",window:"방문 90일 전 GMT 기준",note:"9/21 피사 사탑은 10:30~11:00 슬롯 우선. 08:45 Firenze 출발이면 10:00은 빠듯함",link:"https://www.opapisa.it/en/tickets/buy/",linkText:"OPAPISA"},
+{status:"선택예약",tone:"warn",cat:"식당",title:"D4-D6 피렌체 저녁",target:"2026-08-20~09-05",window:"인기 식당 예약",note:"D4 올트라르노, D5 일요일 영업 후보, D6 Buca Mario 월요일 저녁. Buca Mario는 일요일 휴무, Trattoria Mario는 월~토 점심 중심",link:"https://www.bucamario.com/contatti/",linkText:"Buca Mario"},
 {status:"예약필요",tone:"warn",cat:"교통",title:"베네치아 → 코르티나 렌터카",target:"숙소 확정 후",window:"무료취소 조건 우선",note:"메스트레 픽업/밀라노 반납 수수료 확인",link:"https://www.rentalcars.com",linkText:"RentalCars"},
 {status:"예약필요",tone:"warn",cat:"돌로미티",title:"Tre Cime 주차/통행 예약",target:"방문 전 공식 예약",window:"2026 차량 €40",note:"Auronzo 공식 2026-06-01 확인. 9AM 전 도착 목표",link:"https://auronzo.info/en/parking-tre-cime-di-lavaredo/",linkText:"공식"},
 {status:"후보선정",tone:"",cat:"숙소",title:"친퀘테레/베네치아/코르티나/밀라노",target:"다음 결정 대상",window:"무료취소 우선",note:"가격 변동 크므로 도시별 1순위와 백업 1곳 필요",link:"",linkText:""}
 ];
 
 const TICKETING_ITEMS=[
-{date:"2026.06.01(월) 지금",tone:"critical",name:"장거리 열차/렌터카 1차 조회",target:"D4 Italo 9912 07:40 반영, Firenze→La Spezia, La Spezia→Venezia, 메스트레 렌터카",note:"D4 Roma→Firenze는 사용자 티켓 €38.80/2인 기준(2호차 9·10). 이후 이동편은 Italo/Trenitalia에서 열차번호·환불 조건 재확인.",links:[["Italo","https://www.italotreno.com/en"],["Trenitalia","https://www.trenitalia.com"],["RentalCars","https://www.rentalcars.com"]]},
-{date:"2026.06.22(월)",tone:"critical",name:"D5 피렌체 핵심 3종",target:"우피치 08:30, 아카데미아 13:00, 두오모 쿠폴라 16:00",note:"D5가 일요일이라 오전 슬롯 경쟁이 큼. 쿠폴라는 시간 엄수형이라 마지막으로 남기지 말 것.",links:[["Uffizi","https://www.uffizi.it/en/tickets"],["Accademia","https://www.galleriaaccademiafirenze.it/tickets/"],["Duomo","https://tickets.duomo.firenze.it/en"]]},
-{date:"2026.06.23(화) 09:00 KST",tone:"critical",name:"D6 피사 사탑",target:"9/21 10:00 Leaning Tower",note:"공식 기준 GMT 90일 전 오픈. 한국은 GMT보다 9시간 빠르므로 09:00 KST부터 확인.",links:[["OPAPISA","https://www.opapisa.it/en/tickets/buy/"]]},
-{date:"2026.07.20(월) 07:00 KST",tone:"critical",name:"D3 바티칸 + 보르게세",target:"바티칸 08:00, 보르게세 15:30",note:"이탈리아 00:00은 한국 07:00. 바티칸은 첫 슬롯, 보르게세는 2시간 제한 슬롯이라 15:30 전후가 더 현실적.",links:[["Vatican","https://www.museivaticani.va/content/museivaticani/en.html"],["Borghese","https://galleriaborghese.beniculturali.it/en/visita/"]]},
-{date:"2026.08.18(화)",tone:"critical",name:"D2 콜로세움",target:"9/17 08:30 Colosseum + Forum/Palatine",note:"공식 30일 전 오픈. 07:00 KST부터 확인하고, 08:30 슬롯은 15:30 KST에도 다시 확인.",links:[["Colosseo","https://colosseo.it/en/opening-times-and-tickets/"]]},
-{date:"2026.08.18(화)",tone:"",name:"D2 판테온",target:"9/17 14:30 Pantheon",note:"필수 매진형은 아니지만 €5 공식 티켓을 미리 사두면 현장 줄 리스크를 줄일 수 있음.",links:[["Pantheon","https://www.pantheonroma.com/en/openings-info/"]]},
-{date:"2026.08.24(월)",tone:"",name:"D8 베네치아 두칼레 궁전",target:"9/23 15:30 Doge's Palace",note:"30일 전 온라인 예매가 유리한 구간. 산마르코권 동선 확정 후 같이 처리.",links:[["MUVE","https://palazzoducale.visitmuve.it/en/tickets/"]]},
-{date:"2026.08.25(화)",tone:"",name:"D9 산마르코 종탑/대성당 선택",target:"9/24 오후 San Marco",note:"종탑은 줄 회피용 온라인 티켓, 대성당은 시간대 예약 여부를 동선 확정 후 결정.",links:[["Campanile","https://basilicasanmarco.skiperformance.com/en/store#/en/buy"],["Basilica","https://basilicasanmarco.skiperformance.com/en/store#/en/buy"]]},
-{date:"2026.08.27(목)",tone:"critical",name:"D11 트레치메 주차/통행",target:"9/26 07:00 Tre Cime",note:"차량 예약이 막히면 일정 전체가 흔들림. 번호판 미확정이면 예약 후 입력 마감 시간 별도 확인.",links:[["Auronzo","https://auronzo.info/en/parking-tre-cime-di-lavaredo/"]]},
-{date:"2026.08.28(금)",tone:"",name:"D12 밀라노 두오모 옥상 선택",target:"9/27 17:30 Duomo rooftop",note:"현재 일정은 외관 우선. 옥상까지 갈 거면 30일 전 시간제 티켓으로 확정.",links:[["Duomo Milano","https://ticket.duomomilano.it/en/"]]},
-{date:"2026.09.21(월)",tone:"",name:"D7 친퀘테레 카드",target:"9/22 마을 열차/트레일",note:"날씨 영향을 받으므로 전날 구매가 합리적. 열차만 탈지 트레일 포함할지 당일 컨디션으로 결정.",links:[["Cinque Terre Card","https://card.parconazionale5terre.it/en"]]},
-{date:"2026.09.22(화)",tone:"",name:"D8~D9 베네치아 바포레토 48h",target:"9/23 12:30부터 48시간",note:"온라인 구매 후 첫 사용 때 활성화. 현장 구매도 가능하지만 도착 직후 동선 단축용.",links:[["Venezia Unica","https://www.veneziaunica.it/en/e-commerce/services"]]}
+{ymd:"2026-06-01",date:"2026.06.01(월) 지금",tone:"critical",name:"장거리 열차/렌터카 1차 조회",target:"D4 Italo 완료, Firenze→La Spezia, La Spezia→Venezia, 메스트레 렌터카",note:"D4 Roma→Firenze는 사용자 티켓 €38.80/2인 기준 반영 완료. 이후 이동편은 Italo/Trenitalia에서 열차번호·환불 조건 재확인.",links:[["Italo","https://www.italotreno.com/en"],["Trenitalia","https://www.trenitalia.com"],["RentalCars","https://www.rentalcars.com"]]},
+{ymd:"2026-06-06",date:"2026.06.06(토) 지금",tone:"critical",name:"피렌체 숙소 정정",target:"Le Stanze del Duomo 확정, Plus Florence 취소 확인",note:"새 숙소 기준 D4-D6 일정 반영. 이전 Plus Florence 가예약이 남아 있으면 취소 완료 메일 보관.",links:[["Le Stanze","https://www.lestanzedelduomo.it/en/contacts"],["Plus","https://www.plushostels.com/florence"]]},
+{ymd:"2026-06-22",date:"2026.06.22(월)",tone:"critical",name:"D5 피렌체 핵심 3종",target:"우피치 08:30, 아카데미아 13:30, 두오모 쿠폴라 16:00",note:"D5가 일요일이라 오전 슬롯 경쟁이 큼. 숙소가 두오모 옆이라 중간 휴식은 가능하지만 쿠폴라는 시간 엄수.",links:[["Uffizi","https://www.uffizi.it/en/tickets"],["Accademia","https://www.galleriaaccademiafirenze.it/tickets/"],["Duomo","https://tickets.duomo.firenze.it/en"]]},
+{ymd:"2026-06-23",date:"2026.06.23(화) 09:00 KST",tone:"critical",name:"D6 피사 사탑",target:"9/21 10:30~11:00 Leaning Tower",note:"공식 기준 GMT 90일 전 오픈. 08:45 피렌체 출발이면 10:00은 빠듯하므로 10:30 우선.",links:[["OPAPISA","https://www.opapisa.it/en/tickets/buy/"]]},
+{ymd:"2026-07-20",date:"2026.07.20(월) 07:00 KST",tone:"critical",name:"D3 바티칸 + 보르게세",target:"바티칸 08:00, 보르게세 15:30",note:"이탈리아 00:00은 한국 07:00. 바티칸은 첫 슬롯, 보르게세는 2시간 제한 슬롯이라 15:30 전후가 더 현실적.",links:[["Vatican","https://www.museivaticani.va/content/museivaticani/en.html"],["Borghese","https://galleriaborghese.beniculturali.it/en/visita/"]]},
+{ymd:"2026-08-18",date:"2026.08.18(화)",tone:"critical",name:"D2 콜로세움",target:"9/17 08:30 Colosseum + Forum/Palatine",note:"공식 30일 전 오픈. 07:00 KST부터 확인하고, 08:30 슬롯은 15:30 KST에도 다시 확인.",links:[["Colosseo","https://colosseo.it/en/opening-times-and-tickets/"]]},
+{ymd:"2026-08-18",date:"2026.08.18(화)",tone:"",name:"D2 판테온",target:"9/17 14:30 Pantheon",note:"필수 매진형은 아니지만 €5 공식 티켓을 미리 사두면 현장 줄 리스크를 줄일 수 있음.",links:[["Pantheon","https://www.pantheonroma.com/en/openings-info/"]]},
+{ymd:"2026-08-20",date:"2026.08.20(목)",tone:"",name:"D4-D6 피렌체 식당",target:"D4 올트라르노, D5 일요일 후보, D6 Buca Mario 19:30",note:"Buca Mario는 일요일 휴무라 D6 월요일로 이동. 4 Leoni/Il Santo/Buca Mario 중 확정 후 예약.",links:[["Buca Mario","https://www.bucamario.com/contatti/"],["4 Leoni","https://www.4leoni.it/"]]},
+{ymd:"2026-08-24",date:"2026.08.24(월)",tone:"",name:"D8 베네치아 두칼레 궁전",target:"9/23 15:30 Doge's Palace",note:"30일 전 온라인 예매가 유리한 구간. 산마르코권 동선 확정 후 같이 처리.",links:[["MUVE","https://palazzoducale.visitmuve.it/en/tickets/"]]},
+{ymd:"2026-08-25",date:"2026.08.25(화)",tone:"",name:"D9 산마르코 종탑/대성당 선택",target:"9/24 오후 San Marco",note:"종탑은 줄 회피용 온라인 티켓, 대성당은 시간대 예약 여부를 동선 확정 후 결정.",links:[["Campanile","https://basilicasanmarco.skiperformance.com/en/store#/en/buy"],["Basilica","https://basilicasanmarco.skiperformance.com/en/store#/en/buy"]]},
+{ymd:"2026-08-27",date:"2026.08.27(목)",tone:"critical",name:"D11 트레치메 주차/통행",target:"9/26 07:00 Tre Cime",note:"차량 예약이 막히면 일정 전체가 흔들림. 번호판 미확정이면 예약 후 입력 마감 시간 별도 확인.",links:[["Auronzo","https://auronzo.info/en/parking-tre-cime-di-lavaredo/"]]},
+{ymd:"2026-08-28",date:"2026.08.28(금)",tone:"",name:"D12 밀라노 두오모 옥상 선택",target:"9/27 17:30 Duomo rooftop",note:"현재 일정은 외관 우선. 옥상까지 갈 거면 30일 전 시간제 티켓으로 확정.",links:[["Duomo Milano","https://ticket.duomomilano.it/en/"]]},
+{ymd:"2026-09-21",date:"2026.09.21(월)",tone:"",name:"D7 친퀘테레 카드",target:"9/22 마을 열차/트레일",note:"날씨 영향을 받으므로 전날 구매가 합리적. 열차만 탈지 트레일 포함할지 당일 컨디션으로 결정.",links:[["Cinque Terre Card","https://card.parconazionale5terre.it/en"]]},
+{ymd:"2026-09-22",date:"2026.09.22(화)",tone:"",name:"D8~D9 베네치아 바포레토 48h",target:"9/23 12:30부터 48시간",note:"온라인 구매 후 첫 사용 때 활성화. 현장 구매도 가능하지만 도착 직후 동선 단축용.",links:[["Venezia Unica","https://www.veneziaunica.it/en/e-commerce/services"]]}
 ];
 
 // ===================== STATE & RENDER =====================
@@ -1600,6 +1655,54 @@ function renderTransport(c){
   });
 }
 
+function switchBookingView(view){
+  document.querySelectorAll('.booking-view-toggle button').forEach(b=>b.classList.toggle('active',b.dataset.view===view));
+  document.querySelectorAll('.booking-view').forEach(v=>v.classList.toggle('active',v.dataset.view===view));
+}
+function getKstTodayYmd(){
+  const parts=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+  const byType=Object.fromEntries(parts.map(p=>[p.type,p.value]));
+  return `${byType.year}-${byType.month}-${byType.day}`;
+}
+function bookingDetailHtml(item){
+  if(!item)return '<div class="booking-detail-card"><div class="booking-detail-row">캘린더에서 항목을 선택하면 상세와 공식 링크가 여기에 표시됩니다.</div></div>';
+  const links=(item.links||[]).map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${t} 열기</a>`).join('');
+  return `<div class="booking-detail-card"><div class="booking-detail-date">${item.date}</div><div class="booking-detail-name">${item.name}</div><div class="booking-detail-row"><strong>대상:</strong> ${item.target}</div><div class="booking-detail-row">${item.note}</div>${links?`<div class="booking-detail-links">${links}</div>`:''}</div>`;
+}
+function selectBookingEvent(idx){
+  const item=TICKETING_ITEMS[idx];
+  const detail=document.getElementById('bookingDetail');
+  if(detail)detail.innerHTML=bookingDetailHtml(item);
+  document.querySelectorAll('.booking-event').forEach(b=>b.classList.toggle('active',Number(b.dataset.bookingIdx)===idx));
+}
+function renderBookingCalendar(items){
+  const byDay={};
+  const today=getKstTodayYmd();
+  items.forEach((item,idx)=>{
+    if(!item.ymd)return;
+    (byDay[item.ymd]||(byDay[item.ymd]=[])).push({...item,idx});
+  });
+  const months=[...new Set(items.filter(x=>x.ymd).map(x=>x.ymd.slice(0,7)))].sort();
+  const weekdays=['일','월','화','수','목','금','토'];
+  const selectedIdx=Math.max(0,items.findIndex(x=>x.ymd===today));
+  return `<div class="booking-calendar-head"><div class="booking-today-pill">오늘 ${today}</div><div class="booking-swipe-hint">가로로 밀어서 월 이동</div></div><div class="booking-calendar-grid" id="bookingCalendarScroller">${months.map(month=>{
+    const [y,m]=month.split('-').map(Number);
+    const first=new Date(y,m-1,1);
+    const last=new Date(y,m,0);
+    let cells='';
+    for(let i=0;i<first.getDay();i++)cells+='<div class="booking-day blank"></div>';
+    for(let d=1;d<=last.getDate();d++){
+      const key=`${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      const events=byDay[key]||[];
+      const cls=`booking-day${events.length?' has-events':''}${events.some(e=>e.tone==='critical')?' has-critical':''}${key===today?' today':''}`;
+      const eventHtml=events.map(e=>{
+        return `<button class="booking-event ${e.tone==='critical'?'critical':''}${e.idx===selectedIdx?' active':''}" data-booking-idx="${e.idx}" onclick="selectBookingEvent(${e.idx})">${e.name}</button>`;
+      }).join('');
+      cells+=`<div class="${cls}"><div class="booking-day-num"><span>${d}</span>${key===today?'<span class="booking-today-tag">오늘</span>':''}</div>${eventHtml}</div>`;
+    }
+    return `<div class="booking-month${month===today.slice(0,7)?' today-month':''}"><div class="booking-month-title">${y}.${String(m).padStart(2,'0')}</div><div class="booking-weekdays">${weekdays.map(w=>`<span>${w}</span>`).join('')}</div><div class="booking-days">${cells}</div></div>`;
+  }).join('')}</div><div id="bookingDetail">${bookingDetailHtml(items[selectedIdx])}</div>`;
+}
 function renderBooking(){
   const el=document.getElementById('bookingContent');
   const cards=BOOKING_ITEMS.map(item=>`<div class="booking-card ${item.tone||''}"><div class="booking-top"><div><div class="booking-cat">${item.cat}</div><div class="booking-title">${item.title}</div></div><span class="booking-status">${item.status}</span></div><div class="booking-row"><strong>목표:</strong> ${item.target}</div><div class="booking-row"><strong>조건:</strong> ${item.window}</div><div class="booking-row">${item.note}</div>${item.link?`<a class="booking-link" href="${item.link}" target="_blank" rel="noopener">${item.linkText}</a>`:''}</div>`).join('');
@@ -1607,7 +1710,9 @@ function renderBooking(){
     const links=(item.links||[]).map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${t}</a>`).join('');
     return `<div class="ticket-card ${item.tone||''}"><div class="ticket-date">${item.date}</div><div class="ticket-name">${item.name}</div><div class="ticket-meta"><strong>대상:</strong> ${item.target}</div><div class="ticket-meta">${item.note}</div>${links?`<div class="ticket-links">${links}</div>`:''}</div>`;
   }).join('');
-  el.innerHTML=`<div class="booking-meta">공식 정보 검증 기준일: 2026-06-01 · 한국 기준 날짜(KST) · 이탈리아 9월은 CEST로 한국보다 7시간 느림</div><div class="ticket-title">한국 날짜 기준 티케팅 캘린더</div><div class="ticket-grid">${ticketCards}</div><div class="ticket-title">예약 체크리스트</div><div class="booking-grid">${cards}</div>`;
+  const calendar=renderBookingCalendar(TICKETING_ITEMS);
+  el.innerHTML=`<div class="booking-meta">공식 정보 검증 기준일: 2026-06-06 · 한국 기준 날짜(KST) · 이탈리아 9월은 CEST로 한국보다 7시간 느림</div><div class="booking-view-toggle" role="tablist"><button class="active" data-view="calendar" onclick="switchBookingView('calendar')">캘린더</button><button data-view="list" onclick="switchBookingView('list')">리스트</button></div><div class="booking-view active" data-view="calendar"><div class="ticket-title">한국 날짜 기준 예약 캘린더</div>${calendar}</div><div class="booking-view" data-view="list"><div class="booking-list-block"><div class="ticket-title">한국 날짜 기준 티케팅 리스트</div><div class="ticket-grid">${ticketCards}</div><div class="ticket-title">예약 체크리스트</div><div class="booking-grid">${cards}</div></div></div>`;
+  requestAnimationFrame(()=>document.querySelector('.booking-month.today-month')?.scrollIntoView({block:'nearest',inline:'start'}));
 }
 
 function renderFoodGuide(){
@@ -1636,7 +1741,7 @@ function renderHotels(c){
     }).join('');
     blocks+=`<div class="hotel-city" data-cityblock="${city}"${i===0?'':' hidden'}><h4>${city} <span class="hcount">후보 ${c.hotels[city].length}곳</span></h4><div class="hotel-cards">${cards}</div></div>`;
   });
-  const tip=`<div class="hotel-tip">💡 <strong>예약 팁:</strong> 9월은 성수기! 6개월 전 예약 추천. 로마 Hotel Labelle은 확정가(₩854,164/3박·2인).<br>🏛️ <strong>이탈리아 도시세(tassa di soggiorno):</strong> 대부분 도시가 1인·1박당 €3~7을 체크인 시 숙소에서 현장 결제 — 예산 '도시세' 항목에 별도 계상. 로마(2성) ₩52,620 확정.</div>`;
+  const tip=`<div class="hotel-tip">💡 <strong>예약 팁:</strong> 9월은 성수기라 확정 숙소의 취소/결제 조건과 체크인 시간을 별도 보관. 로마 Hotel Labelle은 확정가(₩854,164/3박·2인), 피렌체 Le Stanze del Duomo는 실결제 금액 입력 필요.<br>🏛️ <strong>이탈리아 도시세(tassa di soggiorno):</strong> 대부분 도시가 1인·1박당 €3~7을 체크인 시 숙소에서 현장 결제 — 예산 '도시세' 항목에 별도 계상. 로마(2성) ₩52,620 확정.</div>`;
   el.innerHTML=nav+blocks+tip;
 }
 function showHotelCity(name){
