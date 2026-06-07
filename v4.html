@@ -286,6 +286,15 @@ a{color:inherit}
 .step-detail summary::after{content:"+";float:right;font-weight:900;color:#8A6A1F}
 .step-detail[open] summary::after{content:"-"}
 .step-detail div{margin-top:6px;font-size:11.5px;line-height:1.55}
+.step-links{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+.step-link{
+  display:inline-flex;align-items:center;gap:4px;padding:5px 9px;border-radius:8px;
+  background:var(--adriatic);color:#fff;text-decoration:none;
+  font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+  font-size:10px;font-weight:800;line-height:1.2;
+}
+.step-link.train{background:var(--terracotta)}
+.step-link:hover{filter:brightness(.94)}
 .backup-strategy-row td{background:var(--paper);padding:8px 16px 12px;border-bottom:1px solid var(--line-2)}
 .backup-strategy-row td:first-child{color:var(--gold);border-left:2px solid var(--gold)}
 .backup-card{
@@ -607,7 +616,7 @@ footer{text-align:center;padding:36px 20px;color:var(--faint);
 }
 .route-anchor-icon,.route-arrow-icon{overflow:visible!important}
 .route-anchor-dot{
-  width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  min-width:20px;width:max-content;height:20px;border-radius:999px;padding:0 5px;display:flex;align-items:center;justify-content:center;
   background:#fff;color:#274C5B;border:2px solid #274C5B;font-size:9px;font-weight:900;
   box-shadow:0 2px 7px rgba(39,76,91,.25);
   font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
@@ -902,12 +911,12 @@ B: {
   {t:"19:30",name:"저녁: Buca Mario",rk:"firenze-bistecca",desc:"월요일 영업 · 비스테카 + crostini neri + cantucci/vin santo · 예약 필수",type:"food",coords:[43.7718,11.2533],tip:"공식 기준 19:00~00:00, 주방 22:00 종료, 일요일 휴무. 메인은 bistecca alla Fiorentina를 공유하고, 시작은 crostini neri 또는 가벼운 전채, 마무리는 cantucci e vin santo가 있으면 선택."},
   {t:"21:45",name:"B&B Le Stanze del Duomo 복귀",desc:"Buca Mario→숙소 도보 8~10분",type:"move",coords:[43.7743554,11.2557735],map:false}
 ],cost:"€250~330"},
-{day:7,date:"9/22 화",city:"→친퀘테레",theme:"남→북 한 줄 동선 + 몬테로쏘 수영",routeSummary:"🚂 Monterosso 짐 보관 · 관광은 Riomaggiore→Manarola→Vernazza→Monterosso",sched:[
-  {t:"07:20~07:55",name:"조식 + 체크아웃",place:"B&B Le Stanze del Duomo",desc:"Konnubio 조식 후 짐 마감 · 수영복/수건/샌들 분리",type:"food",coords:[43.7743554,11.2557735],map:false,route:false,tip:"D7은 열차+마을 이동+수영이 모두 있는 날. 캐리어에는 손대지 않도록 수영 물품, 얇은 겉옷, 보조배터리, 선크림만 데이백에 분리."},
-  {t:"08:05",name:"B&B → Firenze SMN",place:"Firenze SMN",moveInfo:"도보 10~12분 / 택시 5분",desc:"두오모 숙소→SMN · 08:30대 열차 목표",type:"move",coords:[43.7775719,11.2474177],map:false,route:false,tip:"정확한 Firenze→Monterosso 열차번호는 60~90일 전 재확인. 환승 1회라도 좌석/짐 동선이 단순한 편을 우선한다."},
-  {t:"08:30대",name:"Firenze → Monterosso",place:"Monterosso al Mare",moveInfo:"La Spezia 환승 포함 약 2h40~3h",desc:"La Spezia에서 Cinque Terre Train Card 확인 후 Monterosso까지 이동",type:"move",coords:[44.1462,9.6547],map:false,route:false,tip:"9/22는 공식 2026 캘린더상 Train MS Card 1일권 Band B로 보는 것이 안전. 성인 €29.50/인, 2인 €59 예산 반영. 날씨가 나쁘면 트레일보다 열차 중심으로 전환."},
-  {t:"11:20",name:"Monterosso Fegina 숙소 짐 맡김",place:"Hotel Baia 후보",desc:"최적 위치 예시: Hotel Baia · 역 오른쪽 몇 걸음 + 해변 앞",type:"hotel",coords:[44.145352,9.64731],route:false,tip:"지도 1번은 실제 관광 시작점이 아니라 짐 보관 베이스다. 숙소 미정 상태에서는 Monterosso Fegina 역/해변권이 1순위. 캐리어를 없앤 뒤 움직일 수 있고, 수영 후 샤워/체크인도 가장 쉽다. 실제 관광 동선은 2번 Riomaggiore부터 남→북으로 올라온다."},
-  {t:"11:50",name:"Monterosso → Riomaggiore",moveInfo:"Cinque Terre Express 약 20~25분",desc:"짐 없이 남쪽 시작점으로 한 번 이동",type:"move",coords:[44.0994,9.7379],map:false,tip:"겉보기에는 한 번 내려갔다가 올라오는 구조지만, 캐리어를 숙소에 두기 위한 의도적 이동이다. 이후에는 Riomaggiore→Manarola→Vernazza→Monterosso로 북상해서 숙소에서 끝난다."},
+{day:7,date:"9/22 화",city:"→친퀘테레",theme:"짐 먼저 맡기고 남→북 한 줄 동선",routeSummary:"🚂 1 Monterosso 짐 맡김 → 2 Riomaggiore 관광 시작 → Manarola→Vernazza→Monterosso",sched:[
+  {t:"07:20~07:55",name:"조식 + 체크아웃",place:"B&B Le Stanze del Duomo",pin:"숙",desc:"Konnubio 조식 후 짐 마감 · 수영복/수건/샌들 분리",type:"hotel",coords:[43.7743554,11.2557735],map:false,fit:false,actions:[{t:"숙소→SMN 도보",u:"https://www.google.com/maps/dir/?api=1&origin=43.7743554,11.2557735&destination=43.7775719,11.2474177&travelmode=walking"}],tip:"D7은 열차+마을 이동+수영이 모두 있는 날. 피렌체 숙소도 지도 보조 마커로 표시하되, 초기 지도는 친퀘테레가 잘 보이도록 유지한다. 이 행을 누르면 숙소 마커로 이동한다."},
+  {t:"08:05",name:"B&B → Firenze SMN",place:"Firenze SMN",pin:"SMN",moveInfo:"도보 10~12분 / 택시 5분",desc:"두오모 숙소→SMN · 08:30대 열차 목표",type:"move",coords:[43.7775719,11.2474177],map:false,fit:false,actions:[{t:"도보 경로",u:"https://www.google.com/maps/dir/?api=1&origin=43.7743554,11.2557735&destination=43.7775719,11.2474177&travelmode=walking"},{t:"역 위치",u:"https://www.google.com/maps/search/?api=1&query=Firenze+Santa+Maria+Novella"}],tip:"정확한 Firenze→Monterosso 열차번호는 60~90일 전 재확인. 환승 1회라도 좌석/짐 동선이 단순한 편을 우선한다. 이 행을 누르면 Firenze SMN 마커로 이동한다."},
+  {t:"08:30대",name:"Firenze → Monterosso",place:"Monterosso al Mare",pin:"T",moveInfo:"La Spezia 환승 포함 약 2h40~3h",desc:"La Spezia에서 Cinque Terre Train Card 확인 후 Monterosso까지 이동",type:"move",coords:[44.1462,9.6547],map:false,actions:[{t:"Google 열차 경로",u:"https://www.google.com/maps/dir/?api=1&origin=Firenze+Santa+Maria+Novella&destination=Monterosso+al+Mare&travelmode=transit",kind:"train"},{t:"Trenitalia 조회",u:"https://www.trenitalia.com",kind:"train"}],tip:"9/22는 공식 2026 캘린더상 Train MS Card 1일권 Band B로 보는 것이 안전. 성인 €29.50/인, 2인 €59 예산 반영. 날씨가 나쁘면 트레일보다 열차 중심으로 전환."},
+  {t:"11:20",name:"Monterosso Fegina 숙소 짐 맡김",place:"Hotel Baia 후보",moveInfo:"Monterosso 역→Hotel Baia 도보 약 2~5분",desc:"최적 위치 예시: Hotel Baia · 역 오른쪽 몇 걸음 + 해변 앞",type:"hotel",coords:[44.145352,9.64731],actions:[{t:"역→Hotel Baia 도보",u:"https://www.google.com/maps/dir/?api=1&origin=Monterosso+al+Mare+Station&destination=Hotel+Baia+Monterosso&travelmode=walking"},{t:"Hotel Baia 위치",u:"https://www.baiahotel.it/en/how-to-reach-us/"}],tip:"1번은 실제로 가야 하는 지점이다. Monterosso Fegina 역/해변권 숙소에 캐리어를 맡긴 뒤, 짐 없이 Riomaggiore로 내려가 관광을 시작한다. 이 선택의 목적은 수영 후 숙소 샤워/체크인과 다음날 베네치아 이동을 편하게 만드는 것."},
+  {t:"11:50",name:"Monterosso → Riomaggiore",moveInfo:"Cinque Terre Express 약 20~25분",desc:"짐 없이 남쪽 시작점으로 한 번 이동",type:"move",coords:[44.0994,9.7379],map:false,actions:[{t:"열차 경로",u:"https://www.google.com/maps/dir/?api=1&origin=44.145352,9.64731&destination=44.0994,9.7379&travelmode=transit",kind:"train"}],tip:"겉보기에는 한 번 내려갔다가 올라오는 구조지만, 캐리어를 숙소에 두기 위한 의도적 이동이다. 이후에는 Riomaggiore→Manarola→Vernazza→Monterosso로 북상해서 숙소에서 끝난다."},
   {t:"12:15",name:"Riomaggiore 점심 + 항구",rk:"cinqueterre-lunch",desc:"Il Pescato Cucinato/Dau Cila 후보 · 프리또/앵초비/가벼운 해산물",type:"food",coords:[44.0994,9.7379],tip:"점심을 길게 앉으면 오후가 무너진다. 프리또 테이크아웃을 1순위로 두고, 제대로 앉고 싶을 때만 Dau Cila. Via dell'Amore 예약 시간이 있으면 음식보다 입장 시간을 우선."},
   {t:"13:30~14:05",name:"Via dell'Amore",desc:"공식 기준 Riomaggiore→Manarola 일방향 · 예약 필요 · 약 30분",type:"hl",coords:[44.1040900,9.7313600],tip:"공식 안내 기준 2026년 3/29~10/24 운영은 09:00~21:00, 마지막 입장 20:30. 방문자는 예약 필수이고, 일반적으로 Riomaggiore 입구에서 Manarola 방향 일방향이다."},
   {t:"14:10",name:"Manarola 전망 포인트",desc:"마을 골목 + 항구 뷰 · 45분",type:"hl",coords:[44.1068,9.7265],tip:"Nessun Dorma는 D7 화요일 휴무라 이 날의 핵심 식당/석양 플랜에서 제외. 대신 전망 산책과 사진만 하고 다음 마을로 이동한다."},
@@ -1667,6 +1676,7 @@ function renderRouteSupportMarkers(routeItems,anchorItems){
     let popup=`<b>${s.name}</b>`;
     if(s.t)popup=`<span style="color:#d97706;font-weight:700">${s.t}</span> `+popup;
     if(s.desc)popup+=`<br><span style="color:#555;font-size:11px">${s.desc}</span>`;
+    if(Array.isArray(s.actions)&&s.actions.length)popup+=`<br>${s.actions.map(a=>`<a href="${a.u}" target="_blank" rel="noopener" style="display:inline-block;margin-top:4px;margin-right:4px;background:${a.kind==='train'?'#2F6B4F':'#1a73e8'};color:#fff;padding:3px 8px;border-radius:4px;font-size:10px;font-weight:600;text-decoration:none">${a.t}</a>`).join('')}`;
     popup+=`<br><a href="https://www.google.com/maps/search/?api=1&query=${latlng[0]},${latlng[1]}" target="_blank" rel="noopener" style="display:inline-block;margin-top:4px;background:#1a73e8;color:#fff;padding:3px 8px;border-radius:4px;font-size:10px;font-weight:600;text-decoration:none">📍 Google Maps 열기</a>`;
     mk.bindPopup(popup);
     dayMarkers.push(mk);
@@ -1686,6 +1696,7 @@ function renderDayPointMarkers(mapItems,anchorItems=currentDayAnchorItems,routeI
     if(s.optional)popup+=`<br><span style="color:#5F6B3D;font-size:11px;font-weight:700">선택 후보 ${markerLabel}</span>`;
     if(s.desc)popup+=`<br><span style="color:#555;font-size:11px">${s.desc}</span>`;
     if(s.tip)popup+=`<br><span style="color:#92400e;font-size:11px;background:#fffbeb;padding:1px 4px;border-radius:3px">체크포인트는 리스트에서 확인</span>`;
+    if(Array.isArray(s.actions)&&s.actions.length)popup+=`<br>${s.actions.map(a=>`<a href="${a.u}" target="_blank" rel="noopener" style="display:inline-block;margin-top:4px;margin-right:4px;background:${a.kind==='train'?'#2F6B4F':'#1a73e8'};color:#fff;padding:3px 8px;border-radius:4px;font-size:10px;font-weight:600;text-decoration:none">${a.t}</a>`).join('')}`;
     popup+=`<br><a href="https://www.google.com/maps/search/?api=1&query=${latlng[0]},${latlng[1]}" target="_blank" rel="noopener" style="display:inline-block;margin-top:4px;background:#1a73e8;color:#fff;padding:3px 8px;border-radius:4px;font-size:10px;font-weight:600;text-decoration:none">📍 Google Maps 열기</a>`;
     mk.bindPopup(popup);
     dayMarkers.push(mk);
@@ -1702,7 +1713,8 @@ function showDayOnMap(day){
   const routeItems=day.sched.filter(isRoutePoint);
   const visiblePoints=[...routeItems,...items.filter(s=>!routeItems.includes(s))];
   if(visiblePoints.length===0){dayMap.setView([42.5,13],6);return;}
-  const coords=visiblePoints.map(s=>[Number(s.coords[0]),Number(s.coords[1])]);
+  const fitPoints=visiblePoints.filter(s=>s.fit!==false);
+  const coords=(fitPoints.length?fitPoints:visiblePoints).map(s=>[Number(s.coords[0]),Number(s.coords[1])]);
   const mainCoords=routeItems.map(s=>[Number(s.coords[0]),Number(s.coords[1])]);
   const bounds=L.latLngBounds(coords);
   if(bounds.isValid())dayMap.fitBounds(bounds,{padding:[72,72],maxZoom:14});
@@ -1748,6 +1760,10 @@ function renderTipDetail(tip){
   if(!tip)return '';
   return `<details class="step-detail" onclick="event.stopPropagation()"><summary>체크포인트</summary><div>${tip}</div></details>`;
 }
+function renderStepLinks(s){
+  if(!Array.isArray(s?.actions)||!s.actions.length)return '';
+  return `<div class="step-links">${s.actions.map(a=>`<a class="step-link${a.kind==='train'?' train':''}" href="${a.u}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${a.t}</a>`).join('')}</div>`;
+}
 function renderStepTitle(s,mapNum,tag,cp,extra=''){
   const badge=mapNum?`<span class="map-num">${mapNum}</span>`:'';
   return `<div class="step-title">${badge}<span class="step-name">${s.name}</span>${tag}${cp}${extra}</div>`;
@@ -1758,7 +1774,7 @@ function renderMoveNote(prev,s){
   return `<div class="move-note"><strong>이동</strong> ${pointLabel(prev)} → ${pointLabel(s)} · ${detail}</div>`;
 }
 function renderStepDesc(s,moveNote=''){
-  return `<div class="step-desc">${s.desc||''}${moveNote}</div>${renderTipDetail(s.tip)}`;
+  return `<div class="step-desc">${s.desc||''}${moveNote}${renderStepLinks(s)}</div>${renderTipDetail(s.tip)}`;
 }
 function renderBackupStrategy(s){
   const fields=(s.fields||[]).map(f=>`<div class="backup-item"><strong>${f.k}</strong><span>${f.v}</span></div>`).join('');
