@@ -6,4 +6,5 @@
 !plan/
 plan/*
 !plan/VERSIONS.md
+!plan/2026-여정개편-보고서.md
 !.gitignore

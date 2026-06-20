@@ -774,12 +774,12 @@ footer{text-align:center;padding:36px 20px;color:var(--faint);
 const COURSES = {
 B: {
   name:"로마–밀라노 12박 13일",sub:"친퀘테레+코모호수+렌터카",
-  nights:"Roma(3)+Firenze(3)+CinqueTerre(1)+Venezia(2)+Dolomiti(2)+Milano(1)=12N",
-  totalBudget:7579.8,perPerson:569,
-  budget:[{l:"항공",a:2307,c:"#244F3B"},{l:"교통",a:594.8,c:"#2F6B4F"},{l:"숙박",a:1890,c:"#3F7D5E"},{l:"식비",a:1500,c:"#5E6B57"},{l:"입장료",a:688,c:"#7E8B6F"},{l:"도시세",a:120,c:"#9AA38C"},{l:"기타",a:480,c:"#B8B2A6"}],
-  cities:[{name:"Roma",lat:41.9028,lng:12.4964,n:3,dates:"9/16~18",color:"#ef4444"},{name:"Firenze",lat:43.7696,lng:11.2558,n:3,dates:"9/19~21",color:"#22c55e"},{name:"Pisa",lat:43.7228,lng:10.4017,n:0,dates:"9/21",color:"#86efac"},{name:"Cinque Terre",lat:44.1461,lng:9.6535,n:1,dates:"9/22",color:"#f59e0b"},{name:"Monterosso",lat:44.1454,lng:9.6500,n:0,dates:"9/22",color:"#fbbf24"},{name:"Venezia",lat:45.4408,lng:12.3155,n:2,dates:"9/23~24",color:"#06b6d4"},{name:"Burano",lat:45.4854,lng:12.4167,n:0,dates:"9/24",color:"#67e8f9"},{name:"Cortina",lat:46.5369,lng:12.1357,n:2,dates:"9/25~26",color:"#0ea5e9"},{name:"Lago di Como",lat:45.9875,lng:9.2573,n:0,dates:"9/27",color:"#a78bfa"},{name:"Milano",lat:45.4642,lng:9.1900,n:1,dates:"9/27~28",color:"#ec4899"}],
-  calendar:{16:{city:"인천→로마",detail:"KE931 13:20출발\n로마 19:30도착",transport:"Leonardo Exp",nights:"Roma 1N"},17:{city:"로마",detail:"콜로세움+포로+캄피돌리오\n판테온→나보나→트레비",nights:"Roma 2N"},18:{city:"로마",detail:"바티칸 08시 입장\n성베드로+보르게세",nights:"Roma 3N"},19:{city:"→피렌체",detail:"09:17 도착\n두오모 숙소+시장+석양",transport:"Italo 07:40",nights:"Firenze 1N"},20:{city:"피렌체",detail:"우피치+아카데미아\n두오모 쿠폴라",nights:"Firenze 2N"},21:{city:"피사 당일치기",detail:"사탑 10:00 우선\nCavalieri→Spina→산타크로체",transport:"열차 왕복 2h",nights:"Firenze 3N"},22:{city:"→친퀘테레",detail:"Riomaggiore→Manarola\nVernazza→Monterosso 수영",transport:"열차 3h",nights:"Monterosso 1N"},23:{city:"→베네치아",detail:"Monterosso→La Spezia\n곤돌라+치케티",transport:"열차 4.5h",nights:"Venezia 1N"},24:{city:"베네치아+부라노",detail:"부라노 컬러마을\n무라노 유리공예",nights:"Venezia 2N"},25:{city:"→돌로미티",detail:"렌터카 픽업(메스트레)\n코르티나 도착",transport:"렌터카 2h",nights:"Cortina 1N"},26:{city:"돌로미티",detail:"트레치메 트레킹!\n브라이에스(+카레차 선택)",transport:"렌터카",nights:"Cortina 2N"},27:{city:"코모호수→밀라노",detail:"벨라지오 짧게 경유\n밀라노 도착",transport:"렌터카 반납",nights:"Milano"},28:{city:"밀라노→귀국",detail:"쇼핑+브레라\nKE928 22:00출발",transport:"Malpensa Exp"}},
-  transport:[{day:"D1",route:"인천→로마 FCO",mode:"KE931 직항",time:"13시간 10분",cost:"왕복 173만원/인",link:"https://www.koreanair.com",linkText:"대한항공"},{day:"D1",route:"FCO 공항역→Roma Termini",mode:"Leonardo Express",time:"32분",cost:"€28",link:"https://www.trenitalia.com/en/services/leonardo-express.html",linkText:"Trenitalia"},{day:"D1",route:"FCO→Hotel Labelle",mode:"공식 택시 백업",time:"40~55분",cost:"정액 €55",link:"https://www.adr.it/web/aeroporti-di-roma-en/pax-fco-taxi",linkText:"ADR Taxi"},{day:"D4",route:"Roma Termini→Firenze SMN",mode:"Italo 9912 Prima Business",time:"07:40→09:17 (1h37)",cost:"€38.80",link:"https://www.italotreno.com/en/destinations-timetable/rome-florence-tickets",linkText:"Italo"},{day:"D6",route:"Firenze↔Pisa (왕복)",mode:"Regionale",time:"편도 약 1시간 · 08:00대 출발/14:00대 복귀 목표",cost:"€20",link:"https://www.trenitalia.com",linkText:"Trenitalia"},{day:"D7",route:"Firenze→Monterosso",mode:"Regionale/IC + La Spezia 환승",time:"약 2h40~3h · 숙소 먼저 짐 맡김",cost:"€30",link:"https://www.trenitalia.com",linkText:"Trenitalia"},{day:"D7",route:"친퀘테레 마을간",mode:"Cinque Terre Train MS Card",time:"9/22 Band B 1일권 · 24:00까지",cost:"€59",link:"https://www.parconazionale5terre.it/page.php?id=158",linkText:"Parco 5 Terre"},{day:"D8",route:"Monterosso→La Spezia→Venezia",mode:"Regionale + IC/Freccia",time:"약 4.5시간",cost:"€50~80",link:"https://www.trenitalia.com",linkText:"Trenitalia"},{day:"D8",route:"베네치아 바포레토",mode:"ACTV 48h 패스",time:"2일",cost:"€70",link:"https://actv.avmspa.it",linkText:"ACTV"},{day:"D10",route:"Venezia(Mestre)→Cortina",mode:"렌터카 (3일)",time:"2시간",cost:"€210~300",link:"https://www.rentalcars.com",linkText:"RentalCars"},{day:"D12",route:"Cortina→Como→Milano",mode:"렌터카 반납",time:"4~5시간",cost:"렌터카 포함",link:"",linkText:""},{day:"D13",route:"Milano→Malpensa",mode:"Malpensa Express",time:"51분",cost:"€30",link:"https://www.malpensaexpress.it",linkText:"Malpensa Exp"}],
+  nights:"Roma(3)+Firenze(3)+CinqueTerre(1)+Venezia(1)+Dolomiti(3)+Milano(1)=12N",
+  totalBudget:7763,perPerson:582,
+  budget:[{l:"항공",a:2307,c:"#244F3B"},{l:"교통",a:632,c:"#2F6B4F"},{l:"숙박",a:1850,c:"#3F7D5E"},{l:"식비",a:1500,c:"#5E6B57"},{l:"입장료",a:658,c:"#7E8B6F"},{l:"도시세",a:116,c:"#9AA38C"},{l:"예비비",a:700,c:"#B8B2A6"}],
+  cities:[{name:"Roma",lat:41.9028,lng:12.4964,n:3,dates:"9/16~18",color:"#ef4444"},{name:"Firenze",lat:43.7696,lng:11.2558,n:3,dates:"9/19~21",color:"#22c55e"},{name:"Pisa",lat:43.7228,lng:10.4017,n:0,dates:"9/21",color:"#86efac"},{name:"Cinque Terre",lat:44.1461,lng:9.6535,n:1,dates:"9/22",color:"#f59e0b"},{name:"Monterosso",lat:44.1454,lng:9.6500,n:0,dates:"9/22",color:"#fbbf24"},{name:"Venezia",lat:45.4408,lng:12.3155,n:1,dates:"9/23",color:"#06b6d4"},{name:"Tre Cime",lat:46.6131,lng:12.3035,n:0,dates:"9/25",color:"#38bdf8"},{name:"Cortina",lat:46.5369,lng:12.1357,n:3,dates:"9/24~26",color:"#0ea5e9"},{name:"Lago di Como",lat:45.9875,lng:9.2573,n:0,dates:"9/27",color:"#a78bfa"},{name:"Milano",lat:45.4642,lng:9.1900,n:1,dates:"9/27~28",color:"#ec4899"}],
+  calendar:{16:{city:"인천→로마",detail:"KE931 13:20출발\n로마 19:30도착",transport:"Leonardo Exp",nights:"Roma 1N"},17:{city:"로마",detail:"콜로세움+포로+캄피돌리오\n판테온→나보나→트레비",nights:"Roma 2N"},18:{city:"로마",detail:"바티칸 08시 입장\n성베드로+보르게세",nights:"Roma 3N"},19:{city:"→피렌체",detail:"09:17 도착\n두오모 숙소+시장+석양",transport:"Italo 07:40",nights:"Firenze 1N"},20:{city:"피렌체",detail:"우피치+아카데미아\n두오모 쿠폴라",nights:"Firenze 2N"},21:{city:"피사 당일치기",detail:"사탑 10:00 우선\nCavalieri→Spina→산타크로체",transport:"열차 왕복 2h",nights:"Firenze 3N"},22:{city:"→친퀘테레",detail:"Riomaggiore→Manarola\nVernazza→Monterosso 수영",transport:"열차 3h",nights:"Monterosso 1N"},23:{city:"→베네치아",detail:"La Spezia·밀라노 환승\n두칼레+치케티+곤돌라",transport:"열차 5~6.5h",nights:"Venezia 1N"},24:{city:"→돌로미티",detail:"메스트레 렌터카 픽업\n미수리나+코르티나",transport:"렌터카 2h",nights:"Cortina 1N"},25:{city:"돌로미티 트레치메",detail:"트레치메 트레킹 9.5km\n라고 디 브라이에스",transport:"렌터카",nights:"Cortina 2N"},26:{city:"돌로미티 드라이브",detail:"세체다/라가주오이\n파소 자우 드라이브",transport:"렌터카",nights:"Cortina 3N"},27:{city:"코모호수→밀라노",detail:"바레나 호숫가 점심\n밀라노 렌터카 반납",transport:"렌터카 반납",nights:"Milano"},28:{city:"밀라노→귀국",detail:"쇼핑+브레라\nKE928 22:00출발",transport:"Malpensa Exp"}},
+  transport:[{day:"D1",route:"인천→로마 FCO",mode:"KE931 직항",time:"13시간 10분",cost:"왕복 173만원/인",link:"https://www.koreanair.com",linkText:"대한항공"},{day:"D1",route:"FCO 공항역→Roma Termini",mode:"Leonardo Express",time:"32분",cost:"€28",link:"https://www.trenitalia.com/en/services/leonardo-express.html",linkText:"Trenitalia"},{day:"D1",route:"FCO→Hotel Labelle",mode:"공식 택시 백업",time:"40~55분",cost:"정액 €55",link:"https://www.adr.it/web/aeroporti-di-roma-en/pax-fco-taxi",linkText:"ADR Taxi"},{day:"D4",route:"Roma Termini→Firenze SMN",mode:"Italo 9912 Prima Business",time:"07:40→09:17 (1h37)",cost:"€38.80",link:"https://www.italotreno.com/en/destinations-timetable/rome-florence-tickets",linkText:"Italo"},{day:"D6",route:"Firenze↔Pisa (왕복)",mode:"Regionale",time:"편도 약 1시간 · 08:00대 출발/14:00대 복귀 목표",cost:"€20",link:"https://www.trenitalia.com",linkText:"Trenitalia"},{day:"D7",route:"Firenze→Monterosso",mode:"Regionale/IC + La Spezia 환승",time:"약 2h40~3h · 숙소 먼저 짐 맡김",cost:"€30",link:"https://www.trenitalia.com",linkText:"Trenitalia"},{day:"D7",route:"친퀘테레 마을간",mode:"Cinque Terre Train MS Card",time:"9/22 Band B 1일권 · 24:00까지",cost:"€59",link:"https://www.parconazionale5terre.it/page.php?id=158",linkText:"Parco 5 Terre"},{day:"D8",route:"Monterosso→La Spezia→밀라노→Venezia",mode:"Regionale+FR(밀라노 환승)",time:"약 5~6.5시간",cost:"€90~140/2인",link:"https://www.trenitalia.com",linkText:"Trenitalia"},{day:"D8",route:"베네치아 바포레토",mode:"ACTV 24h 패스",time:"1일",cost:"€25/인",link:"https://actv.avmspa.it",linkText:"ACTV"},{day:"D9",route:"Venezia(Mestre)→Cortina 렌터카 픽업",mode:"렌터카 (4일) 풀커버",time:"2~2.5시간",cost:"€280~340",link:"https://www.rentalcars.com",linkText:"RentalCars"},{day:"D12",route:"Cortina→Varenna→Milano 반납",mode:"렌터카 반납(밀라노)",time:"5~5.5시간",cost:"렌터카 포함",link:"",linkText:""},{day:"D13",route:"Milano→Malpensa",mode:"Malpensa Express",time:"51분",cost:"€30",link:"https://www.malpensaexpress.it",linkText:"Malpensa Exp"}],
   hotels:{
     "Roma (3박)":[
       {name:"Hotel Labelle ✅확정",stars:2,price:"₩854,164 / 3박 (2인)",desc:"Via Cavour 310, 몬티(Monti) 지구. 콜로세움·포로 로마노 도보 7분, Cavour 메트로 1분. 예약 확정(환불불가) ₩854,164 · 도시세 ₩52,620 체크인 시 현장 결제 별도",tags:["✅확정","₩854,164/3박","콜로세움 도보","도시세 별도"],links:[{t:"공식 예약",u:"https://www.hotellabelle.it/",c:""},{t:"Booking.com",u:"https://www.booking.com/hotel/it/labelle.html",c:""}]}
@@ -792,11 +792,11 @@ B: {
       {name:"Hotel La Spiaggia Monterosso",stars:2,price:"실가격 재확인",desc:"Via Fegina 98. Hotel Baia와 같은 Fegina 해변/역권 백업. 숙소는 아직 미정이므로 무료취소 조건과 캐리어 동선 우선으로 비교.",tags:["Fegina","역권","해변 앞"],links:[{t:"공식",u:"https://www.laspiaggiamonterosso.com/",c:""}]},
       {name:"Affittacamere San Giorgio Manarola",stars:3,price:"실가격 재확인",desc:"마나롤라 메인 스트리트, 역과 가까운 감성 대안. 다만 D7은 화요일이라 Nessun Dorma 휴무이고 해변·캐리어 편의는 Monterosso보다 떨어져 2순위.",tags:["마나롤라 대안","역 근처","감성 숙소"],links:[{t:"숙소 정보",u:"https://www.lecinqueterre.org/manarola/affittacameresangiorgio.php",c:""}]}
     ],
-    "Venezia (2박)":[
+    "Venezia (1박)":[
       {name:"Hotel Saturnia & International",stars:4,price:"€170~230/박",desc:"산마르코 도보 3분, 14세기 건물",tags:["산마르코앞","역사건물"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/saturnia-international.html",c:""}]},
       {name:"Palazzo Paruta",stars:4,price:"€180~250/박",desc:"스파+웰니스, 커플 평점 9.3",tags:["스파","커플추천"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/palazzo-paruta.html",c:""}]}
     ],
-    "Cortina d'Ampezzo (2박)":[
+    "Cortina d'Ampezzo (3박)":[
       {name:"Hotel de Len",stars:4,price:"€140~190/박",desc:"코르티나 중심, 아늑한 라운지+바",tags:["중심지","커플추천"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/de-len.html",c:""}]},
       {name:"Grand Hotel Savoia",stars:5,price:"€200~300/박",desc:"돌로미티 뷰, 수영장+스파",tags:["5성급","스파","뷰"],links:[{t:"Booking.com",u:"https://www.booking.com/hotel/it/grand-savoia-cortina-d-ampezzo.html",c:""}]}
     ],
@@ -927,10 +927,10 @@ B: {
   {t:"18:25~19:10",name:"체크인 + 샤워 + 노을 산책",desc:"Hotel Baia 후보 기준 해변/역권 · 일몰 약 19:19 CEST",type:"hotel",coords:[44.145352,9.64731],map:false,tip:"숙소가 Fegina면 수영 후 이동 피로가 거의 없다. 일몰 자체는 Manarola가 더 유명하지만, 이날은 화요일 휴무 리스크와 왕복 피로를 피하고 Monterosso 해변 노을로 정리하는 편이 낫다."},
   {t:"20:00",name:"저녁: Monterosso 해변권",rk:"cinqueterre-monterosso-dinner",desc:"La Cantina di Miky / L'Ancora della Tortuga 후보 · 예약 권장",type:"food",coords:[44.1458,9.6476],tip:"La Cantina di Miky는 공식 기준 수요일 휴무라 화요일 D7 가능. Ristorante Miky는 화요일 휴무로 확인되어 D7 저녁 후보에서 제외."}
 ],cost:"€230~290"},
-{day:8,date:"9/23 수",city:"→베네치아",theme:"곤돌라 + 치케티",routeSummary:"🚂 Monterosso→La Spezia→Venezia (약 4.5h)",sched:[
-  {t:"07:15",name:"아침 + 체크아웃",desc:"Monterosso Fegina 숙소 기준 · 역 도보 몇 분",type:"food",coords:[44.145352,9.64731],map:false},
-  {t:"08:00대",name:"Monterosso→La Spezia→Venezia",desc:"La Spezia 환승 포함 약 4.5시간 · 열차번호 60~90일 전 확정",type:"move",coords:[45.4410,12.3215]},
-  {t:"12:30",name:"바포레토 48h",desc:"€35/인",type:"move"},
+{day:8,date:"9/23 수",city:"→베네치아",theme:"곤돌라 + 치케티 (베네치아 1박 압축)",routeSummary:"🚂 Monterosso→La Spezia→밀라노→Venezia (약 5~6.5h)",sched:[
+  {t:"07:00",name:"아침 + 체크아웃",desc:"Monterosso Fegina 숙소 기준 · 역 도보 몇 분 · 09시 이전 출발 목표",type:"food",coords:[44.145352,9.64731],map:false},
+  {t:"~08:00",name:"Monterosso→La Spezia→밀라노→Venezia",desc:"La Spezia·밀라노 2회 환승 약 5~6.5h · 좌석지정편(IC/FR) 7월말 예약창 오픈 직후 잠금",type:"move",coords:[45.4410,12.3215],tip:"친퀘테레→베네치아 직통 없음. 1순위: La Spezia→Milano Centrale(IC/FB)→Venezia S.Lucia(Frecciarossa). Milano-Genova 노선 9월말까지 공사·단선이라 Genova 경유는 백업만. 환승 버퍼 밀라노 40분 이상."},
+  {t:"~13:30",name:"바포레토 24h",desc:"€25/인 · 도착 후 활성화 · 1박이라 24h로 하향",type:"move",tip:"베네치아 1박 단축으로 48h→24h. 단 도착이 13시 이후이고 D9 오전 메스트레 이동까지 쓰면 24h 초과 가능 → 도착 열차시각 확정 후 택1."},
   {t:"13:00",name:"치케티 바 호핑",rk:"venezia-cicchetti",desc:"€38",type:"food",coords:[45.4389,12.3338]},
   {t:"14:30",name:"리알토 다리",desc:"",type:"hl",coords:[45.4380,12.3360]},
   {t:"15:30",name:"두칼레 궁전",desc:"€30/인",type:"spot",coords:[45.4336,12.3404],tip:"💡 30일 전 예약시 €25 (현장 €30)"},
@@ -940,49 +940,47 @@ B: {
   {t:"20:00",name:"저녁: Boccadoro",rk:"venezia-dinner",desc:"€85",type:"food",coords:[45.4440,12.3380]},
   {t:"22:00",name:"야경",desc:"",type:"hl",coords:[45.4345,12.3388],map:false}
 ],cost:"€340"},
-{day:9,date:"9/24 목",city:"베네치아+부라노",theme:"컬러풀 섬 투어",routeSummary:"⛴️ Venezia→Burano→Murano→Venezia (바포레토)",sched:[
-  {t:"08:00",name:"아침",desc:"€12",type:"food"},
-  {t:"09:00~11:20",name:"바포레토 → 부라노 산책",desc:"이동 45분 + 레인보우 하우스 골목 60~75분",type:"hl",coords:[45.4854,12.4167]},
-  {t:"11:30",name:"부라노 점심",rk:"venezia-burano-lunch",desc:"해산물 €55",type:"food",coords:[45.4854,12.4167],map:false},
-  {t:"13:00~15:00",name:"무라노 이동 + 유리공예",desc:"부라노→무라노 바포레토 20분 · 유리공예 산책",type:"spot",coords:[45.4584,12.3518]},
-  {t:"16:00",name:"산마르코 종탑",desc:"€10/인",type:"spot",coords:[45.4345,12.3388]},
-  {t:"19:00",name:"아페리티보",desc:"€15",type:"food"},
-  {t:"20:00",name:"저녁: Antiche Carampane",rk:"venezia-dinner2",desc:"€75",type:"food",coords:[45.4389,12.3338]}
-],cost:"€180"},
-{day:10,date:"9/25 금",city:"→돌로미티",theme:"렌터카로 알프스!",routeSummary:"🚗 Venezia(Mestre)→Cortina (렌터카 2h)",sched:[
-  {t:"07:30",name:"아침+체크아웃",desc:"€12",type:"food"},
-  {t:"08:30",name:"→메스트레",desc:"15분",type:"move"},
-  {t:"09:00",name:"렌터카 픽업",desc:"메스트레역",type:"move"},
-  {t:"09:15",name:"→코르티나",desc:"렌터카 2시간",type:"move",coords:[46.5369,12.1357],map:false},
-  {t:"12:00",name:"호텔 체크인",desc:"€150/박",type:""},
-  {t:"12:30",name:"점심",desc:"카네데를리 €50",type:"food",coords:[46.5369,12.1357]},
-  {t:"14:30",name:"팔로리아 전망대",desc:"€28/인",type:"spot",coords:[46.5225,12.1689]},
-  {t:"17:00",name:"미수리나 호수",desc:"",type:"hl",coords:[46.5828,12.2529]},
-  {t:"19:00",name:"알펜글로우",desc:"",type:"hl",coords:[46.5369,12.1357],map:false},
-  {t:"19:30",name:"저녁: Baita Fraina",rk:"dolomiti-dinner",desc:"€75",type:"food",coords:[46.5330,12.1290]}
-],cost:"€203"},
-{day:11,date:"9/26 토",city:"돌로미티",theme:"트레치메 + 브라이에스",routeSummary:"🚗 렌터카: Tre Cime→Braies 중심, Carezza 선택",sched:[
-  {t:"06:00",name:"아침",desc:"호텔조식",type:"food"},
-  {t:"07:00",name:"렌터카→트레치메",desc:"주차/통행 예약 €40/차",type:"move",coords:[46.6172,12.2942],map:false,tip:"⚠️ Auronzo 공식 2026 차량 €40, 온라인 예약 필수(2026-06-01 확인). 9AM 전 도착"},
-  {t:"08:00",name:"트레치메 트레킹",desc:"9.5km 3~3.5h",type:"spot",coords:[46.6172,12.2942]},
-  {t:"10:00",name:"Rifugio Locatelli",desc:"핫초코 €10",type:"food",coords:[46.6186,12.3045]},
-  {t:"11:30",name:"→브라이에스",desc:"40분",type:"move",coords:[46.6942,12.0855],map:false,tip:"⚠️ 9/15까지 9AM~4PM 차량통제! 9:30 전 도착 or 4PM 후"},
-  {t:"12:30",name:"보트!",desc:"€18",type:"hl",coords:[46.6942,12.0855]},
-  {t:"13:00",name:"호수 점심",desc:"€35",type:"food",coords:[46.6942,12.0855],map:false},
-  {t:"15:30",name:"→카레차 호수 (선택)",desc:"편도 1.5시간, 피곤하면 코르티나 복귀",type:"move",coords:[46.4101,11.5753],map:false,tip:"💡 카레차는 이동 부담이 큼. 날씨/체력 좋을 때만 선택"},
-  {t:"17:00",name:"카레차 호수 (선택)",desc:"에메랄드 반영",type:"hl",coords:[46.4101,11.5753]},
-  {t:"19:30",name:"저녁",desc:"€68",type:"food",coords:[46.5369,12.1357]}
-],cost:"€240"},
+{day:9,date:"9/24 목",city:"베네치아→돌로미티",theme:"본섬 오전 + 렌터카로 알프스 진입 (Day1 저강도)",routeSummary:"🚗 Venezia 본섬→Mestre 렌터카→미수리나→Cortina (약 2~2.5h)",sched:[
+  {t:"07:00",name:"산마르코 새벽 산책 + 조식",desc:"인적 드문 광장 사진 + 바카로 에스프레소 · 짐 정리",type:"food",coords:[45.4341,12.3388],tip:"D9는 베네치아 본섬을 오전 1~2시간만 쓰고 떠나는 날. 무거운 짐은 전날 미리 싸두고, 09:00 픽업 시간 엄수가 핵심."},
+  {t:"08:10",name:"본섬 → Venezia Mestre 역",desc:"산타루치아역→메스트레역 기차 1정거장 또는 People Mover · 약 25~35분",type:"move",coords:[45.4823,12.2317],tip:"본섬은 차량 진입 불가라 렌터카는 메스트레역에서 픽업. 캐리어 동선상 기차 1정거장이 가장 단순."},
+  {t:"09:00",name:"메스트레역 렌터카 픽업 (4일)",desc:"IDP+한국면허+신용카드+여권 · 풀커버 보험 권장",type:"move",coords:[45.4823,12.2317],tip:"⚠️ 픽업 즉시 차량번호판 확보 → D10 Auronzo 통행료 예약에 입력(9/24 23:59까지). 산악 대응 사계절 타이어·ZTL 회피 내비 설정."},
+  {t:"09:15~11:30",name:"메스트레 → 코르티나",desc:"A27 경유 약 2~2h15 · 통행료 €8~10",type:"move",coords:[46.5369,12.1357],map:false,tip:"중간 휴게 포함. 코르티나 시내 일부 ZTL → 호텔 주차/통행 허가 사전 요청."},
+  {t:"11:45",name:"호텔 짐 보관 + 점심",desc:"체크인 전 짐 맡김 · 카네데를리/카주넬리 €40~50",type:"food",coords:[46.5369,12.1357],tip:"객실 준비 전이면 짐만 맡기고 가볍게. 정식 체크인은 오후 복귀 시."},
+  {t:"13:30",name:"미수리나 호수",desc:"코르티나에서 약 25분 · 호반 산책",type:"hl",coords:[46.5808,12.2531],tip:"D7→D8→D9 3일 연속 이동 직후라 저강도로. 소라피스 트레킹(4h+)은 무리 → Day3 여유 시로."},
+  {t:"14:30~16:30",name:"친퀘 토리 또는 팔로리아 전망대 (택1)",desc:"친퀘토리 리프트 왕복 €18~20 / 팔로리아 케이블카 왕복 약 €27/인",type:"spot",coords:[46.5189,12.0386],tip:"친퀘토리=1차대전 야외박물관 평지 산책(사진 명소). 팔로리아=시내 직접 탑승으로 가장 편함. 컨디션 따라 택1."},
+  {t:"16:30~18:30",name:"호텔 체크인 + 휴식",desc:"정식 체크인 · 샤워 · 충전",type:"hotel",coords:[46.5369,12.1357],map:false},
+  {t:"18:30",name:"알펜글로우 (토파네/소라피스)",desc:"일몰 약 19:00 · 봉우리 분홍빛",type:"hl",coords:[46.5369,12.1357],map:false},
+  {t:"19:30",name:"저녁: Baita Fraina",rk:"dolomiti-dinner",desc:"목요일 영업 · 카네데를리/카주넬리 €70~80",type:"food",coords:[46.5330,12.1290],tip:"El Brite de Larieto는 목요일 휴무라 이 날은 Baita Fraina. 예약 권장."}
+],cost:"€220~260"},
+{day:10,date:"9/25 금",city:"돌로미티 트레치메",theme:"트레치메 트레킹 + 라고 디 브라이에스",routeSummary:"🚗 Auronzo→트레치메 일주 9.5km→Braies (날짜 고정: 통행료 예약)",sched:[
+  {t:"06:30",name:"코르티나 출발 (도시락 지참)",desc:"아침 파니노/도시락 챙겨 조기 출발",type:"move",coords:[46.5369,12.1357],map:false,tip:"Auronzo 게이트 09시 전 도착 필수라 새벽 출발. Rifugio 점심은 9월말 시즌 마감 임박 → 백업 파니노 필수."},
+  {t:"07:00~07:30",name:"Auronzo 통행료 게이트 통과",desc:"차량 €40 · 온라인 사전예약 필수 · 차량번호 입력",type:"move",coords:[46.6156,12.2953],map:false,tip:"⚠️ 09시 전 도착 못하면 만차 시 진입 거부. 예약창 약 8월 하순(30일 전) 오픈. 주차+통행 12h 유효."},
+  {t:"07:30~11:00",name:"트레치메 일주 트레킹",desc:"9.5km · 누적 약 350m · 3~3.5h · 난이도 中",type:"spot",coords:[46.6172,12.2942],tip:"Auronzo→Lavaredo→Rifugio Locatelli(트레치메 정면 전망)→복귀. 무릎 부담 시 Locatelli 왕복(평탄)으로 단축, 비트레킹이면 주차장 자체가 전망대."},
+  {t:"10:30",name:"Rifugio Locatelli 전망 + 간식",desc:"트레치메 북벽 정면 · 핫초코/간식",type:"food",coords:[46.6181,12.305],tip:"이 트레킹의 하이라이트 포인트. 9월말 영업 재확인."},
+  {t:"12:30~13:30",name:"게이트 하산 → 라고 디 브라이에스",desc:"약 1시간 이동",type:"move",coords:[46.6944,12.0853],map:false,tip:"💡 Braies ZTL 차량통제는 7/1~9/15만 → 9/25는 자유진입·P4 예약 불필요. 일반주차 €7~30."},
+  {t:"13:30~16:00",name:"라고 디 브라이에스 산책 + 보트",desc:"에메랄드 호수 일주 · 나무보트 €18",type:"hl",coords:[46.6944,12.0853],tip:"돌로미티에서 가장 유명한 호수. 혼잡 대비 가급적 빨리 도착."},
+  {t:"16:30~17:30",name:"코르티나 복귀",desc:"약 1시간",type:"move",coords:[46.5369,12.1357],map:false},
+  {t:"19:30",name:"저녁: El Brite de Larieto",rk:"dolomiti-dinner",desc:"금요일 영업 · 농가식 산악요리 · 예약 권장",type:"food",coords:[46.5566,12.1430],tip:"El Brite는 목 휴무라 금요일인 이 날 배치. SanBrite(미슐랭)는 2~3주 전 예약 대안."}
+],cost:"€230~280"},
+{day:11,date:"9/26 토",city:"돌로미티 드라이브",theme:"서부 확장 · 파소 드라이브 (날짜 유연)",routeSummary:"🚗 세체다 또는 라가주오이/파소 자우 (기상 따라 D10과 스왑 가능)",sched:[
+  {t:"07:30",name:"아침 + 출발",desc:"호텔 조식 · 토요일 혼잡 대비 일찍",type:"food",coords:[46.5369,12.1357],map:false,tip:"날씨/컨디션 따라 옵션 택1. 토요일이라 명소·식당 혼잡 → 오전 일찍 움직이기. 우천 시 D10 트레치메와 순서 스왑."},
+  {t:"옵션 A",name:"세체다 / 발 가르데나 (서부)",desc:"코르티나→오르티세이 약 1h30 · 케이블카 왕복 €74/인(타임슬롯 예약 필수)",type:"spot",coords:[46.6094,11.6586],tip:"돌로미티 능선 최고 절경. 익일 코모 서진 동선과도 정합. 비용 큼(2인 €148) → 별도 예산. 2026 타임슬롯 사전예약 의무."},
+  {t:"옵션 B",name:"파소 팔체레고 / 라가주오이",desc:"코르티나 인접 · 케이블카 왕복 약 €25/인 + 1차대전 터널",type:"spot",coords:[46.5197,12.0089],tip:"저강도·근거리·가성비. 라가주오이 전망대와 1차대전 야외 갱도. 운전 부담 적음."},
+  {t:"경유",name:"파소 자우 드라이브",desc:"코르티나 인접 명품 산악 패스 · 사진",type:"hl",coords:[46.4869,12.0556],tip:"어느 옵션이든 끼워넣기 좋은 드라이브 포인트. 카레차 호수(편도 1.5h)는 멀어 생략 권장."},
+  {t:"13:00",name:"점심: 리푸지오/말가",desc:"산장 점심 €30~45",type:"food",coords:[46.5369,12.1357],map:false},
+  {t:"17:00",name:"코르티나 복귀 + 휴식",desc:"마지막 돌로미티 밤 · 짐 정리",type:"move",coords:[46.5369,12.1357],map:false},
+  {t:"19:30",name:"저녁: 5 Torri / Da Aurelio (예약)",rk:"dolomiti-dinner",desc:"토요일 수요 폭증 · 4주 전 예약 또는 호텔 하프보드",type:"food",coords:[46.5369,12.1357],tip:"토요일 저녁은 현지 수요 폭증 → 미리 예약 필수. 실패 시 호텔 하프보드 백업."}
+],cost:"€120~280"},
 {day:12,date:"9/27 일",city:"코모호수→밀라노",theme:"호반 드라이브 + 두오모",routeSummary:"🚗 Cortina→Como→Milano (렌터카 4~5h)",sched:[
-  {t:"07:30",name:"아침+체크아웃",desc:"호텔조식",type:"food"},
-  {t:"08:00",name:"Cortina→코모호수",desc:"렌터카 4.5~5h",type:"move",coords:[45.9875,9.2573],map:false},
-  {t:"12:30",name:"벨라지오/바레나 중 택1",desc:"호수 경유는 짧게",type:"hl",coords:[45.9875,9.2573]},
-  {t:"13:00",name:"점심: 호숫가",rk:"como-lunch",desc:"리조또 €60",type:"food",coords:[45.9875,9.2573],map:false},
-  {t:"15:00",name:"→밀라노",desc:"1.5시간",type:"move",coords:[45.4641,9.1919],map:false},
-  {t:"16:30",name:"렌터카 반납",desc:"밀라노 시내/공항 지점 확인 필요",type:""},
+  {t:"07:30~08:00",name:"아침+체크아웃 후 출발",desc:"호텔조식 · 코모까지 운전 부담 커 일찍",type:"food",coords:[46.5369,12.1357],map:false,tip:"⚠️ 코르티나→코모/바레나 실측 약 423~425km·4.5~5h(휴게 제외)+코모권→밀라노 1~1.5h=총 5~5.5h. 16:30 밀라노 반납 역산해 07:30~08:00 출발 필수."},
+  {t:"08:00",name:"Cortina→바레나(코모호수)",desc:"렌터카 약 4.5~5h",type:"move",coords:[46.0103,9.2847],map:false},
+  {t:"12:30",name:"바레나(Varenna) 호숫가",desc:"역 인접·주차 용이 · 벨라지오보다 동선 우월",type:"hl",coords:[46.0103,9.2847],tip:"벨라지오는 페리 필요·주차난이라 일요일엔 바레나가 유리. 호수 경유는 짧게 점심 위주."},
+  {t:"13:00",name:"점심: 바레나 호숫가",rk:"como-lunch",desc:"일요일 영업처 확인 · 리조또 €50~60",type:"food",coords:[46.0103,9.2847],map:false},
+  {t:"14:30~16:00",name:"→밀라노 이동",desc:"코모권→밀라노 약 1~1.5h",type:"move",coords:[45.4869,9.2042],map:false},
+  {t:"16:30",name:"렌터카 반납 (밀라노)",desc:"Milano Centrale 또는 Malpensa 반납 · 시내 ZTL(Area C) 절대 회피",type:"",coords:[45.4869,9.2042],tip:"반납지를 ZTL 밖 Milano Centrale 차고 또는 Malpensa로 지정. 시내 진입 시 카메라 벌금."},
   {t:"17:30",name:"밀라노 두오모",desc:"외관+광장 우선, 옥상은 컨디션 따라",type:"spot",coords:[45.4641,9.1919]},
   {t:"18:30",name:"아페리티보",desc:"€22",type:"food"},
-  {t:"19:30",name:"저녁: Trattoria Milanese",rk:"milano-dinner",desc:"€75",type:"food",coords:[45.4620,9.1870]}
+  {t:"19:30",name:"저녁: 일요일 영업처(코톨레타)",rk:"milano-dinner",desc:"⚠️ Trattoria Milanese 일요일 휴무 → Trattoria del Nuovo Macello 등 대체 €40~60/인",type:"food",coords:[45.4620,9.1870],tip:"Trattoria Milanese는 일요일 휴무 확정. 대안: Trattoria del Nuovo Macello(일 영업·코톨레타) 또는 두오모 인근 일요일 영업처. 예약 권장."}
 ],cost:"€220"},
 {day:13,date:"9/28 월",city:"밀라노→귀국",theme:"쇼핑 + 귀국",routeSummary:"✈️ MXP→ICN (KE928 22:00출발)",sched:[
   {t:"08:30",name:"아침: Marchesi",desc:"€18",type:"food",coords:[45.4668,9.1910]},
@@ -1371,7 +1369,7 @@ sources:[
 };
 
 const COMPARE=[
-{id:"B",status:"예약 진행중",name:"로마–밀라노 12박 13일",sub:"친퀘테레+코모호수+렌터카",route:"로마→피렌체(+피사)→친퀘테레→베네치아(+부라노)→돌로미티(렌터카)→코모호수→밀라노",price:"€7,580",krw:"1,137만원",pp:"569만원",pros:["여유로운 페이스로 천천히 음미","친퀘테레 + 코모호수 + 부라노","렌터카로 돌로미티 자유 드라이브","돌로미티 핵심 호수와 트레킹","로마·피렌체·베네치아 핵심까지"],cons:[]},
+{id:"B",status:"예약 진행중",name:"로마–밀라노 12박 13일",sub:"친퀘테레+돌로미티 3일+렌터카",route:"로마→피렌체(+피사)→친퀘테레→베네치아→돌로미티 3일(렌터카)→코모호수→밀라노",price:"€7,763",krw:"1,362만원",pp:"582만원",pros:["여유로운 페이스로 천천히 음미","친퀘테레 + 코모호수 + 돌로미티 3일","렌터카로 돌로미티 자유 드라이브","트레치메 트레킹 + 브라이에스 + 서부 드라이브","로마·피렌체·베네치아 핵심까지"],cons:["베네치아는 1박 압축(부라노/무라노 제외)"]},
 ];
 
 const BOOKING_ITEMS=[
@@ -1405,11 +1403,11 @@ const TICKETING_ITEMS=[
 {ymd:"2026-08-18",date:"2026.08.18(화)",tone:"",name:"D2 판테온",target:"9/17 14:30 Pantheon",note:"필수 매진형은 아니지만 €5 공식 티켓을 미리 사두면 현장 줄 리스크를 줄일 수 있음.",links:[["Pantheon","https://www.pantheonroma.com/en/openings-info/"]]},
 {ymd:"2026-08-20",date:"2026.08.20(목)",tone:"",name:"D4-D6 피렌체 식당",target:"D4 올트라르노, D5 일요일 후보, D6 Buca Mario 19:30",note:"Buca Mario는 일요일 휴무라 D6 월요일로 이동. 4 Leoni/Il Santo/Buca Mario 중 확정 후 예약.",links:[["Buca Mario","https://www.bucamario.com/contatti/"],["4 Leoni","https://www.4leoni.it/"]]},
 {ymd:"2026-08-24",date:"2026.08.24(월)",tone:"",name:"D8 베네치아 두칼레 궁전",target:"9/23 15:30 Doge's Palace",note:"30일 전 온라인 예매가 유리한 구간. 산마르코권 동선 확정 후 같이 처리.",links:[["MUVE","https://palazzoducale.visitmuve.it/en/tickets/"]]},
-{ymd:"2026-08-25",date:"2026.08.25(화)",tone:"",name:"D9 산마르코 종탑/대성당 선택",target:"9/24 오후 San Marco",note:"종탑은 줄 회피용 온라인 티켓, 대성당은 시간대 예약 여부를 동선 확정 후 결정.",links:[["Campanile","https://basilicasanmarco.skiperformance.com/en/store#/en/buy"],["Basilica","https://basilicasanmarco.skiperformance.com/en/store#/en/buy"]]},
-{ymd:"2026-08-27",date:"2026.08.27(목)",tone:"critical",name:"D11 트레치메 주차/통행",target:"9/26 07:00 Tre Cime",note:"차량 예약이 막히면 일정 전체가 흔들림. 번호판 미확정이면 예약 후 입력 마감 시간 별도 확인.",links:[["Auronzo","https://auronzo.info/en/parking-tre-cime-di-lavaredo/"]]},
+{ymd:"2026-07-25",date:"2026.07.25(토)",tone:"critical",name:"D8 친퀘테레→베네치아 장거리 열차",target:"9/23 La Spezia→밀라노→베네치아 (좌석지정)",note:"친퀘테레→베네치아 직통 없음. 좌석지정편(IC/Frecciarossa)은 예약창 오픈(약 7월말) 직후 잠금. La Spezia 09시 이전 출발·밀라노 환승 40분+. Milano-Genova 9월말까지 공사·단선이라 Genova 경유는 백업. 산마르코 종탑은 D9 취소로 삭제됨.",links:[["Trenitalia","https://www.trenitalia.com"],["Italo","https://www.italotreno.com/en"]]},
+{ymd:"2026-08-26",date:"2026.08.26(수)",tone:"critical",name:"D10 트레치메 주차/통행",target:"9/25 07:00 Tre Cime (Auronzo €40)",note:"돌로미티 3일 재편으로 트레치메는 D10(9/25)로 이동. 차량 €40 온라인 예약 필수, 9AM 전 도착. 번호판은 9/24 렌터카 픽업 후 입력. 우천 시 D11과 스왑.",links:[["Auronzo","https://auronzo.info/en/parking-tre-cime-di-lavaredo/"]]},
 {ymd:"2026-08-28",date:"2026.08.28(금)",tone:"",name:"D12 밀라노 두오모 옥상 선택",target:"9/27 17:30 Duomo rooftop",note:"현재 일정은 외관 우선. 옥상까지 갈 거면 30일 전 시간제 티켓으로 확정.",links:[["Duomo Milano","https://ticket.duomomilano.it/en/"]]},
 {ymd:"2026-09-21",date:"2026.09.21(월)",tone:"critical",name:"D7 친퀘테레 카드 + Via dell'Amore",target:"9/22 13:30 Riomaggiore→Manarola",note:"날씨 확인 후 Train MS Card 1일권과 Via dell'Amore 슬롯을 같이 처리. 2026 공식 가격표 기준 9/22 Band B 성인 €29.50/인, 2인 €59.",links:[["Cinque Terre Card","https://card.parconazionale5terre.it/en"],["Via dell'Amore","https://www.parconazionale5terre.it/pagina.php?id=480"]]},
-{ymd:"2026-09-22",date:"2026.09.22(화)",tone:"",name:"D8~D9 베네치아 바포레토 48h",target:"9/23 12:30부터 48시간",note:"온라인 구매 후 첫 사용 때 활성화. 현장 구매도 가능하지만 도착 직후 동선 단축용.",links:[["Venezia Unica","https://www.veneziaunica.it/en/e-commerce/services"]]}
+{ymd:"2026-09-23",date:"2026.09.23(수)",tone:"",name:"D8 베네치아 바포레토 24h",target:"도착(약 13:30)부터 24시간",note:"베네치아 1박 단축으로 48h→24h. 온라인 구매 후 첫 사용 때 활성화. 도착이 13시 이후+D9 오전 메스트레 이동까지 쓰면 48h 검토.",links:[["Venezia Unica","https://www.veneziaunica.it/en/e-commerce/services"]]}
 ];
 
 // ===================== STATE & RENDER =====================
