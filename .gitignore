@@ -7,4 +7,5 @@
 plan/*
 !plan/VERSIONS.md
 !plan/2026-여정개편-보고서.md
+!숙소후보-2026.md
 !.gitignore
