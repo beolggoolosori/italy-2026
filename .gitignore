@@ -2,6 +2,7 @@
 *
 !*.html
 !AGENTS.md
+!CLAUDE.md
 !plan/
 plan/*
 !plan/VERSIONS.md
