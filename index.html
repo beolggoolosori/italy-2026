@@ -797,15 +797,6 @@ footer{text-align:center;padding:36px 20px;color:var(--faint);
   <div class="hotel-section card"><h3 id="hotelTitle">숙소 추천</h3><div id="hotelContent"></div></div>
 </div>
 
-<div class="section-content" id="sec-shortlist">
-  <div class="card">
-    <h3>🛏️ 피렌체 이후 숙소 후보 — 각 날짜 10곳 (멀티 OTA 리뷰 교차검증)</h3>
-    <div class="sl-disc">커플 2인 1실 · <b style="color:var(--terracotta)">Booking ▸날짜</b> 버튼은 그 호텔 페이지에 체크인/체크아웃·2인이 미리 입력된 채 열립니다. Agoda는 호텔URL 찾은 곳은 정확 딥링크, 못 찾은 곳은 이름+날짜 검색. Hotels.com·Trip.com·Google·지도는 이름+날짜 검색. 가격은 2026-06 조사 <b>추정치</b>(2인 총액), 실가·무료취소는 클릭 후 날짜로 최종 확인. <b style="color:var(--terracotta)">✔ 적대검증</b>=상위 3곳 시즌영업·위치·URL 재확인.</div>
-    <div class="sl-subtabs" id="slSubtabs"></div>
-    <div id="slBanner"></div>
-    <div class="sl-grid" id="slGrid"></div>
-  </div>
-</div>
 
 <div class="section-content" id="sec-budget">
   <div class="budget-section card"><h3 id="budgetTitle">예산 (2인 기준)</h3>
@@ -837,27 +828,10 @@ B: {
     "Firenze (3박)":[
       {name:"B&B Le Stanze del Duomo ✅확정",stars:3,price:"실결제 금액 입력 필요 / 3박 (2인)",desc:"Via de' Martelli 8, 두오모 바로 옆. 공식 기준 SMN역 도보 10분 또는 택시 5분, 두오모 130~200m권. 리셉션 08:00~21:00, 객실 14:00부터, 체크인 전 짐 보관 가능.",tags:["✅확정","두오모 1분","SMN 도보 10분","조식 Konnubio"],links:[{t:"공식",u:"https://www.lestanzedelduomo.it/en/",c:""},{t:"찾아가는 법",u:"https://www.lestanzedelduomo.it/en/how-to-reach-us.html",c:""}]}
     ],
-    "Cinque Terre (1박)":[
-      {name:"Hotel La Spiaggia Monterosso ⭐추천 1순위",stars:3,price:"€180~230/박 추정 · 무료취소 가능",desc:"최적 위치: Via Fegina 98 — 페지나 해변 정면, 역에서 평지 도보 약 2분(해변까지 10m). D7은 짐 먼저 맡기고 남→북 호핑 후 해변 수영→체크인, 익일 아침 베네치아행 기차라 역·해변·숙소가 붙은 이 위치가 동선상 최적. 예약법: 무료취소 요금제로 지금(여름) 선예약 후 가격 추이 보며 조정. 비수기라 한정 객실이니 조기 선점.",tags:["⭐1순위","역 도보 2분","해변 정면","무료취소"],links:[{t:"공식",u:"https://www.laspiaggiamonterosso.com/",c:""},{t:"Booking",u:"https://www.booking.com/hotel/it/la-spiaggia.html",c:""}]},
-      {name:"Hotel Baia Monterosso (가격 역전 시 1순위)",stars:3,price:"€130~210/박 추정 · 무료취소 가능",desc:"페지나 해변 정면, 역 출구에서 몇 걸음(약 100m)·전용 해변·전 객실 에어컨. La Spiaggia와 사실상 동급 위치라, 같은 날짜에 더 싸게 나오면 Baia를 1순위로. ⚠️ 비수기 휴업 변동 가능성 있어 예약 시 9/22 영업 여부 재확인.",tags:["역 100m","해변 정면","전용해변","가성비"],links:[{t:"공식",u:"https://www.baiahotel.it/en/",c:""},{t:"Booking",u:"https://www.booking.com/hotel/it/baia-monterosso-al-mare.html",c:""},{t:"찾아가는 법",u:"https://www.baiahotel.it/en/how-to-reach-us/",c:""}]},
-      {name:"Hotel Punta Mesco (안정적 대안)",stars:3,price:"€160~219/박 추정",desc:"Via Molinelli 35, 페지나 신시가 조용한 골목. 역에서 평지 도보 약 5분, 해변 2분. 가족경영 17실·에어컨·조식·무료주차. 해변 정면은 아니지만 평지라 캐리어 무난 — 1·2순위 매진/고가 시 대안.",tags:["평지 5분","무료주차","가족경영"],links:[{t:"공식",u:"https://www.hotelpuntamesco.it/",c:""},{t:"Booking",u:"https://www.booking.com/hotel/it/punta-mesco.html",c:""}]}
-    ],
-    "Venezia (1박)":[
-      {name:"Hotel Plaza Venice (메스트레) ⭐추천 1순위",stars:4,price:"€90~140/박 추정 · 무료취소 가능",desc:"최적 위치 전략: 'D9 오전 09:00 메스트레 렌터카 픽업'이 이 1박의 최대 병목. Viale Stazione 36 — 메스트레역 정면 도보 0~2분이라 아침 캐리어 부담 0. 저녁엔 기차 약 10분으로 본섬 들어가 치케티·리알토·곤돌라 일몰·디너 즐기고 늦게 복귀. 즉 '저녁은 본섬, 잠·아침은 메스트레'가 이 일정에 최적이고 가격도 본섬의 절반.",tags:["⭐1순위","메스트레역 0~2분","본섬 기차 10분","가성비"],links:[{t:"공식",u:"https://www.hotelplazavenice.com/",c:""},{t:"Booking",u:"https://www.booking.com/hotel/it/plaza-mestre.html",c:""}]},
-      {name:"Hotel Antiche Figure (본섬 차선)",stars:4,price:"€160~230/박 추정 · 무료취소 가능",desc:"본섬 분위기를 꼭 원할 때. Santa Croce 대운하변, 산타루치아역에서 다리 하나(Scalzi) 건너 도보 3~5분 — 본섬 호텔 중 역 접근성 최강이라 익일 메스트레 픽업 리스크를 최소화. 캐리어로 다리 하나는 넘어야 함(역 포터 €5~10).",tags:["본섬","역 도보 3~5분","대운하변"],links:[{t:"공식",u:"https://www.hotelantichefigure.it/",c:""},{t:"Booking",u:"https://www.booking.com/hotel/it/hotelantichefigure.html",c:""}]},
-      {name:"Hotel Saturnia & International (분위기 옵션)",stars:4,price:"€220~330/박 추정",desc:"산마르코 200m·SPA·5대째 가족경영으로 커플 분위기 최고. 단 익일 아침 캐리어로 다리 여러 개+역까지 이동이 8:10 출발/9:00 픽업 일정엔 부담 → 분위기 최우선일 때만. Palazzo Paruta(자쿠지 스위트)도 로맨틱하지만 역까지 멀어 이 1박엔 비권장.",tags:["산마르코 200m","SPA","아침동선 부담"],links:[{t:"공식",u:"https://www.hotelsaturnia.it/",c:""},{t:"Booking",u:"https://www.booking.com/hotel/it/hotelsaturniainternational.html",c:""}]}
-    ],
-    "Cortina d'Ampezzo (3박)":[
-      {name:"Hotel Menardi ⭐추천 1순위",stars:3,price:"€600~840/3박 추정(B&B) · 무료취소 가능",desc:"이 조건(렌터카 3박+토요일 저녁 예약난)에 가장 정확히 부합. 무료 야외주차+ZTL 밖이라 매일 차 빼고 넣기 편하고, 하프보드(석식 3코스)로 9/26(토) 외부 식당 전쟁을 회피. 가족경영 산악 전통 스타일·룸조식 가능(새벽 06:30 트레치메 출발 대응). 시내 북쪽 1.3km(차 3~4분)라 Tre Cime/Braies 방향 출발에 오히려 유리. ⚠️ 9/30 시즌 종료 직전 → 즉시 선예약.",tags:["⭐1순위","무료주차","하프보드","ZTL밖","조기예약"],links:[{t:"공식",u:"https://www.hotelmenardi.it/",c:""},{t:"Booking",u:"https://www.booking.com/hotel/it/menardi.html",c:""}]},
-      {name:"Hotel Lajadira & Spa (4성 대안)",stars:4,price:"€660~960/3박 추정 · 무료취소 가능",desc:"Menardi 마감 시 또는 스파/4성 시설 원할 때. 무료 사설주차+ZTL 밖, 하프보드(석식 3코스+채소뷔페) 가능해 토요일 저녁 해결. 시내 2.5km(차 5분), 도보 불가. ⚠️ 9월 말 영업 여부만 예약 시 확인.",tags:["무료주차","하프보드","스파","4성"],links:[{t:"Booking",u:"https://www.booking.com/hotel/it/lajadira.html",c:""}]},
-      {name:"Hotel de Len (시내 모던, 차 있으면 핸디캡)",stars:4,price:"€1,000+/3박 추정",desc:"시내 보행자 구역 옆 모던 부티크 22실. 도보 최적이지만 렌터카 일정엔 핸디캡 — 주차 유료(셀프 €25/발레 €50 per day·400m 거리), ZTL 인접으로 매일 출입 번거롭고 3박 주차비만 €75+. 차 없이 즐기는 여행에 적합.",tags:["시내중심","유료주차","ZTL인접","고가"],links:[{t:"Booking",u:"https://www.booking.com/hotel/it/de-len.html",c:""}]},
-      {name:"Grand Hotel Savoia (5성 호사용)",stars:5,price:"€1,200+/3박 추정",desc:"Radisson Collection 5성·스파. 럭셔리 최우선이면 좋으나 유료 실내주차 €30/일+ZTL+고가로 '무료주차·가성비·하프보드' 기준엔 부합도 낮음. 예산 여유 시 1박 호사용으로만.",tags:["5성","스파","유료주차","고가"],links:[{t:"공식",u:"https://www.grandhotelsavoiacortina.it/en/",c:""},{t:"Booking",u:"https://www.booking.com/hotel/it/grand-savoia-cortina-d-ampezzo.html",c:""}]}
-    ],
-    "Milano (1박)":[
-      {name:"Gran Duca di York ⭐추천 1순위",stars:3,price:"€230~290/박 추정 · 무료취소 가능",desc:"최적 위치: Via Moneta 1(Cordusio 인근). 두오모 도보 7분으로 저녁(아페리티보·코톨레타) 동선 한가운데이고, 익일 브레라·몬테나폴레오네 쇼핑·Luini·Cadorna(말펜사 익스프레스)까지 모두 도보권. Cordusio역 2분이라 Centrale 반납 후 지하철 접근도 쉬움. 18세기 팔라초·조식 포함·평점 9.3으로 위치·가성비·만족도 균형 최고.",tags:["⭐1순위","두오모 7분","Cadorna 도보권","평점9.3"],links:[{t:"공식",u:"https://www.ducadiyork.com/en/",c:""},{t:"Booking",u:"https://www.booking.com/hotel/it/gran-duca-di-york.html",c:""}]},
-      {name:"Hotel Spadari al Duomo (두오모 초근접)",stars:4,price:"€400+/박 추정",desc:"Via Spadari 11, 두오모 150m(도보 6분)·Duomo역 2분. 두오모 저녁 동선이 가장 편한 4성 부티크. 단 1순위 대비 크게 비쌈. ⚠️ Via Spadari 보도공사(~9/15)가 체크인 직전 종료 예정이라 예약 시 진행상황 확인.",tags:["두오모 150m","4성","고가"],links:[{t:"공식",u:"https://www.spadarihotel.com/en/",c:""},{t:"Booking",u:"https://www.booking.com/hotel/it/spadari-al-duomo.html",c:""}]},
-      {name:"Hotel La Madonnina (알뜰 옵션)",stars:3,price:"€150~200/박 추정",desc:"Via Dante 인근, 두오모 도보 5분·평점 8.1. 위치·가격 모두 좋은 알뜰 선택. ⚠️ 객실 14개 소형이고 트램·도로 소음 리뷰 다수 → 1층/도로변 객실 회피 요청.",tags:["가성비","두오모 5분","소음주의"],links:[{t:"공식",u:"https://www.hotellamadonninamilano.it/",c:""},{t:"Booking",u:"https://www.booking.com/hotel/it/la-madonnina.html",c:""}]}
-    ]
+    "Cinque Terre (1박)":[],
+    "Venezia (1박)":[],
+    "Cortina d'Ampezzo (3박)":[],
+    "Milano (1박)":[]
   },
   days:[
 {day:1,date:"9/16 수",city:"인천→로마",theme:"로마의 첫 밤",routeSummary:"✈️ ICN→FCO (KE931 직항 13h10)",sched:[
@@ -1477,7 +1451,7 @@ const TICKETING_ITEMS=[
 
 // ===================== STATE & RENDER =====================
 let currentCourse='B',map=null,routeLine=null,markers=[],dayMap=null,dayMarkers=[],dayLine=null;
-const SEC_LIST=[{id:'overview',l:'🗺️ 루트 & 지도'},{id:'calendar',l:'📅 달력'},{id:'itinerary',l:'📋 상세 일정'},{id:'food',l:'🍝 음식'},{id:'transport',l:'🚆 이동수단'},{id:'booking',l:'🧾 예약 체크'},{id:'hotel',l:'🏨 숙소'},{id:'shortlist',l:'🛏️ 숙소 후보10'},{id:'budget',l:'💰 예산'},{id:'compare',l:'✅ 여행 요약'}];
+const SEC_LIST=[{id:'overview',l:'🗺️ 루트 & 지도'},{id:'calendar',l:'📅 달력'},{id:'itinerary',l:'📋 상세 일정'},{id:'food',l:'🍝 음식'},{id:'transport',l:'🚆 이동수단'},{id:'booking',l:'🧾 예약 체크'},{id:'hotel',l:'🏨 숙소'},{id:'budget',l:'💰 예산'},{id:'compare',l:'✅ 여행 요약'}];
 
 const ICON_COLORS={food:'#f97316',spot:'#22c55e',move:'#2563eb',hl:'#ec4899',couple:'#ec4899',option:'#7E8B6F'};
 function isCoord(v){return Array.isArray(v)&&v.length>=2&&Number.isFinite(Number(v[0]))&&Number.isFinite(Number(v[1]));}
@@ -1617,7 +1591,6 @@ const SL=[
  {name:"Hotel Dei Cavalieri Milano Duomo",stars:4,area:"Piazza Giuseppe Missori 1 — 미소리 광장 정면, 두오모 도보권",dist:"두오모 도보 5~6분(약250~400m). Missori M3 도보 1분 → Centrale 직행(Malpensa Express) 최강. Cadorna는 도보 약13~14분",ov:"8.4",cl:"8.7",sv:"8.8",lo:"9.4",src:"Booking 8.4(약8,032)",cnt:"8,032",price:"약 €200~290 (대형 4성, 일1박2인, 가성비 양호)",cancel:"요율별",book:"https://www.booking.com/hotel/it/deicavalierimilano.html",agoda:"https://www.agoda.com/hotel-dei-cavalieri/hotel/milan-it.html",off:"https://www.hoteldeicavalieri.com/en",why:"Missori M3 도보 1분으로 Centrale발 Malpensa Express 접근 최강. 두오모 도보 5~6분으로 저녁 동선도 양호, 파노라마 루프톱 라운지가 아페리티보에 적합. 리뷰 8,032건 검증 최고.",cav:"대형이라 일부 객실 노후·협소, 인근 바·식당 소음 후기 다수. Cadorna는 멂, 체크아웃 혼잡 가능.",vnote:""}
  ]}
 ];
-let slCur=0;
 const SL_PAX="group_adults=2&no_rooms=1&group_children=0";
 function slBook(u,ci,co){return u?u.split('?')[0]+"?checkin="+ci+"&checkout="+co+"&"+SL_PAX+"&selected_currency=EUR":"";}
 function slAgoda(u,name,city,ci,los){return u?u.split('?')[0]+"?checkIn="+ci+"&los="+los+"&adults=2&rooms=1":"https://www.agoda.com/search?textToSearch="+encodeURIComponent(name+" "+city)+"&checkIn="+ci+"&los="+los+"&adults=2&rooms=1";}
@@ -1651,14 +1624,6 @@ function slCard(h,i,L){
     +'<div class="sl-links">'+links+'</div>'
     +'</div>';
 }
-function slSel(i){slCur=i;renderShortlist();}
-function renderShortlist(){
-  const st=document.getElementById('slSubtabs');if(!st)return;
-  st.innerHTML=SL.map((d,i)=>'<button type="button" class="sl-subtab'+(i===slCur?' active':'')+'" onclick="slSel('+i+')">'+d.label+'<small>'+d.dlabel+'</small></button>').join('');
-  const L=SL[slCur];
-  document.getElementById('slBanner').innerHTML='<div class="sl-banner"><b>'+L.label+' · '+L.dlabel+'</b> &nbsp;('+L.ci+' → '+L.co+', 2인)<br>'+L.summary+'</div>';
-  document.getElementById('slGrid').innerHTML=L.hotels.map((h,i)=>slCard(h,i,L)).join('');
-}
 
 function init(){
   const ct=document.getElementById('courseTabs');ct.innerHTML='';
@@ -1676,7 +1641,7 @@ function switchCourse(id){
   currentCourse=id;
   document.querySelectorAll('.course-tab').forEach(t=>t.classList.toggle('active',t.dataset.course===id));
   const c=COURSES[id];
-  updateMap(c);renderRouteFlow(c);renderStats(c);renderCalendar(c);renderItinerary(c);renderFoodGuide();renderTransport(c);renderBooking();renderHotels(c);renderBudget(c);renderCompare();renderShortlist();
+  updateMap(c);renderRouteFlow(c);renderStats(c);renderCalendar(c);renderItinerary(c);renderFoodGuide();renderTransport(c);renderBooking();renderHotels(c);renderBudget(c);renderCompare();
   if(isItineraryVisible())setTimeout(()=>showOverviewOnDayMap(c),120);
 }
 
@@ -2078,23 +2043,40 @@ function renderFoodGuide(){
 }
 
 // HOTELS
+// 친퀘테레/베네치아/코르티나/밀라노는 SL(10개 후보) 데이터로 렌더, 로마/피렌체는 확정 카드로 렌더
+function slForCity(cityKey){
+  if(/Cinque Terre/i.test(cityKey))return SL.find(s=>s.key==='Monterosso');
+  if(/Venezia/i.test(cityKey))return SL.find(s=>s.key==='Venezia');
+  if(/Cortina/i.test(cityKey))return SL.find(s=>s.key==='Cortina');
+  if(/Milano/i.test(cityKey))return SL.find(s=>s.key==='Milano');
+  return null;
+}
 function renderHotels(c){
   const el=document.getElementById('hotelContent');
   document.getElementById('hotelTitle').textContent='숙소';
   const cities=Object.keys(c.hotels);
   const conf=city=>c.hotels[city].some(h=>/확정/.test(h.name)||(h.tags||[]).some(t=>/확정/.test(t)));
-  const nav='<div class="hotel-citynav">'+cities.map((city,i)=>`<button class="hotel-citychip${i===0?' active':''}" data-city="${city}" onclick="showHotelCity('${city}')">${city}${conf(city)?' ✅':''}</button>`).join('')+'</div>';
+  const nav='<div class="hotel-citynav">'+cities.map((city,i)=>`<button class="hotel-citychip${i===0?' active':''}" data-city="${city}" onclick="showHotelCity('${city}')">${city}${conf(city)?' ✅':(slForCity(city)?' 10':'')}</button>`).join('')+'</div>';
   let blocks='';
   cities.forEach((city,i)=>{
-    const cards=c.hotels[city].map(h=>{
-      const stars='★'.repeat(h.stars)+'☆'.repeat(5-h.stars);
-      const tags=h.tags.map(t=>`<span class="h-tag">${t}</span>`).join('');
-      const links=h.links.map(l=>`<a href="${l.u}" target="_blank" rel="noopener" class="${l.c}">${l.t}</a>`).join('');
-      return `<div class="hotel-card"><div class="h-name">${h.name}</div><div class="h-stars">${stars}</div><div class="h-desc">${h.desc}</div><div class="h-price">${h.price} <small>/2인 기준</small></div><div class="h-tags">${tags}</div><div class="h-links">${links}</div></div>`;
-    }).join('');
-    blocks+=`<div class="hotel-city" data-cityblock="${city}"${i===0?'':' hidden'}><h4>${city} <span class="hcount">후보 ${c.hotels[city].length}곳</span></h4><div class="hotel-cards">${cards}</div></div>`;
+    const L=slForCity(city);
+    let inner,count;
+    if(L){
+      inner=`<div class="sl-banner">${L.summary}</div><div class="sl-grid">${L.hotels.map((h,idx)=>slCard(h,idx,L)).join('')}</div>`;
+      count=`후보 ${L.hotels.length}곳 · ${L.ci}→${L.co}`;
+    }else{
+      const cards=c.hotels[city].map(h=>{
+        const stars='★'.repeat(h.stars)+'☆'.repeat(5-h.stars);
+        const tags=h.tags.map(t=>`<span class="h-tag">${t}</span>`).join('');
+        const links=h.links.map(l=>`<a href="${l.u}" target="_blank" rel="noopener" class="${l.c}">${l.t}</a>`).join('');
+        return `<div class="hotel-card"><div class="h-name">${h.name}</div><div class="h-stars">${stars}</div><div class="h-desc">${h.desc}</div><div class="h-price">${h.price} <small>/2인 기준</small></div><div class="h-tags">${tags}</div><div class="h-links">${links}</div></div>`;
+      }).join('');
+      inner=`<div class="hotel-cards">${cards}</div>`;
+      count=conf(city)?'✅ 예약 완료':`후보 ${c.hotels[city].length}곳`;
+    }
+    blocks+=`<div class="hotel-city" data-cityblock="${city}"${i===0?'':' hidden'}><h4>${city} <span class="hcount">${count}</span></h4>${inner}</div>`;
   });
-  const tip=`<div class="hotel-tip">💡 <strong>예약 팁:</strong> 9월은 성수기라 확정 숙소의 취소/결제 조건과 체크인 시간을 별도 보관. 로마 Hotel Labelle은 확정가(₩854,164/3박·2인), 피렌체 Le Stanze del Duomo는 실결제 금액 입력 필요.<br>🏛️ <strong>이탈리아 도시세(tassa di soggiorno):</strong> 대부분 도시가 1인·1박당 €3~7을 체크인 시 숙소에서 현장 결제 — 예산 '도시세' 항목에 별도 계상. 로마(2성) ₩52,620 확정.</div>`;
+  const tip=`<div class="hotel-tip">💡 <strong>예약 팁:</strong> 로마·피렌체는 예약 완료(확정). 이후 4개 도시는 각 10곳 후보 — <strong>Booking ▸날짜</strong> 버튼이 체크인/체크아웃·2인 입력된 채 열립니다. 9월 성수기 끝물이라 무료취소 요금제로 선예약 후 가격 추이 보며 조정 권장.<br>🏛️ <strong>이탈리아 도시세(tassa di soggiorno):</strong> 대부분 도시가 1인·1박당 €3~7을 체크인 시 숙소에서 현장 결제 — 예산 '도시세' 항목에 별도 계상. 로마(2성) ₩52,620 확정.</div>`;
   el.innerHTML=nav+blocks+tip;
 }
 function showHotelCity(name){
