@@ -7,5 +7,9 @@
 plan/*
 !plan/VERSIONS.md
 !plan/2026-여정개편-보고서.md
+!plan/SESSION-2026-06-21-진행요약.md
+!plan/2026-교통점검-리포트.md
+!plan/2026-렌터카-결정분석.md
+!plan/2026-비용절감-리포트.md
 !숙소후보-2026.md
 !.gitignore
