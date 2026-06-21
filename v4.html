@@ -99,11 +99,11 @@ a{color:inherit}
 /* ============ NAV ============ */
 .navbar{position:sticky;top:0;z-index:40;background:rgba(247,241,230,.94);
   backdrop-filter:saturate(1.2) blur(10px);border-bottom:1px solid var(--line)}
-.section-tabs{max-width:var(--maxw);margin:0 auto;display:flex;gap:4px;
-  padding:4px 18px 0;overflow-x:auto;scrollbar-width:none}
+.section-tabs{max-width:var(--maxw);margin:0 auto;display:flex;flex-wrap:wrap;gap:2px;
+  padding:4px 14px 0}
 .section-tabs::-webkit-scrollbar{display:none}
 .sec-tab{
-  flex:0 0 auto;padding:13px 16px;cursor:pointer;
+  flex:0 0 auto;padding:13px 12px;cursor:pointer;
   font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;font-size:15px;font-weight:700;
   color:var(--muted);white-space:nowrap;transition:color .18s,border-color .18s;
   border:0;border-bottom:2px solid transparent;background:none;border-radius:0;
@@ -670,6 +670,8 @@ footer{text-align:center;padding:36px 20px;color:var(--faint);
   .food-recs-row > td:first-child{width:52px}
 }
 @media(max-width:480px){
+  /* 진짜 폰에서는 탭 줄바꿈 대신 단일행 스와이프 스크롤(네비가 너무 높아지지 않게) */
+  .section-tabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
   .trip-meta .chip:not(.chip-fixed):not(.chip-route){display:none}
 	  .stats-row{grid-template-columns:repeat(2,1fr)}
 	  .cal-grid{display:none}
@@ -879,7 +881,7 @@ B: {
   {t:"선택",seq:"3-2",name:"선택: 라르고 디 토레 아르젠티나",desc:"판테온 가는 길의 고대 유적 · 카이사르 암살 장소로 알려진 구역 5~10분",type:"spot",optional:true,coords:[41.8959948,12.4768388],tip:"길 위에서 내려다보는 짧은 후보. 동선은 좋지만 피곤하면 생략."},
   {t:"13:00",name:"점심: 판테온 근처",rk:"roma-pantheon-lunch",desc:"빠른 파니노부터 정찬까지 · €18~90",type:"food",coords:[41.8986,12.4769],map:false,tip:"동선상 판테온 전후 5~10분권만 선별. 가성비는 Pane e Salame/Il Panino, 예약 정찬은 Armando, 미식 선택은 RetroVino."},
   {t:"14:10",name:"식후 커피/그라니타: 판테온 카페",rk:"roma-pantheon-coffee",desc:"점심 직후 Sant'Eustachio 또는 Tazza d'Oro · 10분 스톱",type:"food",coords:[41.8982524,12.4754268],tip:"식사 전 간식이 아니라 점심 후 커피 타이밍. 로마 카페는 바에서 서서 마시면 빠르고 저렴. Tazza d'Oro는 그라니타 디 카페 콘 판나 후보."},
-  {t:"14:40",name:"판테온",desc:"€5/인 · 30~40분",type:"spot",coords:[41.8986,12.4769],tip:"공식 기준 09:00~19:00 운영. 종교 행사로 변동 가능하니 당일 재확인."},
+  {t:"14:40",name:"판테온",desc:"€7/인 · 30~40분",type:"spot",coords:[41.8986,12.4769],tip:"공식 기준 09:00~19:00 운영. 2026-07-01부터 €5→€7, 공식 Musei italiani에서 구매. 종교 행사로 변동 가능하니 당일 재확인."},
   {t:"선택",seq:"5-1",name:"선택: 산 루이지 데이 프란체시",desc:"판테온→나보나 사이 · 카라바조 성 마태오 연작 15~20분",type:"spot",optional:true,coords:[41.8995875,12.4745426],tip:"D2에서 가장 추천하는 선택지. 무료지만 미사/행사 중에는 관람이 제한될 수 있음."},
   {t:"15:35",name:"나보나 광장",desc:"판테온→도보 5~7분 · 4대강 분수",type:"hl",coords:[41.8992,12.4731]},
   {t:"선택",seq:"6-1",name:"선택: 젤라토/티라미수 스톱",rk:"roma-navona-gelato",desc:"나보나 주변 10~15분 · Gelateria del Teatro 우선",type:"food",optional:true,coords:[41.9004694,12.4695705],tip:"Gelateria del Teatro는 나보나 서쪽으로 살짝 빠짐. 바로 트레비로 가고 싶으면 생략."},
@@ -904,7 +906,7 @@ B: {
   {t:"12:45",name:"점심: Roscioli",rk:"roma-centro-lunch",desc:"산탄젤로→도보 15~20분 · 살루메리아 €65",type:"food",coords:[41.8933,12.4729],tip:"Roscioli를 먹는 날에는 Supplizio를 추가로 먹지 않기. 수플리/조각피자는 점심 대체안으로만 둔다."},
   {t:"점심 대체",seq:"6-1",name:"대체 점심: Supplizio + Antico Forno",rk:"roma-campo-street",desc:"Roscioli 예약이 없거나 가볍게 먹을 때만 선택",type:"food",optional:true,coords:[41.8974708,12.4679030],tip:"공식 월~토 12:00~15:30/17:00~21:30인 Supplizio와 Antico Forno 조각피자를 점심으로 대체. Roscioli와 둘 다 먹는 구성은 비추천."},
   {t:"14:15",name:"보르게세 이동 + 짧은 휴식",desc:"Roscioli→보르게세 택시 15~20분. 15:30 입장 전 30분 버퍼",type:"move",coords:[41.9142,12.4921],map:false},
-  {t:"15:30",name:"보르게세 미술관",desc:"€15/인 사전예약! 2시간 슬롯",type:"spot",coords:[41.9142,12.4921],tip:"⚠️ 반드시 사전예약. 15시대 슬롯 우선, 없으면 17시 슬롯로 조정하고 저녁을 늦추기"},
+  {t:"15:30",name:"보르게세 미술관",desc:"€18/인(€16+예약€2) 사전예약! 2시간 슬롯",type:"spot",coords:[41.9142,12.4921],tip:"⚠️ 반드시 사전예약. 15시대 슬롯 우선, 없으면 17시 슬롯로 조정하고 저녁을 늦추기"},
   {t:"선택",seq:"8-1",name:"선택: 핀초 전망대",desc:"보르게세→스페인광장 이동길 · 로마 전경 10~15분",type:"hl",optional:true,coords:[41.9111966,12.4784418],tip:"해가 좋으면 D3에서 가장 자연스러운 추가 후보. Piazza del Popolo까지 내려가면 시간이 더 걸림."},
   {t:"17:35",seq:"8-2",name:"보급 2: 보르게세→스페인광장 당충전",rk:"roma-spagna-energy-snack",desc:"점심 후 4시간대 · 작은 젤라토/티라미수/에스프레소 10분",type:"food",optional:true,coords:[41.9040627,12.4826188],tip:"저녁 직전 과식 금지. 작은 컵 1개 공유 또는 에스프레소 정도만. 이걸 먹으면 몬티 저녁은 19:30로 늦춘다."},
   {t:"18:00",name:"스페인광장+콘도띠",desc:"쇼핑/산책",type:"",coords:[41.9058,12.4823],tip:"⚠️ 앉기 금지! €250 벌금"},
@@ -985,7 +987,7 @@ B: {
   {t:"~12:30",name:"바포레토 24h",desc:"€25/인 · 도착 후 활성화 · 1박이라 24h로 하향",type:"move",tip:"조기출발로 도착이 ~12:30로 당겨지면 치케티(13:00)부터 동선이 자연스럽게 이어진다. 베네치아 1박이라 48h→24h. 단 활성화 시각+D9 오전 메스트레 이동까지면 24h 초과 가능 → 도착 열차시각 확정 후 24h/48h 택1."},
   {t:"13:00",name:"치케티 바 호핑",rk:"venezia-cicchetti",desc:"€38",type:"food",coords:[45.4389,12.3338]},
   {t:"14:30",name:"리알토 다리",desc:"",type:"hl",coords:[45.4380,12.3360]},
-  {t:"15:30",name:"두칼레 궁전",desc:"€30/인",type:"spot",coords:[45.4336,12.3404],tip:"💡 30일 전 예약시 €25 (현장 €30)"},
+  {t:"15:30",name:"두칼레 궁전",desc:"€30/인(30일전 온라인) · 현장 €35",type:"spot",coords:[45.4336,12.3404],tip:"💡 30일 이상 전 온라인 €30, 현장/임박 €35. 8/24까지 예매 권장"},
   {t:"17:00",name:"Caffe Florian",desc:"€25",type:"food",coords:[45.4343,12.3386],tip:"💡 2인 €40~50 예상 (오케스트라 서차지 포함)"},
   {t:"17:45",name:"곤돌라",desc:"€80 석양!",type:"hl",coords:[45.4380,12.3360],map:false,tip:"💡 €90/보트(5인). 석양 타이밍이 최고"},
   {t:"19:00",name:"산 조르조 마조레",desc:"€8/인",type:"spot",coords:[45.4294,12.3432],tip:"💡 산마르코 종탑보다 뷰 좋고 한적!"},
@@ -993,7 +995,7 @@ B: {
   {t:"22:00",name:"야경",desc:"",type:"hl",coords:[45.4345,12.3388],map:false}
 ],cost:"€340"},
 {day:9,date:"9/24 목",city:"베네치아→돌로미티",theme:"본섬 오전 + 렌터카로 알프스 진입 (Day1 저강도)",routeSummary:"🚗 Venezia 본섬→Mestre 렌터카→미수리나→Cortina (약 2~2.5h)",sched:[
-  {t:"07:00",name:"산마르코 새벽 산책 + 조식",desc:"인적 드문 광장 사진 + 바카로 에스프레소 · 짐 정리",type:"food",coords:[45.4341,12.3388],tip:"D9는 베네치아 본섬을 오전 1~2시간만 쓰고 떠나는 날. 무거운 짐은 전날 미리 싸두고, 09:00 픽업 시간 엄수가 핵심."},
+  {t:"07:00",name:"산마르코 새벽 산책 + 조식",rk:"venezia-morning",desc:"인적 드문 광장 사진 + 07시 여는 곳에서 에스프레소/페이스트리 · 짐 정리",type:"food",coords:[45.4341,12.3388],tip:"D9는 베네치아 본섬을 오전 1~2시간만 쓰고 떠나는 날. 대부분 바카로/카페는 07시에 닫혀 있어 06:30 여는 Pasticceria Da Bonifacio가 사실상 유일한 선택. 무거운 짐은 전날 미리 싸두고, 09:00 메스트레 픽업 엄수가 핵심."},
   {t:"08:10",name:"본섬 → Venezia Mestre 역",desc:"산타루치아역→메스트레역 기차 1정거장 또는 People Mover · 약 25~35분",type:"move",coords:[45.4823,12.2317],tip:"본섬은 차량 진입 불가라 렌터카는 메스트레역에서 픽업. 캐리어 동선상 기차 1정거장이 가장 단순."},
   {t:"09:00",name:"메스트레역 렌터카 픽업 (4일)",desc:"IDP+한국면허+신용카드+여권 · 풀커버 보험 권장",type:"move",coords:[45.4823,12.2317],tip:"⚠️ 픽업 즉시 차량번호판 확보 → D10 Auronzo 통행료 예약에 입력(9/24 23:59까지). 산악 대응 사계절 타이어·ZTL 회피 내비 설정."},
   {t:"09:15~11:30",name:"메스트레 → 코르티나",desc:"A27 경유 약 2~2h15 · 통행료 €8~10",type:"move",coords:[46.5369,12.1357],map:false,tip:"중간 휴게 포함. 코르티나 시내 일부 ZTL → 호텔 주차/통행 허가 사전 요청."},
@@ -1002,7 +1004,7 @@ B: {
   {t:"14:30~16:30",name:"친퀘 토리 또는 팔로리아 전망대 (택1)",desc:"친퀘토리 리프트 왕복 €18~20 / 팔로리아 케이블카 왕복 약 €27/인",type:"spot",coords:[46.5189,12.0386],tip:"친퀘토리=1차대전 야외박물관 평지 산책(사진 명소). 팔로리아=시내 직접 탑승으로 가장 편함. 컨디션 따라 택1."},
   {t:"16:30~18:30",name:"호텔 체크인 + 휴식",desc:"정식 체크인 · 샤워 · 충전",type:"hotel",coords:[46.5369,12.1357],map:false},
   {t:"18:30",name:"알펜글로우 (토파네/소라피스)",desc:"일몰 약 19:00 · 봉우리 분홍빛",type:"hl",coords:[46.5369,12.1357],map:false},
-  {t:"19:30",name:"저녁: Baita Fraina",rk:"dolomiti-dinner",desc:"목요일 영업 · 카네데를리/카주넬리 €70~80",type:"food",coords:[46.5330,12.1290],tip:"El Brite de Larieto는 목요일 휴무라 이 날은 Baita Fraina. 예약 권장."}
+  {t:"19:30",name:"저녁: Baita Fraina",rk:"dolomiti-dinner",desc:"목요일 영업(월 휴무) · 카준치에이/카네데를리/사슴 €90~120",type:"food",coords:[46.5330,12.1290],tip:"Baita Fraina는 월요일 휴무라 목요일인 이 날 영업. El Brite은 금·토 디너 중심이라 D10·D11로 배치. 코르티나 시그니처 카준치에이(비트 라비올리)는 꼭 주문. 예약 권장(+39 0436 3634)."}
 ],cost:"€220~260"},
 {day:10,date:"9/25 금",city:"돌로미티 트레치메",theme:"트레치메 트레킹 + 라고 디 브라이에스",routeSummary:"🚗 Auronzo→트레치메 일주 9.5km→Braies (날짜 고정: 통행료 예약)",sched:[
   {t:"06:30",name:"코르티나 출발 (도시락 지참)",desc:"아침 파니노/도시락 챙겨 조기 출발",type:"move",coords:[46.5369,12.1357],map:false,tip:"Auronzo 게이트 09시 전 도착 필수라 새벽 출발. Rifugio 점심은 9월말 시즌 마감 임박 → 백업 파니노 필수."},
@@ -1012,30 +1014,30 @@ B: {
   {t:"12:30~13:30",name:"게이트 하산 → 라고 디 브라이에스",desc:"약 1시간 이동",type:"move",coords:[46.6944,12.0853],map:false,tip:"💡 Braies ZTL 차량통제는 7/1~9/15만 → 9/25는 자유진입·P4 예약 불필요. 일반주차 €7~30."},
   {t:"13:30~16:00",name:"라고 디 브라이에스 산책 + 보트",desc:"에메랄드 호수 일주 · 나무보트 €18",type:"hl",coords:[46.6944,12.0853],tip:"돌로미티에서 가장 유명한 호수. 혼잡 대비 가급적 빨리 도착."},
   {t:"16:30~17:30",name:"코르티나 복귀",desc:"약 1시간",type:"move",coords:[46.5369,12.1357],map:false},
-  {t:"19:30",name:"저녁: El Brite de Larieto",rk:"dolomiti-dinner",desc:"금요일 영업 · 농가식 산악요리 · 예약 권장",type:"food",coords:[46.5566,12.1430],tip:"El Brite는 목 휴무라 금요일인 이 날 배치. SanBrite(미슐랭)는 2~3주 전 예약 대안."}
+  {t:"19:30",name:"저녁: El Brite de Larieto",rk:"dolomiti-dinner",desc:"금요일 영업(수 휴무) · 농장 직생산 산악요리 · 예약 필수",type:"food",coords:[46.5566,12.1430],tip:"El Brite은 수요일 휴무이고 금·토 디너 운영이라 금요일인 이 날 최적. 촛불 테라스로 로맨틱. 직접 예약 필수(+39 368 7008083). SanBrite(미슐랭★, 2~3주 전 예약) 또는 Tivoli(미슐랭★)가 대안."}
 ],cost:"€230~280"},
 {day:11,date:"9/26 토",city:"돌로미티 드라이브",theme:"서부 확장 · 파소 드라이브 (날짜 유연)",routeSummary:"🚗 세체다 또는 라가주오이/파소 자우 (기상 따라 D10과 스왑 가능)",sched:[
   {t:"07:30",name:"아침 + 출발",desc:"호텔 조식 · 토요일 혼잡 대비 일찍",type:"food",coords:[46.5369,12.1357],map:false,tip:"날씨/컨디션 따라 옵션 택1. 토요일이라 명소·식당 혼잡 → 오전 일찍 움직이기. 우천 시 D10 트레치메와 순서 스왑."},
   {t:"옵션 A",name:"세체다 / 발 가르데나 (서부)",desc:"코르티나→오르티세이 약 1h30 · 케이블카 왕복 €74/인(타임슬롯 예약 필수)",type:"spot",coords:[46.6094,11.6586],tip:"돌로미티 능선 최고 절경. 익일 코모 서진 동선과도 정합. 비용 큼(2인 €148) → 별도 예산. 2026 타임슬롯 사전예약 의무."},
   {t:"옵션 B",name:"파소 팔체레고 / 라가주오이",desc:"코르티나 인접 · 케이블카 왕복 약 €25/인 + 1차대전 터널",type:"spot",coords:[46.5197,12.0089],tip:"저강도·근거리·가성비. 라가주오이 전망대와 1차대전 야외 갱도. 운전 부담 적음."},
   {t:"경유",name:"파소 자우 드라이브",desc:"코르티나 인접 명품 산악 패스 · 사진",type:"hl",coords:[46.4869,12.0556],tip:"어느 옵션이든 끼워넣기 좋은 드라이브 포인트. 카레차 호수(편도 1.5h)는 멀어 생략 권장."},
-  {t:"13:00",name:"점심: 리푸지오/말가",desc:"산장 점심 €30~45",type:"food",coords:[46.5369,12.1357],map:false},
+  {t:"13:00",name:"점심: 리푸지오/말가",rk:"dolomiti-dinner",desc:"산장 점심 €25~45 · ⚠️5 Torri 리푸지오는 9/25 시즌종료 → Malga Ra Stua(5/23~10/11 영업) 또는 Da Aurelio(점심 11:00~15:00)",type:"food",coords:[46.5369,12.1357],map:false,tip:"토요일 점심은 5 Torri/Averau/Scoiattoli가 시즌 종료라 닫힘. 도로 접근 가능한 Malga Ra Stua(카네데를리/폴렌타/굴라시) 또는 Passo Giau의 Da Aurelio 점심으로. 리푸지오 정석: 카네데를리 인 브로도+폴렌타 콘 풍기+스펙·치즈 플래터+슈트루델."},
   {t:"17:00",name:"코르티나 복귀 + 휴식",desc:"마지막 돌로미티 밤 · 짐 정리",type:"move",coords:[46.5369,12.1357],map:false},
-  {t:"19:30",name:"저녁: 5 Torri / Da Aurelio (예약)",rk:"dolomiti-dinner",desc:"토요일 수요 폭증 · 4주 전 예약 또는 호텔 하프보드",type:"food",coords:[46.5369,12.1357],tip:"토요일 저녁은 현지 수요 폭증 → 미리 예약 필수. 실패 시 호텔 하프보드 백업."}
+  {t:"19:30",name:"저녁: Da Aurelio (Passo Giau) / Tivoli",rk:"dolomiti-dinner",desc:"토요일 수요 폭증 · 반드시 예약 또는 호텔 하프보드",type:"food",coords:[46.4844,12.0536],tip:"⚠️5 Torri 리푸지오(Averau/Scoiattoli/Cinque Torri)는 9/25 시즌종료로 토요일 휴업. 토요일 디너는 도로변 Da Aurelio(Passo Giau, +39 0437 720118) 1순위, 시내 Ristorante Tivoli(미슐랭★) 백업, 둘 다 실패 시 호텔 Menardi 하프보드. 토요일은 지금 바로 예약."}
 ],cost:"€120~280"},
 {day:12,date:"9/27 일",city:"코모호수→밀라노",theme:"호반 드라이브 + 두오모",routeSummary:"🚗 Cortina→Como→Milano (렌터카 4~5h)",sched:[
   {t:"07:30~08:00",name:"아침+체크아웃 후 출발",desc:"호텔조식 · 코모까지 운전 부담 커 일찍",type:"food",coords:[46.5369,12.1357],map:false,tip:"⚠️ 코르티나→코모/바레나 실측 약 423~425km·4.5~5h(휴게 제외)+코모권→밀라노 1~1.5h=총 5~5.5h. 16:30 밀라노 반납 역산해 07:30~08:00 출발 필수."},
   {t:"08:00",name:"Cortina→바레나(코모호수)",desc:"렌터카 약 4.5~5h",type:"move",coords:[46.0103,9.2847],map:false},
   {t:"12:30",name:"바레나(Varenna) 호숫가",desc:"역 인접·주차 용이 · 벨라지오보다 동선 우월",type:"hl",coords:[46.0103,9.2847],tip:"벨라지오는 페리 필요·주차난이라 일요일엔 바레나가 유리. 호수 경유는 짧게 점심 위주."},
-  {t:"13:00",name:"점심: 바레나 호숫가",rk:"como-lunch",desc:"일요일 영업처 확인 · 리조또 €50~60",type:"food",coords:[46.0103,9.2847],map:false},
+  {t:"13:00",name:"점심: 바레나 호숫가",rk:"como-lunch",desc:"일요일 영업 Osteria Quatro Pass(농어 리소토) 1순위 · 코모호수 요리 €40~120",type:"food",coords:[46.0103,9.2847],map:false,tip:"기존 데이터는 벨라지오였으나 동선은 바레나라 전면 교체. 일요일 영업 확인된 Quatro Pass(risotto con pesce persico=농어 리소토 명물) 우선, 물 위 테라스 Vecchia Varenna는 폐업 플래그가 있어 전화 확인. 코모호수 머스트잇: 농어 리소토·말린 호수생선(missoltini)·라바렐로."},
   {t:"14:30~16:00",name:"→밀라노 이동",desc:"코모권→밀라노 약 1~1.5h",type:"move",coords:[45.4869,9.2042],map:false},
   {t:"16:30",name:"렌터카 반납 (밀라노)",desc:"Milano Centrale 또는 Malpensa 반납 · 시내 ZTL(Area C) 절대 회피",type:"",coords:[45.4869,9.2042],tip:"반납지를 ZTL 밖 Milano Centrale 차고 또는 Malpensa로 지정. 시내 진입 시 카메라 벌금."},
   {t:"17:30",name:"밀라노 두오모",desc:"외관+광장 우선, 옥상은 컨디션 따라",type:"spot",coords:[45.4641,9.1919]},
-  {t:"18:30",name:"아페리티보",desc:"€22",type:"food"},
-  {t:"19:30",name:"저녁: 일요일 영업처(코톨레타)",rk:"milano-dinner",desc:"⚠️ Trattoria Milanese 일요일 휴무 → Trattoria del Nuovo Macello 등 대체 €40~60/인",type:"food",coords:[45.4620,9.1870],tip:"Trattoria Milanese는 일요일 휴무 확정. 대안: Trattoria del Nuovo Macello(일 영업·코톨레타) 또는 두오모 인근 일요일 영업처. 예약 권장."}
+  {t:"18:30",name:"아페리티보: Camparino in Galleria",desc:"두오모 정면 1915년 캄파리 역사바 · 일요일 영업 · 네그로니/스바글리아토 €12~16/잔",type:"food",coords:[45.4656,9.1903],tip:"일요일 18:30 영업 확인. 두오모 갤러리아 입구라 동선 한가운데. Negroni Sbagliato 가능. 뷰를 원하면 Terrazza Aperol(두오모 정면 테라스)도 한 잔."},
+  {t:"19:30",name:"저녁: 일요일 영업처(코톨레타)",rk:"milano-dinner",desc:"⚠️일요일 9곳 중 6곳 휴무 → Al Matarel(코톨레타+오소부코) 1순위 €90~130/2인",type:"food",coords:[45.4795,9.1857],tip:"Trattoria Milanese·Nuovo Macello·Trippa 모두 일요일 휴무 확정. 일요일 코톨레타+리소토 알라 밀라네세+오소부코는 Al Matarel(중심·화 휴무) 1순위, Ratanà(매일·예약 필수) 백업, Ronchettino(외곽·풀세트) 안전망. 지금 예약 권장."}
 ],cost:"€220"},
 {day:13,date:"9/28 월",city:"밀라노→귀국",theme:"쇼핑 + 귀국",routeSummary:"✈️ MXP→ICN (KE928 22:00출발)",sched:[
-  {t:"08:30",name:"아침: Marchesi",desc:"€18",type:"food",coords:[45.4668,9.1910]},
+  {t:"08:30",name:"아침: Pasticceria Marchesi 1824",desc:"갤러리아 비토리오 에마누엘레 지점(두오모 옆) · 월 07:30 오픈 · 바 스탠딩 €15~25/2인",type:"food",coords:[45.4659,9.1900],tip:"갤러리아 지점(프라다 2층)이 두오모 옆이라 동선 최적, 월요일 07:30 오픈 확인. 착석은 €30~45/2인이라 바 스탠딩이 훨씬 저렴. 시그니처 페이스트리·파네토네(연중)."},
   {t:"10:00",name:"브레라 지구",desc:"",type:"",coords:[45.4722,9.1870]},
   {t:"11:00",name:"쇼핑",desc:"Via Montenapoleone",type:""},
   {t:"12:30",name:"점심: Luini",rk:"milano-lunch",desc:"€48",type:"food",coords:[45.4653,9.1889]},
@@ -1050,45 +1052,42 @@ B: {
 
 const FOOD_RECS={
 "roma-monti-breakfast":[
-{n:"La Licata",d:"Via dei Serpenti 165·Google 4.5(5천+)·06:00 오픈권·콜로세움 전 에스프레소/코르네토",p:"€8~14",c:[41.8946396,12.4908830],q:"La Licata Via dei Serpenti 165 Roma"},
-{n:"Regoli Pasticceria",d:"Via dello Statuto 60·마리토초 명가·Termini/Esquilino 쪽 15분 detour",p:"€10~18",c:[41.8948568,12.5009038],q:"Pasticceria Regoli Via dello Statuto 60 Roma"},
-{n:"Caffe Antica Roma",d:"콜로세움권 아침 백업·관광지권이지만 이동 손실 적음",p:"€8~16",c:[41.8909,12.4932],q:"Caffe Antica Roma Colosseo Roma"}
+{n:"La Licata",d:"Via dei Serpenti 165·몬티 핵심·Google 4.5(5천+)·월~토 06:00 오픈이라 08:30 콜로세움 전 안전·동네 전통 바·2인: 카푸치노 2+코르네토(크림/잼) 2면 충분",p:"€8~14",c:[41.8946396,12.4908830],q:"Bar La Licata Via dei Serpenti 165 Roma"},
+{n:"Regoli Pasticceria",d:"Via dello Statuto 60(에스퀼리노)·Google 4.9(7.9천)·1916년 마리토초 명가·화요일 휴무(D2 목 OK)·현금 권장·콜로세움 반대 방향 도보 12~15분이라 별도 시간에·2인: 마리토초 콘 판나 2+카푸치노 2",p:"€10~18",c:[41.8948568,12.5009038],q:"Pasticceria Regoli Via dello Statuto 60 Roma"},
+{n:"Antico Forno ai Serpenti",d:"Via dei Serpenti 122·몬티 한복판 빠른 베이커리(Caffe Antica Roma 대체)·코르네토/피자 비앙카/커피 테이크아웃·동선 손실 0·2인: 코르네토 2+커피 2 또는 피자 비앙카 1조각",p:"€6~12",c:[41.8951,12.4912],q:"Antico Forno ai Serpenti Via dei Serpenti 122 Roma"}
 ],
 "roma-monti-d1":[
-{n:"La Fraschetta Der Panino",d:"도보 2~3분·Google 4.3(3,188)·공식 월~토 09:00~23:30·포카치아/파니노/피자",p:"€30~45",c:[41.89365,12.48979],q:"La Fraschetta Der Panino Via Cavour 284 Rome"},
-{n:"Benso 215",d:"도보 7분·Google 4.7(10,991)·공식 수 09:00~24:00·파스타/피자, 예약 가능",p:"€45~65",c:[41.8951,12.4931],q:"Benso 215 Via Cavour 215 Rome"},
-{n:"Cavour 313",d:"숙소 바로 옆·Google 4.3(426)·공식 화~토 18:00~23:00·와인+작은 접시",p:"€45~65",c:[41.8931,12.4904],q:"Enoteca Cavour 313 Via Cavour 313 Rome"},
-{n:"Pizza Forum",d:"콜로세움 방향 도보 8~10분·Google 4.7(26,908)·공식 매일 10:30~24:00·피자",p:"€35~55",c:[41.8897,12.4936],q:"Ristorante Pizza Forum Via San Giovanni in Laterano 34 Rome"},
-{n:"L'Archetto di Cavour",d:"Via Cavour 197 도보 8분·Google 4.4(2,121)·수 11:30~23:30·파스타/피자 백업",p:"€35~55",c:[41.89514,12.49353],q:"L'Archetto di Cavour Via Cavour 197 Rome"}
+{n:"La Fraschetta Der Panino",d:"Via Cavour 284·도보 2~3분·Google 4.3(3,200)·1971년 가족운영·월~토 09:00~23:30이라 수요일 22:10 야식 OK·포르케타 파니노/포카치아·2인: 포르케타 파니노 2(또는 파니노 1+파스타 1 공유)면 충분",p:"€15~25",c:[41.89365,12.48979],q:"La Fraschetta Der Panino Via Cavour 284 Rome"},
+{n:"Benso 215",d:"Via Cavour 215·도보 7분·Google 4.6·매일 09:00~24:00(자정까지)이라 늦은 야식에 유연·피자/파스타·2인: 피자 1+수플리/안티파스토+와인 2잔으로 가볍게",p:"€30~50",c:[41.8951,12.4931],q:"Benso 215 Via Cavour 215 Rome"},
+{n:"Da Milvio",d:"Via dei Serpenti 7·몬티 핵심·06:30~02:00 새벽까지·진짜 피자 알 탈리오+수플리 야식 최적(Cavour 313/L'Archetto 대체)·2인: 알 탈리오 2~3조각+수플리 2개",p:"€10~20",c:[41.8949,12.4905],q:"Da Milvio Via dei Serpenti 7 Roma"},
+{n:"Pizza Forum",d:"Via San Giovanni in Laterano 34·콜로세움 옆 도보 8~10분·Google 4.2·매일~24:00·48시간 숙성 나폴리식 화덕피자(착석 정찬)·2인: 피자 2판+음료·가벼운 야식보단 정식 피자 디너용",p:"€25~40",c:[41.8897,12.4936],q:"Ristorante Pizza Forum Via San Giovanni in Laterano 34 Rome"}
 ],
 "roma-monti-d2-dinner":[
-{n:"Trieste Pizza",d:"Google 4.7(5천+), Via Urbana·가벼운 피자/수플리·가격 좋음",p:"€25~40",c:[41.8963273,12.4940708],q:"Trieste Pizza Via Urbana 112 Rome"},
-{n:"Ai Tre Scalini",d:"Google 4.5(4.9천+), 1895년 몬티 와인바·분위기 좋은 캐주얼",p:"€45~70",c:[41.8962767,12.4904433],q:"Ai Tre Scalini Via Panisperna 251 Rome"},
-{n:"La Taverna dei Fori Imperiali",d:"Google 4.4(2.5천+), 숙소 도보 3분·로마 전통 정찬·예약 권장",p:"€70~95",c:[41.8939729,12.4883814],q:"La Taverna dei Fori Imperiali Via della Madonna dei Monti 9 Rome"},
-{n:"Urbana 47",d:"Google 4.3(2천+), Via Urbana·모던 이탈리안·파스타/메인 선택 폭 좋음",p:"€55~85",c:[41.8959560,12.4938805],q:"Urbana 47 Via Urbana 47 Rome"},
-{n:"Broccoletti",d:"Google 4.4(900+), Via Urbana·차분한 로컬 레스토랑·예약식 백업",p:"€55~85",c:[41.8961257,12.4938990],q:"Broccoletti Via Urbana 104 Rome"}
+{n:"La Taverna dei Fori Imperiali",d:"Via della Madonna dei Monti 9·숙소/콜로세움 도보 3분·Google 4.4(3.7천)·정통 쿠치나 로마나(카르보나라/카치오에페페/코다 알라 바치나라 소꼬리/살팀보카)·★1순위 예약 필수·2인: 안티파스토 1+파스타 2+세콘도 1 공유+돌체",p:"€80~110",c:[41.8939729,12.4883814],q:"La Taverna dei Fori Imperiali Via della Madonna dei Monti 9 Rome"},
+{n:"La Carbonara",d:"Via Panisperna 214·몬티 1906년 노포(Urbana 47 대체)·벽 낙서 캔틴 분위기·카르보나라/카르초피/코다 알라 바치나라·일요일 휴무(목·금 OK)·예약 권장·2인: 카르초피+카르보나라+코다 알라 바치나라+세콘도 공유",p:"€55~90",c:[41.8959,12.4925],q:"La Carbonara Via Panisperna 214 Rome"},
+{n:"Ai Tre Scalini",d:"Via Panisperna 251·Google 4.4·1895년 와인바/추체리아·예약 안 받음·항상 만석/대기·소접시+와인·2인: 모둠 안티파스토+폴페테+파스타 1~2+와인 글라스 2",p:"€40~60",c:[41.8962767,12.4904433],q:"Ai Tre Scalini Via Panisperna 251 Rome"},
+{n:"Broccoletti",d:"Via Urbana 104·Google 4.4·모던 로컬·문어 요리 호평·월요일 휴무(목·금 OK)·2인: 문어/안티파스토 1+파스타 2+세콘도 1 공유+돌체",p:"€50~70",c:[41.8961257,12.4938990],q:"Broccoletti Via Urbana 104 Rome"},
+{n:"Trieste Pizza",d:"Via Urbana 112·Google 4.7(5천+)·얇은 로마식 피자·가성비·캐주얼/빠름·분위기 디너보단 가벼운 한 끼·2인: 라지 피자 1~2판+피체타 1~2조각",p:"€20~40",c:[41.8963273,12.4940708],q:"Trieste Pizza Via Urbana 112 Rome"}
 ],
 "roma-pantheon-coffee":[
-{n:"Sant'Eustachio Il Caffe",d:"공식 1938년 카페·Piazza Sant'Eustachio 82·07:30~심야",p:"€4~10",c:[41.8982524,12.4754268],q:"Sant Eustachio Il Caffe Piazza Sant Eustachio 82 Roma"},
-{n:"Tazza d'Oro",d:"Pantheon 옆 로스터리·그라니타 디 카페 콘 판나 후보",p:"€4~10",c:[41.8995925,12.4774865],q:"La Casa del Caffe Tazza d Oro Via degli Orfani 84 Roma"},
-{n:"Giolitti",d:"판테온 북쪽 역사 젤라테리아/카페·젤라토로 바꿔도 좋음",p:"€6~14",c:[41.9009,12.4787],q:"Giolitti Via degli Uffici del Vicario 40 Roma"}
+{n:"Tazza d'Oro",d:"Via degli Orfani 84·판테온 도보 1분·Google 4.5(4.9천)·그라니타 디 카페 콘 판나(위아래 휘핑크림 ~€3)가 9월 더위에 최고·서서 빠르게·2인: 그라니타 콘 판나 2잔",p:"€6~10",c:[41.8995925,12.4774865],q:"La Casa del Caffe Tazza d Oro Via degli Orfani 84 Roma"},
+{n:"Sant'Eustachio Il Caffe",d:"Piazza Sant'Eustachio 82·Google 4.2~4.4·에스프레소 성지 Gran Caffe·⚠️기본 가당이라 무가당은 senza zucchero 주문·바 스탠딩·2인: Gran Caffe 1+에스프레소 1",p:"€5~10",c:[41.8982524,12.4754268],q:"Sant Eustachio Il Caffe Piazza Sant Eustachio 82 Roma"},
+{n:"Giolitti",d:"Via degli Uffici del Vicario 40·07:00~01:30·1900년 노포·커피보다 젤라토가 본령(선결제 후 카운터)·2인: 피콜라 컵 2+판나",p:"€6~14",c:[41.9009,12.4787],q:"Giolitti Via degli Uffici del Vicario 40 Roma"}
 ],
 "roma-navona-gelato":[
-{n:"Gelateria del Teatro",d:"Via dei Coronari 65/66·12:00~24:00권·피스타치오/허브 조합",p:"€6~12",c:[41.9004694,12.4695705],q:"Gelateria del Teatro Via dei Coronari 65 Roma"},
-{n:"Two Sizes",d:"Via del Governo Vecchio 88·티라미수 작은 컵·나보나 바로 뒤",p:"€6~12",c:[41.8994,12.4714],q:"Two Sizes Via del Governo Vecchio 88 Roma"},
-{n:"Giolitti",d:"판테온-트레비 사이로 동선 손실 적은 클래식 젤라토",p:"€6~14",c:[41.9009,12.4787],q:"Giolitti Via degli Uffici del Vicario 40 Roma"}
+{n:"Gelateria del Teatro",d:"Via dei Coronari 65·나보나 도보 3분·Google 4.4·연중무휴(목 OK)·제철 허브/꽃 창작 젤라토(로즈마리-레몬-꿀)·2인: 콘 2개(클래식 1+모험 1)",p:"€6~12",c:[41.9004694,12.4695705],q:"Gelateria del Teatro Via dei Coronari 65 Roma"},
+{n:"Two Sizes",d:"Via del Governo Vecchio 88·나보나 도보 2분·티라미수 전문(젤라토 아님)·피스타치오 강추·2인: 피스타치오 라지 1+클래식 스몰 1 공유",p:"€8~14",c:[41.8994,12.4714],q:"Two Sizes Via del Governo Vecchio 88 Roma"},
+{n:"Giolitti",d:"Via degli Uffici del Vicario 40·판테온-트레비 사이 클래식 젤라토·동선 손실 적은 백업·2인: 멀티맛 컵 2+판나",p:"€6~14",c:[41.9009,12.4787],q:"Giolitti Via degli Uffici del Vicario 40 Roma"}
 ],
 "roma-campo-street":[
-{n:"Supplizio",d:"공식 월~토 12:00~15:30/17:00~21:30·수플리 €3·성베드로→Roscioli 길목",p:"€6~18",c:[41.8974708,12.4679030],q:"Supplizio Via dei Banchi Vecchi 143 Roma"},
-{n:"Antico Forno Roscioli",d:"공식 매일 07:30~20:00·피자 알 탈리오/빵/간단 간식",p:"€8~18",c:[41.8946562,12.4745854],q:"Antico Forno Roscioli Via dei Chiavari 34 Roma"},
-{n:"Forno Campo de' Fiori",d:"시장 옆 역사 베이커리·피자 비앙카/포카치아·일요일 휴무",p:"€8~18",c:[41.8956,12.4720],q:"Forno Campo de Fiori Piazza Campo de Fiori 22 Roma"},
-{n:"Trapizzino Campo de' Fiori",d:"트라피치노 원조 계열·수플리 대신 든든한 길거리식",p:"€12~22",c:[41.8955,12.4714],q:"Trapizzino Campo de Fiori Roma"}
+{n:"Supplizio",d:"Via dei Banchi Vecchi 143·Google 4.5·월~토 12:00~15:30/17:00~21:30(일 휴무)·로마 최고 수플리(라구/카치오에페페/카르보나라 맛)+폴페테+바칼라·★Campo 길거리 1순위·2인: 라구 수플리 2+카치오에페페 1+카르보나라 1",p:"€8~16",c:[41.8974708,12.4679030],q:"Supplizio Via dei Banchi Vecchi 143 Roma"},
+{n:"Forno Campo de' Fiori",d:"Piazza Campo de' Fiori 22·1819년~·Google 4.3·월~토 07:30~14:30/17:00~20:00(일 휴무)·⚠️현금 권장·피자 비앙카+모르타델라·2인: 모르타델라 피자 비앙카 1+피자 로사 1조각(무게)",p:"€6~12",c:[41.8956,12.4720],q:"Forno Campo de Fiori Piazza Campo de Fiori 22 Roma"},
+{n:"Antico Forno Roscioli",d:"Via dei Chiavari 34·매일 07:30~20:00·Google 4.5(9.9천)·피자 알 탈리오/빵/마리토초·간편 간식·2인: 알 탈리오 2조각+마리토초 공유",p:"€8~18",c:[41.8946562,12.4745854],q:"Antico Forno Roscioli Via dei Chiavari 34 Roma"}
 ],
 "roma-vatican-morning-snack":[
-{n:"Caffetteria Centrale Musei Vaticani",d:"바티칸 박물관 내부 공식 카페·빠른 커피/샌드위치/디저트·밖으로 나가지 않는 보급",p:"€6~18",c:[41.9065233,12.4517731],q:"Caffetteria Centrale Musei Vaticani"},
-{n:"Forno Feliziani",d:"Via Candia 61·07:30~17:00권·박물관 출구 쪽 피자 조각/빵/커피",p:"€5~14",c:[41.9081078,12.4534239],q:"Forno Feliziani Via Candia 61 Roma"},
-{n:"Mercato Trionfale",d:"Via Andrea Doria·공식 관광정보 월~토 07:00~14:00·과일/빵/시장 구경 10분",p:"€5~15",c:[41.9093235,12.4527349],q:"Mercato Trionfale Via Andrea Doria Roma"},
-{n:"Gelateria dei Gracchi",d:"Via dei Gracchi 272·공식 매일 11:30~24:00·관람이 늦어져 점심을 미룰 때만",p:"€6~12",c:[41.9091879,12.4668700],q:"Gelateria dei Gracchi Via dei Gracchi 272 Roma"}
+{n:"Forno Feliziani",d:"Via Candia 61·바티칸 박물관 도보 1~2분·Google 4.6(750+)·금 08:00~17:15 영업(목·일 휴무, 9/18 금 OK)·피자 알 탈리오+수플리+마리토초·★이 슬롯 메인·2인: 알 탈리오 2조각+수플리 2",p:"€8~15",c:[41.9081078,12.4534239],q:"Forno Feliziani Via Candia 61 Roma"},
+{n:"Caffetteria Centrale Musei Vaticani",d:"바티칸 박물관 내부 공식 카페·시간 없을 때 안에서 빠른 보급·에스프레소/샌드위치·2인: 에스프레소 2+코르네토/샌드위치 1~2 공유",p:"€8~15",c:[41.9065233,12.4517731],q:"Caffetteria Centrale Musei Vaticani"},
+{n:"Mercato Trionfale",d:"Via La Goletta·로마 최대 재래시장·월~토 07:00~14:00(화·금 ~19:00)·과일/치즈/살루미 픽업·단 박물관 북쪽 도보 8~10분 우회라 시간 여유 있을 때만·2인: 제철 과일+치즈 한 조각 피크닉",p:"€5~15",c:[41.9093235,12.4527349],q:"Mercato Trionfale Via La Goletta Roma"}
 ],
 "roma-spagna-dessert":[
 {n:"Pompi Spagna",d:"공식 Via della Croce 88·10:00~22:30권·티라미수 테이크아웃",p:"€8~14",c:[41.9064505,12.4805093],q:"Pompi Via della Croce 88 Roma"},
@@ -1096,15 +1095,15 @@ const FOOD_RECS={
 {n:"Giolitti",d:"트레비/판테온 쪽으로 다시 걸을 때 가능한 클래식 백업",p:"€6~14",c:[41.9009,12.4787],q:"Giolitti Via degli Uffici del Vicario 40 Roma"}
 ],
 "roma-spagna-energy-snack":[
-{n:"La Strega Nocciola",d:"Via della Vite 100·13:00 오픈권·스페인광장 도보권 젤라토",p:"€6~12",c:[41.9040627,12.4826188],q:"La Strega Nocciola Via della Vite 100 Roma"},
-{n:"Pompi Spagna",d:"Via della Croce 88·10:00~22:30·티라미수 작은 컵 1개 공유",p:"€8~14",c:[41.9064505,12.4805093],q:"Pompi Via della Croce 88 Roma"},
-{n:"Ciampini",d:"Piazza San Lorenzo in Lucina·공식 카페/아페리티보·에스프레소/젤라토/가벼운 당충전",p:"€8~18",c:[41.9037400,12.4780300],q:"Ciampini Piazza San Lorenzo in Lucina 29 Roma"},
-{n:"Gelateria dei Gracchi Ripetta",d:"Via di Ripetta 261·Pincio/Popolo 쪽으로 내려올 때만·공식 수~일 12:00~22:00",p:"€6~12",c:[41.9096515,12.4761148],q:"Gelateria dei Gracchi Via di Ripetta 261 Roma"}
+{n:"Pompi Spagna",d:"Via della Croce 88·스페인계단 도보 2~3분·티라미수의 왕(RestaurantGuru 4.9)·금 17:35 영업·그랩앤고(좌석 없음)·★메인·2인: 클래식 1+피스타치오 1 공유",p:"€8~14",c:[41.9064505,12.4805093],q:"Pompi Via della Croce 88 Roma"},
+{n:"La Strega Nocciola",d:"Via della Vite 100·스페인계단 도보 2~3분·Google 4.7·금 09:30~01:00·노촐라/마스카르포네 젤라토·(TripAdvisor 임시휴업 표기는 피렌체 본점, 로마 지점은 영업)·2인: 콘 2개",p:"€7~11",c:[41.9040627,12.4826188],q:"La Strega Nocciola Via della Vite 100 Roma"},
+{n:"Gelateria dei Gracchi Ripetta",d:"Via di Ripetta 261·Pincio/Popolo 쪽 내려올 때·수~금·일 12:00~22:00·로마 톱티어 장인 젤라토(피스타치오/헤이즐넛)·2인: 콘 2개",p:"€6~12",c:[41.9096515,12.4761148],q:"Gelateria dei Gracchi Via di Ripetta 261 Roma"},
+{n:"Ciampini",d:"Piazza San Lorenzo in Lucina 29·도보 7~8분(살짝 우회)·우아한 광장 카페·젤라토/아페리티보·착석 시 가격↑·보조용·2인: 젤라토 2컵",p:"€8~18",c:[41.9037400,12.4780300],q:"Ciampini Piazza San Lorenzo in Lucina 29 Roma"}
 ],
 "roma-monti-dessert":[
-{n:"Fatamorgana Monti",d:"Piazza degli Zingari 5·저녁 후 몬티권 젤라토·피스타치오/노촐라 후보",p:"€6~12",c:[41.8956187,12.4932453],q:"Fatamorgana Piazza degli Zingari 5 Roma"},
-{n:"Gelateria dell'Angeletto",d:"공식 Via dell'Angeletto 15·11:00~23:00권·숙소 도보 3~4분",p:"€6~12",c:[41.8947942,12.4915124],q:"Gelateria dell Angeletto Via dell Angeletto 15 Roma"},
-{n:"La Bottega del Caffe",d:"Piazza Madonna dei Monti·젤라토 대신 식후 에스프레소/가벼운 산책 백업",p:"€4~10",c:[41.8949549,12.4910693],q:"La Bottega del Caffe Piazza Madonna dei Monti 5 Roma"}
+{n:"Fatamorgana Monti",d:"Piazza degli Zingari 5·몬티 핵심·Google 4.5+·Gambero Rosso Tre Coni·금 ~21:30 마감·천연/창의 플레이버(바질-꿀/피스타치오)·★메인(너무 늦지 않게)·2인: 2맛 콘 2개",p:"€6~9",c:[41.8956187,12.4932453],q:"Fatamorgana Monti Piazza degli Zingari 5 Roma"},
+{n:"Gelateria dell'Angeletto",d:"Via dell'Angeletto 15·숙소 도보 3~4분·완전 글루텐프리·매일 12:00~24:00(늦은 시간 백업)·시칠리아 피스타치오·2인: 콘 2개",p:"€6~10",c:[41.8947942,12.4915124],q:"Gelateria dell Angeletto Via dell Angeletto 15 Roma"},
+{n:"La Bottega del Caffe",d:"Piazza Madonna dei Monti 5·몬티 중심 광장·매일 08:00~02:00·젤라토 아닌 카페/바·식후 칵테일/디저트 마무리·2인: 칵테일 또는 디저트+커피",p:"€15~30",c:[41.8949549,12.4910693],q:"La Bottega del Caffe Piazza Madonna dei Monti 5 Roma"}
 ],
 "roma-trastevere-dinner":[
 {n:"Flavio al Velavevodetto",d:"카르보나라 명가, 테스타초 동굴식당",p:"€55",c:[41.8764,12.4753]},
@@ -1114,11 +1113,11 @@ const FOOD_RECS={
 {n:"Nannarella",d:"소규모 가정식, 현지인만 아는 골목 맛집",p:"€40",c:[41.8895,12.4695]}
 ],
 "roma-pantheon-lunch":[
-{n:"Pane e Salame",d:"Google 4.8(1만+), 판테온→트레비 사이·샤퀴테리/파니노 가성비 최고",p:"€18~35",c:[41.9006367,12.4817632],q:"Pane e Salame Via di Santa Maria in Via 19 Rome"},
-{n:"Il Panino Ingegnoso",d:"Google 4.7(1.9천+), Piazza di Pietra·빠르고 저렴한 파니노",p:"€15~25",c:[41.9000308,12.4793813],q:"Il Panino Ingegnoso Piazza di Pietra 35 Rome"},
-{n:"Armando al Pantheon",d:"Google 4.4(2천+), 판테온 바로 옆 1961년 전통 정찬·예약 난이도 높음",p:"€70~90",c:[41.8990605,12.4761990],q:"Armando al Pantheon Salita de Crescenzi 31 Rome"},
-{n:"Come 'na Vorta",d:"Google 4.6(1.5천+), Torre Argentina·파스타 캐주얼 정찬·가격 안정적",p:"€35~55",c:[41.8952903,12.4762236],q:"Come na Vorta Pasta e Vino Torre Argentina Rome"},
-{n:"RetroVino / Retrobottega",d:"Google 4.5(1천+), 판테온 북쪽·모던 미식 선택지·예약 권장",p:"€80~120",c:[41.9019065,12.4753023],q:"RetroVino Retrobottega Via d'Ascanio 26A Rome"}
+{n:"Armando al Pantheon",d:"Salita de' Crescenzi 31·판테온 도보 1분·Google 4.3~4.5·1961년 노포·목 점심 12:30~15:00 영업·아마트리치아나/카르보나라/코다 알라 바치나라·★온라인 예약 필수(수주 전 마감)·2인: 아마트리치아나+카르보나라+소꼬리+하우스 레드",p:"€70~100",c:[41.8990605,12.4761990],q:"Armando al Pantheon Salita de Crescenzi 31 Rome"},
+{n:"Come 'na Vorta",d:"Via della Palombella 34·판테온 뷰 야외석·TripAdvisor 4.8·화요일만 휴무(목 OK)·카치오에페페/카르보나라·Armando 못 잡을 때 백업·2인: 카치오에페페+카르보나라+메인 1+티라미수",p:"€45~65",c:[41.8985,12.4768],q:"Come na Vorta Palombella Pantheon Rome"},
+{n:"Pane e Salame",d:"Via di Santa Maria in Via 19·판테온→트레비 사이·Google 4.8(1만+)·샤퀴테리/파니노 가성비 최고·빠름·2인: 파니노 2+살루미·치즈 보드 1+와인 2잔",p:"€20~30",c:[41.9006367,12.4817632],q:"Pane e Salame Via di Santa Maria in Via 19 Rome"},
+{n:"Il Panino Ingegnoso",d:"Piazza di Pietra 35·판테온 도보 2~3분(14:10 커피 동선 최적)·Google 4.7(3천)·창작 파니노·2인: 파니노 2+음료",p:"€12~20",c:[41.9000308,12.4793813],q:"Il Panino Ingegnoso Piazza di Pietra 35 Rome"},
+{n:"RetroVino e Caffe",d:"Via della Stelletta 4·판테온 북쪽·14석 히든 에노테카(자매 Retrobottega는 디너 테이스팅 전용이라 점심 제외)·살루미/치즈/소접시+와인·2인: 살루미·치즈+소접시 2~3+와인 글라스 2",p:"€40~70",c:[41.9019065,12.4753023],q:"RetroVino Via della Stelletta 4 Roma"}
 ],
 "roma-testaccio-dinner":[
 {n:"Felice a Testaccio",d:"까치오에페페 원조! 1936년~ 예약필수",p:"€70",c:[41.8764,12.4753]},
@@ -1128,11 +1127,11 @@ const FOOD_RECS={
 {n:"Cups Roma",d:"현대적 로마 비스트로, 젊은 셰프",p:"€55",c:[41.8773,12.4762]}
 ],
 "roma-centro-lunch":[
-{n:"Roscioli",d:"살루메리아+레스토랑, 와인 페어링 최고",p:"€65",c:[41.8933,12.4729]},
-{n:"Emma Pizzeria",d:"캄포데피오리 근처, 고메 피자 전문",p:"€40",c:[41.8943,12.4720]},
-{n:"Pierluigi",d:"해산물 파인다이닝, 캄포데피오리 광장",p:"€80",c:[41.8956,12.4714]},
-{n:"Antico Forno Roscioli",d:"피자 알 탈리오(한 조각씩), 간편 점심",p:"€15",c:[41.8935,12.4727]},
-{n:"Open Baladin",d:"크래프트 맥주+이탈리안 버거, 캐주얼",p:"€35",c:[41.8951,12.4728]}
+{n:"Roscioli",d:"Via dei Giubbonari 21·Campo 도보 2분·Google 4.5·2026 미쉐린 가이드·살루메리아+레스토랑·카르보나라/부라타/생선 크루도·★예약 필수(공식 캘린더 12:45 슬롯·카드 보증)·2인: 살루미보드+카르보나라+아마트리치아나/카치오에페페+크루도+와인",p:"€90~140",c:[41.8933,12.4729],q:"Roscioli Salumeria con Cucina Via dei Giubbonari 21 Rome"},
+{n:"Emma Pizzeria",d:"Via del Monte della Farina 28·로시올리 도보 1분·Google 4.5~4.8·로마식 얇은 피자(로시올리 도우)+프리티·Roscioli 예약 실패 시 1순위·2인: 피오리 디 주카 프리티+피자 2판+와인",p:"€45~70",c:[41.8943,12.4720],q:"Emma Pizzeria Via del Monte della Farina 28 Rome"},
+{n:"Antico Forno Roscioli",d:"Via dei Chiavari 34·로시올리 옆 골목·Google 4.5(9.9천)·피자 알 탈리오+모르타델라 피자 비앙카+마리토초·간편 픽업/플랜B·2인: 알 탈리오 2조각+모르타델라 비앙카 1",p:"€10~18",c:[41.8935,12.4727],q:"Antico Forno Roscioli Via dei Chiavari 34 Rome"},
+{n:"Pierluigi",d:"Piazza de' Ricci 144·Campo 도보 5분·Google 4.3·1938년 해산물 파인다이닝·광장 야외석·고가(2인 €150~250)·별도 호사용·2인: 굴+시푸드 파스타+오븐 농어(2인용)+화이트 보틀",p:"€150~250",c:[41.8956,12.4714],q:"Pierluigi Piazza de Ricci Rome"},
+{n:"Open Baladin",d:"Via degli Specchi 6·Campo 도보 4분·Google 4.1·크래프트 맥주 40탭+구르메 버거·캐주얼·피곤한 날 가벼운 끼니·2인: 버거 2+파타테+맥주 2",p:"€40~60",c:[41.8951,12.4728],q:"Open Baladin Via degli Specchi 6 Rome"}
 ],
 "roma-trastevere-dinner2":[
 {n:"Da Enzo al 29",d:"트라스테베레 로컬 최고, 줄서서 먹는 곳",p:"€60",c:[41.8893,12.4699]},
@@ -1177,35 +1176,35 @@ const FOOD_RECS={
 {n:"O Puledro",d:"소렌토 내륙, 현지인 가성비 맛집",p:"€40",c:[40.6270,14.3760]}
 ],
 "firenze-mercato-lunch":[
-{n:"Da Nerbone",d:"Mercato Centrale 1층 클래식. 피렌체 길거리음식 람프레도토/볼리토 파니노 도전 1순위",p:"€10~20",c:[43.7765847,11.2532087],q:"Da Nerbone Mercato Centrale Firenze"},
-{n:"Mercato Centrale Firenze",d:"공식 09:00~23:00. 2층 푸드홀은 열차 직후 컨디션/취향이 갈릴 때 가장 안전한 브런치 백업",p:"€20~40",c:[43.7765847,11.2532087],q:"Mercato Centrale Firenze"},
-{n:"Massimiliano Parri La Schiacciata",d:"시장 안 스키아차타 후보. 람프레도토가 부담스러우면 토스카나 빵/햄/치즈 계열로 가볍게",p:"€12~24",c:[43.7765847,11.2532087],q:"Massimiliano Parri La Schiacciata Mercato Centrale Firenze"}
+{n:"Da Nerbone",d:"Mercato Centrale 1층·Google 4.4(1.9천)·월~토 09:00~14:00(일 휴무, D4 토 OK)·람프레도토/볼리토 파니노+트리파·2인: 람프레도토 1+볼리토(bagnato) 1+키안티 2잔+트리파 컵 공유",p:"€20~28",c:[43.7765847,11.2532087],q:"Da Nerbone Mercato Centrale Firenze"},
+{n:"Mercato Centrale 2층 푸드홀",d:"매일 09:00~23:00(일요일도 영업 → 일요일 안전망)·생파스타/피자/비스테카 타르타르/튀김·2인: 생파스타 1+프리토 미스토/타르타르 1+와인 2잔",p:"€30~50",c:[43.7765847,11.2532087],q:"Mercato Centrale Firenze"},
+{n:"La Schiacciata - Massimiliano Parri",d:"메르카토 푸드홀 내·매일 영업·고급 토스카나 스키아차타(고대곡물·12종 제철 속)·All'Antico Vinaio보다 가볍고 세련·2인: 스키아차타 2종 반씩+와인 2잔",p:"€16~24",c:[43.7765847,11.2532087],q:"La Schiacciata Massimiliano Parri Mercato Centrale Firenze"}
 ],
 "firenze-d4-lunch":[
-{n:"All'Antico Vinaio",d:"Via dei Neri권 스키아차타. 시뇨리아/우피치 바로 뒤라 D4 실제 점심 1순위, 줄 길면 즉시 대체",p:"€12~20",c:[43.7684,11.2563],q:"All'Antico Vinaio Via dei Neri Firenze"},
-{n:"I Due Fratellini",d:"두오모-시뇨리아 사이 빠른 파니노. 줄과 회전이 비교적 단순해 일정 밀릴 때 안전",p:"€8~16",c:[43.7710,11.2558],q:"I Due Fratellini Firenze"},
-{n:"La Fettunta",d:"Via dei Neri권 캐주얼 토스칸. 앉아서 파스타/브루스케타로 점심을 조금 더 제대로 먹고 싶을 때",p:"€25~45",c:[43.7682,11.2560],q:"La Fettunta Firenze"}
+{n:"All'Antico Vinaio",d:"Via dei Neri 65R·Google 4.6(3만+)·매일 10:00~22:00(일요일도 OK)·대형 스키아차타 La Favolosa(포르케타+페코리노+아티초크)·줄 길음(정오 전/15시)·★D4 점심 1순위·2인: La Favolosa 1+프로슈토·페코리노 1 반씩",p:"€16~22",c:[43.7684,11.2563],q:"All'Antico Vinaio Via dei Neri Firenze"},
+{n:"I Due Fratellini",d:"Via dei Cimatori 38R(시뇨리아 근처)·1875년~·Google 4.5·월~토 09:00~20:00(⚠️일요일 휴무)·서서 먹는 작은 파니노+와인 작은잔·2인: 작은 파니노 4개+레드 작은잔",p:"€12~18",c:[43.7710,11.2558],q:"I Due Fratellini Firenze"},
+{n:"La Fettunta",d:"Via dei Neri 72R·매일 12:00~22:30·착석 정통 트라토리아(빠른 샌드위치 아님)·비스테카 알 산구에/수제 파스타/리볼리타·2인: 비스테카 공유+파스타 1+콘토르노+하우스 키안티",p:"€55~90",c:[43.7682,11.2560],q:"La Fettunta Firenze"}
 ],
 "firenze-oltrarno-gelato":[
-{n:"Gelateria della Passera",d:"Piazza della Passera 소형 젤라토. Ponte Vecchio 뒤 10분 당충전",p:"€5~10",c:[43.7671815,11.2506436],q:"Gelateria della Passera Firenze"},
-{n:"Gelateria La Carraia",d:"Ponte alla Carraia 근처 강변 젤라토. 올트라르노 산책 백업",p:"€5~10",c:[43.7696233,11.2467117],q:"Gelateria La Carraia Firenze"},
-{n:"Le Volpi e l'Uva",d:"Ponte Vecchio 남쪽 와인바. 젤라토 대신 작은 아페리티보 선택지",p:"€16~30",c:[43.7669929,11.2527824],q:"Le Volpi e l'Uva Firenze"}
+{n:"Gelateria della Passera",d:"Via Toscanella 15r·Google 4.7·화~일(⚠️월 휴무, 토·일 OK)·장인 소량생산(profumi d'oriente/리코타-무화과)·2인: 컵 2개(클래식 1+모험 1)",p:"€6~8",c:[43.7671815,11.2506436],q:"Gelateria della Passera Firenze"},
+{n:"Gelateria La Carraia",d:"Piazza Nazario Sauro 25r·Google 4.7(1만+)·매일 11:00~22:30·가성비 최고(화이트초코+피스타치오)·월요일 della Passera 휴무 시 대체·2인: 콘 2개",p:"€4~6",c:[43.7696233,11.2467117],q:"Gelateria La Carraia Firenze"},
+{n:"Le Volpi e l'Uva",d:"Piazza dei Rossi 1r·월~토(⚠️일 휴무)·젤라토 아닌 와인바/아페리티보·소생산자 와인+크로스티니·디너 전 한잔용·2인: 토스카나 레드 2잔+치즈·살루미",p:"€25~40",c:[43.7669929,11.2527824],q:"Le Volpi e l'Uva Firenze"}
 ],
 "firenze-oltrarno-dinner":[
-{n:"Trattoria 4 Leoni",d:"Piazza della Passera. 일요일 저녁 후보, 배+리코타 파스타와 토스카나 전통요리 주문처",p:"€55~75",c:[43.7672,11.2488],q:"Trattoria 4 Leoni Firenze"},
-{n:"Il Santo Bevitore",d:"올트라르노 대표 와인/현대 토스칸. crostini neri, peposo, 계절 전통요리 위주로 확인",p:"€70~95",c:[43.7680,11.2480],q:"Il Santo Bevitore Firenze"},
-{n:"Trattoria Cammillo",d:"1945년 가족운영 전통식당. 리볼리타/파파 알 포모도로/트리파류가 메뉴에 있으면 좋은 선택",p:"€65~90",c:[43.7678,11.2490],q:"Trattoria Cammillo Firenze"}
+{n:"Trattoria 4 Leoni",d:"Piazza della Passera·Google 4.2·매일 12:00~24:00(일요일 종일 OK)·피오케티(배-리코타 라비올리)/페포소/스파게티 콘 트리파·★D5 일요일 디너 메인(파파 알 포모도로+페포소+크로스티니 한자리)·온라인 예약·2인: 피오케티+페포소/비스테카 공유+콘토르노+트리파 전채+디저트",p:"€60~90",c:[43.7672,11.2488],q:"Trattoria 4 Leoni Firenze"},
+{n:"Il Santo Bevitore",d:"Via di Santo Spirito 64r·Google 4.5·미쉐린 가이드·일 점심만 휴무(일 디너 OK)·현대 토스카나(파파 알 포모도로/제철 파스타/살루미)·★D4 토요일 디너 추천·예약 필수·2인: 살루미·치즈+파스타 1+세콘도 1+콘토르노+디저트+와인",p:"€80~110",c:[43.7680,11.2480],q:"Il Santo Bevitore Firenze"},
+{n:"Trattoria Cammillo",d:"Borgo San Jacopo 57r·1945년~·Google 4.3·목~월(화·수 휴무, 일 OK)·비스테카/탈리아텔레/호박꽃·포르치니 튀김·전화 예약만·현금·프리미엄 대안·2인: 튀김+탈리아텔레+비스테카 공유+티라미수",p:"€100~130",c:[43.7678,11.2490],q:"Trattoria Cammillo Firenze"}
 ],
 "firenze-vinaio-lunch":[
-{n:"I Due Fratellini",d:"두오모-시뇨리아 사이 빠른 파니노. D5 일요일 점심의 시간 리스크가 가장 낮은 후보",p:"€8~16",c:[43.7710,11.2558],q:"I Due Fratellini Firenze"},
-{n:"La Fettunta",d:"Via dei Neri권 캐주얼 토스칸. 앉아서 파스타/브루스케타로 먹고 싶을 때, 대기 길면 즉시 포기",p:"€25~45",c:[43.7682,11.2560],q:"La Fettunta Firenze"},
-{n:"All'Antico Vinaio",d:"D4에 못 먹었을 때만 재도전. 이미 먹었다면 반복보다 다른 후보로 전환",p:"€12~20",c:[43.7684,11.2563],q:"All'Antico Vinaio Via dei Neri Firenze"},
-{n:"Mercato Centrale 2층",d:"공식 매일 09:00~23:00. 비/대기/취향 변수 생기면 가장 안정적인 백업",p:"€20~40",c:[43.7765847,11.2532087],q:"Mercato Centrale Firenze"}
+{n:"All'Antico Vinaio",d:"Via dei Neri 65R·매일 10:00~22:00(일요일 OK)·★D5 일요일 점심 1순위 스키아차타·줄 길면 정오 전·2인: La Favolosa 1+프로슈토·페코리노 1 반씩",p:"€16~22",c:[43.7684,11.2563],q:"All'Antico Vinaio Via dei Neri Firenze"},
+{n:"Mercato Centrale 2층",d:"매일 09:00~23:00·일요일 가장 안정적인 백업(비/대기/취향 변수)·생파스타/피자/튀김·2인: 파스타 1+튀김 1+와인 2잔",p:"€30~50",c:[43.7765847,11.2532087],q:"Mercato Centrale Firenze"},
+{n:"La Fettunta",d:"Via dei Neri 72R·매일 영업·착석 토스칸(파스타/브루스케타)·아카데미아 13:30 전이라 대기 길면 즉시 포기·2인: 파스타 2+페투타",p:"€25~45",c:[43.7682,11.2560],q:"La Fettunta Firenze"},
+{n:"I Due Fratellini",d:"Via dei Cimatori 38R·⚠️일요일 휴무라 D5 불가(토·월만)·빠른 파니노",p:"€12~18",c:[43.7710,11.2558],q:"I Due Fratellini Firenze"}
 ],
 "firenze-bistecca":[
-{n:"Buca Mario",d:"공식 19:00~00:00, 주방 22:00, 일요일 휴무. D6 월요일 저녁 비스테카 1순위",p:"€90~130",c:[43.7718,11.2533],q:"Buca Mario Firenze"},
-{n:"Buca Lapi",d:"1880년대 지하 부카 분위기의 비스테카 대안. Buca Mario 예약 실패 시 확인",p:"€95~140",c:[43.7725,11.2515],q:"Buca Lapi Firenze"},
-{n:"Trattoria Sostanza",d:"소규모 전통식당. 비스테카보다 버터 치킨으로도 유명해 예약 난도 높음",p:"€70~110",c:[43.7730,11.2475],q:"Trattoria Sostanza Firenze"}
+{n:"Buca Mario",d:"Piazza degli Ottaviani 16R·1886년~·Google 4.3(4.4천)·월~토 19:00~23:30(일 휴무, D6 월 OK)·비스테카/멧돼지 파파르델레·★예약 필수·비스테카 ~€55~70/kg, 2인 ~1.2kg·2인: 비스테카 1.2kg 공유(레어)+전채 1+콘토르노 2+키안티",p:"€140~170",c:[43.7718,11.2533],q:"Buca Mario Firenze"},
+{n:"Buca Lapi",d:"Via del Trebbio 1R·1880년~·Google 4.5(Buca Mario보다 높음)·월~토 디너(일 휴무)·지하 셀러 비스테카·Buca Mario 만석 시 1순위 백업·2인: 비스테카 ~1kg 공유+크로스티니/affettati+파지올리+시금치",p:"€140~180",c:[43.7725,11.2515],q:"Buca Lapi Firenze"},
+{n:"Trattoria Sostanza",d:"Via della Porcellana 25R·1869년~·Google 4.5·점심·디너 고정좌석·⚠️현금만·전화 예약·폴로 알 부로(버터치킨 명물)+아티초크 타르트+비스테카·2인: 토르티노 카르초피+폴로 알 부로+비스테카 공유",p:"€80~110",c:[43.7730,11.2475],q:"Trattoria Sostanza Firenze"}
 ],
 "firenze-trattoria":[
 {n:"Trattoria Mario",d:"공식 월~토 점심 중심, 일요일/공휴일 휴무. 저녁 후보로 쓰지 말 것",p:"€35~55",c:[43.7748,11.2537],q:"Trattoria Mario Firenze"},
@@ -1215,10 +1214,9 @@ const FOOD_RECS={
 {n:"Trattoria Cammillo",d:"1945년 가족운영, 전통 피렌체 현지인 맛집",p:"€55",c:[43.7678,11.2490]}
 ],
 "cinqueterre-lunch":[
-{n:"Il Pescato Cucinato",d:"Riomaggiore Via Colombo 테이크아웃 프리또. Via dell'Amore 전 20~30분 점심으로 가장 안전",p:"€12~25",c:[44.0992,9.7377],q:"Il Pescato Cucinato Riomaggiore"},
-{n:"Dau Cila",d:"Riomaggiore 항구 뷰 해산물. 공식 12:30~15:00/19:00~22:30 표기, 앉아 먹고 싶을 때만",p:"€45~70",c:[44.0990,9.7385],q:"Dau Cila Riomaggiore"},
-{n:"A Pie de Ma",d:"역 위 절벽 뷰 와인바. 점심보다는 가벼운 화이트와 앵초비/브루스케타 백업",p:"€30~55",c:[44.0985,9.7380],q:"A Pie de Ma Riomaggiore"},
-{n:"Trattoria La Grotta",d:"Riomaggiore 역·터널권 백업. 대기 길거나 Via dell'Amore 시간이 빠듯하면 포기",p:"€35~60",c:[44.0988,9.7375],q:"Trattoria La Grotta Riomaggiore"}
+{n:"Il Pescato Cucinato",d:"Riomaggiore Via Colombo 199·화요일 영업(11:30~20:30)·즉석 튀김 해산물 코노·★Via dell'Amore 전 빠른 점심·테이크아웃(항구 바위에서)·2인: 라지 코노 1(€16)+레귤러 코노 1(€8)",p:"€26~30",c:[44.0992,9.7377],q:"Il Pescato Cucinato Riomaggiore"},
+{n:"Tutti Fritti",d:"Riomaggiore Via Colombo·튀김 코노 대안(레귤러 €5/라지 €8)·기름지지 않음·Il Pescato와 줄 짧은 곳 선택·2인: 라지 코노 2",p:"€10~20",c:[44.0995,9.7375],q:"Tutti Fritti Riomaggiore"},
+{n:"Trattoria La Grotta",d:"Riomaggiore Via Colombo 중심·1920년~ 동굴형 트라토리아·문어구이/봉골레·⚠️화요일 영업 미확인(전화 +39 0187 920187)·착석이라 빠른 점심엔 무거움",p:"€35~60",c:[44.0988,9.7375],q:"Trattoria La Grotta Riomaggiore"}
 ],
 "cinqueterre-dinner":[
 {n:"Trattoria dal Billy",d:"마나롤라 숙소를 고를 때만. 화요일 영업 정보는 재확인 필요, 언덕길 감수",p:"€60~90",c:[44.1070,9.7260],q:"Trattoria dal Billy Manarola"},
@@ -1226,24 +1224,25 @@ const FOOD_RECS={
 {n:"Cappun Magru",d:"Vernazza에서 저녁까지 머물 때의 백업. Monterosso 숙소안에서는 늦은 열차 이동이 생김",p:"€45~70",c:[44.1354,9.6842],q:"Cappun Magru Vernazza"}
 ],
 "cinqueterre-monterosso-dinner":[
-{n:"La Cantina di Miky",d:"Hotel Baia 옆 Fegina 90. 공식 수요일 휴무, D7 화요일 저녁 가능. 18:30 이후 예약 권장",p:"€55~85",c:[44.1457,9.6478],q:"La Cantina di Miky Monterosso"},
-{n:"L'Ancora della Tortuga",d:"절벽 전망 레스토랑. 화요일 저녁 영업 후보, 예약 권장. 숙소에서 도보 10~15분",p:"€70~110",c:[44.1447,9.6514],q:"L'Ancora della Tortuga Monterosso"},
-{n:"Ristorante Belvedere",d:"구시가 항구권 해산물 백업. 화요일 영업 여부는 방문 전 재확인",p:"€50~80",c:[44.1460,9.6542],q:"Ristorante Belvedere Monterosso al Mare"},
-{n:"Ristorante Miky",d:"유명하지만 화요일 휴무로 확인되어 D7 저녁은 제외. 날짜가 바뀌면 재검토",p:"제외",c:[44.1459,9.6469],q:"Ristorante Miky Monterosso"}
+{n:"L'Ancora della Tortuga",d:"Salita Cappuccini 4·Google 4.4(1.1천)·미쉐린 가이드·화요일 영업(월만 휴무)·절벽 위 바다 일몰 뷰·★특별한 저녁 1순위·예약 필수(테라스 한정)·2인: 해산물 안티파스토+트레네테 알 페스토+생선구이+친퀘테레 DOC 보틀",p:"€90~120",c:[44.1447,9.6514],q:"L'Ancora della Tortuga Monterosso"},
+{n:"La Cantina di Miky",d:"Via Fegina 90(해변·역측, 수영 후 동선 최적)·Tripadvisor 4.2(1.8천)·화요일 영업(수 휴무)·안초비 3종 모둠+트로피에 알 페스토·예약 권장·2인: 안초비 모둠+페스토 파스타+해산물 파스타+화이트 2잔",p:"€70~90",c:[44.1457,9.6478],q:"La Cantina di Miky Monterosso"},
+{n:"Da Eraldo",d:"Piazza Agostino Poggi(구시가)·화요일 영업(12:00~14:30/18:30~21:30)·합리적 가족 트라토리아·새우 라비올리/신선 해산물·예약 없이도 가능성↑ 백업·2인: 라비올리+해산물 파스타+생선",p:"€45~70",c:[44.1460,9.6542],q:"Da Eraldo Monterosso al Mare"},
+{n:"Ristorante Miky",d:"본점·유명하지만 ⚠️화요일 휴무라 D7 제외(자매 La Cantina di Miky로 대체)·날짜 바뀌면 재검토",p:"제외",c:[44.1459,9.6469],q:"Ristorante Miky Monterosso"}
 ],
 "venezia-cicchetti":[
-{n:"All Arco",d:"리알토 최고 치케티 바, 현지인 맛집 아침부터",p:"€38",c:[45.4389,12.3338]},
-{n:"Cantina Do Spade",d:"500년 역사, 치케티 원조 바카로",p:"€35",c:[45.4385,12.3340]},
-{n:"Osteria Alla Ciurma",d:"숨은 골목, 프로세코+치케티 조합",p:"€30",c:[45.4387,12.3335]},
-{n:"Cantina Do Mori",d:"1462년! 베네치아 최고 바카로, 서서 먹기",p:"€35",c:[45.4390,12.3342]},
-{n:"Bacareto da Lele",d:"가성비 최강, 1유로 치케티+1유로 와인",p:"€15",c:[45.4370,12.3240]}
+{n:"Cantina Do Mori",d:"San Polo 429·1462년 베네치아 최고(古) 바카로·Google 4.2(1천)·월~토 08:00~19:30(일 휴무, 수 OK)·★점심 크롤 앵커·francobolli(새우 미니)/baccalà mantecato/가지 파르미자나·입석·현금 권장·2인: 치케티 8~10개+옴브라 1잔/인",p:"€25~35",c:[45.4390,12.3342],q:"Cantina Do Mori San Polo Venezia"},
+{n:"Cantina Do Spade",d:"San Polo 859(Do Mori 도보 2분)·1447년·매일 10:00~15:00/18:00~22:00(수 OK)·sarde in saor/튀긴 칼라마리/스파게티 알라 부사라·앉아서 마무리 가능·2인: 치케티 6~8개+스프리츠 1잔/인",p:"€20~30",c:[45.4385,12.3340],q:"Cantina Do Spade San Polo Venezia"},
+{n:"All'Arco",d:"San Polo 436·Google 4.6(1.6천, 평점 최고)·⚠️수요일 휴무+점심만(10:00~14:30)이라 D8 수요일 불가·다른 날이면 최우선·2인: 치케티 모둠+옴브라",p:"제외(수휴무)",c:[45.4389,12.3338],q:"All Arco San Polo 436 Venezia"}
 ],
 "venezia-dinner":[
-{n:"Boccadoro",d:"카나레지오 해산물 맛집, 먹물리조또 필수",p:"€85",c:[45.4440,12.3380]},
-{n:"Antiche Carampane",d:"숨겨진 골목, 관광객 거부! 현지인 해산물",p:"€75",c:[45.4389,12.3338]},
-{n:"Osteria Alle Testiere",d:"미식가 해산물, 9석뿐! 예약 필수",p:"€80",c:[45.4355,12.3420]},
-{n:"Anice Stellato",d:"카나레지오 로컬, 계절 해산물+와인",p:"€65",c:[45.4460,12.3350]},
-{n:"Vini da Gigio",d:"현지인 단골, 계절메뉴 해산물+고기",p:"€70",c:[45.4445,12.3370]}
+{n:"Ostaria Boccadoro",d:"Cannaregio 5405A·매일 12:00~15:00/19:00~21:30(수 OK)·TA 4.3·risotto al nero di seppia(먹물 리소토)+생선 크루도·★20:00 메인·예약 권장·2인: 크루도 모둠+먹물 리소토+구운 생선/프리투라+와인",p:"€110~140",c:[45.4440,12.3380],q:"Ostaria Boccadoro Cannaregio Venezia"},
+{n:"Osteria Alle Testiere",d:"Castello Calle del Mondo Novo 5801·TA 4.4·화~토(수 OK, 일·월 휴무)·~9석 향신료 해산물 파스타·★예약되면 1순위 업그레이드(수주 전)·2인: 해산물 파스타+당일 생선",p:"€120~150",c:[45.4355,12.3420],q:"Osteria Alle Testiere Castello Venezia"},
+{n:"Vini da Gigio",d:"Cannaregio 3628a·미쉐린 가이드·수~일(수 OK)·★fegato alla veneziana(간·양파) 베스트·계절 해산물+고기·2인: fegato alla veneziana+해산물 파스타+세콘도+와인",p:"€100~130",c:[45.4445,12.3370],q:"Vini da Gigio Cannaregio Venezia"},
+{n:"Antiche Carampane",d:"San Polo 1911(숨은 위치, 관광메뉴 없음)·미쉐린 가이드·화~토(수 OK)·frittura/해산물 파스타·예약 강력 권장·2인: frittura+해산물 파스타+세콘도",p:"€120~160",c:[45.4389,12.3338],q:"Antiche Carampane San Polo Venezia"}
+],
+"venezia-morning":[
+{n:"Pasticceria Da Bonifacio",d:"Castello Calle degli Albanesi 4237(산마르코 도보 3~4분, Danieli 뒤)·TA 4.7·평일 06:30 오픈이라 07시 확실·frittelle/크림 페이스트리+에스프레소·★D9 새벽 1순위·2인: 에스프레소 2+프리텔라/페이스트리 2",p:"€8~15",c:[45.4339,12.3415],q:"Pasticceria Da Bonifacio Castello Venezia"},
+{n:"Rosa Salva",d:"San Marco 950·08:00 오픈이라 07시엔 닫힘(이른 출발엔 부적합)·역사 카페·2인: 카푸치노 2+페이스트리",p:"€8~15",c:[45.4350,12.3380],q:"Rosa Salva San Marco Venezia"}
 ],
 "venezia-burano-lunch":[
 {n:"Trattoria Da Romano",d:"부라노 전통, 리조또 디 고 명가 1920년~",p:"€60",c:[45.4854,12.4167]},
@@ -1260,11 +1259,11 @@ const FOOD_RECS={
 {n:"Osteria Bancogiro",d:"대운하 뷰! 리알토 다리 옆 테라스",p:"€65",c:[45.4383,12.3355]}
 ],
 "dolomiti-dinner":[
-{n:"Baita Fraina",d:"코르티나 외곽 산장, 사슴고기+폴렌타 대표",p:"€75",c:[46.5330,12.1290]},
-{n:"Ristorante Tivoli",d:"코르티나 중심, 미슐랭 추천 산악 요리",p:"€90",c:[46.5372,12.1360]},
-{n:"El Camineto",d:"미슐랭1스타, 코르티나 파인다이닝",p:"€120",c:[46.5380,12.1340]},
-{n:"Ra Stua",d:"산장 레스토랑, 카네데를리+슈페츨레 전문",p:"€60",c:[46.5350,12.1380]},
-{n:"Al Passo Giau",d:"고갯길 위 산장, 돌로미티 절경 뷰 식사",p:"€55",c:[46.4844,12.0536]}
+{n:"Baita Fraina",d:"Via Fraina 1(외곽 언덕, 렌터카 5분)·Google/TA 4.1(536)·미쉐린 가이드·월 휴무(★D9 목 영업)·카준치에이/카네데를리/사슴 라구·예약 권장·2인: 카준치에이+카네데를리+체르보 메달리온+폴렌타+슈트루델",p:"€90~120",c:[46.5330,12.1290],q:"Baita Fraina Cortina d'Ampezzo"},
+{n:"El Brite de Larieto",d:"Localita Larieto(농장 아그리투리스모, 산길 운전)·미쉐린 가이드·수요일 휴무(★D10 금·토 디너 영업)·자가 빵+버터/치즈/카준치에이/사슴·촛불 테라스 로맨틱·예약 필수(+39 368 7008083)·2인: 빵+치즈 플래터+카준치에이+폴렌타·체르보+자가 젤라토",p:"€90~120",c:[46.5566,12.1430],q:"El Brite de Larieto Cortina"},
+{n:"Da Aurelio (Passo Giau)",d:"Passo Giau 5(2,175m, SR638 약 30분, 도로변)·TA 4.7(567)·수·일 휴무(★D11 토 영업, 9월말까지)·셰프 Gigi 알파인 고메(사슴+폴렌타/카준치에이)·토요일 수요 폭증 반드시 예약(+39 0437 720118)·2인: 카준치에이/카네데를리+체르보·폴렌타+시그니처+돌체",p:"€110~150",c:[46.4844,12.0536],q:"Da Aurelio Passo Giau"},
+{n:"Ristorante Tivoli",d:"코르티나 시내·미쉐린 ★·월 휴무(화~일 12:00~14:00/19:00~22:00)·세 디너의 안전 백업(특히 토요일)·2인: 테이스팅 또는 알라카르트 코스",p:"€120~180",c:[46.5372,12.1360],q:"Ristorante Tivoli Cortina d'Ampezzo"},
+{n:"El Camineto",d:"Localita Rumerlo 1(Tofane 기슭)·TA 4.x(977)·1968년 노포·점심·디너·D9 11:45 가벼운 점심에도 적합·카준치에이/카네데를리·2인(점심): 카준치에이+카네데를리 인 브로도+폴렌타 콘 풍기",p:"€40~120",c:[46.5380,12.1340],q:"El Camineto Cortina d'Ampezzo"}
 ],
 "dolomiti-dinner2":[
 {n:"El Camineto",d:"미슐랭1스타, 돌로미티 마지막 밤 특별식",p:"€120",c:[46.5380,12.1340]},
@@ -1274,25 +1273,21 @@ const FOOD_RECS={
 {n:"Birreria Vienna",d:"남티롤 맥주+카네데를리, 캐주얼",p:"€45",c:[46.5370,12.1350]}
 ],
 "milano-dinner":[
-{n:"Trattoria Milanese",d:"1933년~ 밀라노 전통, 리소또 알라 밀라네세",p:"€75",c:[45.4620,9.1870]},
-{n:"Ratana",d:"현대 밀라노 요리, 세련된 분위기 핫플",p:"€70",c:[45.4850,9.1900]},
-{n:"Al Matarel",d:"가정식 밀라노, 코톨레타 알라 밀라네세 전문",p:"€55",c:[45.4668,9.1890]},
-{n:"Trippa",d:"밀라노 핫플 비스트로, 예약필수 젊은 셰프",p:"€65",c:[45.4540,9.1750]},
-{n:"Osteria del Treno",d:"아르누보 역사 인테리어, 리소또 명가",p:"€60",c:[45.4830,9.2050]}
+{n:"Al Matarel",d:"Via Laura Solera Mantegazza 2·중심(브레라/포르타 가리발디)·1958년~·★일요일 영업(화 휴무)·코톨레타+리소토 알라 밀라네세+오소부코(~€46) 정확 매칭·전화 예약·2인: 사프란 리소토+오소부코+코톨레타",p:"€90~130",c:[45.4795,9.1857],q:"Al Matarel Milano"},
+{n:"Ratana",d:"Via Gaetano de Castillia 28·중심(포르타 누오바)·Google 4.4·매일 영업(일요일 OK)·세련된 모던 밀라네제(사프란 리소토+그레몰라타/mondeghili)·예약 필수·2인: 리소토+mondeghili+vitello tonnato+세콘도",p:"€120~180",c:[45.4853,9.1929],q:"Ratana Milano"},
+{n:"Antica Osteria il Ronchettino",d:"Via Lelio Basso 9(남부 외곽, 택시 20~25분)·Google 4.4(1.8천)·미쉐린 플레이트·일요일 19:30~24:00·전통 풀세트(리소토±오소부코/코끼리귀 코톨레타/mondeghili)·예약 권장·2인: 리소토+코톨레타+mondeghili",p:"€70~110",c:[45.4108,9.1640],q:"Antica Osteria il Ronchettino Milano"}
 ],
 "milano-lunch":[
-{n:"Luini",d:"밀라노 대표 판체로띠(튀김만두), 1888년~",p:"€8",c:[45.4653,9.1889]},
-{n:"Spontini",d:"밀라노식 두꺼운 피자, 3대째 1953년~",p:"€15",c:[45.4730,9.1960]},
-{n:"Pescaria",d:"해산물 패스트캐주얼, 인스타 핫플",p:"€25",c:[45.4555,9.1760]},
-{n:"Piz",d:"밀라노 신세대 피자, 디자인 매장",p:"€20",c:[45.4650,9.1880]},
-{n:"Panini Durini",d:"밀라노 직장인 런치 체인, 가성비",p:"€12",c:[45.4660,9.1895]}
+{n:"Luini",d:"Via Santa Radegonda 16·두오모 옆·1888년~·Google 4.5(1.6만)·★월요일 영업(일 휴무, D13 월 점심 확정)·판체로띠(모짜+토마토)·좌석X 테이크아웃·2인: 판체로띠 3~4개(€3.5)",p:"€12~16",c:[45.4658,9.1916],q:"Luini Panzerotti Milano"},
+{n:"Spontini",d:"Via Santa Radegonda 11(Luini 길 건너)·월요일 영업·밀라노식 두꺼운 사각피자(pizza al trancio)·Luini 줄 길 때 플랜B·2인: 트란치오 2조각+음료",p:"€14~18",c:[45.4730,9.1960],q:"Spontini Milano"},
+{n:"Piz",d:"Via Torino 34·두오모 도보 5분·TA 4.6·월 12:00~15:00·나폴리식 원형 피자+웰컴 프로세코·착석 대안·2인: 피자 2판",p:"€20~28",c:[45.4650,9.1880],q:"Piz Milano Via Torino"},
+{n:"Panini Durini",d:"Via Orefici 5·두오모 인접·월 07:00~20:30·파니노/샐러드 가벼운 옵션·2인: 파니노 2+음료",p:"€16~24",c:[45.4660,9.1895],q:"Panini Durini Milano"}
 ],
 "como-lunch":[
-{n:"Ristorante Bilacus",d:"벨라지오 호숫가, 리조또+생선 현지인 맛집",p:"€60",c:[45.9875,9.2573]},
-{n:"Bar Il Molo",d:"벨라지오 선착장 카페, 호수 뷰 간편식",p:"€30",c:[45.9870,9.2575]},
-{n:"Ristorante Terrazza Barchetta",d:"호수 뷰 테라스, 고급 레이크사이드",p:"€80",c:[45.9878,9.2570]},
-{n:"Trattoria San Giacomo",d:"벨라지오 골목, 현지인 저렴 가정식",p:"€40",c:[45.9880,9.2568]},
-{n:"La Punta",d:"반도 끝 레스토랑, 양쪽 호수 파노라마",p:"€70",c:[45.9882,9.2580]}
+{n:"Osteria Quatro Pass",d:"Varenna Via XX Settembre 20·Google 4.4(1.2천)·5~10월 매일(일요일 OK) 점심 12:00~15:00·★진짜 코모호수 요리: risotto con pesce persico(농어 리소토)/호수생선 튀김/호박 라비올리+발텔리나 와인·예약 권장·2인: 농어 리소토+호수생선 1+라비올리+화이트",p:"€40~120",c:[46.0113,9.2834],q:"Osteria Quatro Pass Varenna"},
+{n:"Vecchia Varenna",d:"Varenna Contrada Scoscesa 14·물 위 테라스 그 자체·Google 4.0·일 점심 영업(월·화 휴무)·예약 불가라 12:15 일찍·⚠️폐업 플래그 있어 전화 확인(+39 0341 830793)·2인: 일일 정식 2인분(호수생선)",p:"€60~80",c:[46.0109,9.2830],q:"Vecchia Varenna Varenna"},
+{n:"Nilus Bar",d:"Varenna Riva Garibaldi 1·호반 프롬나드 캐주얼 바·일요일 종일(10:00~)·피자/파스타/호수 작은생선/리소토·워크인 친화·뷰 위주 가벼운 점심·2인: 피자 1+파스타 1+음료",p:"€40~60",c:[46.0105,9.2827],q:"Nilus Bar Varenna"},
+{n:"Ristorante del Sole",d:"Varenna Piazza San Giorgio 17·메인광장(호반 아님)·일요일 연속영업·저렴·신선 호수생선·백업·2인: 농어 리소토+호수생선+하우스 와인",p:"€22~40",c:[46.0102,9.2834],q:"Albergo del Sole Varenna"}
 ],
 "ortisei-lunch":[
 {n:"Anna Stuben",d:"미슐랭2스타! 가르데나 계곡 파인다이닝",p:"€120",c:[46.5736,11.6714]},
@@ -1302,15 +1297,15 @@ const FOOD_RECS={
 {n:"Seceda 산장 리푸지오",d:"정상 리푸지오, 카네데를리+핫초코 뷰식사",p:"€40",c:[46.6019,11.7269]}
 ],
 "pisa-lunch":[
-{n:"Osteria dei Cavalieri",d:"Cavalieri 바로 뒤. 피사 시내 산책 동선 위라 이동 손실이 작고 해산물/토스칸 점심 후보",p:"€35~55",c:[43.7170,10.4010],q:"Osteria dei Cavalieri Pisa"},
-{n:"Il Montino",d:"Vettovaglie권 피사 로컬 피자/체치나. 빠르고 가벼워 14:00대 복귀 전 가장 안전",p:"€12~25",c:[43.7160,10.4015],q:"Il Montino Pisa"},
-{n:"Trattoria S. Omobono",d:"Vettovaglie 근처 가정식. 메뉴가 맞고 대기 짧을 때만 선택",p:"€25~45",c:[43.7155,10.4005],q:"Trattoria Sant'Omobono Pisa"},
-{n:"Osteria La Mescita",d:"Piazza delle Vettovaglie 30m권. 짧은 토스칸 점심/와인바형 백업",p:"€25~45",c:[43.7169,10.4012],q:"Osteria La Mescita Pisa"}
+{n:"Il Montino",d:"Via del Monte 1·Cavalieri/Vettovaglie 도보 3~6분·Google 4.1(1.3천)·월~토 12:30~15:00·★체치나(병아리콩 플랫브레드)+장작 피자 슬라이스·카운터 빠름·35분 점심 우승·2인: 체치나 2슬라이스+피자 1~2슬라이스+스푸마 2",p:"€10~18",c:[43.7160,10.4015],q:"Il Montino Pisa"},
+{n:"Trattoria Sant'Omobono",d:"Piazza Sant'Omobono 6·Google 4.6(1.8천, 최고 평점)·매일 12:30~14:30·탈리아텔레 오리 라구/피사식 트리파(체치나 없음)·항상 만석 예약 필수·착석이라 다소 느림·2인: 파스타 2",p:"€20~40",c:[43.7155,10.4005],q:"Trattoria Sant'Omobono Pisa"},
+{n:"Osteria dei Cavalieri",d:"Via San Frediano 16·Cavalieri 1~2분·미쉐린 가이드·세련된 착석(파파르델레 오리/멧돼지)·35분 빠른 점심엔 느림→여유 시 디너 대안·2인: 파스타 2+세콘도 1",p:"€35~55",c:[43.7170,10.4010],q:"Osteria dei Cavalieri Pisa"},
+{n:"Osteria La Mescita",d:"Via Domenico Cavalca 2·1902년~·Vettovaglie 옆·Google 4.2·착석 토스칸/와인바(체치나 없음)·후순위 백업·2인: 파스타 2+와인",p:"€25~45",c:[43.7169,10.4012],q:"Osteria La Mescita Pisa"}
 ]
 };
 
 const FOOD_GUIDE={
-verified:"2026-06-07",
+verified:"2026-06-21",
 groups:[
 {title:"파스타 4대장",items:[
 {n:"카르보나라",d:"계란·페코리노·구안찰레. 크림 없는 로마식으로 1순위."},
@@ -1377,8 +1372,16 @@ route:[
 {day:"D6",time:"12:30",name:"Pisa Vettovaglie lunch",dish:"체치나·파스타·가벼운 토스칸 점심",note:"Miracoli에서 Cavalieri를 보고 남쪽으로 내려온 뒤 먹는 점심. 역 방향 동선이 깨지지 않음.",pick:true},
 {day:"D6",time:"17:30",name:"Pre-steak buffer",dish:"가벼운 아페리티보",note:"Buca Mario 전 과식 금지. 시장 대신 카페/작은 와인으로 발 쉬기."},
 {day:"D6",time:"19:30",name:"Buca Mario",dish:"Bistecca alla Fiorentina + cantucci/vin santo",note:"피렌체 대표 메인과 디저트를 한 번에 처리. 예약 필수.",pick:true},
-{day:"D7",time:"12:15",name:"Riomaggiore lunch",dish:"프리또·앵초비·가벼운 해산물",note:"Via dell'Amore 전이라 짧고 안전한 점심. Il Pescato Cucinato 우선, Dau Cila는 앉아서 먹을 때만."},
-{day:"D7",time:"20:00",name:"Monterosso dinner",dish:"해산물·트로피에 알 페스토·화이트와인",note:"화요일 휴무 후보를 제외하고 Fegina/Monterosso권으로 정리. La Cantina di Miky 또는 L'Ancora della Tortuga.",pick:true}
+{day:"D7",time:"12:15",name:"Riomaggiore lunch",dish:"프리또 코노·앵초비·가벼운 해산물",note:"⚠️화요일이라 Dau Cila·A Pie de Ma 휴무. 튀김 코노 테이크아웃 Il Pescato Cucinato(또는 Tutti Fritti) 우선, 항구 바위에서 먹고 13:30 Via dell'Amore."},
+{day:"D7",time:"20:00",name:"Monterosso dinner",dish:"해산물·트로피에 알 페스토·화이트와인",note:"화요일 휴무 후보를 제외하고 Fegina/Monterosso권으로 정리. L'Ancora della Tortuga(절벽 뷰·예약) 또는 La Cantina di Miky(안초비 3종).",pick:true},
+{day:"D8",time:"13:00",name:"치케티 크롤",dish:"baccalà mantecato·sarde in saor·옴브라",note:"⚠️수요일이라 All'Arco 휴무. Cantina Do Mori(1462년 앵커) → 도보 2분 Cantina Do Spade. 2인 치케티 8~10개+와인.",pick:true},
+{day:"D8",time:"20:00",name:"Boccadoro",dish:"risotto al nero di seppia·생선 크루도",note:"먹물 리소토 명가, 수요일 영업. 간 요리(fegato) 원하면 Vini da Gigio, 미식 업그레이드는 Alle Testiere(예약).",pick:true},
+{day:"D9",time:"19:30",name:"Baita Fraina",dish:"카준치에이·카네데를리·사슴",note:"목요일 영업(월 휴무). 코르티나 시그니처 카준치에이(비트 라비올리) 필수. 예약 권장.",pick:true},
+{day:"D10",time:"19:30",name:"El Brite de Larieto",dish:"자가 치즈·카준치에이·폴렌타·사슴",note:"금요일 영업(수 휴무). 촛불 테라스 로맨틱, 직접 예약 필수. Tre Cime 트레킹 중 Rifugio Locatelli 간식(카네데를리/굴라시).",pick:true},
+{day:"D11",time:"19:30",name:"Da Aurelio (Passo Giau)",dish:"사슴·폴렌타·알파인 코스",note:"⚠️5 Torri 리푸지오 시즌종료. 도로변 Da Aurelio 토요일 영업(반드시 예약), 백업 Tivoli/호텔 하프보드. 점심은 Malga Ra Stua.",pick:true},
+{day:"D12",time:"13:00",name:"Varenna lunch",dish:"risotto con pesce persico(농어 리소토)",note:"바레나 호숫가. 일요일 영업 Osteria Quatro Pass 1순위(농어 리소토·말린 호수생선).",pick:true},
+{day:"D12",time:"19:30",name:"Milano dinner",dish:"cotoletta·risotto alla milanese·ossobuco",note:"⚠️일요일 다수 휴무. Al Matarel(코톨레타+오소부코) 1순위, Ratanà 예약 백업. 18:30 Camparino 아페리티보.",pick:true},
+{day:"D13",time:"12:30",name:"Luini",dish:"panzerotti(튀김 만두)",note:"월요일 영업 확정. 두오모 옆 테이크아웃, 모짜+토마토 3~4개. 아침은 갤러리아 Marchesi 1824.",pick:true}
 ],
 sources:[
 ["Vatican Museums Caffetteria 공식","https://www.museivaticani.va/content/museivaticani/en/organizza-visita/servizi-per-i-visitatori/ristorazione/bar-caffetteria.html"],
@@ -1432,34 +1435,44 @@ const BOOKING_ITEMS=[
 {status:"확정",tone:"done",cat:"교통",title:"D4 Roma→Firenze Italo",target:"완료",window:"사용자 티켓 기준",note:"Italo 9912 07:40→09:17 Prima Business, 2인 €38.80, 2호차 9·10. D4 기상/이동 시간 반영 완료",link:"https://www.italotreno.com/en/destinations-timetable/rome-florence-tickets",linkText:"Italo"},
 {status:"예약필요",tone:"warn",cat:"교통",title:"후속 장거리 열차",target:"지금부터 1차 조회",window:"좌석 지정/환불 조건 비교",note:"Firenze→La Spezia, La Spezia→Venezia 이동편은 60~90일 전까지 열차번호·환불 조건 확정",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
 {status:"후보선정",tone:"warn",cat:"숙소",title:"D7 친퀘테레 숙소",target:"지금",window:"Monterosso Fegina 우선",note:"1박+수영+다음날 베네치아 이동 기준 최적 위치는 Monterosso Fegina 역/해변권. 예시 Hotel Baia는 공식 기준 역에서 나와 오른쪽 몇 걸음, 해변 앞. 무료취소 조건 우선 비교",link:"https://www.baiahotel.it/en/",linkText:"Hotel Baia"},
-{status:"예약필요",tone:"warn",cat:"입장권",title:"콜로세움",target:"2026-08-18(화)",window:"방문 30일 전",note:"D2 08:30 목표. 07:00 KST부터 조회, 08:30 슬롯은 15:30 KST에도 재확인",link:"https://colosseo.it/en/opening-times-and-tickets/",linkText:"공식"},
-{status:"선택예약",tone:"warn",cat:"식당",title:"D2 점심/저녁",target:"2026-08-20~09-03",window:"인기 정찬만 예약",note:"Armando/La Taverna/Broccoletti 선택 시 예약. Pane e Salame/Trieste는 현장 대기 가능",link:"https://www.google.com/maps/search/?api=1&query=Pantheon+Monti+restaurants+Rome",linkText:"지도"},
-{status:"예약필요",tone:"warn",cat:"입장권",title:"바티칸 + 보르게세",target:"2026-07-20(월)",window:"D3 시간제 예약",note:"바티칸 08:00, 보르게세 15:30 슬롯 우선 확보",link:"https://www.museivaticani.va/content/museivaticani/en.html",linkText:"바티칸"},
-{status:"예약필요",tone:"warn",cat:"입장권",title:"D5 우피치 / 아카데미아 / 두오모",target:"2026-06-22(월)",window:"D5 핵심 시간제 예약",note:"08:30 우피치, 13:30 아카데미아, 16:00 Brunelleschi Pass 쿠폴라. 세례당+오페라 두오모 박물관까지 같은 패스로 묶어 두오모권 완성",link:"https://www.uffizi.it/en/tickets",linkText:"우피치"},
-{status:"예약필요",tone:"warn",cat:"입장권",title:"D6 피사 사탑",target:"2026-06-23(화) 09:00 KST",window:"방문 90일 전 GMT 기준",note:"9/21 피사 사탑은 10:00 슬롯 우선, 10:30 백업. 08:00대 Firenze 출발과 택시/버스 이동 기준으로 재정비 완료",link:"https://www.opapisa.it/en/tickets/buy/",linkText:"OPAPISA"},
+{status:"오픈대기",tone:"warn",cat:"입장권",title:"D6 피사 사탑 ⏰가장 임박",target:"2026-06-23(화) 09:00 KST",window:"방문 90일 전(GMT)",note:"공식 구매조건상 사탑은 방문 90~1일 전 판매 — 9/21 기준 90일 전이 6/23, UTC 자정=09:00 KST 오픈. 오픈 즉시 10:00 슬롯(백업 10:30) 확보. FAQ의 15일 문구와 상충하나 90일이 유효 — 출발 전 재확인. 사탑 약 €20~27, 큰 가방 반입 불가",link:"https://acquistabiglietti.opapisa.it",linkText:"OPAPISA"},
+{status:"예약가능",tone:"warn",cat:"입장권",title:"D5 우피치 / 아카데미아 / 두오모",target:"지금 예약 (상시 오픈)",window:"고정 오픈일 없음·조기매진",note:"우피치 08:30 €29(사전권), 아카데미아 13:30 €20+예약 €4=€24(2026-02 인상), 두오모 Brunelleschi Pass €30(쿠폴라+세례당+종탑+오페라두오모박물관). ⚠️일요일 쿠폴라는 12:45~16:30 운영이라 16:00 슬롯이 마지막이거나 없을 수 있음 → 가장 이른 오후 슬롯 확보, 안 되면 D5 순서 조정",link:"https://tickets.uffizi.it/",linkText:"우피치"},
+{status:"오픈대기",tone:"warn",cat:"입장권",title:"D3 바티칸 + 보르게세",target:"2026-07-20(월) 07:00 KST 바티칸",window:"바티칸 60일·보르게세 예약의무",note:"바티칸 08:00 €25(€20+예약 €5)는 약 60일 전 00:00 CET=07:00 KST 오픈, 08:00 얼리엔트리 슬롯 개설 확인. 보르게세 15:00 슬롯은 예약 의무(€16+예약 €2≈€18·공식확인), 2시간제 09·11·13·15·17시. 보르게세 10일전 규칙은 무료개방일 한정 — 유료일은 더 일찍 열리니 7월에 9/18 캘린더 보이면 바로 예약",link:"https://tickets.museivaticani.va",linkText:"바티칸"},
+{status:"오픈대기",tone:"warn",cat:"입장권",title:"D2 콜로세움",target:"2026-08-18(화)",window:"방문 30일 전",note:"공식 30일 전 판매(이른 아침 로마시간). 오픈 즉시 08:30 슬롯 확보. 24h 통합권(콜로세움+포로로마노+팔라티노) €18(예약비 포함), 아레나/지하 Full Experience €24. 신분증 이름 일치",link:"https://colosseo.it/en/opening-times-and-tickets/",linkText:"공식"},
+{status:"선택예약",tone:"",cat:"입장권",title:"D2 판테온 (선택)",target:"2026-08-15~",window:"9월 캘린더 8월 중순 오픈",note:"의무 아님(현장 매표 가능)이나 €7 미리 사면 줄 단축. 2026-07-01부터 €5→€7. 공식 Musei italiani(museiitaliani.it)에서만 구매, pantheonroma.com은 리셀러. 티켓 기명",link:"https://www.museiitaliani.it/",linkText:"Musei italiani"},
+{status:"마감주의",tone:"warn",cat:"입장권",title:"D8 베네치아 두칼레 궁전",target:"2026-08-24(월)까지",window:"30일 전 €30 할인 마감",note:"현장/일반 €35, 방문 30일 이상 전 온라인 €30 → 9/23 기준 8/24까지 예매해야 €30. 산마르코 광장 박물관 통합권. 시간 미지정 시 12:00부터 입장이라 15:30 OK",link:"https://palazzoducale.visitmuve.it/en/tickets/",linkText:"MUVE"},
+{status:"예약가능",tone:"warn",cat:"입장권",title:"D11 세체다 케이블카 (옵션 A)",target:"옵션 A 확정 시 즉시",window:"2026 타임슬롯 의무·상시 오픈",note:"⚠️2026 신규로 30분 단위 지정 타임슬롯 예약 의무(환불·변경 불가). 왕복 €74/인, 7일 이상 전 예매 시 −5%(≈9/18). 토요일 피크라 조기 예약, 이른 오전 슬롯 권장. 옵션 B(라가주오이)는 예약 불필요",link:"https://seceda.axess.shop/en",linkText:"Seceda"},
+{status:"선택예약",tone:"",cat:"입장권",title:"D12 밀라노 두오모 옥상 (선택)",target:"옥상 갈 경우 사전 예약",window:"일요일 예약 필수·상시 판매",note:"외관 우선이지만 옥상까지면 일요일은 시간제 예약 필수. 계단 €16/리프트 €18. 9/27은 표준운영 막입장 18:10이라 17:30 슬롯은 빠듯. 직판 ticket.duomomilano.it만",link:"https://ticket.duomomilano.it/en/",linkText:"Duomo Milano"},
+{status:"날씨확인",tone:"warn",cat:"입장/동선",title:"D7 Via dell'Amore + 친퀘테레 카드",target:"2026-09-21(월) 전후",window:"슬롯 조기마감 가능",note:"별도 결제·별도 예약. Train MS Card 1일권 9/22(화)는 Band B €29.50/2인 €59 가정(Band A면 €44, 공식 캘린더 확인), 상시·당일 구매. Via dell'Amore는 30분 지정슬롯 예약 의무(2026 3/29~10/24, R→M 일방향), 카드소지자 추가 €5~10/인·미소지 ~€17.50. 날씨 안정 시 며칠 전 예약",link:"https://www.viadellamore.info/en",linkText:"Via dell'Amore"},
+{status:"예약가능",tone:"",cat:"교통패스",title:"D8 베네치아 바포레토 24h",target:"출발 전 온라인",window:"첫 탑승 시 활성화",note:"ACTV 24시간권 €25/인(2인 €50). Venezia Unica 온라인 상시 구매, 첫 탑승 시각부터 24시간. 도착 ~12:30부터면 24h 충분(초과 우려 시 48h €35)",link:"https://www.veneziaunica.it/en/e-commerce/services",linkText:"Venezia Unica"},
+{status:"선택예약",tone:"warn",cat:"식당",title:"D2 로마 점심/저녁",target:"2026-08-20~09-03",window:"인기 정찬만 예약",note:"Armando/La Taverna/Broccoletti 선택 시 예약. Pane e Salame/Trieste는 현장 대기 가능",link:"https://www.google.com/maps/search/?api=1&query=Pantheon+Monti+restaurants+Rome",linkText:"지도"},
 {status:"선택예약",tone:"warn",cat:"식당",title:"D4-D6 피렌체 저녁",target:"2026-08-20~09-05",window:"인기 식당 예약",note:"D4 올트라르노, D5 일요일 영업 후보, D6 Buca Mario 월요일 저녁. Buca Mario는 일요일 휴무, Trattoria Mario는 월~토 점심 중심",link:"https://www.bucamario.com/contatti/",linkText:"Buca Mario"},
-{status:"예약필요",tone:"warn",cat:"입장/동선",title:"D7 Via dell'Amore + 친퀘테레 카드",target:"2026-09-21(월)",window:"전날 날씨 확인 후",note:"9/22는 Riomaggiore→Manarola 13:30 전후 슬롯 목표. Via dell'Amore는 방문자 예약 필수이며 ⚠️Cinque Terre Card에 포함되지 않음 — 별도 입장료(카드 소지자 약 €10/인·미소지 €17.50)+별도 예약(viadellamore.info). Train MS 1일권은 별개로 Band B 2인 €59 예산 반영(9/22 평일 밴드는 공식 캘린더 재확인)",link:"https://card.parconazionale5terre.it/en",linkText:"Card"},
 {status:"선택예약",tone:"warn",cat:"식당",title:"D7 Monterosso 저녁",target:"2026-08-25~09-10",window:"화요일 영업 후보만",note:"Nessun Dorma와 Ristorante Miky는 D7 화요일 기본 후보에서 제외. La Cantina di Miky 또는 L'Ancora della Tortuga 예약 우선",link:"https://www.cantinadimiky.it/contatti.html",linkText:"Cantina"},
+{status:"선택예약",tone:"warn",cat:"식당",title:"D9-D12 후반부 저녁",target:"2026-09-05 전후",window:"토요일 돌로미티는 2~4주 전",note:"토요일 D11 저녁(5 Torri·Da Aurelio·SanBrite)은 2~4주 전 예약 필수. El Brite(금)·Baita Fraina(목) 권장. 베네치아 Boccadoro(D8)·밀라노 일요 영업처(D12)도 며칠 전 예약",link:"https://www.google.com/maps/search/?api=1&query=Cortina+Ampezzo+restaurants",linkText:"지도"},
 {status:"예약필요",tone:"warn",cat:"교통",title:"베네치아 → 코르티나 렌터카",target:"숙소 확정 후",window:"무료취소 조건 우선",note:"메스트레 픽업/밀라노 반납 수수료 확인",link:"https://www.rentalcars.com",linkText:"RentalCars"},
-{status:"예약필요",tone:"warn",cat:"돌로미티",title:"Tre Cime 주차/통행 예약",target:"방문 전 공식 예약",window:"2026 차량 €40",note:"Auronzo 공식 2026-06-01 확인. 9AM 전 도착 목표",link:"https://auronzo.info/en/parking-tre-cime-di-lavaredo/",linkText:"공식"},
+{status:"오픈대기",tone:"warn",cat:"돌로미티",title:"Tre Cime 주차/통행 예약",target:"2026-08-26 전후(약 30일 전)",window:"2026 차량 €40·번호판 입력",note:"온라인 예약 필수, 9시 전 도착. 예약창 약 30일 전 롤링 오픈(공식 명시 아님→8월 포털 재확인). 번호판은 9/24 픽업 후 입력",link:"https://auronzo.info/en/parking-tre-cime-di-lavaredo/",linkText:"공식"},
+{status:"예약불필요",tone:"",cat:"현장구매",title:"현장 구매 OK (예약 불필요)",target:"당일 현장",window:"미리 예약할 필요 없음",note:"산타크로체(€10+€1, 월 막입장 17:00)·곤돌라(€80/보트)·산조르조마조레 종탑(€8)·라고 디 브라이에스 보트(현장만)·친퀘토리/팔로리아/라가주오이 리프트는 사전 예약 불필요. 캘린더에서 제외",link:"",linkText:""},
 {status:"후보선정",tone:"",cat:"숙소",title:"베네치아/코르티나/밀라노",target:"다음 결정 대상",window:"무료취소 우선",note:"친퀘테레는 Monterosso Fegina 우선으로 정리. 남은 도시는 가격 변동이 크므로 도시별 1순위와 백업 1곳 필요",link:"",linkText:""}
 ];
 
 const TICKETING_ITEMS=[
 {ymd:"2026-06-01",date:"2026.06.01(월) 지금",tone:"critical",name:"장거리 열차/렌터카 1차 조회",target:"D4 Italo 완료, Firenze→La Spezia, La Spezia→Venezia, 메스트레 렌터카",note:"D4 Roma→Firenze는 사용자 티켓 €38.80/2인 기준 반영 완료. 이후 이동편은 Italo/Trenitalia에서 열차번호·환불 조건 재확인.",links:[["Italo","https://www.italotreno.com/en"],["Trenitalia","https://www.trenitalia.com"],["RentalCars","https://www.rentalcars.com"]]},
 {ymd:"2026-06-06",date:"2026.06.06(토) 지금",tone:"critical",name:"피렌체 숙소 정정",target:"Le Stanze del Duomo 확정, Plus Florence 취소 확인",note:"새 숙소 기준 D4-D6 일정 반영. 이전 Plus Florence 가예약이 남아 있으면 취소 완료 메일 보관.",links:[["Le Stanze","https://www.lestanzedelduomo.it/en/contacts"],["Plus","https://www.plushostels.com/florence"]]},
-{ymd:"2026-06-22",date:"2026.06.22(월)",tone:"critical",name:"D5 피렌체 핵심 3종",target:"우피치 08:30, 아카데미아 13:30, 두오모 쿠폴라 16:00",note:"D5가 일요일이라 오전 슬롯 경쟁이 큼. Brunelleschi Pass는 쿠폴라 시간 엄수, 세례당+오페라 두오모 박물관까지 같은 패스로 커버.",links:[["Uffizi","https://www.uffizi.it/en/tickets"],["Accademia","https://www.galleriaaccademiafirenze.it/tickets/"],["Duomo","https://tickets.duomo.firenze.it/en"]]},
-{ymd:"2026-06-23",date:"2026.06.23(화) 09:00 KST",tone:"critical",name:"D6 피사 사탑",target:"9/21 10:00 Leaning Tower 우선, 10:30 백업",note:"공식 기준 GMT 90일 전 오픈. D6를 08:00대 Firenze 출발로 앞당겼으므로 10:00 슬롯을 우선 노리고, 실패 시 10:30으로 전환.",links:[["OPAPISA","https://www.opapisa.it/en/tickets/buy/"]]},
-{ymd:"2026-07-20",date:"2026.07.20(월) 07:00 KST",tone:"critical",name:"D3 바티칸 + 보르게세",target:"바티칸 08:00, 보르게세 15:30",note:"이탈리아 00:00은 한국 07:00. 바티칸은 첫 슬롯, 보르게세는 2시간 제한 슬롯이라 15:30 전후가 더 현실적.",links:[["Vatican","https://www.museivaticani.va/content/museivaticani/en.html"],["Borghese","https://galleriaborghese.beniculturali.it/en/visita/"]]},
-{ymd:"2026-08-18",date:"2026.08.18(화)",tone:"critical",name:"D2 콜로세움",target:"9/17 08:30 Colosseum + Forum/Palatine",note:"공식 30일 전 오픈. 07:00 KST부터 확인하고, 08:30 슬롯은 15:30 KST에도 다시 확인.",links:[["Colosseo","https://colosseo.it/en/opening-times-and-tickets/"]]},
-{ymd:"2026-08-18",date:"2026.08.18(화)",tone:"",name:"D2 판테온",target:"9/17 14:30 Pantheon",note:"필수 매진형은 아니지만 €5 공식 티켓을 미리 사두면 현장 줄 리스크를 줄일 수 있음.",links:[["Pantheon","https://www.pantheonroma.com/en/openings-info/"]]},
-{ymd:"2026-08-20",date:"2026.08.20(목)",tone:"",name:"D4-D6 피렌체 식당",target:"D4 올트라르노, D5 일요일 후보, D6 Buca Mario 19:30",note:"Buca Mario는 일요일 휴무라 D6 월요일로 이동. 4 Leoni/Il Santo/Buca Mario 중 확정 후 예약.",links:[["Buca Mario","https://www.bucamario.com/contatti/"],["4 Leoni","https://www.4leoni.it/"]]},
-{ymd:"2026-08-24",date:"2026.08.24(월)",tone:"",name:"D8 베네치아 두칼레 궁전",target:"9/23 15:30 Doge's Palace",note:"30일 전 온라인 예매가 유리한 구간. 산마르코권 동선 확정 후 같이 처리.",links:[["MUVE","https://palazzoducale.visitmuve.it/en/tickets/"]]},
+{ymd:"2026-06-21",date:"2026.06.21(일) 오늘",tone:"critical",name:"오늘 착수: 상시 오픈분 + 임박 오픈",target:"피렌체 우피치·아카데미아·두오모 패스 / 세체다(D11 옵션A)는 지금 예약 가능",note:"이 항목들은 고정 오픈일 없이 상시 예약 가능하고 성수기 조기 매진 → 오늘부터 진행. 내일(6/22) 피렌체 핵심 3종, 모레(6/23) 09:00 KST 피사 사탑 90일 오픈이 임박. 입장권/투어 검증 기준일 2026-06-21.",links:[["Uffizi","https://tickets.uffizi.it/"],["Seceda","https://seceda.axess.shop/en"]]},
+{ymd:"2026-06-22",date:"2026.06.22(월)",tone:"critical",name:"D5 피렌체 핵심 3종",target:"우피치 08:30, 아카데미아 13:30, 두오모 쿠폴라(일 오후)",note:"셋 다 고정 오픈일은 없지만 성수기 조기매진이라 지금 예약. 우피치 9/20(일)은 오전 슬롯 경쟁 큼·사전권 €29(16시 이후 €20 할인은 오전 미적용). 아카데미아는 2026-02 인상으로 €20+예약 €4=€24. ⚠️두오모 쿠폴라: 일요일 운영 12:45~16:30이라 16:00 슬롯은 사실상 마지막(없을 수도 있음) → 예약 가능한 가장 이른 오후 슬롯을 잡고, 안 되면 D5 순서 조정. Brunelleschi Pass €30(쿠폴라+세례당+조토 종탑+오페라두오모 박물관, 3일권, 쿠폴라는 지정시간·신분증).",links:[["Uffizi","https://tickets.uffizi.it/"],["Accademia","https://www.galleriaaccademiafirenze.it/en/tickets/"],["Duomo","https://tickets.duomo.firenze.it/en"]]},
+{ymd:"2026-06-23",date:"2026.06.23(화) 09:00 KST",tone:"critical",name:"D6 피사 사탑 (90일 오픈)",target:"9/21 10:00 사탑 우선, 10:30 백업",note:"공식 구매조건상 사탑 티켓은 방문 90~1일 전(GMT) 판매 — 9/21 기준 90일 전이 오늘 6/23, UTC 자정=09:00 KST부터 구매 가능 → 오픈 즉시 10:00 슬롯 확보. (공식 FAQ엔 15일이라는 상충 문구가 있으나 구매조건·안내 페이지의 90일이 유효 — 출발 전 재확인.) 큰 가방 반입 불가, 사탑 약 €20~27, 광장 통합권은 별도. 검증 2026-06-21.",links:[["OPAPISA","https://acquistabiglietti.opapisa.it"]]},
+{ymd:"2026-07-20",date:"2026.07.20(월) 07:00 KST",tone:"critical",name:"D3 바티칸(60일 오픈) + 보르게세",target:"바티칸 08:00, 보르게세 15:00 슬롯",note:"바티칸: 약 60일 전 00:00 CET=07:00 KST 오픈 → 오픈 즉시 첫 슬롯(€20+예약 €5=€25), 08:00은 얼리엔트리 상품이라 해당 날짜 08:00 슬롯 개설 여부 확인. 보르게세: 예약 의무(€2 예약비 포함, 풀티켓 €16+€2≈€18·17:45 막슬롯 €13 — 공식 확인), 2시간제 슬롯 09·11·13·15·17시라 15:30 도착엔 15:00 슬롯. ⚠️10일 전 판매는 무료개방일(첫 일요일 등) 한정 규칙이고 일반 유료일(9/18 금)은 더 일찍 열리므로, 7월에 9/18 캘린더가 보이면 바로 예약(주말 인접 슬롯 조기마감). 검증 2026-06-21.",links:[["Vatican","https://tickets.museivaticani.va"],["Borghese","https://galleriaborghese.beniculturali.it/visita/info-biglietti/"]]},
 {ymd:"2026-07-25",date:"2026.07.25(토)",tone:"critical",name:"D8 친퀘테레→베네치아 장거리 열차",target:"9/23 La Spezia→밀라노→베네치아 (좌석지정)",note:"친퀘테레→베네치아 직통 없음. 좌석지정편(IC/Frecciarossa)은 예약창 오픈(약 7월말) 직후 잠금. La Spezia 09시 이전 출발·밀라노 환승 40분+. Milano-Genova 9월말까지 공사·단선이라 Genova 경유는 백업. 산마르코 종탑은 D9 취소로 삭제됨.",links:[["Trenitalia","https://www.trenitalia.com"],["Italo","https://www.italotreno.com/en"]]},
-{ymd:"2026-08-26",date:"2026.08.26(수)",tone:"critical",name:"D10 트레치메 주차/통행",target:"9/25 07:00 Tre Cime (Auronzo €40)",note:"돌로미티 3일 재편으로 트레치메는 D10(9/25)로 이동. 차량 €40 온라인 예약 필수, 9AM 전 도착. 번호판은 9/24 렌터카 픽업 후 입력. 우천 시 D11과 스왑.",links:[["Auronzo","https://auronzo.info/en/parking-tre-cime-di-lavaredo/"]]},
-{ymd:"2026-08-28",date:"2026.08.28(금)",tone:"",name:"D12 밀라노 두오모 옥상 선택",target:"9/27 17:30 Duomo rooftop",note:"현재 일정은 외관 우선. 옥상까지 갈 거면 30일 전 시간제 티켓으로 확정.",links:[["Duomo Milano","https://ticket.duomomilano.it/en/"]]},
-{ymd:"2026-09-21",date:"2026.09.21(월)",tone:"critical",name:"D7 친퀘테레 카드 + Via dell'Amore",target:"9/22 13:30 Riomaggiore→Manarola",note:"날씨 확인 후 Train MS Card 1일권과 Via dell'Amore 슬롯을 같이 처리(둘은 별도 결제·별도 예약). Train MS는 9/22 Band B 가정 성인 €29.50/인·2인 €59(평일 밴드 공식 캘린더 재확인), Via dell'Amore는 별도 입장료 카드 소지자 약 €10/인·미소지 €17.50.",links:[["Cinque Terre Card","https://card.parconazionale5terre.it/en"],["Via dell'Amore","https://www.viadellamore.info/en"]]},
-{ymd:"2026-09-23",date:"2026.09.23(수)",tone:"",name:"D8 베네치아 바포레토 24h",target:"도착(약 13:30)부터 24시간",note:"베네치아 1박 단축으로 48h→24h. 온라인 구매 후 첫 사용 때 활성화. 도착이 13시 이후+D9 오전 메스트레 이동까지 쓰면 48h 검토.",links:[["Venezia Unica","https://www.veneziaunica.it/en/e-commerce/services"]]}
+{ymd:"2026-08-18",date:"2026.08.18(화)",tone:"critical",name:"D2 콜로세움 (30일 오픈)",target:"9/17 08:30 콜로세움+포로/팔라티노",note:"공식 방문 30일 전 판매(이른 아침 로마시간). 9/17 기준 8/18 오픈 → 오픈 즉시 08:30 슬롯 확보. 24h 통합권(콜로세움+포로로마노+팔라티노) €18(예약비 €2 포함), 아레나/지하 포함 Full Experience €24. 신분증 이름 일치 필요. 검증 2026-06-21.",links:[["Colosseo","https://colosseo.it/en/opening-times-and-tickets/"]]},
+{ymd:"2026-08-18",date:"2026.08.18(화)",tone:"",name:"D2 판테온 (선택, €7)",target:"9/17 ~14:40 판테온",note:"9월 입장 캘린더는 8월 중순 오픈. 시간제 예약은 의무 아님(현장 매표/자판기 가능)하지만 미리 사두면 줄 단축. ⚠️2026-07-01부터 €5→€7 인상이라 9월 방문은 €7. 반드시 공식 Musei italiani에서 구매 — pantheonroma.com 등은 리셀러. 티켓 기명(신분증 일치). 검증 2026-06-21.",links:[["Musei italiani","https://www.museiitaliani.it/"],["판테온 안내","https://direzionemuseiroma.cultura.gov.it/en/pantheon/"]]},
+{ymd:"2026-08-20",date:"2026.08.20(목)",tone:"",name:"D4-D6 피렌체 식당",target:"D4 올트라르노, D5 일요일 후보, D6 Buca Mario 19:30",note:"Buca Mario는 일요일 휴무라 D6 월요일로 배치. 4 Leoni/Il Santo Bevitore/Buca Mario 중 확정 후 예약(인기 정찬은 2~3주 전).",links:[["Buca Mario","https://www.bucamario.com/contatti/"],["4 Leoni","https://www.4leoni.it/"]]},
+{ymd:"2026-08-24",date:"2026.08.24(월)",tone:"critical",name:"D8 두칼레 궁전 (30일 할인 마감)",target:"9/23 15:30 두칼레 궁전",note:"공식 2026: 현장/일반 €35, 방문 30일 이상 전 온라인 예매 시 €30. 9/23 기준 8/24까지 예매하면 €30 확보(이후 €35). 산마르코 광장 박물관 통합권(코레르·고고학·마르치아나 포함). 시간 슬롯 지정은 의무 아님(미지정 시 12:00부터 입장) → 15:30 방문 OK. 운영 09:00~19:00·막입장 18:00. 검증 2026-06-21.",links:[["MUVE","https://palazzoducale.visitmuve.it/en/tickets/"]]},
+{ymd:"2026-08-26",date:"2026.08.26(수)",tone:"critical",name:"D10 트레치메 주차/통행 (약 30일 전)",target:"9/25 07:00 Tre Cime 차량 €40",note:"차량 €40(주차+통행 12h 유효), 온라인 예약 필수·차량번호 입력(전날 23:59까지 수정 가능). 예약창은 방문 약 30일 전 롤링 오픈(≈8월 말)이며 공식 명시값이 아닌 2차 추정이니 8월에 포털 캘린더로 정확한 오픈 시점 확인. 9시 전 도착, 주말 슬롯은 3~5일 전 매진 보고. 번호판은 9/24 렌터카 픽업 후 입력, 우천 시 D11과 스왑. 검증 2026-06-21.",links:[["Auronzo","https://auronzo.info/en/parking-tre-cime-di-lavaredo/"]]},
+{ymd:"2026-08-26",date:"2026.08.26(수)",tone:"critical",name:"D11 세체다 케이블카 타임슬롯 (옵션 A)",target:"9/26 오르티세이→푸르네스→세체다 왕복",note:"⚠️2026 신규: 세체다 케이블카는 30분 단위 지정 타임슬롯 사전예약 의무(환불·변경 불가, 정원의 약 2/3만 온라인). 토요일 능선은 피크라 워크업 위험 → 미리 예약. 왕복 €74/인(7일 이상 전 예매 시 −5%, ≈9/18까지). 시즌 5/22~11/2, 매표 4월부터 상시 오픈이라 지금도 9/26 슬롯 예약 가능 → D11에서 세체다(옵션 A) 택하면 즉시 예약하고 이른 오전 슬롯(08:30~09:30) 권장. 옵션 B(라가주오이)는 예약 불필요. 검증 2026-06-21.",links:[["Seceda","https://seceda.axess.shop/en"],["Val Gardena","https://www.valgardena.it/"]]},
+{ymd:"2026-08-28",date:"2026.08.28(금)",tone:"",name:"D12 밀라노 두오모 옥상 (선택)",target:"9/27 ~17:30 옥상(선택)",note:"현재 일정은 외관 우선이나, 옥상까지 가면 일요일은 예약 필수(시간제). 계단 €16 / 리프트 €18(2인 €32~36). 표는 상시 판매라 지금도 9/27 슬롯 예매 가능. ⚠️9/27은 연장운영 종료(6/5~9/13만 연장)라 표준운영 09:00~19:00·막입장 18:10 → 17:30 슬롯은 가능하나 빠듯. 두오모 직판 ticket.duomomilano.it만 이용. 검증 2026-06-21.",links:[["Duomo Milano","https://ticket.duomomilano.it/en/"]]},
+{ymd:"2026-09-05",date:"2026.09.05(토)",tone:"",name:"후반부 인기 식당 예약",target:"돌로미티 D9-D11 / 베네치아 D8 / 밀라노 D12 저녁",note:"토요일 D11 돌로미티 저녁(5 Torri·Da Aurelio·SanBrite)은 현지 수요 폭증으로 2~4주 전 예약 필수 → 이 시점에 확정. El Brite de Larieto(금)·Baita Fraina(목) 예약 권장. 베네치아 Boccadoro(D8)·밀라노 일요 영업처(D12)도 며칠 전 예약. 요일 휴무는 상세일정 팁 참고. 검증 2026-06-21.",links:[["코르티나 식당 지도","https://www.google.com/maps/search/?api=1&query=Cortina+Ampezzo+restaurants"]]},
+{ymd:"2026-09-21",date:"2026.09.21(월)",tone:"critical",name:"D7 친퀘테레 카드 + Via dell'Amore",target:"9/22 13:30 Riomaggiore→Manarola",note:"둘은 별도 결제·별도 예약. ①Cinque Terre Treno MS Card(열차+트레일 1일권): 2026 밴드 A €22 / B €29.50 / C €35, 9월 피크(C)는 주말만(12-13·19-20·26-27)이라 9/22(화)는 Band B €29.50/2인 €59 가정(공식 캘린더 최종확인, Band A면 €44), 상시·당일 구매 가능. ②Via dell'Amore: 2026 운영 3/29~10/24 09:00~21:00, 30분 단위 지정슬롯 예약 의무(슬롯당 200명), 성수기 Riomaggiore→Manarola 일방향. 카드 소지자 추가요금 약 €5~10/인(미소지 ~€17.50)이고 2026엔 카드 포함/별도보충이 혼재하니 예약 시 확인. 슬롯 조기마감 가능 → 날씨 안정 시 며칠 전 예약 권장. 검증 2026-06-21.",links:[["Cinque Terre Card","https://card.parconazionale5terre.it/en"],["Via dell'Amore","https://www.viadellamore.info/en"]]},
+{ymd:"2026-09-23",date:"2026.09.23(수)",tone:"",name:"D8 베네치아 바포레토 24h",target:"도착(~12:30)부터 24시간",note:"ACTV 24시간권 €25/인(2인 €50). 온라인(Venezia Unica) 상시 구매, 첫 탑승 시 활성화→24시간. 1박이라 24h. 도착 ~12:30부터 다음날 메스트레 이동까지면 24h로 충분(초과 우려 시 48h €35 검토). 검증 2026-06-21.",links:[["Venezia Unica","https://www.veneziaunica.it/en/e-commerce/services"]]}
 ];
 
 // ===================== STATE & RENDER =====================
@@ -1654,7 +1667,10 @@ function init(){
   SEC_LIST.forEach(s=>{const d=document.createElement('button');d.type='button';d.className='sec-tab'+(s.id==='overview'?' active':'');d.dataset.sec=s.id;d.textContent=s.l;d.onclick=()=>{document.querySelectorAll('.sec-tab').forEach(x=>x.classList.remove('active'));d.classList.add('active');document.querySelectorAll('.section-content').forEach(x=>x.classList.remove('active'));document.getElementById('sec-'+s.id).classList.add('active');if(s.id==='overview'&&map)setTimeout(()=>map.invalidateSize(),80);if(s.id==='itinerary')setTimeout(()=>showOverviewOnDayMap(COURSES[currentCourse]),120);};st.appendChild(d);});
   document.getElementById('sec-overview').classList.add('active');
   switchCourse('B');
+  syncNavH();window.addEventListener('resize',syncNavH);
 }
+// 탭이 여러 줄로 줄바꿈되면 네비 높이가 달라지므로, 일정 탭 sticky 지도 오프셋(--nav-h)을 실측으로 맞춘다.
+function syncNavH(){const nb=document.querySelector('.navbar');if(nb)document.documentElement.style.setProperty('--nav-h',nb.offsetHeight+'px');}
 
 function switchCourse(id){
   currentCourse=id;
@@ -2048,7 +2064,7 @@ function renderBooking(){
     return `<div class="ticket-card ${item.tone||''}"><div class="ticket-date">${item.date}</div><div class="ticket-name">${item.name}</div><div class="ticket-meta"><strong>대상:</strong> ${item.target}</div><div class="ticket-meta">${item.note}</div>${links?`<div class="ticket-links">${links}</div>`:''}</div>`;
   }).join('');
   const calendar=renderBookingCalendar(TICKETING_ITEMS);
-  el.innerHTML=`<div class="booking-meta">공식 정보 검증 기준일: 2026-06-06 · 한국 기준 날짜(KST) · 이탈리아 9월은 CEST로 한국보다 7시간 느림</div><div class="booking-view-toggle" role="tablist"><button class="active" data-view="calendar" onclick="switchBookingView('calendar')">캘린더</button><button data-view="list" onclick="switchBookingView('list')">리스트</button></div><div class="booking-view active" data-view="calendar"><div class="ticket-title">한국 날짜 기준 예약 캘린더</div>${calendar}</div><div class="booking-view" data-view="list"><div class="booking-list-block"><div class="ticket-title">한국 날짜 기준 티케팅 리스트</div><div class="ticket-grid">${ticketCards}</div><div class="ticket-title">예약 체크리스트</div><div class="booking-grid">${cards}</div></div></div>`;
+  el.innerHTML=`<div class="booking-meta">공식 정보 검증 기준일: 입장권·투어 2026-06-21 / 교통·숙박 2026-06-20 · 한국 기준 날짜(KST) · 이탈리아 9월은 CEST로 한국보다 7시간 느림</div><div class="booking-view-toggle" role="tablist"><button class="active" data-view="calendar" onclick="switchBookingView('calendar')">캘린더</button><button data-view="list" onclick="switchBookingView('list')">리스트</button></div><div class="booking-view active" data-view="calendar"><div class="ticket-title">한국 날짜 기준 예약 캘린더</div>${calendar}</div><div class="booking-view" data-view="list"><div class="booking-list-block"><div class="ticket-title">한국 날짜 기준 티케팅 리스트</div><div class="ticket-grid">${ticketCards}</div><div class="ticket-title">예약 체크리스트</div><div class="booking-grid">${cards}</div></div></div>`;
   requestAnimationFrame(()=>document.querySelector('.booking-month.today-month')?.scrollIntoView({block:'nearest',inline:'start'}));
 }
 
