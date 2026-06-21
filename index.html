@@ -191,6 +191,30 @@ a{color:inherit}
 .cal-mobile-list{display:none}
 .cal-day-card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 13px}
 .cal-day-card.trip{background:var(--terracotta-soft);border-color:#CFE0D4}
+/* 달력 날짜 클릭 → 그날 요약 사이드 패널 */
+.cal-hint{font-size:11.5px;color:var(--muted);margin:-2px 0 12px}
+.cal-layout{display:flex;gap:16px;align-items:flex-start}
+.cal-main{flex:1;min-width:0}
+.cal-cell.trip{cursor:pointer}
+.cal-cell.sel{border-color:var(--terracotta);box-shadow:0 0 0 2px var(--terracotta-soft),0 8px 18px -10px rgba(47,107,79,.45)}
+.cal-day-card.sel{border-color:var(--terracotta);box-shadow:0 0 0 2px var(--terracotta-soft)}
+.cal-summary{flex:0 0 312px;width:312px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 15px;position:sticky;top:calc(var(--nav-h,64px) + 12px);max-height:calc(100vh - var(--nav-h,64px) - 28px);overflow:auto}
+.cds-head{border-bottom:1px solid var(--line);padding-bottom:9px;margin-bottom:4px}
+.cds-date{font-size:12px;font-weight:700;color:var(--terracotta-deep)}
+.cds-city{font-size:17px;font-weight:800;color:var(--ink);line-height:1.2;margin-top:2px}
+.cds-theme{font-size:12px;color:var(--muted);margin-top:3px;line-height:1.3}
+.cds-pill{display:inline-block;background:var(--gold);color:#fff;padding:0 7px;border-radius:6px;font-size:10px;font-weight:700;vertical-align:middle}
+.cds-sec{margin-top:11px}
+.cds-sec-t{font-size:12px;font-weight:800;color:var(--ink);margin-bottom:5px}
+.cds-row{display:flex;gap:8px;font-size:12px;padding:3px 0;line-height:1.45;border-top:1px dashed var(--line-2)}
+.cds-row:first-of-type{border-top:none}
+.cds-t{flex:0 0 50px;color:var(--muted);font-weight:600;font-variant-numeric:tabular-nums}
+.cds-n{flex:1;color:var(--ink);min-width:0}
+.cds-n small{color:var(--muted);font-size:11px}
+.cds-pick{display:block;color:var(--terracotta-deep);font-size:11px;font-weight:600;margin-top:1px}
+.cds-btn{margin-top:13px;width:100%;padding:10px;border:1px solid var(--terracotta);background:var(--terracotta-soft);color:var(--terracotta-deep);border-radius:9px;font-size:12.5px;font-weight:700;cursor:pointer;transition:.15s}
+.cds-btn:hover{background:var(--terracotta);color:#fff}
+@media(max-width:900px){.cal-layout{flex-direction:column}.cal-summary{flex:none;width:auto;position:static;max-height:none}}
 .cal-day-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
 .cal-day-date{font-weight:800;color:var(--terracotta-deep);font-size:13px}
 .cal-day-city{font-weight:800;color:var(--ink);font-size:14px}
@@ -546,28 +570,45 @@ a{color:inherit}
 .booking-view-toggle button.active{background:var(--terracotta);color:#fff}
 .booking-view{display:none}
 .booking-view.active{display:block}
-.booking-calendar-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
-.booking-today-pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:900;color:var(--terracotta-deep);background:var(--terracotta-soft);border:1px solid #CFE0D4;border-radius:999px;padding:5px 9px;white-space:nowrap}
-.booking-swipe-hint{font-size:11px;font-weight:800;color:var(--muted);white-space:nowrap}
-.booking-calendar-grid{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:thin;-webkit-overflow-scrolling:touch;padding:0 2px 14px;margin-bottom:14px}
-.booking-calendar-grid::-webkit-scrollbar{height:8px}
-.booking-calendar-grid::-webkit-scrollbar-thumb{background:#D2D0C8;border-radius:999px}
-.booking-month{flex:0 0 min(100%,560px);border:1px solid var(--line);border-radius:12px;background:var(--paper-2);padding:14px 16px;scroll-snap-align:start}
-.booking-month.today-month{border-color:var(--terracotta);box-shadow:0 0 0 3px rgba(47,107,79,.10)}
-.booking-month-title{font-size:16px;font-weight:900;color:var(--ink);margin-bottom:12px}
-.booking-weekdays,.booking-days{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
-.booking-weekdays span{text-align:center;font-size:11px;font-weight:900;color:var(--faint);padding-bottom:2px}
-.booking-day{display:flex;flex-direction:column;min-height:62px;border:1px solid var(--line-2);border-radius:9px;background:var(--paper);padding:7px 6px}
-.booking-day.blank{background:transparent;border-color:transparent}
-.booking-day.has-events{background:var(--terracotta-soft);border-color:#CFE0D4}
-.booking-day.has-critical{background:var(--gold-soft);border-color:#D8DCCB}
-.booking-day.today{border-color:var(--terracotta);box-shadow:inset 0 0 0 1px var(--terracotta);background:#fff}
-.booking-day-num{display:flex;align-items:center;justify-content:space-between;gap:4px;font-size:12px;font-weight:900;color:var(--muted);line-height:1;margin-bottom:6px}
-.booking-today-tag{font-size:8px;font-weight:900;color:#fff;background:var(--terracotta);border-radius:999px;padding:2px 5px}
-.booking-event{display:block;width:100%;text-align:left;text-decoration:none;border-radius:7px;padding:5px 7px;margin-top:5px;background:var(--paper-2);border:1px solid var(--line);color:var(--terracotta-deep);font-size:11.5px;font-weight:800;line-height:1.35;letter-spacing:-.01em;word-break:keep-all;overflow-wrap:anywhere;cursor:pointer;font-family:inherit;transition:background .12s,border-color .12s}
-.booking-event:hover{background:var(--terracotta-soft);border-color:#CFE0D4}
-.booking-event.critical{background:#fff;border-color:#D8C9AB;color:#6B5A32}
-.booking-event.active{background:var(--terracotta);border-color:var(--terracotta);color:#fff}
+.booking-calendar-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.booking-today-pill{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:900;color:var(--terracotta-deep);background:var(--terracotta-soft);border:1px solid #CFE0D4;border-radius:999px;padding:6px 11px;white-space:nowrap}
+.bcal-next{display:inline-flex;align-items:center;gap:6px;max-width:100%;font-size:12px;font-weight:800;color:#8A4520;background:#FBEFE4;border:1px solid #EAD2BD;border-radius:999px;padding:6px 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bcal-next b{color:#C2632F;font-weight:900}
+.bcal-legend{display:flex;gap:14px;flex-wrap:wrap;margin:0 2px 16px;font-size:11px;font-weight:800;color:var(--muted)}
+.bcal-legend span{display:inline-flex;align-items:center;gap:6px}
+.bcal-dot{display:inline-block;width:9px;height:9px;border-radius:50%}
+.bcal-dot.crit{background:#C2632F}
+.bcal-dot.norm{background:var(--gold)}
+.bcal-dot.past{background:#C9C6BE}
+.bcal-timeline{position:relative;margin:0 0 18px}
+.bcal-month{margin:0 0 4px}
+.bcal-mhead{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:900;color:var(--terracotta-deep);padding:10px 0}
+.bcal-mhead::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--terracotta)}
+.bcal-row{display:grid;grid-template-columns:56px 1fr;gap:13px;padding:0 0 12px;position:relative}
+.bcal-row::before{content:"";position:absolute;left:27px;top:8px;bottom:-6px;width:2px;background:var(--line);z-index:0}
+.bcal-row:last-child::before{display:none}
+.bcal-date{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:56px;height:56px;border-radius:15px;background:var(--paper-2);border:1px solid var(--line);box-shadow:var(--sh-sm)}
+.bcal-date .bcal-wd{font-size:10px;font-weight:900;color:var(--faint);line-height:1}
+.bcal-date .bcal-dy{font-size:21px;font-weight:900;color:var(--ink);line-height:1}
+.bcal-row.crit .bcal-date{border-color:#E4B998;background:#FFF8F2}
+.bcal-row.crit .bcal-date .bcal-dy{color:#C2632F}
+.bcal-row.today .bcal-date{border-color:var(--terracotta);background:var(--terracotta);box-shadow:0 0 0 3px rgba(47,107,79,.14)}
+.bcal-row.today .bcal-date .bcal-wd,.bcal-row.today .bcal-date .bcal-dy{color:#fff}
+.bcal-row.past{opacity:.52}
+.bcal-cards{display:flex;flex-direction:column;gap:8px;min-width:0;padding-top:1px}
+.booking-event{display:block;width:100%;text-align:left;text-decoration:none;border-radius:13px;padding:11px 14px;background:var(--paper-2);border:1px solid var(--line);cursor:pointer;font-family:inherit;box-shadow:var(--sh-sm);transition:transform .12s,border-color .12s,box-shadow .12s}
+.booking-event:hover{border-color:#CFE0D4;transform:translateY(-1px);box-shadow:0 4px 12px rgba(30,33,30,.08)}
+.bce-top{display:flex;align-items:center;gap:9px}
+.bce-icon{font-size:16px;line-height:1;flex:0 0 auto}
+.bce-title{flex:1 1 auto;min-width:0;font-size:13px;font-weight:900;color:var(--ink);letter-spacing:-.01em;line-height:1.35;word-break:keep-all}
+.bce-dday{flex:0 0 auto;font-size:10.5px;font-weight:900;color:var(--muted);background:var(--paper-3);border:1px solid var(--line);border-radius:999px;padding:3px 9px;white-space:nowrap}
+.bce-dday.soon{color:#C2632F;background:#FBEFE4;border-color:#EAD2BD}
+.bce-dday.today{color:#fff;background:var(--terracotta);border-color:var(--terracotta)}
+.bce-dday.past{color:var(--faint);background:transparent}
+.bce-sub{margin-top:6px;font-size:11.5px;font-weight:600;color:var(--muted);line-height:1.45;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.booking-event.critical{border-left:3px solid #C2632F}
+.booking-event.active{border-color:var(--terracotta);box-shadow:0 0 0 2px rgba(47,107,79,.18)}
+.booking-event.active .bce-title{color:var(--terracotta-deep)}
 .booking-detail-card{border:1px solid var(--line);border-radius:10px;background:var(--paper-2);padding:16px 17px;margin:0 0 20px;box-shadow:var(--sh-sm)}
 .booking-detail-date{font-size:12px;font-weight:900;color:var(--terracotta-deep);margin-bottom:5px}
 .booking-detail-name{font-size:17px;font-weight:900;line-height:1.35;margin-bottom:8px}
@@ -659,10 +700,10 @@ footer{text-align:center;padding:36px 20px;color:var(--faint);
 	  #sec-transport .t-scroll{display:none}
 	  .transport-cards{display:grid;grid-template-columns:1fr;gap:10px}
 	  .booking-calendar-head{align-items:flex-start;flex-direction:column;gap:6px}
-	  .booking-calendar-grid{margin-left:-4px;margin-right:-4px;padding-left:4px;padding-right:4px}
-	  .booking-month{flex-basis:calc(100vw - 48px)}
-	  .booking-day{min-height:56px;padding:6px 5px}
-	  .booking-event{font-size:10.5px;padding:5px;line-height:1.3}
+	  .bcal-row{grid-template-columns:46px 1fr;gap:10px}
+	  .bcal-date{width:46px;height:46px;border-radius:13px}
+	  .bcal-date .bcal-dy{font-size:18px}
+	  .bcal-row::before{left:23px}
 	  .budget-total{flex-direction:column;gap:14px}
 	  .b-row .lbl{width:64px;font-size:11.5px}.b-row .amt{width:64px;font-size:11.5px}
   /* QA-fix: 모바일에서 food-recs-row 패딩 축소 */
@@ -773,7 +814,7 @@ footer{text-align:center;padding:36px 20px;color:var(--faint);
 </div>
 
 <div class="section-content" id="sec-calendar">
-  <div class="cal-wrap card"><h3>Settembre 2026 · 9월 캘린더</h3><div class="cal-grid" id="calGrid"></div><div class="cal-mobile-list" id="calMobileList"></div></div>
+  <div class="cal-wrap card"><h3>Settembre 2026 · 9월 캘린더</h3><p class="cal-hint">📅 날짜를 클릭하면 그날의 식당·예약·주요 일정 요약이 오른쪽(모바일은 아래)에 표시됩니다.</p><div class="cal-layout"><div class="cal-main"><div class="cal-grid" id="calGrid"></div><div class="cal-mobile-list" id="calMobileList"></div></div><aside class="cal-summary" id="calSummary"></aside></div></div>
 </div>
 
 <div class="section-content" id="sec-itinerary">
@@ -1993,33 +2034,56 @@ function selectBookingEvent(idx){
   if(detail)detail.innerHTML=bookingDetailHtml(item);
   document.querySelectorAll('.booking-event').forEach(b=>b.classList.toggle('active',Number(b.dataset.bookingIdx)===idx));
 }
+function ymdDays(ymd){const p=String(ymd).split('-').map(Number);return Math.floor(Date.UTC(p[0],p[1]-1,p[2])/86400000);}
+function bookingIcon(name){
+  const n=name||'';
+  if(/식당/.test(n))return '🍝';
+  if(/열차|렌터카/.test(n))return '🚆';
+  if(/숙소/.test(n))return '🏨';
+  if(/세체다|케이블카/.test(n))return '🚡';
+  if(/트레치메|주차|통행/.test(n))return '🅿️';
+  if(/바포레토|카드|Amore|패스/.test(n))return '🎫';
+  if(/오늘 착수/.test(n))return '⭐';
+  return '🎟️';
+}
 function renderBookingCalendar(items){
-  const byDay={};
   const today=getKstTodayYmd();
-  items.forEach((item,idx)=>{
-    if(!item.ymd)return;
-    (byDay[item.ymd]||(byDay[item.ymd]=[])).push({...item,idx});
-  });
-  const months=[...new Set(items.filter(x=>x.ymd).map(x=>x.ymd.slice(0,7)))].sort();
-  const weekdays=['일','월','화','수','목','금','토'];
-  const selectedIdx=Math.max(0,items.findIndex(x=>x.ymd===today));
-  return `<div class="booking-calendar-head"><div class="booking-today-pill">오늘 ${today}</div><div class="booking-swipe-hint">가로로 밀어서 월 이동</div></div><div class="booking-calendar-grid" id="bookingCalendarScroller">${months.map(month=>{
-    const [y,m]=month.split('-').map(Number);
-    const first=new Date(y,m-1,1);
-    const last=new Date(y,m,0);
-    let cells='';
-    for(let i=0;i<first.getDay();i++)cells+='<div class="booking-day blank"></div>';
-    for(let d=1;d<=last.getDate();d++){
-      const key=`${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-      const events=byDay[key]||[];
-      const cls=`booking-day${events.length?' has-events':''}${events.some(e=>e.tone==='critical')?' has-critical':''}${key===today?' today':''}`;
-      const eventHtml=events.map(e=>{
-        return `<button class="booking-event ${e.tone==='critical'?'critical':''}${e.idx===selectedIdx?' active':''}" data-booking-idx="${e.idx}" onclick="selectBookingEvent(${e.idx})">${e.name}</button>`;
+  const todayD=ymdDays(today);
+  const wd=['일','월','화','수','목','금','토'];
+  const ev=items.map((x,i)=>({...x,idx:i})).filter(x=>x.ymd);
+  const upcoming=ev.filter(x=>ymdDays(x.ymd)>=todayD).sort((a,b)=>ymdDays(a.ymd)-ymdDays(b.ymd));
+  let selectedIdx=items.findIndex(x=>x.ymd===today);
+  if(selectedIdx<0)selectedIdx=upcoming.length?upcoming[0].idx:0;
+  const next=upcoming[0];
+  let nextHtml='';
+  if(next){
+    const diff=ymdDays(next.ymd)-todayD;
+    const dd=diff===0?'오늘':'D-'+diff;
+    const md=next.ymd.slice(5).replace('-','/');
+    nextHtml=`<div class="bcal-next">⏰ ${diff===0?'<b>오늘</b>':'다음 <b>'+dd+'</b>'} · ${md} ${next.name.replace(/\s*\(.*?\)\s*/g,' ').trim()}</div>`;
+  }
+  const months=[...new Set(ev.map(x=>x.ymd.slice(0,7)))].sort();
+  const body=months.map(mn=>{
+    const [y,m]=mn.split('-').map(Number);
+    const days=[...new Set(ev.filter(x=>x.ymd.slice(0,7)===mn).map(x=>x.ymd))].sort();
+    const rows=days.map(day=>{
+      const dayEv=ev.filter(x=>x.ymd===day);
+      const dnum=Number(day.slice(8,10));
+      const dow=new Date(Date.UTC(y,m-1,dnum)).getUTCDay();
+      const diff=ymdDays(day)-todayD;
+      const isToday=diff===0,isPast=diff<0,isCrit=dayEv.some(e=>e.tone==='critical');
+      const rcls='bcal-row'+(isToday?' today':isPast?' past':'')+(isCrit&&!isToday?' crit':'');
+      const cards=dayEv.map(e=>{
+        const ed=ymdDays(e.ymd)-todayD;
+        const ddt=ed===0?'오늘':ed>0?'D-'+ed:'지남';
+        const ddcls=ed===0?'today':ed<0?'past':(ed<=7?'soon':'');
+        return `<button class="booking-event ${e.tone==='critical'?'critical':''}${e.idx===selectedIdx?' active':''}" data-booking-idx="${e.idx}" onclick="selectBookingEvent(${e.idx})"><span class="bce-top"><span class="bce-icon">${bookingIcon(e.name)}</span><span class="bce-title">${e.name}</span><span class="bce-dday ${ddcls}">${ddt}</span></span><span class="bce-sub">${e.target||''}</span></button>`;
       }).join('');
-      cells+=`<div class="${cls}"><div class="booking-day-num"><span>${d}</span>${key===today?'<span class="booking-today-tag">오늘</span>':''}</div>${eventHtml}</div>`;
-    }
-    return `<div class="booking-month${month===today.slice(0,7)?' today-month':''}"><div class="booking-month-title">${y}.${String(m).padStart(2,'0')}</div><div class="booking-weekdays">${weekdays.map(w=>`<span>${w}</span>`).join('')}</div><div class="booking-days">${cells}</div></div>`;
-  }).join('')}</div><div id="bookingDetail">${bookingDetailHtml(items[selectedIdx])}</div>`;
+      return `<div class="${rcls}"><div class="bcal-date"><span class="bcal-wd">${wd[dow]}</span><span class="bcal-dy">${dnum}</span></div><div class="bcal-cards">${cards}</div></div>`;
+    }).join('');
+    return `<div class="bcal-month"><div class="bcal-mhead">${y}년 ${m}월</div>${rows}</div>`;
+  }).join('');
+  return `<div class="booking-calendar-head"><div class="booking-today-pill">📅 오늘 ${today} (KST)</div>${nextHtml}</div><div class="bcal-legend"><span><i class="bcal-dot crit"></i>필수 마감</span><span><i class="bcal-dot norm"></i>선택/일반</span><span><i class="bcal-dot past"></i>지난 항목</span></div><div class="bcal-timeline">${body}</div><div id="bookingDetail">${bookingDetailHtml(items[selectedIdx])}</div>`;
 }
 function renderBooking(){
   const el=document.getElementById('bookingContent');
@@ -2030,7 +2094,7 @@ function renderBooking(){
   }).join('');
   const calendar=renderBookingCalendar(TICKETING_ITEMS);
   el.innerHTML=`<div class="booking-meta">공식 정보 검증 기준일: 입장권·투어 2026-06-21 / 교통·숙박 2026-06-20 · 한국 기준 날짜(KST) · 이탈리아 9월은 CEST로 한국보다 7시간 느림</div><div class="booking-view-toggle" role="tablist"><button class="active" data-view="calendar" onclick="switchBookingView('calendar')">캘린더</button><button data-view="list" onclick="switchBookingView('list')">리스트</button></div><div class="booking-view active" data-view="calendar"><div class="ticket-title">한국 날짜 기준 예약 캘린더</div>${calendar}</div><div class="booking-view" data-view="list"><div class="booking-list-block"><div class="ticket-title">한국 날짜 기준 티케팅 리스트</div><div class="ticket-grid">${ticketCards}</div><div class="ticket-title">예약 체크리스트</div><div class="booking-grid">${cards}</div></div></div>`;
-  requestAnimationFrame(()=>document.querySelector('.booking-month.today-month')?.scrollIntoView({block:'nearest',inline:'start'}));
+  requestAnimationFrame(()=>0);
 }
 
 function renderFoodGuide(){
