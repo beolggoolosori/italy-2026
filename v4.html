@@ -1036,7 +1036,7 @@ B: {
   {t:"옵션 A",name:"세체다 / 발 가르데나 (서부)",desc:"코르티나→오르티세이 약 1h30 · 케이블카 왕복 €74/인(타임슬롯 예약 필수)",type:"spot",coords:[46.6094,11.6586],tip:"돌로미티 능선 최고 절경. 익일 코모 서진 동선과도 정합. 비용 큼(2인 €148) → 별도 예산. 2026 타임슬롯 사전예약 의무."},
   {t:"옵션 B",name:"파소 팔체레고 / 라가주오이",desc:"코르티나 인접 · 케이블카 왕복 약 €25/인 + 1차대전 터널",type:"spot",coords:[46.5197,12.0089],tip:"저강도·근거리·가성비. 라가주오이 전망대와 1차대전 야외 갱도. 운전 부담 적음."},
   {t:"경유",name:"파소 자우 드라이브",desc:"코르티나 인접 명품 산악 패스 · 사진",type:"hl",coords:[46.4869,12.0556],tip:"어느 옵션이든 끼워넣기 좋은 드라이브 포인트. 카레차 호수(편도 1.5h)는 멀어 생략 권장."},
-  {t:"13:00",name:"점심: 리푸지오/말가",rk:"dolomiti-dinner",desc:"산장 점심 €25~45 · ⚠️5 Torri 리푸지오는 9/25 시즌종료 → Malga Ra Stua(5/23~10/11 영업) 또는 Da Aurelio(점심 11:00~15:00)",type:"food",coords:[46.5369,12.1357],map:false,tip:"토요일 점심은 5 Torri/Averau/Scoiattoli가 시즌 종료라 닫힘. 도로 접근 가능한 Malga Ra Stua(카네데를리/폴렌타/굴라시) 또는 Passo Giau의 Da Aurelio 점심으로. 리푸지오 정석: 카네데를리 인 브로도+폴렌타 콘 풍기+스펙·치즈 플래터+슈트루델."},
+  {t:"13:00",name:"점심: 리푸지오/말가",desc:"산장 점심 €25~45 · ⚠️5 Torri 리푸지오는 9/25 시즌종료 → Malga Ra Stua(5/23~10/11 영업) 또는 Da Aurelio(점심 11:00~15:00)",type:"food",coords:[46.5369,12.1357],map:false,tip:"토요일 점심은 5 Torri/Averau/Scoiattoli가 시즌 종료라 닫힘. 도로 접근 가능한 Malga Ra Stua(카네데를리/폴렌타/굴라시) 또는 Passo Giau의 Da Aurelio 점심으로. 리푸지오 정석: 카네데를리 인 브로도+폴렌타 콘 풍기+스펙·치즈 플래터+슈트루델."},
   {t:"17:00",name:"코르티나 복귀 + 휴식",desc:"마지막 돌로미티 밤 · 짐 정리",type:"move",coords:[46.5369,12.1357],map:false},
   {t:"19:30",name:"저녁: Da Aurelio (Passo Giau) / Tivoli",rk:"dolomiti-dinner",desc:"토요일 수요 폭증 · 반드시 예약 또는 호텔 하프보드",type:"food",coords:[46.4844,12.0536],tip:"⚠️5 Torri 리푸지오(Averau/Scoiattoli/Cinque Torri)는 9/25 시즌종료로 토요일 휴업. 토요일 디너는 도로변 Da Aurelio(Passo Giau, +39 0437 720118) 1순위, 시내 Ristorante Tivoli(미슐랭★) 백업, 둘 다 실패 시 호텔 Menardi 하프보드. 토요일은 지금 바로 예약."}
 ],cost:"€120~280"},
@@ -1715,8 +1715,50 @@ function renderCalendar(c){
   const list=document.getElementById('calMobileList');list.innerHTML='';
   ['월','화','수','목','금','토','일'].forEach((h,i)=>{const d=document.createElement('div');d.className='cal-header'+(i===6?' sun':'');d.textContent=h;g.appendChild(d);});
   for(let i=0;i<1;i++){const d=document.createElement('div');d.className='cal-cell empty';g.appendChild(d);}
-  for(let day=1;day<=30;day++){const d=document.createElement('div');const dow=(1+day-1)%7;const isTrip=day>=16&&day<=28;const cal=c.calendar[day];d.className='cal-cell'+(isTrip&&cal?' trip':'')+(dow===6?' sun':'');let html=`<div class="cal-date">${day}</div>`;if(cal){html+=`<div class="cal-city">${cal.city}</div>`;if(cal.detail)html+=`<div class="cal-detail">${cal.detail.replace(/\n/g,'<br>')}</div>`;if(cal.transport)html+=`<div class="cal-transport">${cal.transport}</div>`;if(cal.nights)html+=`<div class="cal-nights">${cal.nights}</div>`;}d.innerHTML=html;g.appendChild(d);}
-  for(let day=16;day<=28;day++){const cal=c.calendar[day];if(!cal)continue;const card=document.createElement('div');card.className='cal-day-card trip';card.innerHTML=`<div class="cal-day-top"><div><div class="cal-day-date">9/${day}</div><div class="cal-day-city">${cal.city}</div></div>${cal.nights?`<span class="cal-day-pill">${cal.nights}</span>`:''}</div>${cal.detail?`<div class="cal-day-detail">${cal.detail.replace(/\n/g,'<br>')}</div>`:''}${cal.transport?`<div class="cal-day-meta"><span class="cal-day-pill">${cal.transport}</span></div>`:''}`;list.appendChild(card);}
+  for(let day=1;day<=30;day++){const d=document.createElement('div');const dow=(1+day-1)%7;const isTrip=day>=16&&day<=28;const cal=c.calendar[day];d.className='cal-cell'+(isTrip&&cal?' trip':'')+(dow===6?' sun':'');let html=`<div class="cal-date">${day}</div>`;if(cal){html+=`<div class="cal-city">${cal.city}</div>`;if(cal.detail)html+=`<div class="cal-detail">${cal.detail.replace(/\n/g,'<br>')}</div>`;if(cal.transport)html+=`<div class="cal-transport">${cal.transport}</div>`;if(cal.nights)html+=`<div class="cal-nights">${cal.nights}</div>`;}d.innerHTML=html;if(isTrip&&cal){d.dataset.calday=day;d.onclick=()=>showDaySummary(c,day);}g.appendChild(d);}
+  for(let day=16;day<=28;day++){const cal=c.calendar[day];if(!cal)continue;const card=document.createElement('div');card.className='cal-day-card trip';card.dataset.calday=day;card.innerHTML=`<div class="cal-day-top"><div><div class="cal-day-date">9/${day}</div><div class="cal-day-city">${cal.city}</div></div>${cal.nights?`<span class="cal-day-pill">${cal.nights}</span>`:''}</div>${cal.detail?`<div class="cal-day-detail">${cal.detail.replace(/\n/g,'<br>')}</div>`:''}${cal.transport?`<div class="cal-day-meta"><span class="cal-day-pill">${cal.transport}</span></div>`:''}`;card.onclick=()=>showDaySummary(c,day);list.appendChild(card);}
+  if(document.getElementById('calSummary'))showDaySummary(c,16);
+}
+// 달력 날짜 클릭 → 상세 일정(식당·예약·주요 일정·이동) 요약을 사이드 패널에 표시
+function showDaySummary(c,calDay){
+  document.querySelectorAll('.cal-cell.sel,.cal-day-card.sel').forEach(e=>e.classList.remove('sel'));
+  document.querySelectorAll('[data-calday="'+calDay+'"]').forEach(e=>e.classList.add('sel'));
+  const panel=document.getElementById('calSummary');
+  if(panel)panel.innerHTML=buildDaySummary(c,calDay);
+}
+function buildDaySummary(c,calDay){
+  const cal=c.calendar[calDay],day=c.days[calDay-16];
+  if(!cal||!day)return '';
+  const esc=x=>(x==null?'':String(x));
+  const meals=[],spots=[],moves=[],books=[];
+  day.sched.forEach(s=>{
+    const t=s.t||'',opt=s.optional||s.backup;
+    const blob=`${s.name||''} ${s.desc||''} ${s.tip||''} ${s.moveInfo||''}`;
+    if(!s.backup&&/예약 필수|예약 권장|사전예약|시간제|입장권|통행료|매진|슬롯/.test(blob))books.push({t,name:(s.name||'').replace(/^(선택|대체 점심|점심 대체|백업)[:：]?\s*/,'')});
+    if(opt)return;
+    if(s.type==='food'){let pick='';const arr=s.rk&&FOOD_RECS[s.rk];if(arr&&arr.length){const nm=s.name||'';const match=arr.find(x=>x.n&&x.p!=='제외'&&nm.indexOf(x.n.split(' (')[0])>=0);const r=match||arr.find(x=>x.p&&x.p!=='제외')||arr[0];pick=`${r.n}${r.p&&r.p!=='제외'?` · ${r.p}`:''}`;}meals.push({t,name:s.name,pick});}
+    else if(s.type==='spot'||s.type==='hl'||s.type==='couple')spots.push({t,name:s.name});
+    else if(s.type==='move'&&(s.moveInfo||/→|열차|기차|택시|렌터카|Express|버스|페리|바포레토|반납|픽업|도착|출발/.test(s.name||'')))moves.push({t,name:s.name,info:s.moveInfo||''});
+  });
+  const sec=(title,items,fn)=>items.length?`<div class="cds-sec"><div class="cds-sec-t">${title}</div>${items.map(fn).join('')}</div>`:'';
+  let h=`<div class="cds-head"><div class="cds-date">9/${calDay} · D${calDay-15}${cal.nights?` · <span class="cds-pill">${esc(cal.nights)}</span>`:''}</div><div class="cds-city">${esc(cal.city)}</div>${day.theme?`<div class="cds-theme">${esc(day.theme)}</div>`:''}</div>`;
+  h+=sec('🍽 식사',meals,m=>`<div class="cds-row"><span class="cds-t">${esc(m.t)}</span><span class="cds-n">${esc(m.name)}${m.pick?`<span class="cds-pick">⭐ ${esc(m.pick)}</span>`:''}</span></div>`);
+  h+=sec('🎫 예약·입장',books,b=>`<div class="cds-row"><span class="cds-t">${esc(b.t)}</span><span class="cds-n">${esc(b.name)}</span></div>`);
+  h+=sec('📍 주요 일정',spots,s=>`<div class="cds-row"><span class="cds-t">${esc(s.t)}</span><span class="cds-n">${esc(s.name)}</span></div>`);
+  h+=sec('🚆 이동',moves,m=>`<div class="cds-row"><span class="cds-t">${esc(m.t)}</span><span class="cds-n">${esc(m.name)}${m.info?` <small>${esc(m.info)}</small>`:''}</span></div>`);
+  h+=`<button type="button" class="cds-btn" onclick="goToItineraryDay(${calDay-15})">📋 상세 일정에서 보기</button>`;
+  return h;
+}
+function goToItineraryDay(tripDay){
+  const tab=document.querySelector('.sec-tab[data-sec="itinerary"]');
+  if(tab)tab.click();
+  setTimeout(()=>{
+    const b=document.querySelectorAll('#itinSection .day-block')[tripDay-1];
+    if(!b)return;
+    const hd=b.querySelector('.day-header');
+    if(hd&&!hd.classList.contains('open'))hd.click();
+    b.scrollIntoView({behavior:'smooth',block:'start'});
+  },200);
 }
 
 // DAY MAP
