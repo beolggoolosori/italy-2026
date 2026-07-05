@@ -562,6 +562,19 @@ a{color:inherit}
 
 /* ============ BOOKING CHECKLIST ============ */
 .booking-meta{font-size:12px;color:var(--muted);margin:-6px 0 16px}
+/* 여행 앱 탭 */
+.app-group{margin:18px 0 6px}
+.app-group h4{margin:0 0 10px;font-size:15px}
+.app-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.app-card{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:14px 15px}
+.app-top{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.app-name{font-weight:800;font-size:14.5px}
+.app-tag{margin-left:auto;font-size:10px;font-weight:700;border-radius:999px;padding:3px 8px;background:var(--paper-2);border:1px solid var(--line);color:var(--terracotta-deep);white-space:nowrap}
+.app-desc{font-size:13px;line-height:1.55}
+.app-tip{font-size:12px;line-height:1.5;color:var(--muted);margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+.app-links{margin-top:8px}
+.app-links a{font-size:12px;font-weight:700;margin-right:10px}
+
 /* 예약 현황 요약 보드 (예약 체크 탭 최상단) */
 .booking-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0 22px}
 .booking-summary-card{border:1px solid var(--line);border-top:3px solid var(--line);border-radius:10px;background:var(--paper);padding:13px 14px}
@@ -856,6 +869,10 @@ footer{text-align:center;padding:36px 20px;color:var(--faint);
 
 <div class="section-content" id="sec-hotel">
   <div class="hotel-section card"><h3 id="hotelTitle">숙소 추천</h3><div id="hotelContent"></div></div>
+</div>
+
+<div class="section-content" id="sec-apps">
+  <div class="apps-section card"><h3>📱 여행 앱 (한국인 기준)</h3><div id="appsContent"></div></div>
 </div>
 
 
@@ -1601,7 +1618,43 @@ const TICKETING_ITEMS=[
 
 // ===================== STATE & RENDER =====================
 let currentCourse='E',map=null,routeLine=null,markers=[],dayMap=null,dayMarkers=[],dayLine=null;
-const SEC_LIST=[{id:'overview',l:'🗺️ 루트 & 지도'},{id:'calendar',l:'📅 달력'},{id:'itinerary',l:'📋 상세 일정'},{id:'food',l:'🍝 음식'},{id:'transport',l:'🚆 이동수단'},{id:'booking',l:'🧾 예약 체크'},{id:'hotel',l:'🏨 숙소'},{id:'budget',l:'💰 예산'},{id:'compare',l:'✅ 여행 요약'}];
+// ===================== 여행 앱 (한국인 기준 · 검증 2026-07-05) =====================
+const APPS={verified:"2026-07-05",groups:[
+{title:"⭐ 필수 3종 (매일 씀)",items:[
+{n:"Google 지도",tag:"지도·대중교통",d:"이 대시보드의 모든 장소 링크가 구글맵 기준. 대중교통 시간표·도보 경로까지 사실상 이걸로 여행함.",tip:"출국 전 로마·피렌체·베네치아·돌로미티 오프라인 지도 저장 — 돌로미티 산길(D10~11)과 친퀘 마을은 신호가 자주 끊김.",links:[["Google Maps","https://maps.google.com"]]},
+{n:"파파고",tag:"번역 (한국어 최적)",d:"이탈리아어↔한국어 번역이 구글보다 자연스러움. 음성 대화 모드는 호텔·식당·약국에서 바로 씀.",tip:"이탈리아어 오프라인 팩 미지원이라 데이터 필요 — 오프라인 대비는 구글 번역과 병행.",links:[["Papago","https://papago.naver.com"]]},
+{n:"Google 번역",tag:"번역 (카메라)",d:"카메라를 메뉴판·표지판에 갖다 대면 실시간 번역. 이탈리아 식당 메뉴는 영어 병기가 없는 곳이 많아 체감 효용 최상위.",tip:"이탈리아어 오프라인 팩 미리 다운로드(설정→오프라인 번역).",links:[["Google Translate","https://translate.google.com"]]}
+]},
+{title:"🚆 열차 (D4·D6·D7)",items:[
+{n:"Trenitalia",tag:"국철 공식",d:"Regionale를 앱에서 사면 QR 티켓이라 개찰(각인) 기계에 줄 설 필요 없음 — D6 피사·친퀘테레 구간권 전부 해당. Pisa S. Rossore 정차편 조회도 이 앱에서.",tip:"회원가입은 출국 전 미리(이탈리아 SMS 인증 이슈 대비 이메일 가입). CartaFreccia 가입 시 Welcome 혜택.",links:[["Trenitalia","https://www.trenitalia.com"]]},
+{n:"Italo",tag:"고속철",d:"D4 로마→피렌체(예약완료) 티켓 관리·좌석 확인·지연 알림. D7 피렌체→베네치아도 이탈로로 예약하면 여기서 관리.",tip:"티켓의 QR만 있으면 되므로 인쇄 불필요. 지연 시 앱 푸시가 역 전광판보다 빠름.",links:[["Italo","https://www.italotreno.com/en"]]},
+{n:"Trainline",tag:"통합 비교",d:"Trenitalia+Italo를 한 화면에서 비교·구매. 한국 카드 결제가 공식 앱보다 잘 통과되는 걸로 유명.",tip:"소액 예약 수수료 있음 — 비교는 Trainline, 구매는 공식 앱이 최저가 조합.",links:[["Trainline","https://www.thetrainline.com"]]}
+]},
+{title:"🚕 택시 (로마·밀라노 시내)",items:[
+{n:"FreeNow",tag:"택시 호출 1순위",d:"로마·밀라노·나폴리·토리노 등 커버. 정식 면허 택시 + 앱 결제 + 사전 요금 확인이라 바가지 원천 차단. 유럽 전역에서 쓰는 표준 앱.",tip:"공항·역 앞 호객 택시 대신 무조건 앱 호출. 소액 예약비 붙음.",links:[["FreeNow","https://www.free-now.com/it-en/"]]},
+{n:"itTaxi",tag:"로마 커버리지 최강",d:"이탈리아 최대 택시 조합 공식 앱. 로마에서 잡히는 차가 가장 많고 예약 수수료 없음(미터 요금 그대로).",tip:"⚠️ Uber는 이탈리아에서 사실상 고가 Uber Black만 운영 — 쓰지 말 것. 피렌체는 appTaxi가 로컬 표준.",links:[["itTaxi","https://ittaxi.it/en/home-en/"]]}
+]},
+{title:"🛶 베네치아 (D7~D9)",items:[
+{n:"AVM Venezia Official",tag:"바포레토 공식",d:"바포레토 48h권을 앱에서 사고 폰 QR로 개찰 — 산마르코·폰다멘테노베 매표소 줄을 통째로 스킵. D8 무라노·부라노 왕복의 필수템.",tip:"티켓은 구매 후 '탑승 직전 활성화' 방식 — 첫 탑승 때 활성화해야 48시간이 그때부터 계산됨(D7 14시 활성화→D9 오전까지 커버).",links:[["AVM Venezia","https://avm.avmspa.it/en/content/avm-venezia-official-app"]]}
+]},
+{title:"🚗 렌터카·드라이브 (D9~D12 돌로미티)",items:[
+{n:"EasyPark",tag:"노상주차 결제",d:"이탈리아 650+ 도시의 파란선 노상주차를 앱으로 분단위 결제. 코르티나·바레나·밀라노에서 주차미터기·타바키 찾아 헤맬 필요 없음. 만료 15분 전 알림+원격 연장.",tip:"⚠️ 렌터카 번호판 등록 후 반납일에 반드시 삭제 — 안 하면 남이 그 번호로 주차할 때 결제됨.",links:[["EasyPark","https://www.easypark.com/en-it"]]},
+{n:"Waze",tag:"운전 내비",d:"ZTL(도심 통행제한)·단속카메라·사고 경고가 구글맵보다 빠름. 코르티나 시내 ZTL, 밀라노 Area C 회피에 유용.",tip:"렌터카 ZTL 벌금은 건당 최대 €330 + 렌터카사 행정수수료 — 내비가 ZTL 근처로 안내하면 의심부터.",links:[["Waze","https://www.waze.com"]]},
+{n:"Prezzi Benzina",tag:"주유소 가격비교",d:"주변 주유소 가솔린 실시간 가격 비교. 밀라노 반납 전 full-to-full 주유(D12) 때 고속도로 주유소(비쌈) 피해서 급유.",tip:"셀프(Self)와 주유원(Servito) 가격이 다름 — Self 선택.",links:[["Prezzi Benzina","https://www.prezzibenzina.it"]]}
+]},
+{title:"💳 결제·환전 (한국인 특화)",items:[
+{n:"트래블로그 / 트래블월렛",tag:"환전 카드",d:"유로 미리 충전해서 결제·ATM 인출 수수료를 없애는 한국인 표준 조합. 로마 지하철·밀라노 트램은 개찰구에 이 카드 컨택리스 탭만 하면 됨(별도 교통앱 불필요).",tip:"결제기가 원화(KRW)를 물어보면 무조건 거부하고 EUR 선택(DCC 수수료 3~7% 함정). ATM은 은행 지점 부설만 사용(Euronet 회피).",links:[["트래블로그","https://m.hanacard.co.kr"],["트래블월렛","https://www.travel-wallet.com"]]},
+{n:"Global Blue",tag:"택스리펀",d:"D13 밀라노 쇼핑 후 택스리펀 추적·환급 카드 등록. 매장에서 여권 제시→앱으로 환급 상태 확인, MXP 공항 전자검증(키오스크) 위치 안내.",tip:"공항 3~4시간 전 도착 계획(D13 반영됨)에 리펀 창구 줄 포함해서 움직일 것. 미개봉 상태 유지.",links:[["Global Blue","https://www.globalblue.com"]]}
+]},
+{title:"📶 통신·식당·날씨·안전",items:[
+{n:"eSIM (Airalo 등)",tag:"통신",d:"출국 전 설치해 착륙 즉시 개통. 듀얼심으로 한국 번호 수신 유지(은행 인증 SMS). 한국계(도시락eSIM·유심사 등)는 카톡 상담 가능.",tip:"12박이면 유럽 통합 10GB+ 요금제 권장 — 지도·번역이 데이터를 생각보다 많이 씀. 물리심 교체형보다 eSIM이 분실 리스크 0.",links:[["Airalo","https://www.airalo.com"]]},
+{n:"TheFork",tag:"식당 예약",d:"이탈리아 식당 예약 표준 앱(미쉐린~동네 트라토리아). 예약 가능 시간 실시간 확인 + 최대 30~50% 할인 식당 필터.",tip:"이 일정의 핵심 식당(Buca Mario·Boccadoro 등)은 공식 채널 예약이 우선이고, TheFork는 '당일 빈자리 찾기+할인'용으로.",links:[["TheFork","https://www.thefork.it"]]},
+{n:"3B Meteo",tag:"이탈리아 로컬 날씨",d:"이탈리아 로컬 기상 서비스 — 산악 지역 정확도가 글로벌 앱보다 좋음. D6 친퀘테레 우천 전환 판단, D10~11 돌로미티 스왑 판단(트레치메 vs 드라이브)에 사용.",tip:"돌로미티는 시간대별 예보로 확인 — 오전 맑음/오후 소나기 패턴이 흔함.",links:[["3B Meteo","https://www.3bmeteo.com"]]},
+{n:"해외안전여행 (외교부)",tag:"안전",d:"영사콜센터 무료전화(앱 내 버튼), 여권 분실·긴급 상황 매뉴얼, 이탈리아 안전공지 푸시.",tip:"이탈리아 긴급번호 112. 로마 테르미니역·바티칸 주변 소매치기 다발 — 위급 시 영사콜센터 +82-2-3210-0404.",links:[["해외안전여행","https://www.0404.go.kr"]]}
+]}
+]};
+
+const SEC_LIST=[{id:'overview',l:'🗺️ 루트 & 지도'},{id:'calendar',l:'📅 달력'},{id:'itinerary',l:'📋 상세 일정'},{id:'food',l:'🍝 음식'},{id:'transport',l:'🚆 이동수단'},{id:'booking',l:'🧾 예약 체크'},{id:'hotel',l:'🏨 숙소'},{id:'apps',l:'📱 앱'},{id:'budget',l:'💰 예산'},{id:'compare',l:'✅ 여행 요약'}];
 
 const ICON_COLORS={food:'#f97316',spot:'#22c55e',move:'#2563eb',hl:'#ec4899',couple:'#ec4899',option:'#7E8B6F'};
 function isCoord(v){return Array.isArray(v)&&v.length>=2&&Number.isFinite(Number(v[0]))&&Number.isFinite(Number(v[1]));}
@@ -1782,6 +1835,7 @@ function init(){
   const st=document.getElementById('secTabs');st.innerHTML='';
   SEC_LIST.forEach(s=>{const d=document.createElement('button');d.type='button';d.className='sec-tab'+(s.id==='overview'?' active':'');d.dataset.sec=s.id;d.textContent=s.l;d.onclick=()=>{document.querySelectorAll('.sec-tab').forEach(x=>x.classList.remove('active'));d.classList.add('active');document.querySelectorAll('.section-content').forEach(x=>x.classList.remove('active'));document.getElementById('sec-'+s.id).classList.add('active');if(s.id==='overview'&&map)setTimeout(()=>map.invalidateSize(),80);if(s.id==='itinerary')setTimeout(()=>showOverviewOnDayMap(COURSES[currentCourse]),120);};st.appendChild(d);});
   document.getElementById('sec-overview').classList.add('active');
+  renderApps();
   switchCourse('E');
   syncNavH();window.addEventListener('resize',syncNavH);
 }
@@ -2260,6 +2314,19 @@ function renderBooking(){
   const calendar=renderBookingCalendar(TICKETING_ITEMS);
   el.innerHTML=`<div class="booking-meta">공식 정보 검증 기준일: 입장권·투어 2026-06-21 / 교통·숙박 2026-06-20 · 한국 기준 날짜(KST) · 이탈리아 9월은 CEST로 한국보다 7시간 느림</div>${summary}<div class="booking-view-toggle" role="tablist"><button class="active" data-view="calendar" onclick="switchBookingView('calendar')">캘린더</button><button data-view="list" onclick="switchBookingView('list')">리스트</button></div><div class="booking-view active" data-view="calendar"><div class="ticket-title">한국 날짜 기준 예약 캘린더</div>${calendar}</div><div class="booking-view" data-view="list"><div class="booking-list-block"><div class="ticket-title">한국 날짜 기준 티케팅 리스트</div><div class="ticket-grid">${ticketCards}</div><div class="ticket-title">예약 체크리스트</div><div class="booking-grid">${cards}</div></div></div>`;
   requestAnimationFrame(()=>0);
+}
+
+function renderApps(){
+  const el=document.getElementById('appsContent');
+  if(!el)return;
+  const groups=APPS.groups.map(g=>{
+    const cards=g.items.map(a=>{
+      const links=(a.links||[]).map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${t}</a>`).join('');
+      return `<div class="app-card"><div class="app-top"><span class="app-name">${a.n}</span><span class="app-tag">${a.tag}</span></div><div class="app-desc">${a.d}</div><div class="app-tip">💡 ${a.tip}</div>${links?`<div class="app-links">${links}</div>`:''}</div>`;
+    }).join('');
+    return `<div class="app-group"><h4>${g.title}</h4><div class="app-grid">${cards}</div></div>`;
+  }).join('');
+  el.innerHTML=`<div class="booking-meta">검증 기준일 ${APPS.verified} · 이 여행(로마→밀라노, 렌터카 4일) 일정에 실제로 쓰는 순간 기준으로 선별. 전부 iOS/Android 무료 — 출국 전 설치+가입까지 마칠 것.</div>${groups}`;
 }
 
 function renderFoodGuide(){
