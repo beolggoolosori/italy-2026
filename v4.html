@@ -562,6 +562,18 @@ a{color:inherit}
 
 /* ============ BOOKING CHECKLIST ============ */
 .booking-meta{font-size:12px;color:var(--muted);margin:-6px 0 16px}
+/* 예약 현황 요약 보드 (예약 체크 탭 최상단) */
+.booking-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0 22px}
+.booking-summary-card{border:1px solid var(--line);border-top:3px solid var(--line);border-radius:10px;background:var(--paper);padding:13px 14px}
+.booking-summary-card.done{border-top-color:#3F7D5E}
+.booking-summary-card.now{border-top-color:#c0392b}
+.booking-summary-card.wait{border-top-color:#d9a441}
+.booking-summary-card h4{margin:0 0 9px;font-size:14px;display:flex;align-items:center;gap:6px}
+.booking-summary-card h4 .cnt{margin-left:auto;font-size:12px;font-weight:800;color:var(--muted)}
+.booking-summary-card ul{margin:0;padding:0;list-style:none}
+.booking-summary-card li{font-size:12.5px;line-height:1.45;padding:4px 0;border-top:1px dashed var(--line)}
+.booking-summary-card li:first-child{border-top:0}
+.booking-summary-card li .bs-target{display:block;font-size:11px;color:var(--muted)}
 .booking-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
 .booking-card{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:15px 16px}
 .booking-card.done{background:var(--terracotta-soft);border-color:#CFE0D4}
@@ -2227,13 +2239,26 @@ function renderBookingCalendar(items){
 }
 function renderBooking(){
   const el=document.getElementById('bookingContent');
+  // 상태 요약 보드: 완료 / 지금 예약 / 오픈 대기 / 현장구매
+  const groupsDef=[
+    {icon:'✅',label:'예약 완료',cls:'done',match:s=>s==='확정'},
+    {icon:'🔴',label:'지금 예약할 것',cls:'now',match:s=>s==='예약필요'||s==='정리필요'},
+    {icon:'🟡',label:'오픈 대기 · 예정',cls:'wait',match:s=>['오픈대기','마감주의','예약가능','날씨확인','선택예약','후보선정'].includes(s)},
+    {icon:'⚪',label:'예약 불필요 (당일 현장)',cls:'none',match:s=>/불필요/.test(s)}
+  ];
+  const summary='<div class="booking-summary">'+groupsDef.map(g=>{
+    const items=BOOKING_ITEMS.filter(it=>g.match(it.status));
+    if(!items.length)return '';
+    const lis=items.map(it=>`<li>${it.title}<span class="bs-target">${it.target}</span></li>`).join('');
+    return `<div class="booking-summary-card ${g.cls}"><h4>${g.icon} ${g.label}<span class="cnt">${items.length}건</span></h4><ul>${lis}</ul></div>`;
+  }).join('')+'</div>';
   const cards=BOOKING_ITEMS.map(item=>`<div class="booking-card ${item.tone||''}"><div class="booking-top"><div><div class="booking-cat">${item.cat}</div><div class="booking-title">${item.title}</div></div><span class="booking-status">${item.status}</span></div><div class="booking-row"><strong>목표:</strong> ${item.target}</div><div class="booking-row"><strong>조건:</strong> ${item.window}</div><div class="booking-row">${item.note}</div>${item.link?`<a class="booking-link" href="${item.link}" target="_blank" rel="noopener">${item.linkText}</a>`:''}</div>`).join('');
   const ticketCards=TICKETING_ITEMS.map(item=>{
     const links=(item.links||[]).map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${t}</a>`).join('');
     return `<div class="ticket-card ${item.tone||''}"><div class="ticket-date">${item.date}</div><div class="ticket-name">${item.name}</div><div class="ticket-meta"><strong>대상:</strong> ${item.target}</div><div class="ticket-meta">${item.note}</div>${links?`<div class="ticket-links">${links}</div>`:''}</div>`;
   }).join('');
   const calendar=renderBookingCalendar(TICKETING_ITEMS);
-  el.innerHTML=`<div class="booking-meta">공식 정보 검증 기준일: 입장권·투어 2026-06-21 / 교통·숙박 2026-06-20 · 한국 기준 날짜(KST) · 이탈리아 9월은 CEST로 한국보다 7시간 느림</div><div class="booking-view-toggle" role="tablist"><button class="active" data-view="calendar" onclick="switchBookingView('calendar')">캘린더</button><button data-view="list" onclick="switchBookingView('list')">리스트</button></div><div class="booking-view active" data-view="calendar"><div class="ticket-title">한국 날짜 기준 예약 캘린더</div>${calendar}</div><div class="booking-view" data-view="list"><div class="booking-list-block"><div class="ticket-title">한국 날짜 기준 티케팅 리스트</div><div class="ticket-grid">${ticketCards}</div><div class="ticket-title">예약 체크리스트</div><div class="booking-grid">${cards}</div></div></div>`;
+  el.innerHTML=`<div class="booking-meta">공식 정보 검증 기준일: 입장권·투어 2026-06-21 / 교통·숙박 2026-06-20 · 한국 기준 날짜(KST) · 이탈리아 9월은 CEST로 한국보다 7시간 느림</div>${summary}<div class="booking-view-toggle" role="tablist"><button class="active" data-view="calendar" onclick="switchBookingView('calendar')">캘린더</button><button data-view="list" onclick="switchBookingView('list')">리스트</button></div><div class="booking-view active" data-view="calendar"><div class="ticket-title">한국 날짜 기준 예약 캘린더</div>${calendar}</div><div class="booking-view" data-view="list"><div class="booking-list-block"><div class="ticket-title">한국 날짜 기준 티케팅 리스트</div><div class="ticket-grid">${ticketCards}</div><div class="ticket-title">예약 체크리스트</div><div class="booking-grid">${cards}</div></div></div>`;
   requestAnimationFrame(()=>0);
 }
 
