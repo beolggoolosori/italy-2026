@@ -1797,7 +1797,7 @@ const SL=[
  {name:"Best Western Hotel Tritone",stars:4,area:"MESTRE — Viale Stazione 16, Mestre역 맞은편",dist:"Venezia Mestre역 도보 약 2~5분(약120~200m)",ov:"8.3",cl:"8.5",sv:"9.2",lo:"9.2",src:"Booking 8.3(약2,015)",cnt:"2,015",price:"약 €120~170 (1박2인)",cancel:"요율별",book:"https://www.booking.com/hotel/it/tritoneveneziamestre.html",agoda:"https://www.agoda.com/best-western-hotel-tritone/hotel/venice-it.html",off:"https://www.hoteltritone.com/",why:"Mestre역 맞은편 도보 2~5분 4성으로 익일 픽업·심야 귀가 편리. 서비스 9.2·조식 평 좋고 가격 합리적이라 잠만 자는 실용 1박에 적합.",cav:"객실 다소 작고 인테리어 노후 평. 역 대로변 소음, 본섬 분위기 없음, 주차 유료.",vnote:""},
  {name:"Hotel Plaza Venice (Mestre)",stars:4,area:"MESTRE — Viale Stazione 36, Mestre역 정면",dist:"Venezia Mestre역 도보 약 1~2분(약150m)",ov:"8.4",cl:"8.6",sv:"8.9",lo:"9.3",src:"Booking 8.4(약5,276)",cnt:"5,276",price:"약 €110~175 (1박2인)",cancel:"요율별",book:"https://www.booking.com/hotel/it/plaza-mestre.html",agoda:"https://www.agoda.com/hotel-plaza-venice/hotel/venice-it.html",off:"https://www.hotelplazavenice.com/",why:"Mestre역 정문 바로 앞 대형 4성. 위치 9.3, 익일 09:00 픽업·심야 귀가 동선 매우 짧음. 리뷰 5천+로 검증 충분, 객실 많아 가용성 높고 가격 합리적.",cav:"역 정면 대로변 소음 가능(안쪽 객실 요청). 대형 회전율로 객실 컨디션 편차. 본섬 분위기 없음.",vnote:""}
  ]},
-{key:"Cortina",label:"코르티나(돌로미티)",dlabel:"9/24~27 · 3박",ci:"2026-09-24",co:"2026-09-27",los:3,city:"Cortina d'Ampezzo",
+{key:"Cortina",label:"코르티나(돌로미티)",dlabel:"9/23 수~9/27 일 · 4박",ci:"2026-09-23",co:"2026-09-27",los:4,city:"Cortina d'Ampezzo",
  summary:"렌터카로 매일 Tre Cime/Braies/Falzarego 드라이브 — 「무료·저렴 부지 내 주차 + ZTL 무관(자가주차)」을 사실상 필수로, 9/26(토) 시내 저녁 예약난을 피하는 하프보드(석식 포함) 가능 여부를 큰 가점으로 반영. 1군: 시내 도보권+주차 동시충족. 2군: 북측(Tre Cime 방면) 외곽 자가주차형. 3군: 하프보드로 토요일 석식 해결하는 Pocol·외곽형.",
  hotels:[
  {name:"Hotel Cortina",stars:4,area:"시내 정중앙, Corso Italia 92 — 종탑 앞 보행·쇼핑 구역",dist:"Corso Italia 정중앙(도보 0~1분). Faloria 케이블카 약 300m. 외곽 드라이브는 종탑 앞 주차장에서 출발",ov:"8.9",cl:"9.0",sv:"9.2",lo:"9.7",src:"Booking 8.8~8.9(109, 위치 9.7~9.8)",cnt:"109",price:"3박2인 약 €950~1,300+ (하프보드 시 상향)",cancel:"요율별",book:"https://www.booking.com/hotel/it/cortina-cortina-d-ampezzo.html",agoda:"https://www.agoda.com/hotel-cortina/hotel/cortina-d-ampezzo-it.html",off:"https://www.hotelcortina.it/",why:"위치 9.7의 시내 최핵심(종탑 앞)이라 9/26(토) 저녁 식당가 도보 접근 최상. 드물게 시내 핵심+종탑 앞 무료주차 동시 충족, 하프보드(4코스 석식)로 토요일 예약난까지 회피.",cav:"종탑 앞 사설주차 무료(면수 제한, 추가분 약 300m)·보행구역이라 ZTL 통행 안내 따라야 함. 객실 전통적·소박, 리뷰 수 적음(약109).",vnote:"✔ 검증: 9/24~27 정상영업. 성급 3성→4성 정정(공식·Tripadvisor). 종탑 앞 무료주차/ZTL 세부 예약 전 호텔 직접 확인 권장."},
@@ -2389,7 +2389,7 @@ function renderHotels(c){
   cities.forEach((city,i)=>{
     const L=slForCity(city);
     let inner,count;
-    if(L){
+    if(L&&!conf(city)){ // 예약 확정된 도시는 후보 그리드 대신 확정 카드만 (후보 데이터는 SL에 보관)
       inner=`<div class="sl-banner">${L.summary}</div><div class="sl-grid">${L.hotels.map((h,idx)=>slCard(h,idx,L)).join('')}</div>`;
       count=`후보 ${L.hotels.length}곳 · ${L.ci}→${L.co}`;
     }else{
@@ -2404,7 +2404,7 @@ function renderHotels(c){
     }
     blocks+=`<div class="hotel-city" data-cityblock="${city}"${i===0?'':' hidden'}><h4>${city} <span class="hcount">${count}</span></h4>${inner}</div>`;
   });
-  const tip=`<div class="hotel-tip">💡 <strong>예약 팁:</strong> 로마·피렌체는 예약 완료(확정). 이후 4개 도시는 각 10곳 후보 — <strong>Booking ▸날짜</strong> 버튼이 체크인/체크아웃·2인 입력된 채 열립니다. 9월 성수기 끝물이라 무료취소 요금제로 선예약 후 가격 추이 보며 조정 권장.<br>🏛️ <strong>이탈리아 도시세(tassa di soggiorno):</strong> 대부분 도시가 1인·1박당 €3~7을 체크인 시 숙소에서 현장 결제 — 예산 '도시세' 항목에 별도 계상. 로마(2성) ₩52,620 확정.</div>`;
+  const tip=`<div class="hotel-tip">💡 <strong>예약 팁:</strong> 로마·피렌체·베네치아(Carlton Capri)는 예약 완료(확정) — 확정 도시는 후보 리스트를 숨깁니다. 남은 코르티나 4박·밀라노 1박은 각 10곳 후보 — <strong>Booking ▸날짜</strong> 버튼이 체크인/체크아웃·2인 입력된 채 열립니다. 9월 성수기 끝물이라 무료취소 요금제로 선예약 후 가격 추이 보며 조정 권장.<br>🏛️ <strong>이탈리아 도시세(tassa di soggiorno):</strong> 대부분 도시가 1인·1박당 €3~7을 체크인 시 숙소에서 현장 결제 — 예산 '도시세' 항목에 별도 계상. 로마(2성) ₩52,620 확정.</div>`;
   el.innerHTML=nav+blocks+tip;
 }
 function showHotelCity(name){
