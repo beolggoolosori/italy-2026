@@ -507,6 +507,21 @@ a{color:inherit}
 .h-price{font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;font-size:17px;font-weight:700;color:var(--olive);margin:0 18px 12px}
 .h-price small{font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;font-size:10px;color:var(--faint);font-weight:400}
 .h-tags{display:flex;flex-wrap:wrap;gap:6px;margin:0 18px 12px}
+.h-info{display:flex;gap:8px;align-items:flex-start;margin:0 18px 7px;font-size:12.5px;color:var(--muted);line-height:1.5}
+.h-info .hi-ic{flex:0 0 18px;text-align:center}
+.h-info a{color:var(--brand);font-weight:600}
+.h-info b{color:var(--ink)}
+.lodge-timeline{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;margin:14px 0 6px}
+.lt-cell{border-radius:8px;padding:6px 2px;text-align:center;font-size:10.5px;line-height:1.35;border:1px solid var(--line)}
+.lt-cell .lt-d{font-weight:700;font-size:11.5px}
+.lt-cell.done{background:rgba(47,107,79,.12);border-color:rgba(47,107,79,.4)}
+.lt-cell.pend{background:rgba(200,140,30,.10);border-color:rgba(200,140,30,.45)}
+.lodge-cost{border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:10px 0 18px;font-size:13px}
+.lodge-cost h5{margin:0 0 8px;font-size:13.5px}
+.lodge-cost .lc-row{display:flex;justify-content:space-between;gap:10px;padding:3px 0;border-bottom:1px dashed var(--line)}
+.lodge-cost .lc-row:last-of-type{border-bottom:none}
+.lodge-cost .lc-note{color:var(--muted);font-size:12px;margin-top:8px;line-height:1.55}
+@media(max-width:640px){.lodge-timeline{grid-template-columns:repeat(6,1fr)}}
 .h-tag{font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;font-size:10px;padding:3px 10px;border-radius:999px;
   background:var(--olive-soft);color:#4E5836;border:1px solid #D2D2B4;font-weight:500}
 .h-links{display:flex;gap:8px;margin:0 18px}
@@ -901,10 +916,26 @@ B: {
   transport:[{day:"D1",route:"인천→로마 FCO",mode:"KE931 직항",time:"13시간 10분",cost:"왕복 173만원/인",link:"https://www.koreanair.com",linkText:"대한항공"},{day:"D1",route:"FCO 공항역→Roma Termini",mode:"Leonardo Express",time:"32분",cost:"€28",link:"https://www.trenitalia.com/en/services/leonardo-express.html",linkText:"Trenitalia"},{day:"D1",route:"FCO→Hotel Labelle",mode:"공식 택시 백업",time:"40~55분",cost:"정액 €55",link:"https://www.adr.it/web/aeroporti-di-roma-en/pax-fco-taxi",linkText:"ADR Taxi"},{day:"D4",route:"Roma Termini→Firenze SMN",mode:"Italo 9912 Prima Business",time:"07:40→09:17 (1h37)",cost:"€38.80",link:"https://www.italotreno.com/en/destinations-timetable/rome-florence-tickets",linkText:"Italo"},{day:"D6",route:"Firenze↔Pisa (왕복)",mode:"Regionale",time:"편도 약 1시간 · 08:00대 출발/14:00대 복귀 목표",cost:"€20",link:"https://www.trenitalia.com",linkText:"Trenitalia"},{day:"D7",route:"Firenze→Monterosso",mode:"Regionale/IC + La Spezia 환승",time:"약 2h40~3h · 숙소 먼저 짐 맡김",cost:"€30",link:"https://www.trenitalia.com",linkText:"Trenitalia"},{day:"D7",route:"친퀘테레 마을간",mode:"Cinque Terre Train MS Card",time:"9/22 Band B 1일권 · 24:00까지",cost:"€59",link:"https://www.parconazionale5terre.it/page.php?id=158",linkText:"Parco 5 Terre"},{day:"D8",route:"Monterosso→La Spezia→(피렌체/밀라노)→Venezia",mode:"R+FR · 직통 없음 · 피렌체 경유 1환승 우선",time:"약 5~5.5h (07시 출발 목표)",cost:"€90~180/2인",link:"https://www.trenitalia.com",linkText:"Trenitalia"},{day:"D8",route:"베네치아 바포레토",mode:"ACTV 24h 패스",time:"1일",cost:"€25/인",link:"https://actv.avmspa.it",linkText:"ACTV"},{day:"D9",route:"Venezia(Mestre)→Cortina 렌터카 픽업",mode:"렌터카 (4일) 풀커버",time:"2~2.5시간",cost:"€280~340",link:"https://www.rentalcars.com",linkText:"RentalCars"},{day:"D12",route:"Cortina→Varenna→Milano 반납",mode:"렌터카 반납(밀라노)",time:"5~5.5시간",cost:"렌터카 포함",link:"",linkText:""},{day:"D13",route:"Milano→Malpensa",mode:"Malpensa Express",time:"51분",cost:"€30",link:"https://www.malpensaexpress.it",linkText:"Malpensa Exp"}],
   hotels:{
     "Roma (3박)":[
-      {name:"Hotel Labelle ✅확정",stars:2,price:"₩854,164 / 3박 (2인)",desc:"Via Cavour 310, 몬티(Monti) 지구. 콜로세움·포로 로마노 도보 7분, Cavour 메트로 1분. 예약 확정(환불불가) ₩854,164 · 도시세 ₩52,620 체크인 시 현장 결제 별도",tags:["✅확정","₩854,164/3박","콜로세움 도보","도시세 별도"],links:[{t:"공식 예약",u:"https://www.hotellabelle.it/",c:""},{t:"Booking.com",u:"https://www.booking.com/hotel/it/labelle.html",c:""}]}
+      {name:"Hotel Labelle ✅확정",stars:2,price:"₩854,164 / 3박 (2인)",desc:"몬티(Monti) 지구. 콜로세움·포로 로마노 도보 7분, Cavour 메트로 1분. 예약 확정(환불불가) — 예약확인서는 메일 보관.",
+       dates:"9/16(수) 체크인 → 9/19(토) 체크아웃 · 3박",addr:"Via Cavour 310, 00184 Roma",tel:"+39 06 6794750",
+       arrive:"D1 19:30 FCO 도착 → Leonardo Express 32분 → Termini → 도보 8~10분 (백업: 정액택시 €55)",
+       depart:"D4 07:40 Italo 9912 — Termini 도보 8분, 06:50 출발이면 여유",
+       breakfast:"조식 미제공(제휴 바 안내) — D2·D3 아침은 몬티 카페로 일정에 이미 반영(La Licata 06:00 오픈 등)",
+       reception:"24시간 리셉션 — 19:30 늦은 도착 문제없음(도착시간 사전 통지 권장) · 프런트 금고",
+       luggage:"체크아웃 후 짐 보관 가능 — D4는 07:40 열차라 불필요",
+       tax:"도시세(2성 €5/인·박) 2인·3박 = €30 ≈ ₩52,620 — 체크인 시 현장 결제(현금 권장)",
+       tags:["✅확정","₩854,164/3박","콜로세움 도보","24h 리셉션"],links:[{t:"공식 예약",u:"https://www.hotellabelle.it/",c:""},{t:"Booking.com",u:"https://www.booking.com/hotel/it/labelle.html",c:""},{t:"지도",u:"https://www.google.com/maps/search/?api=1&query=Hotel+Labelle+Via+Cavour+310+Roma",c:""}]}
     ],
     "Firenze (3박)":[
-      {name:"B&B Le Stanze del Duomo ✅확정",stars:3,price:"실결제 금액 입력 필요 / 3박 (2인)",desc:"Via de' Martelli 8, 두오모 바로 옆. 공식 기준 SMN역 도보 10분 또는 택시 5분, 두오모 130~200m권. 리셉션 08:00~21:00, 객실 14:00부터, 체크인 전 짐 보관 가능.",tags:["✅확정","두오모 1분","SMN 도보 10분","조식 Konnubio"],links:[{t:"공식",u:"https://www.lestanzedelduomo.it/en/",c:""},{t:"찾아가는 법",u:"https://www.lestanzedelduomo.it/en/how-to-reach-us.html",c:""}]}
+      {name:"B&B Le Stanze del Duomo ✅확정",stars:3,price:"₩790,658 / 3박 (2인)",desc:"두오모 바로 옆(130~200m). SMN역 도보 10분 또는 택시 5분. 예약 확정 ₩790,658 — 예약확인서는 메일 보관.",
+       dates:"9/19(토) 체크인 → 9/22(화) 체크아웃 · 3박",addr:"Via de' Martelli 8, 50129 Firenze",tel:"+39 055 290012",
+       arrive:"D4 09:17 SMN 도착 → 도보 10분 → 짐 맡기고 시장 브런치(객실은 14:00부터)",
+       depart:"D7 산타크로체 관람 후 10:50 짐 픽업 → SMN 11:30대 베네치아 직통",
+       breakfast:"조식 포함 — 도보 3분 Konnubio 레스토랑에서(D5·D6 아침 일정에 반영됨)",
+       reception:"리셉션 08:00~21:00 — 도착시간 사전 통지 필요 · D6 07:35 새벽 출발은 전날 안내받기",
+       luggage:"체크인 전·아웃 후 짐 보관 가능 — D4 오전·D7 오전 둘 다 활용(일정 반영됨)",
+       tax:"도시세(B&B €6/인·박) 2인·3박 = €36 — 현장 결제(현금 권장)",
+       tags:["✅확정","₩790,658/3박","두오모 1분","조식 Konnubio"],links:[{t:"공식",u:"https://www.lestanzedelduomo.it/en/",c:""},{t:"찾아가는 법",u:"https://www.lestanzedelduomo.it/en/how-to-reach-us.html",c:""},{t:"지도",u:"https://www.google.com/maps/search/?api=1&query=Le+Stanze+del+Duomo+Via+de+Martelli+8+Firenze",c:""}]}
     ],
     "Cinque Terre (1박)":[],
     "Venezia (1박)":[],
@@ -1142,7 +1173,15 @@ COURSES.E.hotels={
   "Roma (3박)":COURSES.E.hotels["Roma (3박)"],
   "Firenze (3박)":COURSES.E.hotels["Firenze (3박)"],
   "Venezia (1박)":[
-    {name:"Hotel Carlton Capri ✅확정",stars:3,price:"9/22~23 1박 (2인) · 실결제 금액 입력 필요",desc:"Santa Croce 595. 산타루치아역 도보 5분(~460m), 리알토 도보 15분. 체크인 14:00(D7 열차 ~13:40 도착과 정합)·체크아웃 11:00. D8은 새벽 출발 전 체크아웃+짐 리셉션 보관 → 두칼레 후 픽업",tags:["✅확정","역 도보 5분","체크인 14:00","2026-07-12 예약"],links:[{t:"공식",u:"https://carltoncapri.atvenicehotels.com/en/"}]}
+    {name:"Hotel Carlton Capri ✅확정",stars:3,price:"₩310,404 / 1박 (2인)",desc:"산타루치아역 도보 5분(~460m), 리알토 도보 15분. 예약 확정 ₩310,404(2026-07-12) — 예약확인서는 메일 보관.",
+     dates:"9/22(화) 체크인 14:00 → 9/23(수) 체크아웃 11:00 · 1박",addr:"Santa Croce 595, 30135 Venezia",tel:"+39 041 275 2300",
+     arrive:"D7 ~13:40 S.Lucia 도착 → 도보 5분(바포레토 불필요) → 14:00 체크인",
+     depart:"D8 두칼레 후 11:15 짐 픽업 → 11:25 역 → 11:30 Mestre행 1정거장 → 12:00 렌터카",
+     breakfast:"뷔페 조식(요금제 따라 포함 or €10/인) — ⚠️D8은 06:45 출발이라 조식 시간 전, Da Bonifacio 06:30 오픈으로 대체(일정 반영)",
+     reception:"24시간 리셉션 ✅ — D8 새벽 출발 OK. 전날 밤 정산+짐 보관 요청해두기",
+     luggage:"체크아웃 후 짐 보관 가능(요청제) — D8 새벽 출발 전 맡기고 두칼레 다녀와서 픽업",
+     tax:"도시세(3성·성수기 €3.50/인·박) 2인·1박 = €7 — 현장 결제(현금 권장)",
+     tags:["✅확정","₩310,404/1박","역 도보 5분","24h 리셉션"],links:[{t:"공식",u:"https://hotelcapri.net/",c:""},{t:"지도",u:"https://www.google.com/maps/search/?api=1&query=Hotel+Carlton+Capri+Santa+Croce+595+Venezia",c:""}]}
   ],
   "Cortina d'Ampezzo (4박)":[],
   "Milano (1박)":[]
@@ -1602,11 +1641,11 @@ const COMPARE=[
 const BOOKING_ITEMS=[
 {status:"확정",tone:"done",cat:"항공",title:"KE931 / KE928",target:"완료",window:"예약 완료",note:"왕복 173만원/인 예산 반영",link:"https://www.koreanair.com",linkText:"대한항공"},
 {status:"확정",tone:"done",cat:"숙소",title:"로마 Hotel Labelle",target:"완료",window:"환불불가",note:"₩854,164/3박 + 도시세 ₩52,620 현장결제",link:"https://www.hotellabelle.it/",linkText:"공식"},
-{status:"확정",tone:"done",cat:"숙소",title:"피렌체 B&B Le Stanze del Duomo",target:"완료",window:"두오모 바로 옆",note:"Via de' Martelli 8. 공식 기준 SMN 도보 10분/택시 5분, 리셉션 08:00~21:00, 객실 14:00부터, 짐 보관 가능. 실결제 금액/도시세는 예산에 추가 입력 필요",link:"https://www.lestanzedelduomo.it/en/contacts",linkText:"공식"},
+{status:"확정",tone:"done",cat:"숙소",title:"피렌체 B&B Le Stanze del Duomo",target:"완료",window:"두오모 바로 옆",note:"Via de' Martelli 8. 공식 기준 SMN 도보 10분/택시 5분, 리셉션 08:00~21:00, 객실 14:00부터, 짐 보관 가능. 실결제 ₩790,658/3박(2026-07-12 입력) · 도시세 €36(B&B €6/인·박) 현장 결제",link:"https://www.lestanzedelduomo.it/en/contacts",linkText:"공식"},
 {status:"확정",tone:"done",cat:"숙소",title:"Plus Florence 가예약 취소",target:"완료 (2026-07-12)",window:"정리 완료",note:"2026-07-12 사용자 취소 완료 확인. 피렌체 숙소는 Le Stanze del Duomo 단일. 취소 완료 메일은 보관 권장",link:"https://www.plushostels.com/florence",linkText:"Plus"},
 {status:"확정",tone:"done",cat:"교통",title:"D4 Roma→Firenze Italo",target:"완료",window:"사용자 티켓 기준",note:"Italo 9912 07:40→09:17 Prima Business, 2인 €38.80, 2호차 9·10. D4 기상/이동 시간 반영 완료",link:"https://www.italotreno.com/en/destinations-timetable/rome-florence-tickets",linkText:"Italo"},
 {status:"예약필요",tone:"warn",cat:"교통",title:"D7 Firenze→Venezia 직통 열차",target:"지금 (예약창 오픈됨)",window:"조기예약일수록 저렴 (Super Economy)",note:"9/22(화) 11시대 Firenze SMN→Venezia S.Lucia 직통 Frecciarossa/Italo 약 2h05(일 17편) — 오전 산타크로체(09:30~10:45) 후 탑승이라 11:30 전후 편 우선. D6 피사·친퀘 왕복은 전부 Regionale라 예약 불필요(당일 구매, Pisa S. Rossore 정차편 확인)",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
-{status:"확정",tone:"done",cat:"숙소",title:"베네치아 Hotel Carlton Capri",target:"완료 (2026-07-12 예약)",window:"9/22(화) 14:00 체크인 · 9/23(수) 11:00 체크아웃",note:"Santa Croce 595 · 3성 · 산타루치아역 도보 5분 — D7 열차 도착(~13:40)→14:00 체크인, D8 두칼레 후 짐 픽업→역 5분 동선 최적. ⚠️D8 새벽 출발 전 체크아웃 처리+짐 리셉션 보관(체크아웃 마감 11:00). 실결제 금액은 예산에 입력 필요",link:"https://carltoncapri.atvenicehotels.com/en/",linkText:"공식"},
+{status:"확정",tone:"done",cat:"숙소",title:"베네치아 Hotel Carlton Capri",target:"완료 (2026-07-12 예약)",window:"9/22(화) 14:00 체크인 · 9/23(수) 11:00 체크아웃",note:"Santa Croce 595 · 3성 · 산타루치아역 도보 5분 — D7 열차 도착(~13:40)→14:00 체크인, D8 두칼레 후 짐 픽업→역 5분 동선 최적. ⚠️D8 새벽 출발 전 체크아웃 처리+짐 리셉션 보관(체크아웃 마감 11:00, 24h 리셉션이라 새벽 OK). 실결제 ₩310,404/1박(2026-07-12 입력) · 도시세 €7(3성 €3.50/인·박) 현장 결제 · 전화 +39 041 275 2300",link:"https://hotelcapri.net/",linkText:"공식"},
 {status:"불필요",tone:"",cat:"입장권",title:"D6 피사 사탑 등탑 — 제외(사진만)",target:"이미 구매했다면 환불 확인",window:"사진만 (등탑 X)",note:"확정 일정은 사탑 외관 사진만이라 등탑 티켓이 필요 없어짐. 6/23 오픈 때 이미 구매했다면 OPAPISA 환불/변경 조건 확인(시간제 티켓은 환불 제한 가능)",link:"https://www.opapisa.it/en/tickets/buy/",linkText:"OPAPISA"},
 {status:"예약가능",tone:"warn",cat:"입장권",title:"D5 우피치 / 아카데미아 / 두오모",target:"지금 예약 (상시 오픈)",window:"고정 오픈일 없음·조기매진",note:"우피치 08:30 €29(사전권), 아카데미아 13:30 €20+예약 €4=€24(2026-02 인상), 두오모 Brunelleschi Pass €30(쿠폴라+세례당+종탑+오페라두오모박물관). ⚠️일요일 쿠폴라는 12:45~16:30 운영이라 16:00 슬롯이 마지막이거나 없을 수 있음 → 가장 이른 오후 슬롯 확보, 안 되면 D5 순서 조정",link:"https://tickets.uffizi.it/",linkText:"우피치"},
 {status:"확정",tone:"done",cat:"입장권",title:"D3 바티칸 박물관 08:00",target:"완료 (2026-07-05 발권)",window:"환불불가·기명 티켓",note:"9/18(금) 08:00 입장, 2인 €50(€25/인=€20+예약비 €5). 입구는 예약자 줄 우측 Corridoio 1(Passageway 1) · 신분증 필수 · ⚠️입장 전 안뜰의 직원에게 티켓 검증(validation) 필수 — 미검증 시 개찰구 통과 불가. 티켓 PDF는 휴대폰+인쇄본 이중 보관",link:"https://tickets.museivaticani.va",linkText:"바티칸"},
@@ -1827,6 +1866,15 @@ const SL=[
  ]}
 ];
 const SL_PAX="group_adults=2&no_rooms=1&group_children=0";
+// 숙박비 집계 (실결제 기준 · 2026-07-12) — 환율 표기는 예산 탭과 동일 기준(≈1,754원/€)
+const LODGING={rows:[
+ {city:"Roma 3박 — Hotel Labelle",amt:"₩854,164",st:"✅ 결제 완료(환불불가)"},
+ {city:"Firenze 3박 — Le Stanze del Duomo",amt:"₩790,658",st:"✅ 확정"},
+ {city:"Venezia 1박 — Carlton Capri",amt:"₩310,404",st:"✅ 확정"},
+ {city:"Cortina 4박",amt:"미예약",st:"🔴 지금 예약 — 후보 10곳"},
+ {city:"Milano 1박",amt:"미예약",st:"🔴 지금 예약 — 후보 10곳"}
+],doneSum:"₩1,955,226 (7박 ≈ €1,115)",
+note:"숙박 예산 €1,800 중 확정분 ≈ €1,115 → 남은 코르티나 4박+밀라노 1박 목표 ≈ €685 안팎. 도시세는 숙박비와 별도로 체크인 시 현장 결제: 확정분 로마 €30 + 피렌체 €36 + 베네치아 €7 = <b>€73 현금 준비</b>, 코르티나·밀라노는 예약 후 추가(예산 '도시세' €116에 계상). 요율 검증 2026-07-12 — 로마 2성 €5 · 피렌체 B&B €6 · 베네치아 3성 성수기 €3.50 /인·박."};
 function slBook(u,ci,co){return u?u.split('?')[0]+"?checkin="+ci+"&checkout="+co+"&"+SL_PAX+"&selected_currency=EUR":"";}
 function slAgoda(u,name,city,ci,los){return u?u.split('?')[0]+"?checkIn="+ci+"&los="+los+"&adults=2&rooms=1":"https://www.agoda.com/search?textToSearch="+encodeURIComponent(name+" "+city)+"&checkIn="+ci+"&los="+los+"&adults=2&rooms=1";}
 function slHotels(name,city,ci,co){return "https://www.hotels.com/Hotel-Search?destination="+encodeURIComponent(name+" "+city)+"&startDate="+ci+"&endDate="+co+"&adults=2";}
@@ -2385,6 +2433,16 @@ function renderHotels(c){
   const cities=Object.keys(c.hotels);
   const conf=city=>c.hotels[city].some(h=>/확정/.test(h.name)||(h.tags||[]).some(t=>/확정/.test(t)));
   const nav='<div class="hotel-citynav">'+cities.map((city,i)=>`<button class="hotel-citychip${i===0?' active':''}" data-city="${city}" onclick="showHotelCity('${city}')">${city}${conf(city)?' ✅':(slForCity(city)?' 10':'')}</button>`).join('')+'</div>';
+  // 숙박 타임라인 (9/16~27 · 12박) + 비용 집계
+  let tl='<div class="lodge-timeline">';
+  for(let d=16;d<=27;d++){
+    const n=((c.calendar[d]||{}).nights||'').split(' ')[0]||'';
+    const hkey=cities.find(k=>n&&k.indexOf(n)===0);
+    const cls=hkey&&conf(hkey)?'done':'pend';
+    tl+=`<div class="lt-cell ${cls}"><div class="lt-d">9/${d}</div>${n||'—'}</div>`;
+  }
+  tl+='</div>';
+  const cost=`<div class="lodge-cost"><h5>💶 숙박비 집계 — 확정 ${LODGING.doneSum}</h5>${LODGING.rows.map(r=>`<div class="lc-row"><span>${r.city}</span><span><b>${r.amt}</b> · ${r.st}</span></div>`).join('')}<div class="lc-note">${LODGING.note}</div></div>`;
   let blocks='';
   cities.forEach((city,i)=>{
     const L=slForCity(city);
@@ -2396,8 +2454,10 @@ function renderHotels(c){
       const cards=c.hotels[city].map(h=>{
         const stars='★'.repeat(h.stars)+'☆'.repeat(5-h.stars);
         const tags=h.tags.map(t=>`<span class="h-tag">${t}</span>`).join('');
-        const links=h.links.map(l=>`<a href="${l.u}" target="_blank" rel="noopener" class="${l.c}">${l.t}</a>`).join('');
-        return `<div class="hotel-card"><div class="h-name">${h.name}</div><div class="h-stars">${stars}</div><div class="h-desc">${h.desc}</div><div class="h-price">${h.price} <small>/2인 기준</small></div><div class="h-tags">${tags}</div><div class="h-links">${links}</div></div>`;
+        const links=h.links.map(l=>`<a href="${l.u}" target="_blank" rel="noopener" class="${l.c||''}">${l.t}</a>`).join('');
+        const info=[["📅",h.dates],["📍",h.addr],["📞",h.tel?`<a href="tel:${h.tel.replace(/\s/g,'')}">${h.tel}</a>`:null],["🛬",h.arrive],["🛫",h.depart],["🥐",h.breakfast],["🛎️",h.reception],["🧳",h.luggage],["🏛️",h.tax]]
+          .filter(x=>x[1]).map(x=>`<div class="h-info"><span class="hi-ic">${x[0]}</span><span>${x[1]}</span></div>`).join('');
+        return `<div class="hotel-card"><div class="h-name">${h.name}</div><div class="h-stars">${stars}</div><div class="h-desc">${h.desc}</div>${info}<div class="h-price">${h.price} <small>/2인 기준</small></div><div class="h-tags">${tags}</div><div class="h-links">${links}</div></div>`;
       }).join('');
       inner=`<div class="hotel-cards">${cards}</div>`;
       count=conf(city)?'✅ 예약 완료':`후보 ${c.hotels[city].length}곳`;
@@ -2405,7 +2465,7 @@ function renderHotels(c){
     blocks+=`<div class="hotel-city" data-cityblock="${city}"${i===0?'':' hidden'}><h4>${city} <span class="hcount">${count}</span></h4>${inner}</div>`;
   });
   const tip=`<div class="hotel-tip">💡 <strong>예약 팁:</strong> 로마·피렌체·베네치아(Carlton Capri)는 예약 완료(확정) — 확정 도시는 후보 리스트를 숨깁니다. 남은 코르티나 4박·밀라노 1박은 각 10곳 후보 — <strong>Booking ▸날짜</strong> 버튼이 체크인/체크아웃·2인 입력된 채 열립니다. 9월 성수기 끝물이라 무료취소 요금제로 선예약 후 가격 추이 보며 조정 권장.<br>🏛️ <strong>이탈리아 도시세(tassa di soggiorno):</strong> 대부분 도시가 1인·1박당 €3~7을 체크인 시 숙소에서 현장 결제 — 예산 '도시세' 항목에 별도 계상. 로마(2성) ₩52,620 확정.</div>`;
-  el.innerHTML=nav+blocks+tip;
+  el.innerHTML=nav+tl+cost+blocks+tip;
 }
 function showHotelCity(name){
   document.querySelectorAll('.hotel-citychip').forEach(b=>b.classList.toggle('active',b.dataset.city===name));
