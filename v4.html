@@ -511,6 +511,20 @@ a{color:inherit}
 .h-info .hi-ic{flex:0 0 18px;text-align:center}
 .h-info a{color:var(--brand);font-weight:600}
 .h-info b{color:var(--ink)}
+/* 확정 숙소: 풀폭 2단 카드 */
+.hotel-card.wide{grid-column:1/-1;display:grid;grid-template-columns:minmax(250px,320px) 1fr;column-gap:10px;padding:0 0 10px}
+.hotel-card.wide::before{grid-column:1/-1;height:52px}
+.hotel-card.wide:hover{transform:none}
+.hotel-card.wide .hc-side{padding:16px 18px 0 0;display:grid;grid-template-columns:repeat(2,1fr);gap:4px 22px;align-content:start}
+.hotel-card.wide .hc-side .h-info{margin:0}
+@media(max-width:760px){
+  .hotel-card.wide{grid-template-columns:1fr}
+  .hotel-card.wide .hc-side{grid-template-columns:1fr;padding:0 18px;gap:6px}
+}
+.lc-notes{margin:9px 0 0;padding:0;list-style:none}
+.lc-notes li{display:flex;gap:7px;color:var(--muted);font-size:12.5px;line-height:1.55;padding:2px 0}
+.lc-notes li::before{content:"·";color:var(--brand);font-weight:700}
+.lc-notes b{color:var(--ink)}
 .lodge-timeline{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;margin:14px 0 6px}
 .lt-cell{border-radius:8px;padding:6px 2px;text-align:center;font-size:10.5px;line-height:1.35;border:1px solid var(--line)}
 .lt-cell .lt-d{font-weight:700;font-size:11.5px}
@@ -920,10 +934,10 @@ B: {
        dates:"9/16(수) 체크인 → 9/19(토) 체크아웃 · 3박",addr:"Via Cavour 310, 00184 Roma",tel:"+39 06 6794750",
        arrive:"D1 19:30 FCO 도착 → Leonardo Express 32분 → Termini → 도보 8~10분 (백업: 정액택시 €55)",
        depart:"D4 07:40 Italo 9912 — Termini 도보 8분, 06:50 출발이면 여유",
-       breakfast:"조식 미제공(제휴 바 안내) — D2·D3 아침은 몬티 카페로 일정에 이미 반영(La Licata 06:00 오픈 등)",
-       reception:"24시간 리셉션 — 19:30 늦은 도착 문제없음(도착시간 사전 통지 권장) · 프런트 금고",
-       luggage:"체크아웃 후 짐 보관 가능 — D4는 07:40 열차라 불필요",
-       tax:"도시세(2성 €5/인·박) 2인·3박 = €30 ≈ ₩52,620 — 체크인 시 현장 결제(현금 권장)",
+       breakfast:"조식 미제공 — 아침은 몬티 카페로 일정에 반영(La Licata 06:00 등)",
+       reception:"24시간 리셉션 — 19:30 늦은 도착 OK(사전 통지 권장) · 금고",
+       luggage:"짐 보관 가능 (D4는 07:40 열차라 불필요)",
+       tax:"도시세 €30(₩52,620) — 체크인 시 현금",
        tags:["✅확정","₩854,164/3박","콜로세움 도보","24h 리셉션"],links:[{t:"공식 예약",u:"https://www.hotellabelle.it/",c:""},{t:"Booking.com",u:"https://www.booking.com/hotel/it/labelle.html",c:""},{t:"지도",u:"https://www.google.com/maps/search/?api=1&query=Hotel+Labelle+Via+Cavour+310+Roma",c:""}]}
     ],
     "Firenze (3박)":[
@@ -931,10 +945,10 @@ B: {
        dates:"9/19(토) 체크인 → 9/22(화) 체크아웃 · 3박",addr:"Via de' Martelli 8, 50129 Firenze",tel:"+39 055 290012",
        arrive:"D4 09:17 SMN 도착 → 도보 10분 → 짐 맡기고 시장 브런치(객실은 14:00부터)",
        depart:"D7 산타크로체 관람 후 10:50 짐 픽업 → SMN 11:30대 베네치아 직통",
-       breakfast:"조식 포함 — 도보 3분 Konnubio 레스토랑에서(D5·D6 아침 일정에 반영됨)",
-       reception:"리셉션 08:00~21:00 — 도착시간 사전 통지 필요 · D6 07:35 새벽 출발은 전날 안내받기",
-       luggage:"체크인 전·아웃 후 짐 보관 가능 — D4 오전·D7 오전 둘 다 활용(일정 반영됨)",
-       tax:"도시세(B&B €6/인·박) 2인·3박 = €36 — 현장 결제(현금 권장)",
+       breakfast:"조식 포함 — 도보 3분 Konnubio에서 (D5·D6 일정 반영)",
+       reception:"리셉션 08:00~21:00 — 도착시간 사전 통지 · D6 07:35 출발은 전날 안내받기",
+       luggage:"체크인 전·아웃 후 짐 보관 가능 (D4·D7 오전 활용)",
+       tax:"도시세 €36 — 체크인 시 현금",
        tags:["✅확정","₩790,658/3박","두오모 1분","조식 Konnubio"],links:[{t:"공식",u:"https://www.lestanzedelduomo.it/en/",c:""},{t:"찾아가는 법",u:"https://www.lestanzedelduomo.it/en/how-to-reach-us.html",c:""},{t:"지도",u:"https://www.google.com/maps/search/?api=1&query=Le+Stanze+del+Duomo+Via+de+Martelli+8+Firenze",c:""}]}
     ],
     "Cinque Terre (1박)":[],
@@ -1177,10 +1191,10 @@ COURSES.E.hotels={
      dates:"9/22(화) 체크인 14:00 → 9/23(수) 체크아웃 11:00 · 1박",addr:"Santa Croce 595, 30135 Venezia",tel:"+39 041 275 2300",
      arrive:"D7 ~13:40 S.Lucia 도착 → 도보 5분(바포레토 불필요) → 14:00 체크인",
      depart:"D8 두칼레 후 11:15 짐 픽업 → 11:25 역 → 11:30 Mestre행 1정거장 → 12:00 렌터카",
-     breakfast:"뷔페 조식(요금제 따라 포함 or €10/인) — ⚠️D8은 06:45 출발이라 조식 시간 전, Da Bonifacio 06:30 오픈으로 대체(일정 반영)",
-     reception:"24시간 리셉션 ✅ — D8 새벽 출발 OK. 전날 밤 정산+짐 보관 요청해두기",
-     luggage:"체크아웃 후 짐 보관 가능(요청제) — D8 새벽 출발 전 맡기고 두칼레 다녀와서 픽업",
-     tax:"도시세(3성·성수기 €3.50/인·박) 2인·1박 = €7 — 현장 결제(현금 권장)",
+     breakfast:"뷔페 조식(요금제 확인) — ⚠️06:45 출발이라 못 먹음, Da Bonifacio 06:30로 대체(일정 반영)",
+     reception:"24시간 리셉션 — 새벽 출발 OK, 전날 밤 정산+짐 보관 요청",
+     luggage:"짐 보관 가능(요청제) — 새벽에 맡기고 두칼레 후 픽업",
+     tax:"도시세 €7 — 체크인 시 현금",
      tags:["✅확정","₩310,404/1박","역 도보 5분","24h 리셉션"],links:[{t:"공식",u:"https://hotelcapri.net/",c:""},{t:"지도",u:"https://www.google.com/maps/search/?api=1&query=Hotel+Carlton+Capri+Santa+Croce+595+Venezia",c:""}]}
   ],
   "Cortina d'Ampezzo (4박)":[],
@@ -1874,7 +1888,11 @@ const LODGING={rows:[
  {city:"Cortina 4박",amt:"미예약",st:"🔴 지금 예약 — 후보 10곳"},
  {city:"Milano 1박",amt:"미예약",st:"🔴 지금 예약 — 후보 10곳"}
 ],doneSum:"₩1,955,226 (7박 ≈ €1,115)",
-note:"숙박 예산 €1,800 중 확정분 ≈ €1,115 → 남은 코르티나 4박+밀라노 1박 목표 ≈ €685 안팎. 도시세는 숙박비와 별도로 체크인 시 현장 결제: 확정분 로마 €30 + 피렌체 €36 + 베네치아 €7 = <b>€73 현금 준비</b>, 코르티나·밀라노는 예약 후 추가(예산 '도시세' €116에 계상). 요율 검증 2026-07-12 — 로마 2성 €5 · 피렌체 B&B €6 · 베네치아 3성 성수기 €3.50 /인·박."};
+notes:[
+ "예산 <b>€1,800</b> 중 확정 ≈€1,115 → 남은 5박(코르티나 4+밀라노 1) 목표 <b>≈€685</b>",
+ "도시세는 별도 현장 결제 — 확정분 <b>현금 €73</b> (로마 30 · 피렌체 36 · 베네치아 7)",
+ "코르티나·밀라노 도시세는 예약 후 추가 (예산 '도시세' €116 계상) · 요율 검증 2026-07-12"
+]};
 function slBook(u,ci,co){return u?u.split('?')[0]+"?checkin="+ci+"&checkout="+co+"&"+SL_PAX+"&selected_currency=EUR":"";}
 function slAgoda(u,name,city,ci,los){return u?u.split('?')[0]+"?checkIn="+ci+"&los="+los+"&adults=2&rooms=1":"https://www.agoda.com/search?textToSearch="+encodeURIComponent(name+" "+city)+"&checkIn="+ci+"&los="+los+"&adults=2&rooms=1";}
 function slHotels(name,city,ci,co){return "https://www.hotels.com/Hotel-Search?destination="+encodeURIComponent(name+" "+city)+"&startDate="+ci+"&endDate="+co+"&adults=2";}
@@ -2442,7 +2460,7 @@ function renderHotels(c){
     tl+=`<div class="lt-cell ${cls}"><div class="lt-d">9/${d}</div>${n||'—'}</div>`;
   }
   tl+='</div>';
-  const cost=`<div class="lodge-cost"><h5>💶 숙박비 집계 — 확정 ${LODGING.doneSum}</h5>${LODGING.rows.map(r=>`<div class="lc-row"><span>${r.city}</span><span><b>${r.amt}</b> · ${r.st}</span></div>`).join('')}<div class="lc-note">${LODGING.note}</div></div>`;
+  const cost=`<div class="lodge-cost"><h5>💶 숙박비 집계 — 확정 ${LODGING.doneSum}</h5>${LODGING.rows.map(r=>`<div class="lc-row"><span>${r.city}</span><span><b>${r.amt}</b> · ${r.st}</span></div>`).join('')}<ul class="lc-notes">${LODGING.notes.map(n=>`<li><span>${n}</span></li>`).join('')}</ul></div>`;
   let blocks='';
   cities.forEach((city,i)=>{
     const L=slForCity(city);
@@ -2457,7 +2475,8 @@ function renderHotels(c){
         const links=h.links.map(l=>`<a href="${l.u}" target="_blank" rel="noopener" class="${l.c||''}">${l.t}</a>`).join('');
         const info=[["📅",h.dates],["📍",h.addr],["📞",h.tel?`<a href="tel:${h.tel.replace(/\s/g,'')}">${h.tel}</a>`:null],["🛬",h.arrive],["🛫",h.depart],["🥐",h.breakfast],["🛎️",h.reception],["🧳",h.luggage],["🏛️",h.tax]]
           .filter(x=>x[1]).map(x=>`<div class="h-info"><span class="hi-ic">${x[0]}</span><span>${x[1]}</span></div>`).join('');
-        return `<div class="hotel-card"><div class="h-name">${h.name}</div><div class="h-stars">${stars}</div><div class="h-desc">${h.desc}</div>${info}<div class="h-price">${h.price} <small>/2인 기준</small></div><div class="h-tags">${tags}</div><div class="h-links">${links}</div></div>`;
+        if(info)return `<div class="hotel-card wide"><div class="hc-main"><div class="h-name">${h.name}</div><div class="h-stars">${stars}</div><div class="h-desc">${h.desc}</div><div class="h-price">${h.price} <small>/2인 기준</small></div><div class="h-tags">${tags}</div><div class="h-links">${links}</div></div><div class="hc-side">${info}</div></div>`;
+        return `<div class="hotel-card"><div class="h-name">${h.name}</div><div class="h-stars">${stars}</div><div class="h-desc">${h.desc}</div><div class="h-price">${h.price} <small>/2인 기준</small></div><div class="h-tags">${tags}</div><div class="h-links">${links}</div></div>`;
       }).join('');
       inner=`<div class="hotel-cards">${cards}</div>`;
       count=conf(city)?'✅ 예약 완료':`후보 ${c.hotels[city].length}곳`;
