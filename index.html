@@ -876,6 +876,8 @@ footer{text-align:center;padding:36px 20px;color:var(--faint);
 .bgt-amt b{display:block;font-size:13.5px}
 .bgt-amt span{font-size:10.5px;color:var(--muted)}
 .bgt-foot{font-size:11.5px;color:var(--muted);margin-top:10px}
+.bgt-fx{font-size:12px;color:#8a6d1a;background:#faf3e3;border-radius:8px;padding:8px 12px;margin-bottom:10px;font-weight:600}
+.bk-when{font-size:11px;color:#8a6d1a;background:#faf3e3;padding:3px 7px;border-radius:6px;flex:0 0 auto;font-weight:700}
 @media(max-width:640px){.bgt-row{flex-wrap:wrap}.bgt-amt{min-width:70px}.bgt-sub{width:100%;margin-left:18px}}
 /* ===== 예약 체크 재설계 (2026-07-12) ===== */
 .bk-strip{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 16px}
@@ -1225,16 +1227,18 @@ Object.assign(COURSES.E,{
   nights:"Roma(3)+Firenze(3)+Venezia(1)+Dolomiti(4)+Milano(1)=12N",
   cities:[{name:"Roma",lat:41.9028,lng:12.4964,n:3,dates:"9/16~18",color:"#ef4444"},{name:"Firenze",lat:43.7696,lng:11.2558,n:3,dates:"9/19~21",color:"#22c55e"},{name:"Pisa",lat:43.7228,lng:10.4017,n:0,dates:"9/21",color:"#86efac"},{name:"Cinque Terre",lat:44.1461,lng:9.6535,n:0,dates:"9/21",color:"#f59e0b"},{name:"Venezia",lat:45.4408,lng:12.3155,n:1,dates:"9/22",color:"#06b6d4"},{name:"Seceda",lat:46.5950,lng:11.7210,n:0,dates:"9/24",color:"#7dd3fc"},{name:"Tre Cime",lat:46.6131,lng:12.3035,n:0,dates:"9/25",color:"#38bdf8"},{name:"Lagazuoi",lat:46.5273,lng:12.0057,n:0,dates:"9/26",color:"#60a5fa"},{name:"Cortina",lat:46.5369,lng:12.1357,n:4,dates:"9/23~26",color:"#0ea5e9"},{name:"Lago di Como",lat:45.9875,lng:9.2573,n:0,dates:"9/27",color:"#a78bfa"},{name:"Milano",lat:45.4642,lng:9.1900,n:1,dates:"9/27~28",color:"#ec4899"}]
 });
-// ===== 상세 예산 (2026-07-12 전면 개편 · 환율 1,500원/€ 가정 · 2인 기준) =====
-// st: '확정'(발권/결제 완료) · '고정'(가격 확정, 미결제) · '추정'(예상치)
+// ===== 상세 예산 (2026-07-12 전면 개편 · 원화 기준 · 2인) =====
+// 원칙: 원화로 결제 완료된 항목은 krw(실결제)가 원본 — 환율 무관 확정값.
+//       유로 표시 항목(eur)만 환율 적용. st: '확정'(결제/발권 완료) · '고정'(가격 확정, 미결제) · '추정'
+const EUR_KRW=1700; // 적용 환율 (2026-07-12 기준) — 이 값만 바꾸면 전체 재계산
 const BUDGET_DETAIL=[
 {cat:"항공",c:"#244F3B",items:[
- {n:"KE931/KE928 인천↔로마/밀라노 왕복",eur:2307,krw:3460000,st:"확정",note:"173만원/인 · 발권 완료"}
+ {n:"KE931/KE928 인천↔로마/밀라노 왕복",krw:3460000,st:"확정",note:"173만원/인 · 발권 완료 — 원화 확정"}
 ]},
 {cat:"숙박",c:"#3F7D5E",items:[
- {n:"로마 Hotel Labelle 3박",eur:569,krw:854164,st:"확정",note:"환불불가 선결제 완료"},
- {n:"피렌체 Le Stanze del Duomo 3박",eur:527,krw:790658,st:"확정",note:"실결제 기록"},
- {n:"베네치아 Hotel Carlton Capri 1박",eur:207,krw:310404,st:"확정",note:"9/22~23 · 역 도보 5분"},
+ {n:"로마 Hotel Labelle 3박",krw:854164,st:"확정",note:"환불불가 선결제 완료 — 원화 확정"},
+ {n:"피렌체 Le Stanze del Duomo 3박",krw:790658,st:"확정",note:"실결제 — 원화 확정"},
+ {n:"베네치아 Hotel Carlton Capri 1박",krw:310404,st:"확정",note:"9/22~23 · 역 도보 5분 — 원화 확정"},
  {n:"코르티나 4박",eur:560,st:"추정",note:"€120~160/박 목표 · 미예약(최우선 과제)"},
  {n:"밀라노 1박",eur:150,st:"추정",note:"첸트랄레권 · 미예약"}
 ]},
@@ -1274,7 +1278,7 @@ const BUDGET_DETAIL=[
  {n:"조식·카페·젤라토·간식",eur:200,st:"추정",note:"€15~20/일"}
 ]},
 {cat:"도시세 (현장)",c:"#9AA38C",items:[
- {n:"로마 3박",eur:35,krw:52620,st:"고정",note:"체크아웃 시 현장 결제"},
+ {n:"로마 3박",eur:35,st:"고정",note:"€6/인/박 내외 · 체크아웃 시 현장(유로)"},
  {n:"피렌체 3박",eur:33,st:"고정",note:"~€5.5/인/박"},
  {n:"베네치아 1박",eur:8,st:"고정",note:"~€4/인/박"},
  {n:"코르티나 4박 + 밀라노 1박",eur:30,st:"추정",note:"€2.5~5/인/박"}
@@ -1283,8 +1287,9 @@ const BUDGET_DETAIL=[
  {n:"쇼핑·기념품·비상금",eur:600,st:"추정",note:"총액의 ~8%"}
 ]}
 ];
-COURSES.E.budget=BUDGET_DETAIL.map(g=>({l:g.cat.split(' ')[0],a:g.items.reduce((s,i)=>s+i.eur,0),c:g.c}));
-COURSES.E.perPerson=Math.round(COURSES.E.budget.reduce((a,b)=>a+b.a,0)*1500/2/10000);
+const BGT_KRW=i=>i.krw!=null?i.krw:i.eur*EUR_KRW; // 항목의 원화값 (실결제 우선)
+COURSES.E.budget=BUDGET_DETAIL.map(g=>({l:g.cat.split(' ')[0],a:Math.round(g.items.reduce((s,i)=>s+BGT_KRW(i),0)/EUR_KRW),c:g.c}));
+COURSES.E.perPerson=Math.round(BUDGET_DETAIL.flatMap(g=>g.items).reduce((s,i)=>s+BGT_KRW(i),0)/2/10000);
 COURSES.E.calendar[21]={city:"피사+친퀘 당일치기",detail:"사탑 사진만(등탑X)\n리오마조레→마나롤라→베르나차",transport:"열차 왕복 ~6h",nights:"Firenze 3N"};
 COURSES.E.calendar[22]={city:"→베네치아",detail:"09:39 직통 11:55 도착 ✅\n리알토·Florian·석양 곤돌라",transport:"Italo 8904 09:39",nights:"Venezia 1N"};
 COURSES.E.calendar[23]={city:"베네치아→돌로미티",detail:"새벽 산마르코+두칼레\n정오 렌터카→미수리나→코르티나",transport:"렌터카 2h15",nights:"Cortina 1N"};
@@ -1773,17 +1778,17 @@ sources:[
 };
 
 const COMPARE=[
-{id:"E",status:"확정 · 예약 진행중",name:"로마–밀라노 12박 13일",sub:"피사+친퀘 당일치기 · 베네치아 1박 · 돌로미티 4박+렌터카",route:"로마→피렌체(피사+친퀘 당일치기)→베네치아 1박→돌로미티 4박(렌터카)→코모호수→밀라노",price:"€8,069",krw:"1,210만원",pp:"605만원",pros:["짐 이동 최소(피렌체 3박 + 코르티나 4박 투 베이스)","베네치아 핵심 전부 유지 — 석양 곤돌라·치케티·새벽 산마르코·두칼레","돌로미티 4박: 세체다(목)+트레치메(금)+라가주오이(토) 모두 소화 — 택1 불필요","세체다가 평일 방문 + 산악 날씨 버퍼 +1일","친퀘테레 3마을 맛보기+Via dell'Amore · D7 직통 2h05"],cons:["D6이 13.5시간 풀데이(피사·친퀘 압축)","무라노·부라노·산조르조 일몰 생략(베네치아 오후 없음)","친퀘테레 수영·노을·숙박은 포기"]},
+{id:"E",status:"확정 · 예약 진행중",name:"로마–밀라노 12박 13일",sub:"피사+친퀘 당일치기 · 베네치아 1박 · 돌로미티 4박+렌터카",route:"로마→피렌체(피사+친퀘 당일치기)→베네치아 1박→돌로미티 4박(렌터카)→코모호수→밀라노",price:"₩1,300만",krw:"€7,644 상당 @1,700원/€",pp:"650만원",pros:["짐 이동 최소(피렌체 3박 + 코르티나 4박 투 베이스)","베네치아 핵심 전부 유지 — 석양 곤돌라·치케티·새벽 산마르코·두칼레","돌로미티 4박: 세체다(목)+트레치메(금)+라가주오이(토) 모두 소화 — 택1 불필요","세체다가 평일 방문 + 산악 날씨 버퍼 +1일","친퀘테레 3마을 맛보기+Via dell'Amore · D7 직통 2h05"],cons:["D6이 13.5시간 풀데이(피사·친퀘 압축)","무라노·부라노·산조르조 일몰 생략(베네치아 오후 없음)","친퀘테레 수영·노을·숙박은 포기"]},
 ];
 
 const BOOKING_ITEMS=[
-{status:"확정",tone:"done",cat:"항공",title:"KE931 / KE928",target:"완료",window:"예약 완료",note:"왕복 173만원/인 예산 반영",link:"https://www.koreanair.com",linkText:"대한항공"},
-{status:"확정",tone:"done",cat:"숙소",title:"로마 Hotel Labelle",target:"완료",window:"환불불가",note:"₩854,164/3박 + 도시세 ₩52,620 현장결제",link:"https://www.hotellabelle.it/",linkText:"공식"},
-{status:"확정",tone:"done",cat:"숙소",title:"피렌체 B&B Le Stanze del Duomo",target:"완료",window:"두오모 바로 옆",note:"Via de' Martelli 8. 공식 기준 SMN 도보 10분/택시 5분, 리셉션 08:00~21:00, 객실 14:00부터, 짐 보관 가능. 실결제 ₩790,658/3박(2026-07-12 입력) · 도시세 €36(B&B €6/인·박) 현장 결제",link:"https://www.lestanzedelduomo.it/en/contacts",linkText:"공식"},
-{status:"확정",tone:"done",cat:"숙소",title:"Plus Florence 가예약 취소",target:"완료 (2026-07-12)",window:"정리 완료",note:"2026-07-12 사용자 취소 완료 확인. 피렌체 숙소는 Le Stanze del Duomo 단일. 취소 완료 메일은 보관 권장",link:"https://www.plushostels.com/florence",linkText:"Plus"},
+{status:"확정",tone:"done",cat:"항공",title:"KE931 / KE928",when:"9/16(수)~9/28(월) 왕복",wk:16,target:"완료",window:"예약 완료",note:"왕복 173만원/인 예산 반영",link:"https://www.koreanair.com",linkText:"대한항공"},
+{status:"확정",tone:"done",cat:"숙소",title:"로마 Hotel Labelle",when:"9/16(수)~19(토) 3박",wk:16,target:"완료",window:"환불불가",note:"₩854,164/3박 + 도시세 ₩52,620 현장결제",link:"https://www.hotellabelle.it/",linkText:"공식"},
+{status:"확정",tone:"done",cat:"숙소",title:"피렌체 B&B Le Stanze del Duomo",when:"9/19(토)~22(화) 3박",wk:19,target:"완료",window:"두오모 바로 옆",note:"Via de' Martelli 8. 공식 기준 SMN 도보 10분/택시 5분, 리셉션 08:00~21:00, 객실 14:00부터, 짐 보관 가능. 실결제 ₩790,658/3박(2026-07-12 입력) · 도시세 €36(B&B €6/인·박) 현장 결제",link:"https://www.lestanzedelduomo.it/en/contacts",linkText:"공식"},
+{status:"확정",tone:"done",cat:"숙소",title:"Plus Florence 가예약 취소",when:"여행 전 정리",wk:0,target:"완료 (2026-07-12)",window:"정리 완료",note:"2026-07-12 사용자 취소 완료 확인. 피렌체 숙소는 Le Stanze del Duomo 단일. 취소 완료 메일은 보관 권장",link:"https://www.plushostels.com/florence",linkText:"Plus"},
 {status:"확정",tone:"done",cat:"교통",title:"D4 Roma→Firenze Italo",target:"완료",window:"사용자 티켓 기준",note:"Italo 9912 07:40→09:17 Prima Business, 2인 €38.80, 2호차 9·10. D4 기상/이동 시간 반영 완료",link:"https://www.italotreno.com/en/destinations-timetable/rome-florence-tickets",linkText:"Italo"},
 {status:"확정",tone:"done",cat:"교통",title:"D7 Firenze→Venezia Italo",target:"완료 (2026-07-12 발권)",window:"Low Cost — 환불불가·변경 72h전 50%",note:"Italo 8904 · 9/22(화) 09:39 Firenze SMN→11:55 Venezia S.Lucia · Prima Business 2호차 15·16 · 1 Adult+1 Young · 2인 €65.80. 티켓 PDF 이메일 수신 — 폰+백업 이중 보관, Young은 검표 시 여권 나이 확인 가능. D6 피사·친퀘 왕복은 전부 Regionale라 예약 불필요(당일 구매, Pisa S. Rossore 정차편 확인)",link:"https://www.italotreno.com/en",linkText:"Italo"},
-{status:"확정",tone:"done",cat:"숙소",title:"베네치아 Hotel Carlton Capri",target:"완료 (2026-07-12 예약)",window:"9/22(화) 14:00 체크인 · 9/23(수) 11:00 체크아웃",note:"Santa Croce 595 · 3성 · 산타루치아역 도보 5분 — D7 11:55 도착(Italo 8904 ✅)→12:05 짐 보관→14:00 체크인, D8 두칼레 후 짐 픽업→역 5분 동선 최적. ⚠️D8 새벽 출발 전 체크아웃 처리+짐 리셉션 보관(체크아웃 마감 11:00, 24h 리셉션이라 새벽 OK). 실결제 ₩310,404/1박(2026-07-12 입력) · 도시세 €7(3성 €3.50/인·박) 현장 결제 · 전화 +39 041 275 2300",link:"https://hotelcapri.net/",linkText:"공식"},
+{status:"확정",tone:"done",cat:"숙소",title:"베네치아 Hotel Carlton Capri",when:"9/22(화)~23(수) 1박",wk:22,target:"완료 (2026-07-12 예약)",window:"9/22(화) 14:00 체크인 · 9/23(수) 11:00 체크아웃",note:"Santa Croce 595 · 3성 · 산타루치아역 도보 5분 — D7 11:55 도착(Italo 8904 ✅)→12:05 짐 보관→14:00 체크인, D8 두칼레 후 짐 픽업→역 5분 동선 최적. ⚠️D8 새벽 출발 전 체크아웃 처리+짐 리셉션 보관(체크아웃 마감 11:00, 24h 리셉션이라 새벽 OK). 실결제 ₩310,404/1박(2026-07-12 입력) · 도시세 €7(3성 €3.50/인·박) 현장 결제 · 전화 +39 041 275 2300",link:"https://hotelcapri.net/",linkText:"공식"},
 {status:"불필요",tone:"",cat:"입장권",title:"D6 피사 사탑 등탑 — 제외(사진만)",target:"이미 구매했다면 환불 확인",window:"사진만 (등탑 X)",note:"확정 일정은 사탑 외관 사진만이라 등탑 티켓이 필요 없어짐. 6/23 오픈 때 이미 구매했다면 OPAPISA 환불/변경 조건 확인(시간제 티켓은 환불 제한 가능)",link:"https://www.opapisa.it/en/tickets/buy/",linkText:"OPAPISA"},
 {status:"예약가능",tone:"warn",cat:"입장권",title:"D5 우피치 / 아카데미아 / 두오모",target:"지금 예약 (상시 오픈)",window:"고정 오픈일 없음·조기매진",note:"우피치 08:30 €29(사전권), 아카데미아 13:30 €20+예약 €4=€24(2026-02 인상), 두오모 Brunelleschi Pass €30(쿠폴라+세례당+종탑+오페라두오모박물관). ⚠️일요일 쿠폴라는 12:45~16:30 운영이라 16:00 슬롯이 마지막이거나 없을 수 있음 → 가장 이른 오후 슬롯 확보, 안 되면 D5 순서 조정",link:"https://tickets.uffizi.it/",linkText:"우피치"},
 {status:"확정",tone:"done",cat:"입장권",title:"D3 바티칸 박물관 08:00",target:"완료 (2026-07-05 발권)",window:"환불불가·기명 티켓",note:"9/18(금) 08:00 입장, 2인 €50(€25/인=€20+예약비 €5). 입구는 예약자 줄 우측 Corridoio 1(Passageway 1) · 신분증 필수 · ⚠️입장 전 안뜰의 직원에게 티켓 검증(validation) 필수 — 미검증 시 개찰구 통과 불가. 티켓 PDF는 휴대폰+인쇄본 이중 보관",link:"https://tickets.museivaticani.va",linkText:"바티칸"},
@@ -1799,10 +1804,10 @@ const BOOKING_ITEMS=[
 {status:"선택예약",tone:"warn",cat:"식당",title:"D4-D6 피렌체 저녁",target:"2026-08-20~09-05",window:"인기 식당 예약",note:"비스테카(Buca Mario)는 D4(토) 20:15로 이동 — 일요일 휴무라 D5 불가, D6은 친퀘 당일치기로 저녁 부재. D5 일요일은 전통요리 후보(4 Leoni 등)",link:"https://www.bucamario.com/contatti/",linkText:"Buca Mario"},
 {status:"예약불필요",tone:"",cat:"식당",title:"D6 리오마조레 점심",target:"당일 현장",window:"테이크아웃 우선",note:"친퀘테레 당일치기 확정으로 Monterosso 저녁 예약은 불필요해짐. D6 점심은 리오마조레 프리또 코노 테이크아웃(Il Pescato Cucinato 등) — 예약 불필요, 월요일 영업 여부만 직전 확인",link:"",linkText:""},
 {status:"선택예약",tone:"warn",cat:"식당",title:"D8-D12 후반부 저녁",target:"2026-09-05 전후",window:"토요일 돌로미티는 2~4주 전",note:"코르티나 4박 로테이션: 수(D8) Baita Fraina · 목(D9) Tivoli/SanBrite(영업일 전화 확인) · 금(D10) El Brite · 토(D11) Da Aurelio — 토요일 몫은 2~4주 전 예약 필수. 밀라노 일요 영업처(D12)도 며칠 전 예약",link:"https://www.google.com/maps/search/?api=1&query=Cortina+Ampezzo+restaurants",linkText:"지도"},
-{status:"예약필요",tone:"warn",cat:"교통",title:"베네치아 → 밀라노 렌터카 (5일)",target:"지금",window:"무료취소 조건 우선",note:"2026-07-12 확정: 9/23(수) 12:00 메스트레역 픽업 → 9/27(일) 16:30 밀라노 반납 = 5일 과금. ⚠️영업소 점심휴무(12:30~15:00 흔함) 걸리는지 확인 — 걸리면 11:30 픽업 또는 무휴 업체. 원웨이 수수료·풀커버 포함 견적 비교",link:"https://www.rentalcars.com",linkText:"RentalCars"},
-{status:"오픈대기",tone:"warn",cat:"돌로미티",title:"Tre Cime 주차/통행 예약",target:"2026-08-26 전후(약 30일 전)",window:"2026 차량 €40·번호판 입력",note:"온라인 예약 필수. 2026-07-12 재설계: 브라이에스 아침 선행이라 통행 슬롯 11:00 전후, 목/금 중 예보 좋은 날로 선택. 예약창 약 30일 전 롤링 오픈(공식 명시 아님→8월 포털 재확인). 번호판은 9/23(수) 픽업 후 입력(전날 23:59까지 수정 가능). 카디니 전망대는 같은 주차장이라 추가비용 0",link:"https://auronzo.info/en/parking-tre-cime-di-lavaredo/",linkText:"공식"},
-{status:"예약불필요",tone:"",cat:"현장구매",title:"현장 구매 OK (예약 불필요)",target:"당일 현장",window:"미리 예약할 필요 없음",note:"산타크로체(€10+€1, 월 막입장 17:00)·곤돌라(주간 €90/보트, 19시 이후 €110 — 18:00 탑승이라 주간 요금)·라고 디 브라이에스 보트(현장만)·라가주오이(~€26/인, 온라인 −5%)·친퀘토리 리프트(€18~20)는 사전 예약 불필요. ⚠️팔로리아는 9/20 시즌종료로 제외. 캘린더에서 제외",link:"",linkText:""},
-{status:"예약필요",tone:"warn",cat:"숙소",title:"코르티나 4박 / 밀라노 1박 숙소",target:"지금",window:"무료취소 우선",note:"2026-07-12 확정: 코르티나 9/23~27 4박(수~일) — 주말 낀 4연박이라 빨리 잡을수록 유리, 시내 ZTL 대응 주차 포함 필수 조건. 하프보드 가능 숙소(Menardi 등)면 토요일 저녁 백업도 해결. 밀라노 1박(9/27)은 Centrale 반납 동선 고려",link:"https://www.booking.com/city/it/cortina-d-ampezzo.html",linkText:"Booking"}
+{status:"예약필요",tone:"warn",cat:"교통",title:"베네치아 → 밀라노 렌터카 (5일)",when:"9/23(수) 12:00 픽업~9/27(일)",wk:23,target:"지금",window:"무료취소 조건 우선",note:"2026-07-12 확정: 9/23(수) 12:00 메스트레역 픽업 → 9/27(일) 16:30 밀라노 반납 = 5일 과금. ⚠️영업소 점심휴무(12:30~15:00 흔함) 걸리는지 확인 — 걸리면 11:30 픽업 또는 무휴 업체. 원웨이 수수료·풀커버 포함 견적 비교",link:"https://www.rentalcars.com",linkText:"RentalCars"},
+{status:"오픈대기",tone:"warn",cat:"돌로미티",title:"Tre Cime 주차/통행 예약",when:"9/25(금) 사용",wk:25,target:"2026-08-26 전후(약 30일 전)",window:"2026 차량 €40·번호판 입력",note:"온라인 예약 필수. 2026-07-12 재설계: 브라이에스 아침 선행이라 통행 슬롯 11:00 전후, 목/금 중 예보 좋은 날로 선택. 예약창 약 30일 전 롤링 오픈(공식 명시 아님→8월 포털 재확인). 번호판은 9/23(수) 픽업 후 입력(전날 23:59까지 수정 가능). 카디니 전망대는 같은 주차장이라 추가비용 0",link:"https://auronzo.info/en/parking-tre-cime-di-lavaredo/",linkText:"공식"},
+{status:"예약불필요",tone:"",cat:"현장구매",title:"현장 구매 OK (예약 불필요)",when:"여행 중 상시",wk:99,target:"당일 현장",window:"미리 예약할 필요 없음",note:"산타크로체(€10+€1, 월 막입장 17:00)·곤돌라(주간 €90/보트, 19시 이후 €110 — 18:00 탑승이라 주간 요금)·라고 디 브라이에스 보트(현장만)·라가주오이(~€26/인, 온라인 −5%)·친퀘토리 리프트(€18~20)는 사전 예약 불필요. ⚠️팔로리아는 9/20 시즌종료로 제외. 캘린더에서 제외",link:"",linkText:""},
+{status:"예약필요",tone:"warn",cat:"숙소",title:"코르티나 4박 / 밀라노 1박 숙소",when:"9/23(수)~28(월)",wk:23,target:"지금",window:"무료취소 우선",note:"2026-07-12 확정: 코르티나 9/23~27 4박(수~일) — 주말 낀 4연박이라 빨리 잡을수록 유리, 시내 ZTL 대응 주차 포함 필수 조건. 하프보드 가능 숙소(Menardi 등)면 토요일 저녁 백업도 해결. 밀라노 1박(9/27)은 Centrale 반납 동선 고려",link:"https://www.booking.com/city/it/cortina-d-ampezzo.html",linkText:"Booking"}
 ];
 
 const TICKETING_ITEMS=[
@@ -2092,7 +2097,10 @@ function renderRouteFlow(c){
 // STATS
 function renderStats(c){
   const el=document.getElementById('statsRow'),tot=c.budget.reduce((a,b)=>a+b.a,0);
-  el.innerHTML=`<div class="stat"><div class="label">총 예산(2인)</div><div class="value">${Math.round(tot*1500/10000)}만원</div><div class="stat-sub">€${tot.toLocaleString()}</div></div><div class="stat"><div class="label">1인당</div><div class="value">${c.perPerson}만원</div><div class="stat-sub">항공 포함</div></div><div class="stat"><div class="label">도시</div><div class="value">${c.cities.filter(x=>x.n>0).length}</div><div class="stat-sub">숙박 도시</div></div><div class="stat"><div class="label">교통</div><div class="value">€${(c.budget.find(x=>x.l==='교통')||{}).a}</div><div class="stat-sub">${c.cities.length>9?'열차+렌터카':'열차+버스'}</div></div><div class="stat"><div class="label">숙박</div><div class="value">€${(c.budget.find(x=>x.l==='숙박')||{}).a}</div><div class="stat-sub">12박</div></div>`;
+  const _k=cat=>BUDGET_DETAIL.filter(g=>g.cat.startsWith(cat)).flatMap(g=>g.items).reduce((s,i)=>s+BGT_KRW(i),0);
+  const _totK=BUDGET_DETAIL.flatMap(g=>g.items).reduce((s,i)=>s+BGT_KRW(i),0);
+  const _m=v=>Math.round(v/10000).toLocaleString()+'만원';
+  el.innerHTML=`<div class="stat"><div class="label">총 예산(2인)</div><div class="value">${_m(_totK)}</div><div class="stat-sub">€${Math.round(_totK/EUR_KRW).toLocaleString()} 상당 @${EUR_KRW.toLocaleString()}</div></div><div class="stat"><div class="label">1인당</div><div class="value">${c.perPerson}만원</div><div class="stat-sub">항공 포함</div></div><div class="stat"><div class="label">도시</div><div class="value">${c.cities.filter(x=>x.n>0).length}</div><div class="stat-sub">숙박 도시</div></div><div class="stat"><div class="label">교통</div><div class="value">${_m(_k('교통'))}</div><div class="stat-sub">${c.cities.length>9?'열차+렌터카':'열차+버스'}</div></div><div class="stat"><div class="label">숙박</div><div class="value">${_m(_k('숙박'))}</div><div class="stat-sub">12박</div></div>`;
 }
 
 // CALENDAR
@@ -2480,7 +2488,15 @@ function renderBooking(){
     {icon:'✅',label:'예약 완료',cls:'done',open:false,match:s=>s==='확정'},
     {icon:'⚪',label:'예약 불필요 (당일 현장)',cls:'none',open:false,match:s=>/불필요/.test(s)}
   ];
-  const counts=groupsDef.map(g=>({g,items:BOOKING_ITEMS.filter(it=>g.match(it.status))}));
+  // 여행일 도출: when 필드 우선, 없으면 제목의 D번호(D1=9/16)로 계산 → 그룹 내 여행일 순 정렬
+  const BK_DOW=['수','목','금','토','일','월','화','수','목','금','토','일','월'];
+  const bkWhen=it=>{
+    if(it.when!=null)return {t:it.when,k:it.wk??50};
+    const m=(it.title||'').match(/D(\d{1,2})/);
+    if(m){const d=Number(m[1]);return {t:`9/${15+d}(${BK_DOW[d-1]||''})`,k:15+d};}
+    return null;
+  };
+  const counts=groupsDef.map(g=>({g,items:BOOKING_ITEMS.filter(it=>g.match(it.status)).slice().sort((a,b)=>((bkWhen(a)||{k:98}).k)-((bkWhen(b)||{k:98}).k))}));
   const strip=`<div class="bk-strip">${counts.filter(c=>c.items.length).map(c=>`<button class="bk-chip ${c.g.cls}" onclick="document.getElementById('bkg-${c.g.cls}').scrollIntoView({behavior:'smooth',block:'start'})">${c.g.icon} ${c.g.label.split(' (')[0]} <b>${c.items.length}</b></button>`).join('')}</div>`;
   // ── 마감 타임라인 (TICKETING_ITEMS)
   const ev=TICKETING_ITEMS.map((x,i)=>({...x,idx:i})).filter(x=>x.ymd);
@@ -2497,7 +2513,7 @@ function renderBooking(){
   // ── 상태 그룹별 통합 리스트 (행 클릭 → 상세 펼침)
   const list=counts.map(({g,items})=>{
     if(!items.length)return '';
-    const rows=items.map(it=>`<details class="bk-row ${g.cls}"${g.open?' open':''}><summary><span class="bk-cat">${it.cat}</span><span class="bk-title">${it.title}</span><span class="bk-target">${it.target}</span><span class="bk-status ${g.cls}">${it.status}</span></summary><div class="bk-detail"><div class="bk-drow"><strong>조건</strong>${it.window}</div><div class="bk-drow"><strong>메모</strong>${it.note}</div>${it.link?`<a class="booking-link" href="${it.link}" target="_blank" rel="noopener">${it.linkText} 열기 ↗</a>`:''}</div></details>`).join('');
+    const rows=items.map(it=>{const w=bkWhen(it);return `<details class="bk-row ${g.cls}"${g.open?' open':''}><summary><span class="bk-cat">${it.cat}</span><span class="bk-title">${it.title}</span>${w?`<span class="bk-when">🗓 ${w.t}</span>`:''}<span class="bk-target">${it.target}</span><span class="bk-status ${g.cls}">${it.status}</span></summary><div class="bk-detail"><div class="bk-drow"><strong>조건</strong>${it.window}</div><div class="bk-drow"><strong>메모</strong>${it.note}</div>${it.link?`<a class="booking-link" href="${it.link}" target="_blank" rel="noopener">${it.linkText} 열기 ↗</a>`:''}</div></details>`;}).join('');
     return `<div class="bk-group" id="bkg-${g.cls}"><div class="bk-ghead ${g.cls}">${g.icon} ${g.label}<span class="cnt">${items.length}건</span></div>${rows}</div>`;
   }).join('');
   el.innerHTML=`<div class="booking-meta">📅 오늘 ${today} (KST) · 검증 기준일: 돌로미티·교통 2026-07-12 / 입장권 2026-06-21 · 이탈리아 9월은 한국보다 7시간 느림</div>${strip}<div class="ticket-title">⏰ 마감 타임라인 — 칩을 누르면 아래 상세가 바뀝니다</div>${nextH}${tl}${tlPast}<div id="bookingDetail">${bookingDetailHtml(TICKETING_ITEMS[selIdx])}</div><div class="ticket-title" style="margin-top:24px">🗂 전체 예약 현황 — 행을 누르면 상세가 펼쳐집니다</div>${list}`;
@@ -2580,30 +2596,34 @@ function showHotelCity(name){
   document.querySelectorAll('[data-cityblock]').forEach(b=>{b.hidden=(b.dataset.cityblock!==name);});
 }
 
-// BUDGET — 상세 내역 기반 (2026-07-12 개편)
+// BUDGET — 원화 기준 상세 원장 (2026-07-12 개편, 원화 전환)
 function renderBudget(c){
   const el=document.getElementById('budgetContent');if(!el)return;
-  const KRW=1500;
-  const fmtE=v=>'€'+v.toLocaleString();
+  const R=EUR_KRW;
+  const kOf=BGT_KRW;
+  const fmtM=v=>Math.round(v/10000).toLocaleString()+'만';
+  const fmtW=v=>'₩'+Math.round(v).toLocaleString();
   const all=BUDGET_DETAIL.flatMap(g=>g.items);
-  const sum=f=>all.filter(f).reduce((s,i)=>s+i.eur,0);
-  const tot=sum(()=>true),fixed=sum(i=>i.st==='확정'),locked=sum(i=>i.st==='고정'),est=sum(i=>i.st==='추정');
-  document.getElementById('budgetTitle').textContent='예산 상세 (2인 기준 · 환율 1,500원/€ 가정)';
-  const stChip=s=>`<span class="bgt-st ${s==='확정'?'done':s==='고정'?'lock':'est'}">${s==='확정'?'✅ 확정':s==='고정'?'📌 가격고정':'📊 추정'}</span>`;
+  const sumK=f=>all.filter(f).reduce((s,i)=>s+kOf(i),0);
+  const totK=sumK(()=>true),paidK=sumK(i=>i.st==='확정'),lockK=sumK(i=>i.st==='고정'),estK=sumK(i=>i.st==='추정');
+  const restEur=all.filter(i=>i.st!=='확정'&&i.eur!=null).reduce((s,i)=>s+i.eur,0);
+  document.getElementById('budgetTitle').textContent=`예산 상세 (2인 · 원화 기준 · 적용 환율 ${R.toLocaleString()}원/€)`;
+  const stChip=s=>`<span class="bgt-st ${s==='확정'?'done':s==='고정'?'lock':'est'}">${s==='확정'?'✅ 지출확정':s==='고정'?'📌 가격고정':'📊 추정'}</span>`;
   const head=`<div class="bgt-summary">
-    <div class="bgt-tile main"><div class="v">${fmtE(tot)}</div><div class="l">총 예산 (2인)</div><div class="s">₩${Math.round(tot*KRW/10000).toLocaleString()}만 · 1인 ${Math.round(tot*KRW/2/10000)}만</div></div>
-    <div class="bgt-tile done"><div class="v">${fmtE(fixed)}</div><div class="l">✅ 확정 (결제·발권 완료)</div><div class="s">전체의 ${Math.round(fixed/tot*100)}%</div></div>
-    <div class="bgt-tile lock"><div class="v">${fmtE(locked)}</div><div class="l">📌 가격 고정 (미결제)</div><div class="s">전체의 ${Math.round(locked/tot*100)}%</div></div>
-    <div class="bgt-tile est"><div class="v">${fmtE(est)}</div><div class="l">📊 추정치</div><div class="s">전체의 ${Math.round(est/tot*100)}% — 숙소·렌터카 확정 시 축소</div></div>
+    <div class="bgt-tile main"><div class="v">₩${fmtM(totK)}</div><div class="l">총 예산 (2인)</div><div class="s">1인 ₩${fmtM(totK/2)} · €${Math.round(totK/R).toLocaleString()} 상당</div></div>
+    <div class="bgt-tile done"><div class="v">₩${fmtM(paidK)}</div><div class="l">✅ 이미 지출 (환율 무관)</div><div class="s">전체의 ${Math.round(paidK/totK*100)}% — 결제·발권 완료분</div></div>
+    <div class="bgt-tile lock"><div class="v">₩${fmtM(lockK)}</div><div class="l">📌 가격 고정 (유로, 미결제)</div><div class="s">전체의 ${Math.round(lockK/totK*100)}%</div></div>
+    <div class="bgt-tile est"><div class="v">₩${fmtM(estK)}</div><div class="l">📊 추정치</div><div class="s">전체의 ${Math.round(estK/totK*100)}% — 숙소·렌터카 확정 시 축소</div></div>
   </div>
-  <div class="bgt-stack">${BUDGET_DETAIL.map(g=>{const gs=g.items.reduce((s,i)=>s+i.eur,0);return `<span class="bgt-seg" style="width:${(gs/tot*100).toFixed(1)}%;background:${g.c}" title="${g.cat} €${gs}"></span>`;}).join('')}</div>
-  <div class="bgt-legend">${BUDGET_DETAIL.map(g=>{const gs=g.items.reduce((s,i)=>s+i.eur,0);return `<span><i style="background:${g.c}"></i>${g.cat} ${Math.round(gs/tot*100)}%</span>`;}).join('')}</div>`;
+  <div class="bgt-fx">💱 남은 유로 지출 €${restEur.toLocaleString()} — 환율이 100원 움직이면 총예산 ±₩${Math.round(restEur*100/10000).toLocaleString()}만 변동</div>
+  <div class="bgt-stack">${BUDGET_DETAIL.map(g=>{const gs=g.items.reduce((s,i)=>s+kOf(i),0);return `<span class="bgt-seg" style="width:${(gs/totK*100).toFixed(1)}%;background:${g.c}" title="${g.cat} ₩${fmtM(gs)}"></span>`;}).join('')}</div>
+  <div class="bgt-legend">${BUDGET_DETAIL.map(g=>{const gs=g.items.reduce((s,i)=>s+kOf(i),0);return `<span><i style="background:${g.c}"></i>${g.cat} ${Math.round(gs/totK*100)}%</span>`;}).join('')}</div>`;
   const groups=BUDGET_DETAIL.map(g=>{
-    const gs=g.items.reduce((s,i)=>s+i.eur,0);
-    const rows=g.items.map(i=>`<div class="bgt-row"><div class="bgt-n">${i.n}${i.note?`<span class="bgt-note">${i.note}</span>`:''}</div>${stChip(i.st)}<div class="bgt-amt"><b>${fmtE(i.eur)}</b><span>${i.krw?('₩'+i.krw.toLocaleString()+' 실결제'):('₩'+Math.round(i.eur*KRW/10000).toLocaleString()+'만')}</span></div></div>`).join('');
-    return `<details class="bgt-group" open><summary><span class="bgt-dot" style="background:${g.c}"></span><span class="bgt-cat">${g.cat}</span><span class="bgt-cnt">${g.items.length}건</span><span class="bgt-sub">${fmtE(gs)} · ₩${Math.round(gs*KRW/10000).toLocaleString()}만 (${Math.round(gs/tot*100)}%)</span></summary><div class="bgt-rows">${rows}</div></details>`;
+    const gs=g.items.reduce((s,i)=>s+kOf(i),0);
+    const rows=g.items.map(i=>`<div class="bgt-row"><div class="bgt-n">${i.n}${i.note?`<span class="bgt-note">${i.note}</span>`:''}</div>${stChip(i.st)}<div class="bgt-amt"><b>${fmtW(kOf(i))}</b><span>${i.krw!=null?'실결제 확정':'€'+i.eur.toLocaleString()+' × '+R.toLocaleString()}</span></div></div>`).join('');
+    return `<details class="bgt-group" open><summary><span class="bgt-dot" style="background:${g.c}"></span><span class="bgt-cat">${g.cat}</span><span class="bgt-cnt">${g.items.length}건</span><span class="bgt-sub">₩${fmtM(gs)} (${Math.round(gs/totK*100)}%)</span></summary><div class="bgt-rows">${rows}</div></details>`;
   }).join('');
-  el.innerHTML=head+groups+`<div class="bgt-foot">✅확정 항목은 실결제 원화 기준 · 미예약(코르티나·밀라노 숙소, 렌터카) 확정 시 갱신 · 검증 2026-07-12</div>`;
+  el.innerHTML=head+groups+`<div class="bgt-foot">원화 결제 완료분(항공·숙소 3건)은 실결제액 고정 — 환율과 무관 · 유로 항목만 적용환율(${R.toLocaleString()}원/€)로 환산 · 검증 2026-07-12</div>`;
 }
 
 // COMPARE
