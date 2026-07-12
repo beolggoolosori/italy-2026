@@ -1109,33 +1109,40 @@ B: {
 // Firenze→Venezia 직통 일 17편(최단 2h01) · La Spezia→Firenze 일 23편(직통 10편, 막차 21:23).
 // D6은 Pisa S. Rossore 하차(사탑 도보 5~8분) — La Spezia행 Regionale가 Centrale 다음 정차.
 
-// ---------- 확정안: 피사+친퀘 당일치기(피렌체 베이스) + 베네치아 2박 ----------
+// ---------- 확정안(2026-07-12 개정): 피사+친퀘 당일치기 + 베네치아 1박 + 돌로미티 4박 ----------
 COURSES.E=JSON.parse(JSON.stringify(COURSES.B));
 Object.assign(COURSES.E,{
-  name:"로마–밀라노 12박 13일",tab:"✅확정",sub:"친퀘 당일치기 · 베네치아 2박",
-  nights:"Roma(3)+Firenze(3)+Venezia(2)+Dolomiti(3)+Milano(1)=12N",
-  cities:[{name:"Roma",lat:41.9028,lng:12.4964,n:3,dates:"9/16~18",color:"#ef4444"},{name:"Firenze",lat:43.7696,lng:11.2558,n:3,dates:"9/19~21",color:"#22c55e"},{name:"Pisa",lat:43.7228,lng:10.4017,n:0,dates:"9/21",color:"#86efac"},{name:"Cinque Terre",lat:44.1461,lng:9.6535,n:0,dates:"9/21",color:"#f59e0b"},{name:"Venezia",lat:45.4408,lng:12.3155,n:2,dates:"9/22~23",color:"#06b6d4"},{name:"Tre Cime",lat:46.6131,lng:12.3035,n:0,dates:"9/25",color:"#38bdf8"},{name:"Cortina",lat:46.5369,lng:12.1357,n:3,dates:"9/24~26",color:"#0ea5e9"},{name:"Lago di Como",lat:45.9875,lng:9.2573,n:0,dates:"9/27",color:"#a78bfa"},{name:"Milano",lat:45.4642,lng:9.1900,n:1,dates:"9/27~28",color:"#ec4899"}]
+  name:"로마–밀라노 12박 13일",tab:"✅확정",sub:"친퀘 당일치기 · 베네치아 1박 · 돌로미티 4박",
+  nights:"Roma(3)+Firenze(3)+Venezia(1)+Dolomiti(4)+Milano(1)=12N",
+  cities:[{name:"Roma",lat:41.9028,lng:12.4964,n:3,dates:"9/16~18",color:"#ef4444"},{name:"Firenze",lat:43.7696,lng:11.2558,n:3,dates:"9/19~21",color:"#22c55e"},{name:"Pisa",lat:43.7228,lng:10.4017,n:0,dates:"9/21",color:"#86efac"},{name:"Cinque Terre",lat:44.1461,lng:9.6535,n:0,dates:"9/21",color:"#f59e0b"},{name:"Venezia",lat:45.4408,lng:12.3155,n:1,dates:"9/22",color:"#06b6d4"},{name:"Seceda",lat:46.5950,lng:11.7210,n:0,dates:"9/24",color:"#7dd3fc"},{name:"Tre Cime",lat:46.6131,lng:12.3035,n:0,dates:"9/25",color:"#38bdf8"},{name:"Lagazuoi",lat:46.5273,lng:12.0057,n:0,dates:"9/26",color:"#60a5fa"},{name:"Cortina",lat:46.5369,lng:12.1357,n:4,dates:"9/23~26",color:"#0ea5e9"},{name:"Lago di Como",lat:45.9875,lng:9.2573,n:0,dates:"9/27",color:"#a78bfa"},{name:"Milano",lat:45.4642,lng:9.1900,n:1,dates:"9/27~28",color:"#ec4899"}]
 });
+COURSES.E.budget=[{l:"항공",a:2307,c:"#244F3B"},{l:"교통",a:682,c:"#2F6B4F"},{l:"숙박",a:1800,c:"#3F7D5E"},{l:"식비",a:1500,c:"#5E6B57"},{l:"입장료",a:834,c:"#7E8B6F"},{l:"도시세",a:116,c:"#9AA38C"},{l:"예비비",a:700,c:"#B8B2A6"}]; // 2026-07-12: 렌터카 5일(+70)·바포레토 24h(−20)·베네치아 −1박/코르티나 +1박(−50)·세체다 확정 편입(+148)
 COURSES.E.calendar[21]={city:"피사+친퀘 당일치기",detail:"사탑 사진만(등탑X)\n리오마조레→마나롤라→베르나차",transport:"열차 왕복 ~6h",nights:"Firenze 3N"};
 COURSES.E.calendar[22]={city:"→베네치아",detail:"오전 산타크로체\n직통 2h05 · 석양 곤돌라",transport:"FR 직통 2h05",nights:"Venezia 1N"};
-COURSES.E.calendar[23]={city:"베네치아",detail:"새벽 산마르코+두칼레\n무라노·부라노",nights:"Venezia 2N"};
+COURSES.E.calendar[23]={city:"베네치아→돌로미티",detail:"새벽 산마르코+두칼레\n정오 렌터카→미수리나→코르티나",transport:"렌터카 2h15",nights:"Cortina 1N"};
+COURSES.E.calendar[24]={city:"돌로미티 세체다",detail:"그레이트 돌로미티 로드\n세체다 케이블카+능선",transport:"렌터카",nights:"Cortina 2N"};
+COURSES.E.calendar[25]={city:"돌로미티 트레치메",detail:"트레치메 트레킹 9.5km\n라고 디 브라이에스",transport:"렌터카",nights:"Cortina 3N"};
+COURSES.E.calendar[26]={city:"돌로미티 라가주오이",detail:"라가주오이 2,732m+1차대전 터널\n파소 자우·친퀘토리",transport:"렌터카",nights:"Cortina 4N"};
 {
-  const kept=COURSES.E.transport.filter(r=>!/^D[678]$/.test(String(r.day)));
+  const kept=COURSES.E.transport.filter(r=>!/^D[6789]$/.test(String(r.day)));
   const rows=[
     {day:"D6",route:"Firenze→Pisa S.Rossore(사탑 도보 5분)→La Spezia→(친퀘)→Firenze",mode:"Regionale · S.Rossore 정차편 이용 → 피사 시내버스/택시 0",time:"Fi→S.Rossore ~1h05 · S.Rossore→SP ~1h05 · 복귀 SP→Fi 2h10~30 (막차 21:23)",cost:"약 €70/2인",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
     {day:"D6",route:"친퀘테레 구간 3회 (SP→Rio · Man→Ver · Ver→SP)",mode:"CT Express 구간권 ×3 (MS Card 불필요: 3구간 €15/인 < 카드 €29.50/인)",time:"8~25분/구간",cost:"€5/인/구간 = €30/2인",link:"https://www.parconazionale5terre.it",linkText:"Parco 5 Terre"},
     {day:"D6",route:"Via dell'Amore (Riomaggiore→Manarola)",mode:"도보 900m · 30분 단위 시간제 예약",time:"약 30분 · 14:00 슬롯 목표",cost:"€17.50/인(카드 미소지)",link:"https://www.viadellamore.info",linkText:"예약"},
     {day:"D7",route:"Firenze SMN→Venezia S.Lucia",mode:"Frecciarossa/Italo 직통 (일 17편)",time:"약 2h05 · 11시대 출발 목표",cost:"조기예약 €25~50/2인",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
-    {day:"D7",route:"베네치아 바포레토",mode:"ACTV 패스 · 2박이라 48h 검토",time:"도착 직후 활성화 → D9 오전까지 커버",cost:"24h €25/인 · 48h 요금 예약 시 확인",link:"https://actv.avmspa.it",linkText:"ACTV"}
+    {day:"D7",route:"베네치아 바포레토",mode:"ACTV 24h 패스 · 도착 직후(~14:00) 활성화",time:"D8 오전 P.le Roma/역 이동까지 24h로 커버 (무라노·부라노 없음 → 48h 불필요)",cost:"€25/인 = €50/2인",link:"https://actv.avmspa.it",linkText:"ACTV"},
+    {day:"D8",route:"Venezia S.Lucia→Mestre역",mode:"Trenitalia Regionale 1정거장 (⚠️바포레토 패스 미적용 · People Mover는 Tronchetto행이라 무관)",time:"약 10~12분 · 짐 포함 총 30~40분",cost:"€1.5~3/인",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
+    {day:"D8",route:"Mestre역 렌터카 픽업(5일·풀커버)→Cortina",mode:"A27 경유 · 12:00 픽업 목표 (⚠️영업소 점심휴무 확인)",time:"약 2h15 · 통행료 €8~10",cost:"렌터카 5일 €330~420",link:"https://www.rentalcars.com",linkText:"RentalCars"},
+    {day:"D9",route:"Cortina↔Ortisei (세체다 왕복)",mode:"렌터카 · 그레이트 돌로미티 로드 (Falzarego→Valparola→Corvara→Passo Gardena)",time:"편도 약 80km·1h45 (사진 정차 포함 ~2h)",cost:"연료 · 파소 도로 통행 무료",link:"",linkText:""}
   ];
-  kept.splice(kept.findIndex(r=>r.day==="D9"),0,...rows);
+  kept.splice(kept.findIndex(r=>r.day==="D12"),0,...rows);
   COURSES.E.transport=kept;
 }
 COURSES.E.hotels={
   "Roma (3박)":COURSES.E.hotels["Roma (3박)"],
   "Firenze (3박)":COURSES.E.hotels["Firenze (3박)"],
-  "Venezia (2박)":[],
-  "Cortina d'Ampezzo (3박)":[],
+  "Venezia (1박)":[],
+  "Cortina d'Ampezzo (4박)":[],
   "Milano (1박)":[]
 };
 {
@@ -1165,26 +1172,48 @@ COURSES.E.days[6]={day:7,date:"9/22 화",city:"→베네치아",theme:"산타크
   {t:"09:30~10:40",name:"산타크로체 성당",desc:"화 09:30~17:30 · 미켈란젤로·갈릴레오 묘 + 파치 예배당 (기존 D6 항목 이동)",type:"spot",coords:[43.7685,11.2623],tip:"개장 직후가 가장 한산. 09:25 도착 목표, 두오모 숙소에서 도보 12분."},
   {t:"10:50~11:15",name:"숙소 짐 픽업 → SMN",moveInfo:"도보 12분+10~12분",desc:"",type:"move",coords:[43.7775719,11.2474177],map:false},
   {t:"11:30대",name:"Firenze SMN → Venezia S.Lucia",moveInfo:"Frecciarossa/Italo 직통 약 2h05 (일 17편)",desc:"~13:40 도착 · Super Economy 조기예약 · 검증 2026-07-05",type:"move",coords:[45.4410,12.3215],tip:"기존 친퀘 경유안(5~5.5h·환승 1~2회) 대비 3시간+ 절약. 점심은 SMN에서 파니노 포장해 차내에서."},
-  {t:"14:00~14:40",name:"바포레토 + 숙소 체크인",desc:"짐 정리 · ACTV 패스는 도착 직후 활성화(48h면 D9 오전까지 커버)",type:"hotel",coords:[45.4408,12.3155],map:false},
+  {t:"14:00~14:40",name:"바포레토 + 숙소 체크인",desc:"짐 정리 · ACTV 24h 패스 도착 직후 활성화 → D8 오전 P.le Roma 이동까지 커버",type:"hotel",coords:[45.4408,12.3155],map:false},
   {t:"14:50",name:"리알토 다리 + 산폴로 골목",desc:"",type:"hl",coords:[45.4380,12.3360]},
+  {t:"15:40~16:20",name:"Cantina Do Mori 치케티 맛보기",rk:"venezia-cicchetti",desc:"1462년 최고(古) 바카로 · 월~토 08:00~19:30이라 저녁엔 닫힘 → 오후 산책 중 방문",type:"food",coords:[45.4390,12.3342],tip:"리알토 도보 2분. 프란코볼리+옴브라 한 잔만 — 저녁(Do Spade) 배를 남겨둘 것."},
   {t:"17:00",name:"Caffe Florian",desc:"2인 €40~50 (오케스트라 서차지 포함)",type:"food",coords:[45.4343,12.3386]},
   {t:"18:00~18:45",name:"곤돌라 (석양)",desc:"€90/보트 · 일몰 약 19:16 → 골든아워 탑승",type:"hl",coords:[45.4380,12.3360],map:false,tip:"이전 안에서 오후에 압축됐던 곤돌라를 여유 시간대에 배치."},
-  {t:"20:00",name:"저녁: 치케티 바 호핑",rk:"venezia-cicchetti",desc:"Cantina Do Mori → Do Spade · 치케티 8~10개+와인",type:"food",coords:[45.4389,12.3338]},
+  {t:"20:00",name:"저녁: Cantina Do Spade + 치케티 호핑",rk:"venezia-cicchetti",desc:"1447년 · 매일 18:00~22:00 · sarde in saor·부사라 · 착석 마무리 가능",type:"food",coords:[45.4385,12.3340],tip:"Do Mori는 19:30 마감이라 저녁 앵커는 Do Spade(도보 2분). 베네치아의 유일한 밤 — 느긋하게."},
   {t:"22:00",name:"산마르코 야경",desc:"",type:"hl",coords:[45.4345,12.3388],map:false}
 ],cost:"€280~340"};
-COURSES.E.days[7]={day:8,date:"9/23 수",city:"베네치아",theme:"새벽 산마르코 + 두칼레 + 무라노·부라노 (풀데이)",routeSummary:"🚶 새벽 산마르코→두칼레→바포레토 무라노→부라노→도르소두로→산조르조 일몰→Boccadoro",sched:[
-  {t:"06:45~08:00",name:"새벽 산마르코 + 리알토 산책",desc:"데이트리퍼 없는 유일한 시간 · 조식 Pasticceria Da Bonifacio(06:30 오픈)",type:"hl",coords:[45.4341,12.3388],tip:"베네치아 2박의 핵심 보상. 새벽 광장·안개 낀 운하 사진은 숙박자만 가능."},
-  {t:"09:00~10:45",name:"두칼레 궁전",desc:"€30/인(30일 전 온라인·8/24까지) · 현장 €35 · 09:00 첫 슬롯",type:"spot",coords:[45.4336,12.3404],tip:"탄식의 다리·대평의회장 포함 1시간 45분. 첫 슬롯이 가장 한산."},
-  {t:"11:00~11:40",name:"F.te Nove → 무라노",moveInfo:"바포레토 4.1/4.2 약 15분",desc:"",type:"move",coords:[45.4586,12.3531],map:false},
-  {t:"11:40~13:30",name:"무라노 유리공방 + 점심",desc:"유리공방 시연 + 가벼운 점심",type:"spot",coords:[45.4586,12.3531]},
-  {t:"13:40~14:15",name:"무라노 → 부라노",moveInfo:"바포레토 12번 약 30분",desc:"",type:"move",coords:[45.4853,12.4167],map:false},
-  {t:"14:15~16:00",name:"부라노 색색 집",desc:"레이스 골목 + 기울어진 종탑 · 인증샷 명소",type:"hl",coords:[45.4853,12.4167]},
-  {t:"16:10~17:00",name:"부라노 → 본섬 복귀",moveInfo:"바포레토 12번 → F.te Nove",desc:"",type:"move",coords:[45.4453,12.3410],map:false},
-  {t:"17:15~18:20",name:"도르소두로 · 아카데미아 다리",desc:"살루테 성당 외관 + 아카데미아 다리 뷰",type:"spot",coords:[45.4315,12.3287]},
-  {t:"18:40",name:"산 조르조 마조레 종탑 (일몰)",desc:"€8/인 · 일몰 약 19:15 · 산마르코 종탑보다 뷰 좋고 한적",type:"hl",coords:[45.4294,12.3432]},
-  {t:"20:00",name:"저녁: Boccadoro",rk:"venezia-dinner",desc:"먹물 리소토 · 수요일 영업 · €85",type:"food",coords:[45.4440,12.3380]},
-  {t:"22:00",name:"야경 + 짐 정리",desc:"내일 09:00 메스트레 렌터카 픽업 → 전날 밤 짐 완성",type:"hl",coords:[45.4345,12.3388],map:false}
-],cost:"€300~360"};
+COURSES.E.days[7]={day:8,date:"9/23 수",city:"베네치아→돌로미티",theme:"새벽 산마르코 + 두칼레 → 정오 렌터카 → 돌로미티 입성",routeSummary:"🚶 새벽 산마르코→두칼레 09:00→🚗 Mestre 렌터카 12:00→A27 2h15→미수리나→Cortina",sched:[
+  {t:"06:45~08:00",name:"새벽 산마르코 + 리알토 산책",desc:"데이트리퍼 없는 유일한 시간 · 조식 Pasticceria Da Bonifacio(06:30 오픈)",type:"hl",coords:[45.4341,12.3388],tip:"1박이어도 이 보상은 그대로 — 새벽 광장·안개 낀 운하 사진은 숙박자만 가능. 전날 밤 짐을 싸두면 아침이 가볍다."},
+  {t:"09:00~10:45",name:"두칼레 궁전",desc:"€30/인(30일 전 온라인·8/24까지) · 현장 €35 · 09:00 첫 슬롯",type:"spot",coords:[45.4336,12.3404],tip:"탄식의 다리·대평의회장 포함 1시간 45분. 첫 슬롯이 가장 한산. 짐은 관람 동안 호텔 보관."},
+  {t:"10:50~11:20",name:"숙소 짐 픽업 → 산타루치아역",moveInfo:"도보/바포레토 (24h 패스 마지막 사용)",desc:"체크아웃 · 물·간식 미리 구입",type:"move",coords:[45.4410,12.3215],map:false},
+  {t:"11:30~11:45",name:"S.Lucia → Mestre역",moveInfo:"Regionale 1정거장 ~10분 · €1.5~3/인",desc:"⚠️People Mover는 Tronchetto행이라 메스트레에 안 감 — 기차가 정답",type:"move",coords:[45.4823,12.2317],map:false,tip:"바포레토 패스 미적용 구간. 매표는 Trenitalia 앱 QR로."},
+  {t:"12:00",name:"메스트레역 렌터카 픽업 (5일)",desc:"IDP+한국면허+신용카드+여권 · 풀커버 보험 권장",type:"move",coords:[45.4823,12.2317],tip:"⚠️이탈리아 영업소는 12:30~15:00 점심휴무가 흔함 — 예약 시 픽업시간 가능 여부 확인, 걸리면 11:30 픽업 또는 무휴 업체. 픽업 즉시 차량번호판 확보 → D10 Auronzo 통행료 예약에 입력(9/24 23:59까지). 산악 대응 타이어·ZTL 회피 내비 설정."},
+  {t:"12:30~14:45",name:"메스트레 → 코르티나",desc:"A27 경유 약 2h15 · 통행료 €8~10 · 차내 파니노 점심",type:"move",coords:[46.5369,12.1357],map:false,tip:"중간 휴게 포함. 코르티나 시내 일부 ZTL → 호텔 주차/통행 허가 사전 요청."},
+  {t:"15:00",name:"호텔 체크인 + 짐 정리",desc:"4박 베이스캠프 — 이후 짐 이동 없음",type:"hotel",coords:[46.5369,12.1357],map:false},
+  {t:"15:40~17:10",name:"미수리나 호수",desc:"코르티나에서 약 25분 · 호반 산책 + 소라피스 뷰",type:"hl",coords:[46.5808,12.2531],tip:"도착일은 저강도로 몸 풀기. ⚠️팔로리아 케이블카는 9/20 시즌종료(2026 하계 7/11~9/20)라 불가 — 전망대는 D11 친퀘토리·라가주오이로. 토파나 곤돌라(9/29까지)가 당일 대안."},
+  {t:"18:30",name:"알펜글로우 (토파네/소라피스)",desc:"일몰 약 19:05 · 봉우리 분홍빛",type:"hl",coords:[46.5369,12.1357],map:false},
+  {t:"19:30",name:"저녁: Baita Fraina",rk:"dolomiti-dinner",desc:"수요일 영업(월 휴무) · 카준치에이/카네데를리/사슴 €90~120",type:"food",coords:[46.5330,12.1290],tip:"El Brite은 수요일 휴무라 이 날은 Baita Fraina. 코르티나 시그니처 카준치에이(비트 라비올리)는 꼭 주문. 예약 권장(+39 0436 3634)."}
+],cost:"€250~320"};
+COURSES.E.days[8]={day:9,date:"9/24 목",city:"돌로미티 세체다",theme:"그레이트 돌로미티 로드 + 세체다 능선 (풀데이 #1)",routeSummary:"🚗 Falzarego→Valparola→Corvara→Passo Gardena→Ortisei→🚡세체다 능선→역방향 복귀",sched:[
+  {t:"07:30",name:"호텔 조식 + 출발 준비",desc:"물·바람막이·선크림 — 능선은 2,500m",type:"food",coords:[46.5369,12.1357],map:false,tip:"평일(목) 방문이라 토요일 피크 회피. 세체다 타임슬롯(10:00 목표)은 사전 예약 필수 — 시간 역산 출발."},
+  {t:"08:00~10:00",name:"코르티나 → 오르티세이 (그레이트 돌로미티 로드)",moveInfo:"약 80km · 순수 1h45 + 사진 정차",desc:"Passo Falzarego→Valparola→La Villa·Corvara→Passo Gardena→Selva→Ortisei",type:"move",coords:[46.5486,11.8117],tip:"세계적 명성의 파소 드라이브 — 파소 가르데나 정상(2,136m)에서 셀라 북벽 배경 사진 정차 10분. 검증 2026-07-12."},
+  {t:"10:00~10:30",name:"세체다 케이블카 (Ortisei→Furnes→Seceda)",desc:"왕복 €74/인 · 2026 30분단위 타임슬롯 사전예약 의무 · 2구간 환승 ~20분",type:"move",coords:[46.5770,11.6745],tip:"운영 08:30~17:00대(시즌 5/22~11/2). 7일 이상 전 예매 −5%(9/17까지). 오르티세이역 지하/인근 유료주차."},
+  {t:"10:30~13:00",name:"세체다 능선 2,500m — 오들레 침봉 파노라마",desc:"정상역→능선 뷰포인트 도보 10~15분 · 페르메다 탑 배경 인증샷",type:"hl",coords:[46.5985,11.7255],tip:"돌로미티 전체에서 가장 유명한 능선 뷰. 시간·체력 여유면 능선 따라 Pieralongia 방향 완만한 왕복 1시간 추가."},
+  {t:"13:00~14:15",name:"점심: Baita Sofie 또는 Troier Hütte",desc:"산장 점심 €30~50 · 카네데를리/슈페크 플래터/슈트루델",type:"food",coords:[46.5936,11.7181],tip:"Sofie는 정상역 인근(오르막 없음), Troier는 30분 하강(복귀 40분 오르막 감안). ⚠️9월 말 산장 영업 재확인."},
+  {t:"14:30~15:00",name:"하산 (Seceda→Ortisei)",moveInfo:"케이블카 하행",desc:"",type:"move",coords:[46.5770,11.6745],map:false},
+  {t:"15:00~15:40",name:"오르티세이 마을 산책",desc:"발 가르데나 목공예 거리 + 젤라토",type:"spot",coords:[46.5761,11.6718]},
+  {t:"15:45~17:45",name:"복귀 드라이브 (역방향)",moveInfo:"약 1h45~2h",desc:"오후 빛의 파소 가르데나·발파롤라 — 아침과 다른 얼굴",type:"move",coords:[46.5369,12.1357],map:false},
+  {t:"19:30",name:"저녁: Tivoli (미슐랭★) / SanBrite",rk:"dolomiti-dinner",desc:"Tivoli 화~일 영업(월 휴무·목 OK) · 예약 필수 · 테이스팅 €120~180/2인",type:"food",coords:[46.5410,12.1290],tip:"Tivoli(+39 0436 866400) 1순위, SanBrite(2~3주 전 예약) 대안. 둘 다 실패 시 El Camineto 등 시내 트라토리아."}
+],cost:"€300~380"};
+COURSES.E.days[10]={day:11,date:"9/26 토",city:"돌로미티 라가주오이",theme:"라가주오이 2,732m + 1차대전 야외박물관 + 파소 자우 (풀데이 #3)",routeSummary:"🚗 Falzarego 30분→🚡라가주오이 전망대·터널→Malga Ra Stua 점심→파소 자우→친퀘토리(옵션)→Cortina",sched:[
+  {t:"08:00",name:"호텔 조식 + 출발",desc:"토요일 혼잡 대비 첫 케이블카(09:00) 목표",type:"food",coords:[46.5369,12.1357],map:false,tip:"근거리(30분)·저강도 코스라 토요일에 배치. 우천 시 D10 트레치메와 스왑 불가(통행료 날짜고정) → 이 날이 날씨 버퍼."},
+  {t:"08:30~09:00",name:"코르티나 → 파소 팔자레고",moveInfo:"SR48 약 30분",desc:"",type:"move",coords:[46.5197,12.0089],map:false},
+  {t:"09:00~11:00",name:"라가주오이 케이블카 + 2,732m 전망대",desc:"왕복 ~€26/인(온라인/카드 −5%·줄 스킵) · 운영 09:00~17:00 (시즌 5/30~10/18)",type:"hl",coords:[46.5273,12.0057],tip:"Rifugio Lagazuoi 테라스(2,752m)에서 마르몰라다·토파네·친퀘토리 파노라마 — 커피 한 잔 필수. 예약 불필요, 온라인 구매 시 개찰 스킵. 검증 2026-07-12."},
+  {t:"11:00~12:00",name:"1차대전 야외박물관 (참호·갱도 상부)",desc:"무료 · 복원된 참호·기관총좌·터널 입구 산책",type:"spot",coords:[46.5273,12.0057],tip:"갱도 전체 하강(Falzarego까지 1h+, 헬멧·헤드랜턴 대여)은 무릎 부담 커서 상부 구간만 보고 케이블카 하산 권장."},
+  {t:"12:30~14:00",name:"점심: Malga Ra Stua",desc:"카네데를리/폴렌타/굴라시 €25~45 · 5/23~10/11 영업",type:"food",coords:[46.5906,12.0908],map:false,tip:"⚠️5 Torri 권역 리푸지오(Averau·Scoiattoli)는 9/25 시즌종료. 도로 접근 가능한 Malga Ra Stua 1순위, Passo Giau의 Da Aurelio 점심(11:00~15:00) 대안."},
+  {t:"14:15~15:30",name:"파소 자우 드라이브 + 사진",desc:"코르티나 인접 명품 산악 패스 · 라 구셀라 침봉 배경",type:"hl",coords:[46.4844,12.0536],tip:"어느 동선이든 끼워넣기 좋은 포인트. 카레차 호수(편도 1.5h)는 멀어 생략."},
+  {t:"15:30~17:00",name:"친퀘토리 체어리프트 (옵션)",desc:"리프트 왕복 €18~20 · 6/6~10/11 운영 · 1차대전 야외박물관 평지 산책",type:"option",coords:[46.5189,12.0386],tip:"라가주오이 터널로 1차대전 테마가 충분했으면 생략하고 시내로. 리프트는 예약 불필요."},
+  {t:"17:30",name:"코르티나 Corso Italia 산책 + 쇼핑",desc:"마지막 돌로미티 밤 · 짐 정리",type:"spot",coords:[46.5369,12.1357],map:false},
+  {t:"19:30",name:"저녁: Da Aurelio (Passo Giau) / Tivoli",rk:"dolomiti-dinner",desc:"토요일 수요 폭증 · 반드시 예약 또는 호텔 하프보드",type:"food",coords:[46.4844,12.0536],tip:"토요일 디너는 Da Aurelio(+39 0437 720118) 1순위 — 점심에 갔다면 시내 Tivoli(미슐랭★)로. 둘 다 실패 시 호텔 하프보드. 지금 바로 예약."}
+],cost:"€180~300"};
 
 // 2026-07-05 확정: 검토용 탭 제거. 코스 B는 클론 소스로만 쓰고 아래에서 삭제 →
 // 코스가 E 하나뿐이라 init()이 코스 탭 자체를 숨긴다. 이전 안은 git 이력(커밋 d411496 이전) 참조.
@@ -1381,7 +1410,7 @@ const FOOD_RECS={
 {n:"Antiche Carampane",d:"San Polo 1911(숨은 위치, 관광메뉴 없음)·미쉐린 가이드·화~토(수 OK)·frittura/해산물 파스타·예약 강력 권장·2인: frittura+해산물 파스타+세콘도",p:"€120~160",c:[45.4389,12.3338],q:"Antiche Carampane San Polo Venezia"}
 ],
 "venezia-morning":[
-{n:"Pasticceria Da Bonifacio",d:"Castello Calle degli Albanesi 4237(산마르코 도보 3~4분, Danieli 뒤)·TA 4.7·평일 06:30 오픈이라 07시 확실·frittelle/크림 페이스트리+에스프레소·★D9 새벽 1순위·2인: 에스프레소 2+프리텔라/페이스트리 2",p:"€8~15",c:[45.4339,12.3415],q:"Pasticceria Da Bonifacio Castello Venezia"},
+{n:"Pasticceria Da Bonifacio",d:"Castello Calle degli Albanesi 4237(산마르코 도보 3~4분, Danieli 뒤)·TA 4.7·평일 06:30 오픈이라 07시 확실·frittelle/크림 페이스트리+에스프레소·★D8 새벽 1순위·2인: 에스프레소 2+프리텔라/페이스트리 2",p:"€8~15",c:[45.4339,12.3415],q:"Pasticceria Da Bonifacio Castello Venezia"},
 {n:"Rosa Salva",d:"San Marco 950·08:00 오픈이라 07시엔 닫힘(이른 출발엔 부적합)·역사 카페·2인: 카푸치노 2+페이스트리",p:"€8~15",c:[45.4350,12.3380],q:"Rosa Salva San Marco Venezia"}
 ],
 "venezia-burano-lunch":[
@@ -1399,7 +1428,7 @@ const FOOD_RECS={
 {n:"Osteria Bancogiro",d:"대운하 뷰! 리알토 다리 옆 테라스",p:"€65",c:[45.4383,12.3355]}
 ],
 "dolomiti-dinner":[
-{n:"Baita Fraina",d:"Via Fraina 1(외곽 언덕, 렌터카 5분)·Google/TA 4.1(536)·미쉐린 가이드·월 휴무(★D9 목 영업)·카준치에이/카네데를리/사슴 라구·예약 권장·2인: 카준치에이+카네데를리+체르보 메달리온+폴렌타+슈트루델",p:"€90~120",c:[46.5330,12.1290],q:"Baita Fraina Cortina d'Ampezzo"},
+{n:"Baita Fraina",d:"Via Fraina 1(외곽 언덕, 렌터카 5분)·Google/TA 4.1(536)·미쉐린 가이드·월 휴무(★D8 수 영업)·카준치에이/카네데를리/사슴 라구·예약 권장·2인: 카준치에이+카네데를리+체르보 메달리온+폴렌타+슈트루델",p:"€90~120",c:[46.5330,12.1290],q:"Baita Fraina Cortina d'Ampezzo"},
 {n:"El Brite de Larieto",d:"Localita Larieto(농장 아그리투리스모, 산길 운전)·미쉐린 가이드·수요일 휴무(★D10 금·토 디너 영업)·자가 빵+버터/치즈/카준치에이/사슴·촛불 테라스 로맨틱·예약 필수(+39 368 7008083)·2인: 빵+치즈 플래터+카준치에이+폴렌타·체르보+자가 젤라토",p:"€90~120",c:[46.5566,12.1430],q:"El Brite de Larieto Cortina"},
 {n:"Da Aurelio (Passo Giau)",d:"Passo Giau 5(2,175m, SR638 약 30분, 도로변)·TA 4.7(567)·수·일 휴무(★D11 토 영업, 9월말까지)·셰프 Gigi 알파인 고메(사슴+폴렌타/카준치에이)·토요일 수요 폭증 반드시 예약(+39 0437 720118)·2인: 카준치에이/카네데를리+체르보·폴렌타+시그니처+돌체",p:"€110~150",c:[46.4844,12.0536],q:"Da Aurelio Passo Giau"},
 {n:"Ristorante Tivoli",d:"코르티나 시내·미쉐린 ★·월 휴무(화~일 12:00~14:00/19:00~22:00)·세 디너의 안전 백업(특히 토요일)·2인: 테이스팅 또는 알라카르트 코스",p:"€120~180",c:[46.5372,12.1360],q:"Ristorante Tivoli Cortina d'Ampezzo"},
@@ -1506,17 +1535,18 @@ route:[
 {day:"D4",time:"10:05",name:"Mercato Centrale",dish:"람프레도토/볼리토 또는 시장 브런치",note:"B&B에 짐 맡긴 뒤 첫 식사. Da Nerbone은 1개 공유 도전, 부담되면 시장 푸드홀로 전환.",pick:true},
 {day:"D4",time:"13:35",name:"Via dei Neri lunch",dish:"스키아차타·파니노·가벼운 토스칸 점심",note:"시뇨리아/우피치 뒤 2~4분권. All'Antico Vinaio 줄 길면 I Due Fratellini 또는 La Fettunta로 전환.",pick:true},
 {day:"D4",time:"15:05",name:"Passera / La Carraia",dish:"젤라토 또는 에스프레소",note:"Ponte Vecchio 뒤 식후 당충전. 저녁 전 과식 없이 작은 컵."},
-{day:"D4",time:"20:15",name:"Oltrarno dinner",dish:"토스칸 정찬·와인",note:"미켈란젤로광장 석양 후 내려와 먹는 흐름. Il Santo Bevitore는 예약 권장."},
+{day:"D4",time:"20:15",name:"Buca Mario",dish:"Bistecca alla Fiorentina + cantucci/vin santo",note:"비스테카는 토요일인 D4로 이동(일 휴무·D6은 친퀘 당일치기). 미켈란젤로광장 석양 후 택시 10~15분 → 20:15 착석. 예약 필수.",pick:true},
 {day:"D5",time:"11:30",name:"Uffizi lunch",dish:"빠른 파니노/스키아차타 또는 가벼운 토스칸",note:"13:30 아카데미아 전이라 긴 식사는 금지. D4에 못 먹은 후보만 보충.",pick:true},
 {day:"D5",time:"20:00",name:"Oltrarno dinner",dish:"리볼리타·파파 알 포모도로·페포소·크로스티니",note:"일요일 저녁은 비스테카보다 전통요리 미션. 4 Leoni/Il Santo Bevitore/Cammillo 중 예약 가능한 곳."},
-{day:"D6",time:"12:30",name:"Pisa Vettovaglie lunch",dish:"체치나·파스타·가벼운 토스칸 점심",note:"Miracoli에서 Cavalieri를 보고 남쪽으로 내려온 뒤 먹는 점심. 역 방향 동선이 깨지지 않음.",pick:true},
-{day:"D6",time:"17:30",name:"Pre-steak buffer",dish:"가벼운 아페리티보",note:"Buca Mario 전 과식 금지. 시장 대신 카페/작은 와인으로 발 쉬기."},
-{day:"D6",time:"19:30",name:"Buca Mario",dish:"Bistecca alla Fiorentina + cantucci/vin santo",note:"피렌체 대표 메인과 디저트를 한 번에 처리. 예약 필수.",pick:true},
-{day:"D7",time:"12:15",name:"Riomaggiore lunch",dish:"프리또 코노·앵초비·가벼운 해산물",note:"⚠️화요일이라 Dau Cila·A Pie de Ma 휴무. 튀김 코노 테이크아웃 Il Pescato Cucinato(또는 Tutti Fritti) 우선, 항구 바위에서 먹고 13:30 Via dell'Amore."},
-{day:"D7",time:"20:00",name:"Monterosso dinner",dish:"해산물·트로피에 알 페스토·화이트와인",note:"화요일 휴무 후보를 제외하고 Fegina/Monterosso권으로 정리. L'Ancora della Tortuga(절벽 뷰·예약) 또는 La Cantina di Miky(안초비 3종).",pick:true},
-{day:"D8",time:"13:00",name:"치케티 크롤",dish:"baccalà mantecato·sarde in saor·옴브라",note:"⚠️수요일이라 All'Arco 휴무. Cantina Do Mori(1462년 앵커) → 도보 2분 Cantina Do Spade. 2인 치케티 8~10개+와인.",pick:true},
-{day:"D8",time:"20:00",name:"Boccadoro",dish:"risotto al nero di seppia·생선 크루도",note:"먹물 리소토 명가, 수요일 영업. 간 요리(fegato) 원하면 Vini da Gigio, 미식 업그레이드는 Alle Testiere(예약).",pick:true},
-{day:"D9",time:"19:30",name:"Baita Fraina",dish:"카준치에이·카네데를리·사슴",note:"목요일 영업(월 휴무). 코르티나 시그니처 카준치에이(비트 라비올리) 필수. 예약 권장.",pick:true},
+{day:"D6",time:"12:15",name:"Riomaggiore lunch",dish:"프리또 코노·앵초비·가벼운 해산물",note:"월요일 영업 여부 직전 확인(테이크아웃 Il Pescato Cucinato 등 우선). 항구 바위에서 먹고 14:00 Via dell'Amore로.",pick:true},
+{day:"D6",time:"~21:10",name:"피렌체 복귀 야식",dish:"젤라토·가벼운 야식",note:"13.5h 풀데이 복귀 후 두오모권에서 가볍게. 정찬 없음(비스테카는 D4에 완료)."},
+{day:"D7",time:"11:20",name:"SMN 파니노 포장",dish:"파니노·물",note:"11:30대 직통 열차 차내 점심. 산타크로체 관람 후 역에서 포장.",pick:true},
+{day:"D7",time:"15:40",name:"Cantina Do Mori",dish:"francobolli·baccalà mantecato·옴브라",note:"1462년 앵커 바카로 — 월~토 08:00~19:30이라 저녁 불가 → 오후 산책 중 맛보기 스톱.",pick:true},
+{day:"D7",time:"20:00",name:"Cantina Do Spade 치케티 저녁",dish:"sarde in saor·부사라·치케티 6~8개+와인",note:"매일 18:00~22:00 · 착석 마무리 가능. 베네치아의 유일한 밤. 미식 업그레이드는 Alle Testiere(예약).",pick:true},
+{day:"D8",time:"06:45",name:"Pasticceria Da Bonifacio",dish:"에스프레소·페이스트리",note:"06:30 오픈 — 새벽 산마르코 산책 조식. 07시 전 여는 곳이 사실상 여기뿐.",pick:true},
+{day:"D8",time:"19:30",name:"Baita Fraina",dish:"카준치에이·카네데를리·사슴",note:"수요일 영업(월 휴무). 돌로미티 입성 첫 저녁 — 시그니처 카준치에이(비트 라비올리) 필수. 예약 권장.",pick:true},
+{day:"D9",time:"13:00",name:"세체다 산장 점심",dish:"카네데를리·슈페크 플래터·슈트루델",note:"Baita Sofie(정상역 인근) 또는 Troier Hütte(30분 하강·복귀 오르막). 9월 말 영업 재확인.",pick:true},
+{day:"D9",time:"19:30",name:"Tivoli / SanBrite",dish:"미슐랭★ 산악 다이닝",note:"목요일 영업 전화 확인 후 예약 필수. 가볍게는 Al Camin.",pick:true},
 {day:"D10",time:"19:30",name:"El Brite de Larieto",dish:"자가 치즈·카준치에이·폴렌타·사슴",note:"금요일 영업(수 휴무). 촛불 테라스 로맨틱, 직접 예약 필수. Tre Cime 트레킹 중 Rifugio Locatelli 간식(카네데를리/굴라시).",pick:true},
 {day:"D11",time:"19:30",name:"Da Aurelio (Passo Giau)",dish:"사슴·폴렌타·알파인 코스",note:"⚠️5 Torri 리푸지오 시즌종료. 도로변 Da Aurelio 토요일 영업(반드시 예약), 백업 Tivoli/호텔 하프보드. 점심은 Malga Ra Stua.",pick:true},
 {day:"D12",time:"13:00",name:"Varenna lunch",dish:"risotto con pesce persico(농어 리소토)",note:"바레나 호숫가. 일요일 영업 Osteria Quatro Pass 1순위(농어 리소토·말린 호수생선).",pick:true},
@@ -1564,7 +1594,7 @@ sources:[
 };
 
 const COMPARE=[
-{id:"E",status:"확정 · 예약 진행중",name:"로마–밀라노 12박 13일",sub:"피사+친퀘 당일치기 · 베네치아 2박 · 돌로미티 3일+렌터카",route:"로마→피렌체(피사+친퀘 당일치기)→베네치아 2박→돌로미티 3일(렌터카)→코모호수→밀라노",price:"€7,791",krw:"1,367만원",pp:"584만원",pros:["짐 이동 최소(피렌체 3박 베이스 유지)","베네치아 2박 — 새벽 산마르코·두칼레·무라노/부라노","친퀘테레 3마을 맛보기(리오마조레·마나롤라·베르나차)+Via dell'Amore","D7 피렌체→베네치아 직통 2h05 (친퀘 경유 대비 이동 3h+ 절약)","트레치메 트레킹 + 브라이에스 + 서부 드라이브"],cons:["D6이 13.5시간 풀데이(피사·친퀘 압축)","친퀘테레 수영·노을·숙박은 포기"]},
+{id:"E",status:"확정 · 예약 진행중",name:"로마–밀라노 12박 13일",sub:"피사+친퀘 당일치기 · 베네치아 1박 · 돌로미티 4박+렌터카",route:"로마→피렌체(피사+친퀘 당일치기)→베네치아 1박→돌로미티 4박(렌터카)→코모호수→밀라노",price:"€7,939",krw:"1,393만원",pp:"595만원",pros:["짐 이동 최소(피렌체 3박 + 코르티나 4박 투 베이스)","베네치아 핵심 전부 유지 — 석양 곤돌라·치케티·새벽 산마르코·두칼레","돌로미티 4박: 세체다(목)+트레치메(금)+라가주오이(토) 모두 소화 — 택1 불필요","세체다가 평일 방문 + 산악 날씨 버퍼 +1일","친퀘테레 3마을 맛보기+Via dell'Amore · D7 직통 2h05"],cons:["D6이 13.5시간 풀데이(피사·친퀘 압축)","무라노·부라노·산조르조 일몰 생략(베네치아 오후 없음)","친퀘테레 수영·노을·숙박은 포기"]},
 ];
 
 const BOOKING_ITEMS=[
@@ -1574,26 +1604,26 @@ const BOOKING_ITEMS=[
 {status:"정리필요",tone:"warn",cat:"숙소",title:"Plus Florence 가예약 취소 확인",target:"지금",window:"이전 가예약 정리",note:"새 숙소가 Le Stanze del Duomo로 확정됐으므로 Plus Florence 예약/가예약이 남아 있으면 취소 완료 메일을 보관",link:"https://www.plushostels.com/florence",linkText:"Plus"},
 {status:"확정",tone:"done",cat:"교통",title:"D4 Roma→Firenze Italo",target:"완료",window:"사용자 티켓 기준",note:"Italo 9912 07:40→09:17 Prima Business, 2인 €38.80, 2호차 9·10. D4 기상/이동 시간 반영 완료",link:"https://www.italotreno.com/en/destinations-timetable/rome-florence-tickets",linkText:"Italo"},
 {status:"예약필요",tone:"warn",cat:"교통",title:"D7 Firenze→Venezia 직통 열차",target:"지금 (예약창 오픈됨)",window:"조기예약일수록 저렴 (Super Economy)",note:"9/22(화) 11시대 Firenze SMN→Venezia S.Lucia 직통 Frecciarossa/Italo 약 2h05(일 17편) — 오전 산타크로체(09:30~10:45) 후 탑승이라 11:30 전후 편 우선. D6 피사·친퀘 왕복은 전부 Regionale라 예약 불필요(당일 구매, Pisa S. Rossore 정차편 확인)",link:"https://www.trenitalia.com",linkText:"Trenitalia"},
-{status:"예약필요",tone:"warn",cat:"숙소",title:"베네치아 숙소 2박",target:"지금",window:"9/22~24 · 무료취소 우선",note:"친퀘테레 당일치기 확정으로 친퀘테레 숙소는 불필요해짐. 베네치아 본섬 2박 — 산마르코/리알토권 우선, D9 아침 산타루치아역 이동 편의 고려. 9월 성수기라 가격 변동 큼 → 무료취소 조건으로 빨리 잡기",link:"https://www.booking.com/city/it/venice.html",linkText:"Booking"},
+{status:"예약필요",tone:"warn",cat:"숙소",title:"베네치아 숙소 1박",target:"지금",window:"9/22~23 · 무료취소 우선",note:"2026-07-12 확정: 베네치아 1박 + 돌로미티 4박. 본섬 1박 — 산마르코/리알토권 우선, D8 아침 두칼레(09:00) 관람 동안 짐 보관 가능 + 산타루치아역 이동 편의 고려. 9월 성수기라 무료취소 조건으로 빨리 잡기",link:"https://www.booking.com/city/it/venice.html",linkText:"Booking"},
 {status:"불필요",tone:"",cat:"입장권",title:"D6 피사 사탑 등탑 — 제외(사진만)",target:"이미 구매했다면 환불 확인",window:"사진만 (등탑 X)",note:"확정 일정은 사탑 외관 사진만이라 등탑 티켓이 필요 없어짐. 6/23 오픈 때 이미 구매했다면 OPAPISA 환불/변경 조건 확인(시간제 티켓은 환불 제한 가능)",link:"https://www.opapisa.it/en/tickets/buy/",linkText:"OPAPISA"},
 {status:"예약가능",tone:"warn",cat:"입장권",title:"D5 우피치 / 아카데미아 / 두오모",target:"지금 예약 (상시 오픈)",window:"고정 오픈일 없음·조기매진",note:"우피치 08:30 €29(사전권), 아카데미아 13:30 €20+예약 €4=€24(2026-02 인상), 두오모 Brunelleschi Pass €30(쿠폴라+세례당+종탑+오페라두오모박물관). ⚠️일요일 쿠폴라는 12:45~16:30 운영이라 16:00 슬롯이 마지막이거나 없을 수 있음 → 가장 이른 오후 슬롯 확보, 안 되면 D5 순서 조정",link:"https://tickets.uffizi.it/",linkText:"우피치"},
 {status:"확정",tone:"done",cat:"입장권",title:"D3 바티칸 박물관 08:00",target:"완료 (2026-07-05 발권)",window:"환불불가·기명 티켓",note:"9/18(금) 08:00 입장, 2인 €50(€25/인=€20+예약비 €5). 입구는 예약자 줄 우측 Corridoio 1(Passageway 1) · 신분증 필수 · ⚠️입장 전 안뜰의 직원에게 티켓 검증(validation) 필수 — 미검증 시 개찰구 통과 불가. 티켓 PDF는 휴대폰+인쇄본 이중 보관",link:"https://tickets.museivaticani.va",linkText:"바티칸"},
 {status:"확정",tone:"done",cat:"입장권",title:"D3 성베드로 쿠폴라 14:30",target:"완료 (2026-07-05 예약확정)",window:"엘리베이터 €22/인",note:"9/18(금) 14:30 돔 슬롯 예약 확정. 티켓에 대성당 시간지정 입장(돔 90분 전 배정 원칙 → 13:00 예상)+오디오가이드+우선 보안레인 포함 — ⚠️확정 메일의 성당 입장시각 확인 후 D3 13:00 단계 시간 갱신. QR·신분증 지참. 보르게세는 안 가는 것으로 확정(2026-07-05)",link:"https://booking.basilicasanpietro.va/",linkText:"공식 예약"},
 {status:"오픈대기",tone:"warn",cat:"입장권",title:"D2 콜로세움",target:"2026-08-18(화)",window:"방문 30일 전",note:"공식 30일 전 판매(이른 아침 로마시간). 오픈 즉시 08:30 슬롯 확보. 24h 통합권(콜로세움+포로로마노+팔라티노) €18(예약비 포함), 아레나/지하 Full Experience €24. 신분증 이름 일치",link:"https://colosseo.it/en/opening-times-and-tickets/",linkText:"공식"},
 {status:"선택예약",tone:"",cat:"입장권",title:"D2 판테온 (선택)",target:"2026-08-15~",window:"9월 캘린더 8월 중순 오픈",note:"의무 아님(현장 매표 가능)이나 €7 미리 사면 줄 단축. 2026-07-01부터 €5→€7. 공식 Musei italiani(museiitaliani.it)에서만 구매, pantheonroma.com은 리셀러. 티켓 기명",link:"https://www.museiitaliani.it/",linkText:"Musei italiani"},
-{status:"마감주의",tone:"warn",cat:"입장권",title:"D8 베네치아 두칼레 궁전",target:"2026-08-24(월)까지",window:"30일 전 €30 할인 마감",note:"현장/일반 €35, 방문 30일 이상 전 온라인 €30 → 9/23 기준 8/24까지 예매해야 €30. 산마르코 광장 박물관 통합권. D8 09:00 첫 슬롯 방문(무라노·부라노 전) — 시간슬롯 지정 가능하면 09:00 지정",link:"https://palazzoducale.visitmuve.it/en/tickets/",linkText:"MUVE"},
-{status:"예약가능",tone:"warn",cat:"입장권",title:"D11 세체다 케이블카 (옵션 A)",target:"옵션 A 확정 시 즉시",window:"2026 타임슬롯 의무·상시 오픈",note:"⚠️2026 신규로 30분 단위 지정 타임슬롯 예약 의무(환불·변경 불가). 왕복 €74/인, 7일 이상 전 예매 시 −5%(≈9/18). 토요일 피크라 조기 예약, 이른 오전 슬롯 권장. 옵션 B(라가주오이)는 예약 불필요",link:"https://seceda.axess.shop/en",linkText:"Seceda"},
+{status:"마감주의",tone:"warn",cat:"입장권",title:"D8 베네치아 두칼레 궁전",target:"2026-08-24(월)까지",window:"30일 전 €30 할인 마감",note:"현장/일반 €35, 방문 30일 이상 전 온라인 €30 → 9/23 기준 8/24까지 예매해야 €30. 산마르코 광장 박물관 통합권. D8 09:00 첫 슬롯 방문(관람 후 정오 메스트레 렌터카 픽업) — 시간슬롯 지정 가능하면 09:00 지정",link:"https://palazzoducale.visitmuve.it/en/tickets/",linkText:"MUVE"},
+{status:"예약필요",tone:"warn",cat:"입장권",title:"D9 세체다 케이블카 (9/24 목 확정)",target:"지금 (상시 오픈 · 9/17까지 −5%)",window:"2026 타임슬롯 의무 · 환불·변경 불가",note:"2026-07-12 확정: D9(목) 세체다 방문 — 더 이상 옵션 아님. 30분 단위 지정 타임슬롯 예약 의무, 왕복 €74/인(2인 €148), 7일 이상 전 예매 −5%. 10:00 전후 슬롯 권장(그레이트 돌로미티 로드 경유 2h 역산). 평일이라 토요일 피크 회피. D11 라가주오이는 예약 불필요",link:"https://seceda.axess.shop/en",linkText:"Seceda"},
 {status:"선택예약",tone:"",cat:"입장권",title:"D12 밀라노 두오모 옥상 (선택)",target:"옥상 갈 경우 사전 예약",window:"일요일 예약 필수·상시 판매",note:"외관 우선이지만 옥상까지면 일요일은 시간제 예약 필수. 계단 €16/리프트 €18. 9/27은 표준운영 막입장 18:10이라 17:30 슬롯은 빠듯. 직판 ticket.duomomilano.it만",link:"https://ticket.duomomilano.it/en/",linkText:"Duomo Milano"},
 {status:"날씨확인",tone:"warn",cat:"입장/동선",title:"D6 Via dell'Amore 14:00 슬롯",target:"9월 초 예약창 오픈 확인",window:"슬롯 조기마감 가능",note:"9/21(월) 14:00 슬롯(R→M 일방향, 30분 지정슬롯 예약 의무, 2026 3/29~10/24 운영). 미소지 요금 ~€17.50/인 — CT 구간권 3회(€15/인)만 타므로 Train MS Card(€29.50/인) 불필요. 날씨 안정 확인 후 며칠 전 예약, 우천 시 D6은 피사+루카 코스로 전환",link:"https://www.viadellamore.info/en",linkText:"Via dell'Amore"},
-{status:"예약가능",tone:"",cat:"교통패스",title:"D7~D9 베네치아 바포레토 48h",target:"출발 전 온라인",window:"첫 탑승 시 활성화",note:"베네치아 2박: D7 ~14:00 도착 활성화 → D9 오전 메스트레 이동까지 48h(€35/인)로 커버. D8 무라노·부라노 왕복 포함이라 48h가 확실히 이득(24h €25는 부족)",link:"https://www.veneziaunica.it/en/e-commerce/services",linkText:"Venezia Unica"},
+{status:"예약가능",tone:"",cat:"교통패스",title:"D7~D8 베네치아 바포레토 24h",target:"출발 전 온라인",window:"첫 탑승 시 활성화",note:"베네치아 1박 확정(2026-07-12)으로 48h→24h 변경: D7 ~14:00 도착 활성화 → D8 오전 짐픽업·역 이동까지 24h(€25/인)로 커버. 무라노·부라노 없음. ⚠️D8 S.Lucia→Mestre 기차는 별도(€1.5~3/인, Trenitalia)",link:"https://www.veneziaunica.it/en/e-commerce/services",linkText:"Venezia Unica"},
 {status:"선택예약",tone:"warn",cat:"식당",title:"D2 로마 점심/저녁",target:"2026-08-20~09-03",window:"인기 정찬만 예약",note:"Armando/La Taverna/Broccoletti 선택 시 예약. Pane e Salame/Trieste는 현장 대기 가능",link:"https://www.google.com/maps/search/?api=1&query=Pantheon+Monti+restaurants+Rome",linkText:"지도"},
 {status:"선택예약",tone:"warn",cat:"식당",title:"D4-D6 피렌체 저녁",target:"2026-08-20~09-05",window:"인기 식당 예약",note:"비스테카(Buca Mario)는 D4(토) 20:15로 이동 — 일요일 휴무라 D5 불가, D6은 친퀘 당일치기로 저녁 부재. D5 일요일은 전통요리 후보(4 Leoni 등)",link:"https://www.bucamario.com/contatti/",linkText:"Buca Mario"},
 {status:"예약불필요",tone:"",cat:"식당",title:"D6 리오마조레 점심",target:"당일 현장",window:"테이크아웃 우선",note:"친퀘테레 당일치기 확정으로 Monterosso 저녁 예약은 불필요해짐. D6 점심은 리오마조레 프리또 코노 테이크아웃(Il Pescato Cucinato 등) — 예약 불필요, 월요일 영업 여부만 직전 확인",link:"",linkText:""},
-{status:"선택예약",tone:"warn",cat:"식당",title:"D9-D12 후반부 저녁",target:"2026-09-05 전후",window:"토요일 돌로미티는 2~4주 전",note:"토요일 D11 저녁(5 Torri·Da Aurelio·SanBrite)은 2~4주 전 예약 필수. El Brite(금)·Baita Fraina(목) 권장. 베네치아 Boccadoro(D8)·밀라노 일요 영업처(D12)도 며칠 전 예약",link:"https://www.google.com/maps/search/?api=1&query=Cortina+Ampezzo+restaurants",linkText:"지도"},
-{status:"예약필요",tone:"warn",cat:"교통",title:"베네치아 → 코르티나 렌터카",target:"숙소 확정 후",window:"무료취소 조건 우선",note:"메스트레 픽업/밀라노 반납 수수료 확인",link:"https://www.rentalcars.com",linkText:"RentalCars"},
-{status:"오픈대기",tone:"warn",cat:"돌로미티",title:"Tre Cime 주차/통행 예약",target:"2026-08-26 전후(약 30일 전)",window:"2026 차량 €40·번호판 입력",note:"온라인 예약 필수, 9시 전 도착. 예약창 약 30일 전 롤링 오픈(공식 명시 아님→8월 포털 재확인). 번호판은 9/24 픽업 후 입력",link:"https://auronzo.info/en/parking-tre-cime-di-lavaredo/",linkText:"공식"},
-{status:"예약불필요",tone:"",cat:"현장구매",title:"현장 구매 OK (예약 불필요)",target:"당일 현장",window:"미리 예약할 필요 없음",note:"산타크로체(€10+€1, 월 막입장 17:00)·곤돌라(€80/보트)·산조르조마조레 종탑(€8)·라고 디 브라이에스 보트(현장만)·친퀘토리/팔로리아/라가주오이 리프트는 사전 예약 불필요. 캘린더에서 제외",link:"",linkText:""},
-{status:"후보선정",tone:"",cat:"숙소",title:"코르티나/밀라노 숙소",target:"다음 결정 대상",window:"무료취소 우선",note:"친퀘테레 숙소 항목은 삭제, 베네치아 2박은 별도 항목으로 승격. 남은 코르티나 3박·밀라노 1박은 가격 변동이 크므로 도시별 1순위와 백업 1곳 필요",link:"",linkText:""}
+{status:"선택예약",tone:"warn",cat:"식당",title:"D8-D12 후반부 저녁",target:"2026-09-05 전후",window:"토요일 돌로미티는 2~4주 전",note:"코르티나 4박 로테이션: 수(D8) Baita Fraina · 목(D9) Tivoli/SanBrite(영업일 전화 확인) · 금(D10) El Brite · 토(D11) Da Aurelio — 토요일 몫은 2~4주 전 예약 필수. 밀라노 일요 영업처(D12)도 며칠 전 예약",link:"https://www.google.com/maps/search/?api=1&query=Cortina+Ampezzo+restaurants",linkText:"지도"},
+{status:"예약필요",tone:"warn",cat:"교통",title:"베네치아 → 밀라노 렌터카 (5일)",target:"지금",window:"무료취소 조건 우선",note:"2026-07-12 확정: 9/23(수) 12:00 메스트레역 픽업 → 9/27(일) 16:30 밀라노 반납 = 5일 과금. ⚠️영업소 점심휴무(12:30~15:00 흔함) 걸리는지 확인 — 걸리면 11:30 픽업 또는 무휴 업체. 원웨이 수수료·풀커버 포함 견적 비교",link:"https://www.rentalcars.com",linkText:"RentalCars"},
+{status:"오픈대기",tone:"warn",cat:"돌로미티",title:"Tre Cime 주차/통행 예약",target:"2026-08-26 전후(약 30일 전)",window:"2026 차량 €40·번호판 입력",note:"온라인 예약 필수, 9시 전 도착. 예약창 약 30일 전 롤링 오픈(공식 명시 아님→8월 포털 재확인). 번호판은 9/23(수) 픽업 후 입력(9/24 23:59까지 수정 가능)",link:"https://auronzo.info/en/parking-tre-cime-di-lavaredo/",linkText:"공식"},
+{status:"예약불필요",tone:"",cat:"현장구매",title:"현장 구매 OK (예약 불필요)",target:"당일 현장",window:"미리 예약할 필요 없음",note:"산타크로체(€10+€1, 월 막입장 17:00)·곤돌라(주간 €90/보트, 19시 이후 €110 — 18:00 탑승이라 주간 요금)·라고 디 브라이에스 보트(현장만)·라가주오이(~€26/인, 온라인 −5%)·친퀘토리 리프트(€18~20)는 사전 예약 불필요. ⚠️팔로리아는 9/20 시즌종료로 제외. 캘린더에서 제외",link:"",linkText:""},
+{status:"예약필요",tone:"warn",cat:"숙소",title:"코르티나 4박 / 밀라노 1박 숙소",target:"지금",window:"무료취소 우선",note:"2026-07-12 확정: 코르티나 9/23~27 4박(수~일) — 주말 낀 4연박이라 빨리 잡을수록 유리, 시내 ZTL 대응 주차 포함 필수 조건. 하프보드 가능 숙소(Menardi 등)면 토요일 저녁 백업도 해결. 밀라노 1박(9/27)은 Centrale 반납 동선 고려",link:"https://www.booking.com/city/it/cortina-d-ampezzo.html",linkText:"Booking"}
 ];
 
 const TICKETING_ITEMS=[
@@ -1607,13 +1637,13 @@ const TICKETING_ITEMS=[
 {ymd:"2026-08-18",date:"2026.08.18(화)",tone:"critical",name:"D2 콜로세움 (30일 오픈)",target:"9/17 08:30 콜로세움+포로/팔라티노",note:"공식 방문 30일 전 판매(이른 아침 로마시간). 9/17 기준 8/18 오픈 → 오픈 즉시 08:30 슬롯 확보. 24h 통합권(콜로세움+포로로마노+팔라티노) €18(예약비 €2 포함), 아레나/지하 포함 Full Experience €24. 신분증 이름 일치 필요. 검증 2026-06-21.",links:[["Colosseo","https://colosseo.it/en/opening-times-and-tickets/"]]},
 {ymd:"2026-08-18",date:"2026.08.18(화)",tone:"",name:"D2 판테온 (선택, €7)",target:"9/17 ~14:40 판테온",note:"9월 입장 캘린더는 8월 중순 오픈. 시간제 예약은 의무 아님(현장 매표/자판기 가능)하지만 미리 사두면 줄 단축. ⚠️2026-07-01부터 €5→€7 인상이라 9월 방문은 €7. 반드시 공식 Musei italiani에서 구매 — pantheonroma.com 등은 리셀러. 티켓 기명(신분증 일치). 검증 2026-06-21.",links:[["Musei italiani","https://www.museiitaliani.it/"],["판테온 안내","https://direzionemuseiroma.cultura.gov.it/en/pantheon/"]]},
 {ymd:"2026-08-20",date:"2026.08.20(목)",tone:"",name:"D4-D5 피렌체 식당",target:"D4(토) Buca Mario 20:15 비스테카, D5 일요일 후보",note:"비스테카(Buca Mario)는 D4 토요일 20:15로 이동 — 일요일 휴무라 D5 불가, D6은 친퀘 당일치기라 저녁 부재. D5 일요일은 전통요리(4 Leoni/Il Santo Bevitore 등). 인기 정찬은 2~3주 전 예약.",links:[["Buca Mario","https://www.bucamario.com/contatti/"],["4 Leoni","https://www.4leoni.it/"]]},
-{ymd:"2026-08-24",date:"2026.08.24(월)",tone:"critical",name:"D8 두칼레 궁전 (30일 할인 마감)",target:"9/23 15:30 두칼레 궁전",note:"공식 2026: 현장/일반 €35, 방문 30일 이상 전 온라인 예매 시 €30. 9/23 기준 8/24까지 예매하면 €30 확보(이후 €35). 산마르코 광장 박물관 통합권(코레르·고고학·마르치아나 포함). 시간 슬롯 지정은 의무 아님(미지정 시 12:00부터 입장) → 15:30 방문 OK. 운영 09:00~19:00·막입장 18:00. 검증 2026-06-21.",links:[["MUVE","https://palazzoducale.visitmuve.it/en/tickets/"]]},
+{ymd:"2026-08-24",date:"2026.08.24(월)",tone:"critical",name:"D8 두칼레 궁전 (30일 할인 마감)",target:"9/23 09:00 두칼레 궁전 (첫 슬롯)",note:"공식 2026: 현장/일반 €35, 방문 30일 이상 전 온라인 예매 시 €30. 9/23 기준 8/24까지 예매하면 €30 확보(이후 €35). 산마르코 광장 박물관 통합권(코레르·고고학·마르치아나 포함). ⚠️09:00 첫 슬롯 필수 — 관람 후 정오 메스트레 렌터카 픽업 동선(시간 슬롯 미지정 시 12:00부터 입장이라 불가). 운영 09:00~19:00·막입장 18:00. 검증 2026-06-21, 동선 갱신 2026-07-12.",links:[["MUVE","https://palazzoducale.visitmuve.it/en/tickets/"]]},
 {ymd:"2026-08-26",date:"2026.08.26(수)",tone:"critical",name:"D10 트레치메 주차/통행 (약 30일 전)",target:"9/25 07:00 Tre Cime 차량 €40",note:"차량 €40(주차+통행 12h 유효), 온라인 예약 필수·차량번호 입력(전날 23:59까지 수정 가능). 예약창은 방문 약 30일 전 롤링 오픈(≈8월 말)이며 공식 명시값이 아닌 2차 추정이니 8월에 포털 캘린더로 정확한 오픈 시점 확인. 9시 전 도착, 주말 슬롯은 3~5일 전 매진 보고. 번호판은 9/24 렌터카 픽업 후 입력, 우천 시 D11과 스왑. 검증 2026-06-21.",links:[["Auronzo","https://auronzo.info/en/parking-tre-cime-di-lavaredo/"]]},
-{ymd:"2026-08-26",date:"2026.08.26(수)",tone:"critical",name:"D11 세체다 케이블카 타임슬롯 (옵션 A)",target:"9/26 오르티세이→푸르네스→세체다 왕복",note:"⚠️2026 신규: 세체다 케이블카는 30분 단위 지정 타임슬롯 사전예약 의무(환불·변경 불가, 정원의 약 2/3만 온라인). 토요일 능선은 피크라 워크업 위험 → 미리 예약. 왕복 €74/인(7일 이상 전 예매 시 −5%, ≈9/18까지). 시즌 5/22~11/2, 매표 4월부터 상시 오픈이라 지금도 9/26 슬롯 예약 가능 → D11에서 세체다(옵션 A) 택하면 즉시 예약하고 이른 오전 슬롯(08:30~09:30) 권장. 옵션 B(라가주오이)는 예약 불필요. 검증 2026-06-21.",links:[["Seceda","https://seceda.axess.shop/en"],["Val Gardena","https://www.valgardena.it/"]]},
+{ymd:"2026-07-14",date:"2026.07.14(화) 지금",tone:"critical",name:"D9 세체다 케이블카 타임슬롯 (확정)",target:"9/24(목) 10:00 전후 · 오르티세이→푸르네스→세체다 왕복",note:"2026-07-12 확정: D9(목) 세체다 — 옵션 아님. ⚠️2026 신규: 30분 단위 지정 타임슬롯 사전예약 의무(환불·변경 불가, 정원의 약 2/3만 온라인). 왕복 €74/인(7일 이상 전 예매 −5%, 9/17까지). 상시 오픈이라 지금 예약 — 코르티나에서 그레이트 돌로미티 로드 경유 ~2h 역산해 10:00 전후 슬롯. 평일이라 토요일 피크 회피. D11 라가주오이는 예약 불필요. 검증 2026-06-21/07-12.",links:[["Seceda","https://seceda.axess.shop/en"],["Val Gardena","https://www.valgardena.it/"]]},
 {ymd:"2026-08-28",date:"2026.08.28(금)",tone:"",name:"D12 밀라노 두오모 옥상 (선택)",target:"9/27 ~17:30 옥상(선택)",note:"현재 일정은 외관 우선이나, 옥상까지 가면 일요일은 예약 필수(시간제). 계단 €16 / 리프트 €18(2인 €32~36). 표는 상시 판매라 지금도 9/27 슬롯 예매 가능. ⚠️9/27은 연장운영 종료(6/5~9/13만 연장)라 표준운영 09:00~19:00·막입장 18:10 → 17:30 슬롯은 가능하나 빠듯. 두오모 직판 ticket.duomomilano.it만 이용. 검증 2026-06-21.",links:[["Duomo Milano","https://ticket.duomomilano.it/en/"]]},
-{ymd:"2026-09-05",date:"2026.09.05(토)",tone:"",name:"후반부 인기 식당 예약",target:"돌로미티 D9-D11 / 베네치아 D8 / 밀라노 D12 저녁",note:"토요일 D11 돌로미티 저녁(5 Torri·Da Aurelio·SanBrite)은 현지 수요 폭증으로 2~4주 전 예약 필수 → 이 시점에 확정. El Brite de Larieto(금)·Baita Fraina(목) 예약 권장. 베네치아 Boccadoro(D8)·밀라노 일요 영업처(D12)도 며칠 전 예약. 요일 휴무는 상세일정 팁 참고. 검증 2026-06-21.",links:[["코르티나 식당 지도","https://www.google.com/maps/search/?api=1&query=Cortina+Ampezzo+restaurants"]]},
+{ymd:"2026-09-05",date:"2026.09.05(토)",tone:"",name:"후반부 인기 식당 예약",target:"돌로미티 D8-D11 / 밀라노 D12 저녁",note:"코르티나 4박 로테이션: 수(D8) Baita Fraina · 목(D9) Tivoli/SanBrite(영업일 전화 확인) · 금(D10) El Brite de Larieto · 토(D11) Da Aurelio. 토요일 D11은 현지 수요 폭증으로 2~4주 전 예약 필수 → 이 시점에 확정. 밀라노 일요 영업처(D12)도 며칠 전 예약. 요일 휴무는 상세일정 팁 참고. 검증 2026-06-21, 재편 2026-07-12.",links:[["코르티나 식당 지도","https://www.google.com/maps/search/?api=1&query=Cortina+Ampezzo+restaurants"]]},
 {ymd:"2026-09-14",date:"2026.09.14(월) 전후",tone:"critical",name:"D6 Via dell'Amore 14:00 슬롯",target:"9/21(월) 14:00 Riomaggiore→Manarola",note:"MS Card는 불필요(D6은 CT Express 구간권 3회 €5/인×3=€15/인 < 카드 €29.50/인 — 당일 현장/앱 구매). Via dell'Amore만 예약: 2026 운영 3/29~10/24 09:00~21:00, 30분 단위 지정슬롯 의무(슬롯당 200명), 성수기 R→M 일방향, 미소지 ~€17.50/인. 예약창은 9월 초 오픈 확인 후 날씨 안정 시 며칠 전 예약(우천 시 D6은 피사+루카로 전환). 검증 2026-06-20.",links:[["Via dell'Amore","https://www.viadellamore.info/en"]]},
-{ymd:"2026-09-22",date:"2026.09.22(화)",tone:"",name:"D7~D9 베네치아 바포레토 48h",target:"D7 도착(~14:00) 활성화 → D9 오전까지",note:"베네치아 2박: ACTV 48시간권 €35/인(2인 €70). 온라인(Venezia Unica) 상시 구매, 첫 탑승 시 활성화. D8 무라노·부라노 왕복 포함이라 48h가 확실히 이득. D7 14:00 활성화 기준 D9 14:00까지 유효 → D9 오전 메스트레 이동까지 커버. 검증 2026-06-21.",links:[["Venezia Unica","https://www.veneziaunica.it/en/e-commerce/services"]]}
+{ymd:"2026-09-22",date:"2026.09.22(화)",tone:"",name:"D7~D8 베네치아 바포레토 24h",target:"D7 도착(~14:00) 활성화 → D8 오전까지",note:"베네치아 1박 확정(2026-07-12): ACTV 24시간권 €25/인(2인 €50). 온라인(Venezia Unica) 상시 구매, 첫 탑승 시 활성화. D7 14:00 활성화 기준 D8 14:00까지 유효 → D8 오전 짐픽업·산타루치아역 이동까지 커버. ⚠️S.Lucia→Mestre 기차(€1.5~3/인)는 별도.",links:[["Venezia Unica","https://www.veneziaunica.it/en/e-commerce/services"]]}
 ];
 
 // ===================== STATE & RENDER =====================
@@ -1635,7 +1665,7 @@ const APPS={verified:"2026-07-05",groups:[
 {n:"itTaxi",tag:"로마 커버리지 최강",d:"이탈리아 최대 택시 조합 공식 앱. 로마에서 잡히는 차가 가장 많고 예약 수수료 없음(미터 요금 그대로).",tip:"⚠️ Uber는 이탈리아에서 사실상 고가 Uber Black만 운영 — 쓰지 말 것. 피렌체는 appTaxi가 로컬 표준.",links:[["itTaxi","https://ittaxi.it/en/home-en/"]]}
 ]},
 {title:"🛶 베네치아 (D7~D9)",items:[
-{n:"AVM Venezia Official",tag:"바포레토 공식",d:"바포레토 48h권을 앱에서 사고 폰 QR로 개찰 — 산마르코·폰다멘테노베 매표소 줄을 통째로 스킵. D8 무라노·부라노 왕복의 필수템.",tip:"티켓은 구매 후 '탑승 직전 활성화' 방식 — 첫 탑승 때 활성화해야 48시간이 그때부터 계산됨(D7 14시 활성화→D9 오전까지 커버).",links:[["AVM Venezia","https://avm.avmspa.it/en/content/avm-venezia-official-app"]]}
+{n:"AVM Venezia Official",tag:"바포레토 공식",d:"바포레토 24h권을 앱에서 사고 폰 QR로 개찰 — 산마르코 매표소 줄을 통째로 스킵. D7 도착·곤돌라 이동과 D8 아침 동선에 사용.",tip:"티켓은 구매 후 '탑승 직전 활성화' 방식 — 첫 탑승 때 활성화해야 24시간이 그때부터 계산됨(D7 14시 활성화→D8 오전 역 이동까지 커버). D8 S.Lucia→Mestre 기차는 Trenitalia 앱에서 별도 구매.",links:[["AVM Venezia","https://avm.avmspa.it/en/content/avm-venezia-official-app"]]}
 ]},
 {title:"🚗 렌터카·드라이브 (D9~D12 돌로미티)",items:[
 {n:"EasyPark",tag:"노상주차 결제",d:"이탈리아 650+ 도시의 파란선 노상주차를 앱으로 분단위 결제. 코르티나·바레나·밀라노에서 주차미터기·타바키 찾아 헤맬 필요 없음. 만료 15분 전 알림+원격 연장.",tip:"⚠️ 렌터카 번호판 등록 후 반납일에 반드시 삭제 — 안 하면 남이 그 번호로 주차할 때 결제됨.",links:[["EasyPark","https://www.easypark.com/en-it"]]},
@@ -2326,7 +2356,7 @@ function renderApps(){
     }).join('');
     return `<div class="app-group"><h4>${g.title}</h4><div class="app-grid">${cards}</div></div>`;
   }).join('');
-  el.innerHTML=`<div class="booking-meta">검증 기준일 ${APPS.verified} · 이 여행(로마→밀라노, 렌터카 4일) 일정에 실제로 쓰는 순간 기준으로 선별. 전부 iOS/Android 무료 — 출국 전 설치+가입까지 마칠 것.</div>${groups}`;
+  el.innerHTML=`<div class="booking-meta">검증 기준일 ${APPS.verified} · 이 여행(로마→밀라노, 렌터카 5일) 일정에 실제로 쓰는 순간 기준으로 선별. 전부 iOS/Android 무료 — 출국 전 설치+가입까지 마칠 것.</div>${groups}`;
 }
 
 function renderFoodGuide(){
@@ -2335,7 +2365,7 @@ function renderFoodGuide(){
   const groups=FOOD_GUIDE.groups.map(g=>`<div class="food-guide-card"><h4>${g.title}</h4><ul>${g.items.map(x=>`<li><strong>${x.n}</strong>${x.d}</li>`).join('')}</ul></div>`).join('');
   const route=FOOD_GUIDE.route.map(x=>`<div class="food-route-card ${x.pick?'pick':''}"><div class="food-route-top"><span class="food-route-day">${x.day}</span><span class="food-route-time">${x.time}</span></div><div class="food-route-name">${x.name}</div><div class="food-route-dish">${x.dish}</div><div class="food-route-note">${x.note}</div></div>`).join('');
   const sources=FOOD_GUIDE.sources.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${t}</a>`).join('');
-  el.innerHTML=`<div class="food-guide-meta">검증 기준일: ${FOOD_GUIDE.verified} · 공식 사이트/관광청/업체 페이지 우선, Google 외부 평점 페이지와 지도 좌표로 보강. 로마 D1-D3, 피렌체 D4-D6 상세 일정에 같은 후보를 동선형 스톱으로 반영.</div><div class="food-guide-grid">${groups}</div><div class="food-route-title">D1-D6 동선에 넣은 먹거리 스톱</div><div class="food-route-list">${route}</div><div class="food-source-list">${sources}</div>`;
+  el.innerHTML=`<div class="food-guide-meta">검증 기준일: ${FOOD_GUIDE.verified} · 공식 사이트/관광청/업체 페이지 우선, Google 외부 평점 페이지와 지도 좌표로 보강. 로마 D1-D3, 피렌체 D4-D6 상세 일정에 같은 후보를 동선형 스톱으로 반영.</div><div class="food-guide-grid">${groups}</div><div class="food-route-title">D1~D13 동선에 넣은 먹거리 스톱</div><div class="food-route-list">${route}</div><div class="food-source-list">${sources}</div>`;
 }
 
 // HOTELS
