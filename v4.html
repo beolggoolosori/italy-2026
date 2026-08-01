@@ -459,14 +459,24 @@ a{color:inherit}
   font-size:11px;font-weight:600;transition:.16s}
 .book-link::after{content:"→";font-size:12px}
 .book-link:hover{background:var(--terracotta-deep)}
-.transport-cards{display:none}
-.transport-card{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:13px 14px}
-.transport-card .tc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px}
-.transport-card .tc-day{font-weight:900;color:var(--terracotta-deep);font-size:13px}
-.transport-card .tc-cost{font-weight:800;color:var(--terracotta);font-size:13px;text-align:right}
-.transport-card .tc-route{font-weight:800;color:var(--ink);font-size:14px;margin-bottom:4px}
-.transport-card .tc-meta{font-size:12px;color:var(--muted);line-height:1.45}
-.transport-card .book-link{margin-top:10px}
+/* 이동수단 — 표 대신 반응형 행 목록(가로 스크롤 제거) */
+.tr-head,.tr-row{display:grid;grid-template-columns:52px minmax(0,1fr) 196px 128px 124px;gap:14px}
+.tr-head{padding:9px 16px;font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+  font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;
+  border:1px solid var(--line);border-bottom-width:2px;border-radius:var(--r-sm) var(--r-sm) 0 0;background:var(--paper)}
+.tr-list{border:1px solid var(--line);border-top:0;border-radius:0 0 var(--r-sm) var(--r-sm);overflow:hidden}
+.tr-row{align-items:start;padding:13px 16px;border-bottom:1px solid var(--line-2);transition:background .16s}
+.tr-row:last-child{border-bottom:0}
+.tr-row:nth-child(even){background:rgba(231,230,210,.4)}
+.tr-row:hover{background:var(--terracotta-soft)}
+.tr-day{font-weight:800;color:var(--terracotta-deep);font-size:13px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.tr-route{font-weight:700;color:var(--ink);line-height:1.45;overflow-wrap:anywhere}
+.tr-mode{margin-top:3px;color:var(--olive);font-weight:600;font-size:12.5px;line-height:1.45;overflow-wrap:anywhere}
+.tr-time{color:var(--muted);font-size:12.5px;line-height:1.5;overflow-wrap:anywhere}
+.tr-cost{color:var(--terracotta);font-weight:700;font-size:13px;line-height:1.5;overflow-wrap:anywhere}
+.tr-book{display:flex;justify-content:flex-end}
+.tr-nolink{color:var(--line);font-size:12px}
+.tr-lb{display:none}
 
 /* ============ HOTELS ============ */
 .hotel-citynav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
@@ -759,8 +769,12 @@ footer{text-align:center;padding:36px 20px;color:var(--faint);
 	  .backup-head{flex-direction:column;align-items:flex-start;gap:7px}
 	  .backup-steps span{border-radius:8px}
 	  .t-table{min-width:600px}
-	  #sec-transport .t-scroll{display:none}
-	  .transport-cards{display:grid;grid-template-columns:1fr;gap:10px}
+	  .tr-head{display:none}
+	  .tr-list{border-top:1px solid var(--line);border-radius:var(--r-sm)}
+	  .tr-row{grid-template-columns:1fr;gap:5px;padding:13px 14px}
+	  .tr-lb{display:inline-block;min-width:58px;color:var(--muted);font-weight:700;font-size:10px;
+	    text-transform:uppercase;letter-spacing:.06em;margin-right:6px}
+	  .tr-book{justify-content:flex-start;margin-top:5px}
 	  .booking-calendar-head{align-items:flex-start;flex-direction:column;gap:6px}
 	  .bcal-row{grid-template-columns:46px 1fr;gap:10px}
 	  .bcal-date{width:46px;height:46px;border-radius:13px}
@@ -884,6 +898,22 @@ footer{text-align:center;padding:36px 20px;color:var(--faint);
 .bk-chip{border:1px solid #e3dcd0;background:#fff;border-radius:20px;padding:7px 13px;font-size:12.5px;font-weight:700;cursor:pointer}
 .bk-chip b{margin-left:3px}
 .bk-chip.now{border-color:#d76a5b;color:#b3402f}.bk-chip.wait{border-color:#c9a94e;color:#8a6d1a}.bk-chip.done{border-color:#7fae92;color:#2F6B4F}.bk-chip.none{color:#777}
+/* 예약 체크 — 상태별 서브탭 */
+.bk-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 16px;padding-bottom:12px;border-bottom:2px solid var(--line)}
+.bk-tab{border:1px solid #e3dcd0;background:#fff;border-radius:20px;padding:8px 15px;font-size:12.5px;font-weight:700;cursor:pointer;color:#666;transition:.16s}
+.bk-tab b{margin-left:4px}
+.bk-tab:hover{background:#faf8f4}
+.bk-tab.now{border-color:#d76a5b;color:#b3402f}.bk-tab.wait{border-color:#c9a94e;color:#8a6d1a}.bk-tab.done{border-color:#7fae92;color:#2F6B4F}.bk-tab.none{color:#777}
+.bk-tab.active{color:#fff}
+.bk-tab.now.active{background:#d76a5b;border-color:#d76a5b}
+.bk-tab.wait.active{background:#c9a94e;border-color:#c9a94e}
+.bk-tab.done.active{background:#7fae92;border-color:#7fae92}
+.bk-tab.none.active{background:#9a9a9a;border-color:#9a9a9a}
+.bk-note{max-width:80ch}
+ul.bk-note{margin:0;padding-left:17px}
+ul.bk-note li{margin:4px 0;line-height:1.62}
+.bk-note.one{line-height:1.65}
+.bk-note b{color:#b3402f;font-weight:800}
 .btl-month{margin-bottom:10px}
 .btl-mh{font-size:12px;font-weight:800;color:var(--muted);margin:8px 0 6px}
 .btl-chips{display:flex;flex-wrap:wrap;gap:7px}
@@ -910,8 +940,10 @@ footer{text-align:center;padding:36px 20px;color:var(--faint);
 .bk-status{font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:20px;flex:0 0 auto}
 .bk-status.now{background:#fbe9e5;color:#b3402f}.bk-status.wait{background:#f6eed7;color:#8a6d1a}.bk-status.done{background:#e6f2ea;color:#2F6B4F}.bk-status.none{background:#eee;color:#666}
 .bk-detail{padding:4px 14px 12px;border-top:1px dashed #eee6d9;font-size:12.5px;line-height:1.65}
-.bk-drow{margin:6px 0}
-.bk-drow strong{color:var(--muted);margin-right:6px;font-size:11px}
+.bk-drow{margin:9px 0;display:flex;gap:10px;align-items:flex-start}
+.bk-drow strong{color:var(--muted);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;
+  flex:0 0 38px;padding-top:3px}
+.bk-drow>div,.bk-drow>ul{flex:1;min-width:0}
 @media(max-width:640px){.bk-target{width:100%;order:5;margin-left:2px}}
 </style>
 </head>
@@ -955,7 +987,7 @@ footer{text-align:center;padding:36px 20px;color:var(--faint);
 
 <div class="section-content" id="sec-transport">
   <div class="transport-section card"><h3>이동수단 · 예매 링크</h3>
-  <div class="t-scroll"><table class="t-table" id="transportTable"><thead><tr><th>DAY</th><th>구간</th><th>수단</th><th>소요</th><th>비용(2인)</th><th>예매</th></tr></thead><tbody id="transportBody"></tbody></table></div><div class="transport-cards" id="transportCards"></div></div>
+  <div class="tr-head"><span>DAY</span><span>구간 · 수단</span><span>소요</span><span>비용(2인)</span><span>예매</span></div><div class="tr-list" id="transportList"></div></div>
 </div>
 
 <div class="section-content" id="sec-booking">
@@ -2489,10 +2521,14 @@ function renderItinerary(c){
 
 // TRANSPORT
 function renderTransport(c){
-  const tb=document.getElementById('transportBody'),cards=document.getElementById('transportCards');tb.innerHTML='';cards.innerHTML='';
-  c.transport.forEach(t=>{const tr=document.createElement('tr');tr.innerHTML=`<td class="day-col">${t.day}</td><td class="route-col">${t.route}</td><td class="mode-col">${t.mode}</td><td>${t.time}</td><td class="cost-col">${t.cost}</td><td>${t.link?`<a class="book-link" href="${t.link}" target="_blank" rel="noopener">${t.linkText}</a>`:''}</td>`;tb.appendChild(tr);
-    const card=document.createElement('div');card.className='transport-card';card.innerHTML=`<div class="tc-top"><span class="tc-day">${t.day}</span><span class="tc-cost">${t.cost}</span></div><div class="tc-route">${t.route}</div><div class="tc-meta">${t.mode} · ${t.time}</div>${t.link?`<a class="book-link" href="${t.link}" target="_blank" rel="noopener">${t.linkText}</a>`:''}`;cards.appendChild(card);
-  });
+  const list=document.getElementById('transportList');if(!list)return;
+  list.innerHTML=c.transport.map(t=>`<div class="tr-row">`
+    +`<div class="tr-day">${t.day}</div>`
+    +`<div class="tr-main"><div class="tr-route">${t.route}</div><div class="tr-mode">${t.mode}</div></div>`
+    +`<div class="tr-time"><span class="tr-lb">소요</span>${t.time}</div>`
+    +`<div class="tr-cost"><span class="tr-lb">비용(2인)</span>${t.cost}</div>`
+    +`<div class="tr-book">${t.link?`<a class="book-link" href="${t.link}" target="_blank" rel="noopener">${t.linkText}</a>`:'<span class="tr-nolink">—</span>'}</div>`
+    +`</div>`).join('');
 }
 
 function getKstTodayYmd(){
@@ -2503,7 +2539,25 @@ function getKstTodayYmd(){
 function bookingDetailHtml(item){
   if(!item)return '<div class="booking-detail-card"><div class="booking-detail-row">캘린더에서 항목을 선택하면 상세와 공식 링크가 여기에 표시됩니다.</div></div>';
   const links=(item.links||[]).map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${t} 열기</a>`).join('');
-  return `<div class="booking-detail-card"><div class="booking-detail-date">${item.date}</div><div class="booking-detail-name">${item.name}</div><div class="booking-detail-row"><strong>대상:</strong> ${item.target}</div><div class="booking-detail-row">${item.note}</div>${links?`<div class="booking-detail-links">${links}</div>`:''}</div>`;
+  return `<div class="booking-detail-card"><div class="booking-detail-date">${item.date}</div><div class="booking-detail-name">${item.name}</div><div class="booking-detail-row"><strong>대상:</strong> ${mdBold(item.target)}</div><div class="booking-detail-row">${bkNote(item.note)}</div>${links?`<div class="booking-detail-links">${links}</div>`:''}</div>`;
+}
+function mdBold(x){return String(x==null?'':x).replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>');}
+function bkNote(x){
+  if(x==null||x==='')return '';
+  const t=mdBold(x);
+  const bal=a=>a.every(p=>(p.match(/<b>/g)||[]).length===(p.match(/<\/b>/g)||[]).length);
+  let parts=t.split(' · ').map(v=>v.trim()).filter(Boolean);
+  // ' · ' 구분이 없는 긴 줄글은 문장 단위로 분해 (소수점·태그 중간은 건드리지 않음)
+  if(parts.length<3&&t.length>140){
+    const alt=t.split(/(?<=[.。])\s+(?=\S)/).map(v=>v.trim()).filter(Boolean);
+    if(alt.length>2&&bal(alt))parts=alt;
+  }
+  if(!bal(parts))parts=[t];
+  return parts.length>2?`<ul class="bk-note">${parts.map(v=>`<li>${v}</li>`).join('')}</ul>`:`<div class="bk-note one">${t}</div>`;
+}
+function showBookingGroup(cls){
+  document.querySelectorAll('.bk-tab').forEach(b=>b.classList.toggle('active',b.dataset.bkg===cls));
+  document.querySelectorAll('[data-bkgroup]').forEach(g=>{g.hidden=(g.dataset.bkgroup!==cls);});
 }
 function selectBookingEvent(idx){
   const item=TICKETING_ITEMS[idx];
@@ -2542,7 +2596,9 @@ function renderBooking(){
     return null;
   };
   const counts=groupsDef.map(g=>({g,items:BOOKING_ITEMS.filter(it=>g.match(it.status)).slice().sort((a,b)=>((bkWhen(a)||{k:98}).k)-((bkWhen(b)||{k:98}).k))}));
-  const strip=`<div class="bk-strip">${counts.filter(c=>c.items.length).map(c=>`<button class="bk-chip ${c.g.cls}" onclick="document.getElementById('bkg-${c.g.cls}').scrollIntoView({behavior:'smooth',block:'start'})">${c.g.icon} ${c.g.label.split(' (')[0]} <b>${c.items.length}</b></button>`).join('')}</div>`;
+  const shown=counts.filter(c=>c.items.length);
+  const firstCls=shown.length?shown[0].g.cls:'';
+  const strip=`<div class="bk-tabs">${shown.map(c=>`<button class="bk-tab ${c.g.cls}${c.g.cls===firstCls?' active':''}" data-bkg="${c.g.cls}" onclick="showBookingGroup(this.dataset.bkg)">${c.g.icon} ${c.g.label.split(' (')[0]} <b>${c.items.length}</b></button>`).join('')}</div>`;
   // ── 마감 타임라인 (TICKETING_ITEMS)
   const ev=TICKETING_ITEMS.map((x,i)=>({...x,idx:i})).filter(x=>x.ymd);
   const isDone=x=>/✅|완료|취소됨/.test((x.date||'')+(x.name||''));
@@ -2558,10 +2614,10 @@ function renderBooking(){
   // ── 상태 그룹별 통합 리스트 (행 클릭 → 상세 펼침)
   const list=counts.map(({g,items})=>{
     if(!items.length)return '';
-    const rows=items.map(it=>{const w=bkWhen(it);return `<details class="bk-row ${g.cls}"${g.open?' open':''}><summary><span class="bk-cat">${it.cat}</span><span class="bk-title">${it.title}</span>${w?`<span class="bk-when">🗓 ${w.t}</span>`:''}<span class="bk-target">${it.target}</span><span class="bk-status ${g.cls}">${it.status}</span></summary><div class="bk-detail"><div class="bk-drow"><strong>조건</strong>${it.window}</div><div class="bk-drow"><strong>메모</strong>${it.note}</div>${it.link?`<a class="booking-link" href="${it.link}" target="_blank" rel="noopener">${it.linkText} 열기 ↗</a>`:''}</div></details>`;}).join('');
-    return `<div class="bk-group" id="bkg-${g.cls}"><div class="bk-ghead ${g.cls}">${g.icon} ${g.label}<span class="cnt">${items.length}건</span></div>${rows}</div>`;
+    const rows=items.map(it=>{const w=bkWhen(it);return `<details class="bk-row ${g.cls}"><summary><span class="bk-cat">${it.cat}</span><span class="bk-title">${it.title}</span>${w?`<span class="bk-when">🗓 ${w.t}</span>`:''}<span class="bk-target">${it.target}</span><span class="bk-status ${g.cls}">${it.status}</span></summary><div class="bk-detail"><div class="bk-drow"><strong>조건</strong><div class="bk-note one">${mdBold(it.window)}</div></div><div class="bk-drow"><strong>메모</strong>${bkNote(it.note)}</div>${it.link?`<a class="booking-link" href="${it.link}" target="_blank" rel="noopener">${it.linkText} 열기 ↗</a>`:''}</div></details>`;}).join('');
+    return `<div class="bk-group" id="bkg-${g.cls}" data-bkgroup="${g.cls}"${g.cls===firstCls?'':' hidden'}><div class="bk-ghead ${g.cls}">${g.icon} ${g.label}<span class="cnt">${items.length}건</span></div>${rows}</div>`;
   }).join('');
-  el.innerHTML=`<div class="booking-meta">📅 오늘 ${today} (KST) · 검증 기준일: 돌로미티·교통 2026-07-12 / 입장권 2026-06-21 · 이탈리아 9월은 한국보다 7시간 느림</div>${strip}<div class="ticket-title">⏰ 마감 타임라인 — 칩을 누르면 아래 상세가 바뀝니다</div>${nextH}${tl}${tlPast}<div id="bookingDetail">${bookingDetailHtml(TICKETING_ITEMS[selIdx])}</div><div class="ticket-title" style="margin-top:24px">🗂 전체 예약 현황 — 행을 누르면 상세가 펼쳐집니다</div>${list}`;
+  el.innerHTML=`<div class="booking-meta">📅 오늘 ${today} (KST) · 검증 기준일: 돌로미티·교통 2026-07-12 / 입장권 2026-06-21 · 이탈리아 9월은 한국보다 7시간 느림</div>${strip}<div class="ticket-title">⏰ 마감 타임라인 — 칩을 누르면 아래 상세가 바뀝니다</div>${nextH}${tl}${tlPast}<div id="bookingDetail">${bookingDetailHtml(TICKETING_ITEMS[selIdx])}</div><div class="ticket-title" style="margin-top:24px">🗂 전체 예약 현황 — 위 탭으로 상태를 고르고, 행을 누르면 상세가 펼쳐집니다</div>${list}`;
 }
 
 function renderApps(){
@@ -2600,7 +2656,7 @@ function renderHotels(c){
   document.getElementById('hotelTitle').textContent='숙소';
   const cities=Object.keys(c.hotels);
   const conf=city=>c.hotels[city].some(h=>/확정/.test(h.name)||(h.tags||[]).some(t=>/확정/.test(t)));
-  const nav='<div class="hotel-citynav">'+cities.map((city,i)=>`<button class="hotel-citychip${i===0?' active':''}" data-city="${city}" onclick="showHotelCity('${city}')">${city}${conf(city)?' ✅':(slForCity(city)?' '+slForCity(city).hotels.length:'')}</button>`).join('')+'</div>';
+  const nav='<div class="hotel-citynav">'+cities.map((city,i)=>`<button class="hotel-citychip${i===0?' active':''}" data-city="${city}" onclick="showHotelCity(this.dataset.city)">${city}${conf(city)?' ✅':(slForCity(city)?' '+slForCity(city).hotels.length:'')}</button>`).join('')+'</div>';
   // 숙박 타임라인 (9/16~27 · 12박) + 비용 집계
   let tl='<div class="lodge-timeline">';
   for(let d=16;d<=27;d++){
