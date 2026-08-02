@@ -187,7 +187,8 @@ a{color:inherit}
 .cal-cell.trip{background:var(--terracotta-soft);border-color:#CFE0D4}
 .cal-cell.trip:hover{border-color:var(--terracotta);transform:translateY(-1px);
   box-shadow:0 8px 18px -10px rgba(47,107,79,.45)}
-.cal-top{display:flex;align-items:flex-start;justify-content:space-between;gap:4px;flex-wrap:wrap;margin-bottom:4px}
+/* 날짜→뱃지→도시 세로 스택 — 셀 폭과 무관하게 뱃지 위치 통일 */
+.cal-top{display:flex;flex-direction:column;align-items:flex-start;gap:3px;margin-bottom:4px}
 .cal-date{font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;font-weight:700;font-size:13px;color:var(--ink);line-height:1.2}
 .cal-cell.sun .cal-date{color:var(--terracotta-deep)}
 .cal-city{font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;font-size:11.5px;
