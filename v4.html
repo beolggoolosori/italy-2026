@@ -123,7 +123,7 @@ a{color:inherit}
 .container{max-width:var(--maxw);margin:0 auto;padding:40px 30px 24px;position:relative;z-index:1}
 .section-content{display:none;animation:fade .35s ease}
 .section-content.active{display:block}
-@keyframes fade{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}} /* transform 제거 — 조상 transform은 sticky의 뷰포트 고정을 깨뜨림 */
 .card{
   background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r);
   padding:26px 28px;margin-bottom:26px;box-shadow:var(--sh-sm);
@@ -243,6 +243,18 @@ a{color:inherit}
      (고정 64px 추정 제거). hover:none 분기에서 토큰을 60px로 올려 sec-tab 44px+padding 흡수. */
   .itin-map-wrap{flex:0 0 42%;width:auto;position:sticky;top:calc(var(--nav-h) + 8px);align-self:flex-start}
   .itin-list-wrap{flex:1}
+}
+/* 모바일: 지도 상단 고정 + 접기 토글 — 일정을 스크롤하며 지도를 따라가는 UX */
+.map-dock-toggle{display:none}
+@media(max-width:899px){
+  .itin-map-wrap{position:sticky;top:var(--nav-h);z-index:30;background:var(--paper-2);
+    padding:6px 0 0;margin:0 0 12px}
+  .itin-map-wrap #dayMap{height:32vh;min-height:190px;margin-bottom:0}
+  .itin-map-wrap.map-collapsed #dayMap{display:none}
+  .map-dock-toggle{display:block;width:100%;margin:0;padding:8px 0 9px;
+    background:transparent;border:0;border-bottom:1px solid var(--line);
+    font-family:'Pretendard Variable',Pretendard,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+    font-size:12px;font-weight:800;color:var(--olive);cursor:pointer;letter-spacing:.02em}
 }
 #dayMap{
   width:100%;height:clamp(280px,54vh,560px);border:1px solid var(--gold);
@@ -2309,6 +2321,14 @@ function toggleRecs(id,evt){
     }
   }
 }
+function toggleMapDock(force){
+  const w=document.querySelector('.itin-map-wrap');if(!w)return;
+  const collapse=typeof force==='boolean'?force:!w.classList.contains('map-collapsed');
+  w.classList.toggle('map-collapsed',collapse);
+  const btn=w.querySelector('.map-dock-toggle');
+  if(btn)btn.textContent=collapse?'🗺 지도 펼치기 ▼':'지도 접기 ▲';
+  if(!collapse&&dayMap)setTimeout(()=>dayMap.invalidateSize(),60);
+}
 function toggleSegRoute(ev,dayNum,si){
   if(ev&&ev.stopPropagation)ev.stopPropagation();
   const day=COURSES[currentCourse].days.find(d=>d.day===dayNum);
@@ -2328,6 +2348,7 @@ function toggleSegRoute(ev,dayNum,si){
     return;
   }
   segFocus=key;segFocusPair={prev,cur:s};
+  toggleMapDock(false); // 접혀 있으면 자동 펼침 — 행을 눌렀다는 건 지도를 보고 싶다는 뜻
   document.querySelectorAll('.sched-row.active-row').forEach(r=>r.classList.remove('active-row'));
   const tr=ev&&(ev.currentTarget&&ev.currentTarget.classList?ev.currentTarget:(ev.target&&ev.target.closest?ev.target.closest('tr'):null));
   if(tr&&tr.classList)tr.classList.add('active-row');
@@ -2554,7 +2575,7 @@ function renderItinerary(c){
   // layout: map + list
   const layout=document.createElement('div');layout.className='itin-layout';
   const mapWrap=document.createElement('div');mapWrap.className='itin-map-wrap';
-  mapWrap.innerHTML='<div id="dayMap"></div>';
+  mapWrap.innerHTML='<div id="dayMap"></div><button class="map-dock-toggle" type="button" onclick="toggleMapDock()">지도 접기 ▲</button>';
   const listWrap=document.createElement('div');listWrap.className='itin-list-wrap';
   layout.appendChild(mapWrap);layout.appendChild(listWrap);el.appendChild(layout);
 
