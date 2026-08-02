@@ -876,6 +876,29 @@ footer{text-align:center;padding:36px 20px;color:var(--faint);
 .sl-subtab small{display:block;font-weight:500;font-size:10.5px;color:var(--faint)}
 .sl-subtab.active{background:var(--terracotta);color:#fff;border-color:var(--terracotta-deep)}
 .sl-subtab.active small{color:#e8efea}
+/* 숙소 후보 — 펼침 리스트 테이블 */
+.slt{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}
+.slt-row{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;padding:11px 13px;cursor:pointer;border-bottom:1px solid var(--line-2);transition:background .15s}
+.slt-row:hover{background:var(--paper-3)}
+.slt-row.open{background:var(--terracotta-soft)}
+.slt-rank{flex:0 0 auto;font-weight:800;color:var(--muted);font-size:11px;width:26px}
+.slt-nm{flex:1 1 240px;min-width:0;font-weight:800;font-size:13.5px}
+.slt-st{color:#c9a94e;font-size:11px;font-weight:600}
+.slt-b{display:inline-block;font-size:9.5px;font-weight:800;padding:2px 6px;border-radius:8px;vertical-align:1px}
+.slt-b.hold{background:#fdf1e3;color:#9a5b22}
+.slt-b.fc{background:#e6f2ea;color:#2F6B4F}
+.slt-pr{flex:0 1 auto;font-size:12px;font-weight:700;color:var(--terracotta);max-width:46%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.slt-sc{flex:0 0 auto;font-size:12px;color:var(--olive)}
+.slt-sc small{color:var(--muted);margin-left:2px}
+.slt-ch{flex:0 0 auto;color:var(--muted);font-size:11px;transition:transform .15s}
+.slt-row.open .slt-ch{transform:rotate(180deg)}
+.slt-det{padding:4px 14px 13px 14px;border-bottom:1px solid var(--line-2);background:#fffdf9;font-size:12.5px;line-height:1.65}
+.slt-drow{margin:6px 0}
+.slt-drow.cav{color:#7a4a12}
+.slt-scores{display:flex;gap:12px;margin:7px 0;flex-wrap:wrap}
+.slt-sco{font-size:11.5px;color:var(--muted)}
+.slt-sco b{color:var(--olive);margin-right:3px;font-size:12.5px}
+.slt-links{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
 .sl-banner{background:var(--terracotta-soft);border:1px solid var(--line);border-left:3px solid var(--terracotta);border-radius:var(--r-sm);padding:11px 13px;font-size:12.5px;color:var(--ink);line-height:1.6;margin-bottom:16px}
 .sl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
 .sl-card{border:1px solid var(--line);border-radius:var(--r-sm);background:var(--paper-2);padding:13px 14px;display:flex;flex-direction:column;gap:9px;position:relative;transition:.18s}
@@ -1919,8 +1942,8 @@ const BOOKING_ITEMS=[
 {status:"예약가능",tone:"warn",cat:"입장권",title:"D5 우피치 / 아카데미아 / 두오모",target:"지금 예약 (상시 오픈)",window:"고정 오픈일 없음·조기매진",note:"우피치 08:30 €29(사전권), 아카데미아 13:30 €20+예약 €4=€24(2026-02 인상), 두오모 Brunelleschi Pass €30(쿠폴라+세례당+종탑+오페라두오모박물관). ⚠️일요일 쿠폴라는 12:45~16:30 운영이라 16:00 슬롯이 마지막이거나 없을 수 있음 → 가장 이른 오후 슬롯 확보, 안 되면 D5 순서 조정",link:"https://tickets.uffizi.it/",linkText:"우피치"},
 {status:"확정",tone:"done",cat:"입장권",title:"D3 바티칸 박물관 08:00",target:"완료 (2026-07-05 발권)",window:"환불불가·기명 티켓",note:"9/18(금) 08:00 입장, 2인 €50(€25/인=€20+예약비 €5). 입구는 예약자 줄 우측 Corridoio 1(Passageway 1) · 신분증 필수 · ⚠️입장 전 안뜰의 직원에게 티켓 검증(validation) 필수 — 미검증 시 개찰구 통과 불가. 티켓 PDF는 휴대폰+인쇄본 이중 보관",link:"https://tickets.museivaticani.va",linkText:"바티칸"},
 {status:"확정",tone:"done",cat:"입장권",title:"D3 성베드로 쿠폴라 14:30",target:"완료 (2026-07-05 예약확정)",window:"엘리베이터 €22/인",note:"9/18(금) 14:30 돔 슬롯 예약 확정. 티켓에 대성당 시간지정 입장(돔 90분 전 배정 원칙 → 13:00 예상)+오디오가이드+우선 보안레인 포함 — ⚠️확정 메일의 성당 입장시각 확인 후 D3 13:00 단계 시간 갱신. QR·신분증 지참. 보르게세는 안 가는 것으로 확정(2026-07-05)",link:"https://booking.basilicasanpietro.va/",linkText:"공식 예약"},
-{status:"오픈대기",tone:"warn",cat:"입장권",title:"D2 콜로세움",target:"2026-08-18(화)",window:"방문 30일 전",note:"공식 30일 전 판매(이른 아침 로마시간). 오픈 즉시 08:30 슬롯 확보. 24h 통합권(콜로세움+포로로마노+팔라티노) €18(예약비 포함), 아레나/지하 Full Experience €24. 신분증 이름 일치",link:"https://colosseo.it/en/opening-times-and-tickets/",linkText:"공식"},
-{status:"선택예약",tone:"",cat:"입장권",title:"D2 판테온 (선택)",target:"2026-08-15~",window:"9월 캘린더 8월 중순 오픈",note:"의무 아님(현장 매표 가능)이나 €7 미리 사면 줄 단축. 2026-07-01부터 €5→€7. 공식 Musei italiani(museiitaliani.it)에서만 구매, pantheonroma.com은 리셀러. 티켓 기명",link:"https://www.museiitaliani.it/",linkText:"Musei italiani"},
+{status:"오픈대기",tone:"warn",cat:"입장권",title:"D2 콜로세움",target:"2026-08-18(화)",window:"방문 30일 전",note:"공식 30일 전 판매(이른 아침 로마시간). 오픈 즉시 08:30 슬롯 확보. 24h 통합권(콜로세움+포로로마노+팔라티노) €18(예약비 포함), 아레나/지하 Full Experience €24. 신분증 이름 일치. ✅2026-08-02 실측: 예매 캘린더가 정확히 오늘+30일(9/1)까지만 열림 — 30일 롤링 확인, 9/17은 8/18 오픈 확정. ⚠️구 링크 colosseo.it 접속 불가 → 공식 예매처 ticketing.colosseo.it로 교체",link:"https://ticketing.colosseo.it/en/categorie/singoli-1-8-persone/",linkText:"Colosseo 예매"},
+{status:"선택예약",tone:"",cat:"입장권",title:"D2 판테온 (선택)",target:"2026-08-15~",window:"9월 캘린더 8월 중순 오픈",note:"의무 아님(현장 매표 가능)이나 €7 미리 사면 줄 단축. 2026-07-01부터 €5→€7. 공식 Musei italiani(museiitaliani.it)에서만 구매, pantheonroma.com은 리셀러. 티켓 기명. ✅2026-08-02 실측: 8월은 전 일자 구매 가능하나 9월 캘린더는 아직 미오픈(전일 회색) — 8월 중순 오픈 예상 유지. €7 인상 공식 재확인. 링크는 판테온 구매 화면 직행",link:"https://portale.museiitaliani.it/b2c/buyTicketless/33f77159-0acd-40c4-8524-701f33aae108",linkText:"판테온 바로구매"},
 {status:"마감주의",tone:"warn",cat:"입장권",title:"D8 베네치아 두칼레 궁전",target:"2026-08-23(일)까지",window:"30일 전 €30 할인 마감",note:"현장/일반 €35, 방문 30일 초과 전 온라인 €30 → 9/23 기준 8/23까지 예매해야 €30(2026-07-27 공식 실측). 산마르코 광장 박물관 통합권. D8 09:00 첫 슬롯 방문(관람 후 정오 메스트레 렌터카 픽업) — 시간슬롯 지정 가능하면 09:00 지정",link:"https://palazzoducale.visitmuve.it/en/tickets/",linkText:"MUVE"},
 {status:"날씨확인",tone:"warn",cat:"입장권",title:"D10 세체다 케이블카 (9/25 금 오후)",target:"전날 예보 확인 후 구매 (seceda.axess.shop)",window:"2026 타임슬롯 의무 · 30분당 정원 · 환불·변경 불가",note:"2026-08-02 V2.2a: D10(금) Wolf 짐 10:45 후 **12:30 슬롯** — 능선에서 오들레 침봉이 오후 순광이고, 마지막 하행 18:00이라 능선에 3h 확보. 구매: seceda.it의 초록 'Online Ticket Summer 2026' 버튼 또는 https://seceda.axess.shop/ 직행. **온라인 사전예약이 원칙**이고 현장 매표는 온라인 미매진분에 한해 가능(원하는 슬롯이 차 있으면 다른 시간대로 밀림). 온라인 조기구매 시 −5% + 매표 줄 스킵. 30분 단위 타임슬롯 예약 의무, 왕복 €74/인(2인 €148). ⚠️2026 신설: 능선 주요 트레일 입장료 €5/인 별도 현장 징수. 운영 08:30~18:00(시즌 5/22~11/2, 공식 seceda.it 2026-08-01 확인). 환불불가라 전날 예보 확인 후 구매",link:"https://seceda.axess.shop/en",linkText:"Seceda"},
 {status:"선택예약",tone:"warn",cat:"리프트 패스",title:"💳 리프트 패스 — 살까 말까 (2026-08-01 계산)",when:"9/25~26",wk:25,target:"알페 디 시우시 확정 여부로 결정",window:"Gardena Card는 3일 연속권만 존재",note:"⚠️먼저: D9(9/24) 트레치메는 유료도로라 어떤 패스도 무관. 우리 리프트는 발 가르데나 이틀(9/25·26)에만 몰려 있다. ①**Dolomiti Supersummer(€67/1일, €145/3-of-4)는 사면 안 된다** — 세체다 구간(Ortisei-Furnes·Furnes-Seceda·Fermeda)이 명시적으로 제외라 우리 최대 지출을 못 덮는다. ②**Gardena Card €124/인**(3일 연속, 6/6~10/11) — 세체다·사쏘룽고·오르티세이↔알페 디 시우시 18개 리프트 전부 포함, 무제한 탑승. 단 3일권뿐이라 우리는 2일만 쓴다. ③**개별권 합계**: 세체다 왕복 €74 + 사쏘룽고 €20 = €94. 알페 디 시우시(~€24, 요금 미확정)까지 하면 ~€118. 👉**판단: 알페 디 시우시를 확정하면 Gardena Card(€124)가 사실상 동가 + 세체다 재탑승 무제한이라 유리. 안 하거나 미정이면 개별권(€94)이 1인당 €30 저렴.** 세체다는 1회 €74라, 9/25 오후가 흐려 9/26에 재도전하면 개별권은 €148이 되고 카드는 추가비용 0 — 이게 카드의 진짜 값어치. 카드로도 세체다 타임슬롯 예약은 별도 필요(카드번호로 seceda.it에서). 참고: 숙소가 주는 Val Gardena Mobil Card는 버스·기차용이라 리프트와 무관",link:"https://www.gardena-card.com/en/prices.asp",linkText:"Gardena Card"},
@@ -1950,8 +1973,8 @@ const TICKETING_ITEMS=[
 {ymd:"2026-07-12",date:"2026.07.12(일) ✅완료",tone:"",name:"D7 Firenze→Venezia Italo 8904 (발권완료)",target:"9/22(화) 09:39→11:55 · Prima Business",note:"2026-07-12 발권 완료 — Italo 8904, 2호차 15·16, 1 Adult+1 Young, 2인 €65.80(Low Cost·환불불가·변경 72h전 50%+차액). 산타크로체는 D7에서 제외, 아침 직행으로 베네치아 체류 +2h. 티켓은 이메일 PDF — 폰+백업 이중 보관.",links:[["Italo","https://www.italotreno.com/en"]]},
 {ymd:"2026-08-01",date:"2026.08.01(토) 오늘",tone:"critical",name:"돌로미티 동→서 재설계 + 숙소 착수",target:"코르티나 2박 + 발 가르데나 2박 숙소 (트레치메는 8월 하순 대기)",note:"트레치메 예약: 포털은 4월 말부터 가동 중이나 **예약 범위가 약 1개월 롤링**이라 8/1 시점엔 9/3까지만 열림 → 9/24는 8/22~8/25경 오픈 예정(당일 '지금 예약 가능'으로 적었던 건 오류, 정정함). 날짜·시간 변경 불가(취소 후 재예약만), 5일 전까지 무료 취소. ⚠️2026-09-01부터 파소 가르데나가 당일 통과차량 통제(거주자·숙박객·배송만) → 기존 D9 루트 폐기, 팔자레고→아라바→포르도이→셀라 경유로 변경(사쏘룽고 확보, +13km·+11분). 라가주오이·1차대전 갱도·친퀘토리·파소 자우 제외, 카레차 호수 추가. 숙소가 코르티나 4박 → 코르티나 2박+오르티세이 2박으로 분할되어 발 가르데나 숙소·식당이 신규 최우선 과제. 검증 기준일 2026-08-01.",links:[["Tre Cime 예약","https://auronzo.info/en/parking-tre-cime-di-lavaredo/"],["Sassolungo","https://sassolungo.bz/en/timetables-and-prices/"],["Ortisei 숙소","https://www.booking.com/city/it/ortisei.html"]]},
 {ymd:"2026-08-22",date:"2026.08.22(토) 전후 — 매일 확인",tone:"critical",name:"D9 Tre Cime 통행/주차 (롤링 오픈)",target:"9/24(목) 10:30 슬롯 · 차량 €40",note:"예약 캘린더가 약 1개월 롤링이라 9/24는 이 무렵 열린다(2026-08-01 실측: 9/3까지만 열림 = 지평선 약 33일). 8/20부터 매일 포털 확인. 🎯슬롯은 10:30(30분 단위면)/10:00(1시간 단위면) — 조기도착은 진입 거부되고 지각은 그대로 허용되므로, 게이트 도착 예상범위(10:25~11:30)보다 이른 슬롯이 안전. 주차 700대·9월 말 평일이라 매진 위험은 낮지만 주말 슬롯은 3~5일 전 마감 사례 있음. 번호판은 9/23 렌터카 픽업 후 전날 23:59까지 1회 수정. 5일 전(9/19)까지 무료 취소 — 예보 보고 결정 가능. 검증 2026-08-01.",links:[["Tre Cime 예약","https://auronzo.info/en/parking-tre-cime-di-lavaredo/"]]},
-{ymd:"2026-08-18",date:"2026.08.18(화)",tone:"critical",name:"D2 콜로세움 (30일 오픈)",target:"9/17 08:30 콜로세움+포로/팔라티노",note:"공식 방문 30일 전 판매(이른 아침 로마시간). 9/17 기준 8/18 오픈 → 오픈 즉시 08:30 슬롯 확보. 24h 통합권(콜로세움+포로로마노+팔라티노) €18(예약비 €2 포함), 아레나/지하 포함 Full Experience €24. 신분증 이름 일치 필요. 검증 2026-06-21.",links:[["Colosseo","https://colosseo.it/en/opening-times-and-tickets/"]]},
-{ymd:"2026-08-18",date:"2026.08.18(화)",tone:"",name:"D2 판테온 (선택, €7)",target:"9/17 ~14:40 판테온",note:"9월 입장 캘린더는 8월 중순 오픈. 시간제 예약은 의무 아님(현장 매표/자판기 가능)하지만 미리 사두면 줄 단축. ⚠️2026-07-01부터 €5→€7 인상이라 9월 방문은 €7. 반드시 공식 Musei italiani에서 구매 — pantheonroma.com 등은 리셀러. 티켓 기명(신분증 일치). 검증 2026-06-21.",links:[["Musei italiani","https://www.museiitaliani.it/"],["판테온 안내","https://direzionemuseiroma.cultura.gov.it/en/pantheon/"]]},
+{ymd:"2026-08-18",date:"2026.08.18(화)",tone:"critical",name:"D2 콜로세움 (30일 오픈)",target:"9/17 08:30 콜로세움+포로/팔라티노",note:"공식 방문 30일 전 판매(이른 아침 로마시간). 9/17 기준 8/18 오픈 → 오픈 즉시 08:30 슬롯 확보. 24h 통합권(콜로세움+포로로마노+팔라티노) €18(예약비 €2 포함), 아레나/지하 포함 Full Experience €24. 신분증 이름 일치 필요. ✅2026-08-02 실측: 캘린더 9/1까지만 오픈(30일 롤링 확인) — 8/18 오픈 확실. 구 colosseo.it 접속 불가라 공식 예매처 ticketing.colosseo.it로 링크 교체. 검증 2026-08-02.",links:[["Colosseo 예매","https://ticketing.colosseo.it/en/categorie/singoli-1-8-persone/"]]},
+{ymd:"2026-08-18",date:"2026.08.18(화)",tone:"",name:"D2 판테온 (선택, €7)",target:"9/17 ~14:40 판테온",note:"9월 입장 캘린더는 8월 중순 오픈. 시간제 예약은 의무 아님(현장 매표/자판기 가능)하지만 미리 사두면 줄 단축. ⚠️2026-07-01부터 €5→€7 인상이라 9월 방문은 €7. 반드시 공식 Musei italiani에서 구매 — pantheonroma.com 등은 리셀러. 티켓 기명(신분증 일치). ✅2026-08-02 실측: 8월 전일 구매 가능·9월 캘린더 미오픈(전일 회색). 안내 페이지(direzionemuseiroma)는 접속 불가라 제거, 구매 화면 직행 링크로 교체. 검증 2026-08-02.",links:[["판테온 바로구매","https://portale.museiitaliani.it/b2c/buyTicketless/33f77159-0acd-40c4-8524-701f33aae108"],["Musei italiani","https://www.museiitaliani.it/"]]},
 {ymd:"2026-08-20",date:"2026.08.20(목)",tone:"",name:"D4-D5 피렌체 식당",target:"D4(토) Buca Mario 20:15 비스테카, D5 일요일 후보",note:"비스테카(Buca Mario)는 D4 토요일 20:15로 이동 — 일요일 휴무라 D5 불가, D6은 친퀘 당일치기라 저녁 부재. D5 일요일은 전통요리(4 Leoni/Il Santo Bevitore 등). 인기 정찬은 2~3주 전 예약.",links:[["Buca Mario","https://www.bucamario.com/contatti/"],["4 Leoni","https://www.4leoni.it/"]]},
 {ymd:"2026-08-23",date:"2026.08.23(일)",tone:"critical",name:"D8 두칼레 궁전 (30일 할인 마감)",target:"9/23 09:00 두칼레 궁전 (첫 슬롯)",note:"공식 2026: 현장/일반 €35, 방문 30일 초과 전 온라인 예매 시 €30. 9/23 기준 8/23까지 예매하면 €30 확보(이후 €35 · 2026-07-27 공식 실측). 산마르코 광장 박물관 통합권(코레르·고고학·마르치아나 포함). ⚠️09:00 첫 슬롯 필수 — 관람 후 정오 메스트레 렌터카 픽업 동선(시간 슬롯 미지정 시 12:00부터 입장이라 불가). 운영 09:00~19:00·막입장 18:00. 검증 2026-06-21, 동선 갱신 2026-07-12.",links:[["MUVE","https://palazzoducale.visitmuve.it/en/tickets/"]]},
 {ymd:"2026-09-20",date:"2026.09.20(일) 전후 — 예보 보고",tone:"critical",name:"D10 세체다 케이블카 타임슬롯",target:"9/25(금) 12:30 슬롯 · 오르티세이→푸르네스→세체다 왕복",note:"2026-08-02 V2.2a: D10(금) Wolf 짐 10:45 후 12:30 슬롯 — 능선에서 오들레 침봉이 오후 순광이고 막차 18:00, 능선 ~4h(산장 점심 포함). ⚠️30분 단위 지정 타임슬롯 사전예약 의무(환불·변경 불가). 왕복 €74/인. ⚠️2026 신설: 능선 주요 트레일 입장료 €5/인 현장 별도. 전략: 환불불가라 조기예매 대신 전날 예보 확인 후 구매. 우천이면 D11 카레차 루프와 순서를 바꿔 세체다를 토요일로 밀 수 있음(이 안의 날씨 버퍼). 운영 08:30~18:00(시즌 5/22~11/2, 공식 seceda.it 2026-08-01 확인). 주차: 밸리역 250대 €2.50/30분·일 최대 €30. 검증 2026-08-01.",links:[["Seceda","https://seceda.axess.shop/en"],["Val Gardena","https://www.valgardena.it/"]]},
@@ -2127,7 +2150,7 @@ const SL=[
  {name:"Hotel Plaza Venice (Mestre)",stars:4,area:"MESTRE — Viale Stazione 36, Mestre역 정면",dist:"Venezia Mestre역 도보 약 1~2분(약150m)",ov:"8.4",cl:"8.6",sv:"8.9",lo:"9.3",src:"Booking 8.4(약5,276)",cnt:"5,276",price:"약 €110~175 (1박2인)",cancel:"요율별",book:"https://www.booking.com/hotel/it/plaza-mestre.html",agoda:"https://www.agoda.com/hotel-plaza-venice/hotel/venice-it.html",off:"https://www.hotelplazavenice.com/",why:"Mestre역 정문 바로 앞 대형 4성. 위치 9.3, 익일 09:00 픽업·심야 귀가 동선 매우 짧음. 리뷰 5천+로 검증 충분, 객실 많아 가용성 높고 가격 합리적.",cav:"역 정면 대로변 소음 가능(안쪽 객실 요청). 대형 회전율로 객실 컨디션 편차. 본섬 분위기 없음.",vnote:""}
  ]},
 {key:"Cortina",label:"코르티나(돌로미티)",dlabel:"9/23 수~9/25 금 · 2박",ci:"2026-09-23",co:"2026-09-25",los:2,city:"Cortina d'Ampezzo",
- summary:"⚠️2026-08-01 커밋 9be8b46으로 코르티나가 4박→<b>2박(9/23~25)</b>이 되며 기준이 바뀌었다. ①토요일 Da Aurelio 디너가 삭제돼 <b>하프보드 가점 소멸</b> ②유일한 풀데이 D9가 브라이에스·트레치메(북·북동)라 <b>북측 접근 프리미엄 부활</b> ③아래 #1·#2는 사용자가 아고다 무료취소로 9/23~25를 <b>가예약</b>해둔 SS51 남측 후보 — 2026-08-01 실측 결과 D9 페널티가 브라이에스 +5분·트레치메 +9분에 그쳐(SR48 직결, 코르티나 미경유) 유효한 선택지다. 대신 <b>저녁 외식은 코르티나까지 편도 18~21분</b>이 상시 비용. 남은 실질 기준: 부지 내 무료주차 · ZTL 무관 · 저녁 접근 · 무료취소. #3 이하는 <b>구 4박 기준 조사(2026-07-27)</b>라 가격·재고 무효, 속성만 참고. <b>2026-08-01 2박(9/23~25) 재견적</b>: 시내권 최저 Des Alpes €405 · Piccolo Pocol €424(무료취소) · Montana €468 · <b>Villa Gaia €528(9.4 — 4박 때와 달리 2박은 더블 있음)</b> vs 가예약 €321~374 → <b>남측 유지가 €70~150 절감</b>. 바꿀 가치가 있는 건 Villa Gaia 정도인데 무료취소 불가라 가예약과 병행 불가.",
+ summary:"가예약 2곳(#1·#2, 아고다 무료취소) 중 <b>택1 후 나머지 취소</b>만 남은 상태. 기준: 부지 내 무료주차 · ZTL 무관 · 저녁 접근(남측 베이스는 시내 식당 왕복 36~42분) · 무료취소. 남측(San Vito·Borca)도 트레치메 +9분·브라이에스 +5분뿐이라 유효. 시내파 대안: Villa Gaia €528(9.4·무취 불가) · Montana €468. #3 이하 가격은 참고용.",
  hotels:[
  {name:"Dolomiti Sport Hotel 🔒가예약",hold:true,ver:false,stars:3,area:"San Vito di Cadore, Via Roma 33 (32046) — 코르티나 남쪽 SS51 알레마냐 축. 발코니·산 전망, 무료주차(지하 실내 포함)",dist:"코르티나 Corso Italia 차 <b>18분·13.1km</b>(SS51) · 브라이에스 <b>1h15·59.0km</b> · 아우론조 산장(트레치메) <b>59분·34.2km</b>(SS51→SR48, 코르티나 미경유) — 전부 2026-08-01 Google Maps 실측",ov:"9.1",cl:"9.3",sv:"9.7",lo:"9.1",src:"Booking 9.1 Wonderful (2026-08-01 직접 확인)",cnt:"1,258",price:"2박2인 아고다 확보 — Booking 동조건 <b>€321~336</b>(2026-08-01, 무료취소 9/16까지 요금 기준)",cancel:"아고다(무료취소)",book:"https://www.booking.com/hotel/it/albergo-dolomiti-san-vito-di-cadore.html",agoda:"",off:"",why:"이번 후보군 <b>종합 최상위 9.1</b>(1,258건)에 서비스 9.7·청결 9.3. 무료주차와 조식(Wonderful) 확보. D8 도착일엔 코르티나보다 13km 앞이라 체크인이 15~20분 빠르고, D9 트레치메는 SR48 직결이라 코르티나 베이스 대비 +9분에 그친다.",cav:"코르티나 시내 저녁 식당(Baita Fraina·Tivoli·El Brite)까지 <b>편도 18분·왕복 36분</b> — 매일 저녁 운전이 붙고 음주 불가. 3성이라 스파·부대시설 없음. D10 팔자레고 서향 출발 시 코르티나를 되짚어 +18분.",vnote:"🔒 <b>가예약(확정 아님)</b> — 2026-08-01 아고다 무료취소 조건으로 9/23~25 2박 확보. 검증 2026-08-01: 3성·9.1(1,258건)·무료주차·조식을 Booking에서 직접 확인, 주행 3구간 Google Maps 실측. ⚠️결제액·취소기한은 아고다 예약확인서 확인 후 기재."},
  {name:"TH Cadore - Hotel Antelao 🔒가예약",hold:true,ver:false,stars:4,area:"Borca di Cadore, Via Roma 11 (32040) — 코르티나 남쪽 SS51 축, San Vito보다 약 2.8km 더 남쪽. Le Coccole 스파(사우나·자쿠지)·La Cima 레스토랑(페모 전망)·바",dist:"코르티나 Corso Italia 차 <b>21분·15.9km</b>(SS51, 2026-08-01 Google Maps 실측 — ⚠️Booking 표기 '15분'은 낙관치) · 트레치메·브라이에스는 위 #1에서 각 +3분 내외",ov:"8.6",cl:"9.0",sv:"9.2",lo:"8.7",src:"Booking 8.6 Excellent (2026-08-01 직접 확인)",cnt:"1,566",price:"2박2인 아고다 확보 — Booking 동조건 <b>€374~</b>(스파 이용 포함 객실, 2026-08-01, 무료취소 9/20까지 요금 기준)",cancel:"아고다(무료취소)",book:"https://www.booking.com/hotel/it/antelao.html",agoda:"",off:"",why:"유일한 <b>4성 리조트형</b> — 스파·레스토랑·바를 갖춰 저녁에 코르티나로 안 나가도 해결된다(외식 왕복 42분을 상쇄하는 유일한 후보). 무료주차·조식 Excellent, 리뷰 1,566건으로 표본이 가장 두껍다.",cav:"⚠️Booking 리뷰에 <b>도로변 객실 소음</b> 언급 — 안쪽/후면 객실 요청 권장. 종합 8.6·위치 8.7로 #1(9.1/9.1)보다 낮고 <b>코르티나에서 가장 먼 후보</b>. 자체 레스토랑을 안 쓰면 왕복 42분.",vnote:"🔒 <b>가예약(확정 아님)</b> — 2026-08-01 아고다 무료취소 조건으로 9/23~25 2박 확보. 검증 2026-08-01: 4성·8.6(1,566건)·무료주차·스파·조식을 Booking에서 직접 확인, 코르티나 주행 Google Maps 실측. ⚠️결제액·취소기한은 아고다 예약확인서 확인 후 기재."},
@@ -2155,7 +2178,7 @@ const SL=[
  {name:"Hotel Garni Snaltnerhof",ver:false,stars:3,area:"중심 50m — 가르니(조식 호텔)",dist:"중심가 50m · 세체다 승강장 도보 약 10~12분",ov:"9.0",cl:"9.2",sv:"9.3",lo:"9.6",src:"Booking 9.0 (2026-08-01 검색결과 실측)",cnt:"636",price:"2박2인 <b>€965</b> · 조식 (Booking 2026-08-01)",cancel:"가능(요금 선택)",book:"https://www.booking.com/hotel/it/garni-snaltnerhof.html",agoda:"",off:"",why:"<b>무료취소가 확인된 유일한 중심가 호텔형</b> — 먼저 잠그고 재검색하는 전략엔 이 카드.",cav:"€965로 예산 초과 — 잠금용으로만. 확정 전 하위가 재검색 필수.",vnote:""}
  ]},
 {key:"Milano",label:"밀라노",dlabel:"9/27 일 · 1박",ci:"2026-09-27",co:"2026-09-28",los:1,city:"Milano",
- summary:"⚠️<b>2026-08-02 정정 — 9/27 밤은 밀라노 패션위크(여성복 SS27, 9/22~28)와 정면 겹침</b>. 7/27의 '특수요인 없음'은 오류(그건 남성복 주간). 실시세: 두오모권 호텔 €249~400 · 아파트호텔 €195~ · 첸트랄레 €181~320 — <b>가격은 상방, 조기 확정 권장</b>. 마지막날 동선(D12 저녁 두오모·브레라 + D13 종일 시내·짐보관 15:30 픽업) 기준 <b>두오모 도보권+짐보관</b>이 최적. 아래 #1·#2는 2026-08-02 실시세, #3 이하는 6/21 조사(가격 무효·속성 참고). 10곳 전원 두오모 도보권 + Malpensa Express 역(Cadorna 또는 Centrale 경유) 접근. 상위권은 두오모 코어(저녁 아페리티보·쇼핑 동선), 하위권은 Cadorna/Missori 인접(익일 16:00 공항행 편의). 저녁 동선 중시 → 1~4·9·10번, 귀국 동선 중시 → 5~7번 권장. (차는 16:30 반납이라 호텔 주차 불필요)",
+ summary:"⚠️<b>9/27은 밀라노 패션위크 주간</b> — 가격이 계속 오르는 구간이라 무료취소 요금제로 조기 확정 권장. 기준: <b>두오모 도보권 + 짐보관</b>(마지막 날 15:30 짐 픽업 후 공항행). 저녁·쇼핑 동선 중시면 두오모 코어(#1·#2), 공항 동선 중시면 Cadorna·Missori 인접. #1·#2는 실시세, #3 이하 가격은 참고용. 차는 전날 반납이라 주차 불필요.",
  hotels:[
  {name:"Aparthotel Dei Mercanti",ver:false,stars:3,area:"Passaggio degli Osii 1 — 피아차 메르칸티, <b>두오모 도보 2~3분</b> · 위치 9.7",dist:"두오모 2~3분 · Camparino 3분 · 브레라 도보 12분 · 첸트랄레 M3 5분",ov:"8.6",cl:"8.8",sv:"9.2",lo:"9.7",src:"Booking 8.6 (2026-08-02 상세페이지 — 위치 9.7·스태프 9.2·가성비 8.3)",cnt:"1,255",price:"1박2인 <b>€195</b>(기본) / <b>€209 — 9/6까지 무료취소</b> (Booking 2026-08-02)",cancel:"€209 요금제 9/6까지",book:"https://www.booking.com/hotel/it/aparthotel-dei-mercanti.html",agoda:"",off:"",why:"<b>패션위크 주간에 두오모 2분을 €195~209에</b> — 이번 조사 위치·가격 균형 1위. D12 저녁(두오모·Camparino·브레라)과 D13 종일 시내가 전부 도보권, 무료취소 요금제로 지금 잠그고 재검색 가능.",cav:"아파트호텔 — <b>짐보관·리셉션 시간 확인 필수</b>(D13 15:30 짐 픽업 전제). 가성비 세부점수 8.3. 도시세 별도.",vnote:""},
  {name:"B&B HOTEL Milano Duomo Velasca",ver:false,stars:4,area:"Missori 권역 — 두오모 도보 7분, M3 Missori 1정거장",dist:"두오모 7분 · 첸트랄레 M3 직결(짐 이동 편함)",ov:"9.1",cl:"9.3",sv:"9.2",lo:"9.5",src:"Booking 9.1 (2026-08-02 검색결과)",cnt:"92",price:"1박2인 <b>€249</b> (Booking 2026-08-02)",cancel:"요율별",book:"https://www.booking.com/hotel/it/b-amp-b-milano-missori.html",agoda:"",off:"",why:"정통 호텔형(체인 — 24h 리셉션·짐보관 표준)에 9.1. 두오모 도보권 호텔 최저가.",cav:"리뷰 92건으로 표본 얇음(신축). 조식 별도.",vnote:""},
@@ -2194,6 +2217,34 @@ function slTrip(name,city,ci,co){return "https://www.trip.com/hotels/list?keywor
 function slGoogle(name,city,ci,co){return "https://www.google.com/travel/search?q="+encodeURIComponent(name+" "+city)+"%20"+ci+"%20"+co;}
 function slMaps(name,city){return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(name+" "+city);}
 function slScore(k,v){const n=parseFloat(v);const cls=n>=9.3?"hi":(n>=8.8?"mid":"");return '<div class="sl-sc"><div class="v '+cls+'">'+(v||"-")+'</div><div class="k">'+k+'</div></div>';}
+function slToggleRow(id,el){const d=document.getElementById(id);if(!d)return;d.hidden=!d.hidden;el.classList.toggle('open',!d.hidden);}
+function slTable(L){
+  return '<div class="slt">'+L.hotels.map((h,i)=>{
+    const id='slt-'+L.key+'-'+i;
+    const bk=slBook(h.book,L.ci,L.co),ag=slAgoda(h.agoda,h.name,L.city,L.ci,L.los),gg=slGoogle(h.name,L.city,L.ci,L.co),mp=slMaps(h.name,L.city);
+    const badge=(h.hold?'<span class="slt-b hold">가예약</span>':'')+(h.cancel&&!/요율|확인/.test(h.cancel)?'<span class="slt-b fc">무취</span>':'');
+    const scores=[["종합",h.ov],["청결",h.cl],["서비스",h.sv],["위치",h.lo]].filter(x=>x[1]).map(x=>`<span class="slt-sco"><b>${x[1]}</b>${x[0]}</span>`).join('');
+    const links=`<a href="${gg}" target="_blank" rel="noopener" class="sl-lk book" onclick="event.stopPropagation()">Google 비교 ▸날짜</a>`
+      +(bk?`<a href="${bk}" target="_blank" rel="noopener" class="sl-lk" onclick="event.stopPropagation()">Booking</a>`:'')
+      +`<a href="${ag}" target="_blank" rel="noopener" class="sl-lk" onclick="event.stopPropagation()">Agoda</a>`
+      +(h.off?`<a href="${h.off}" target="_blank" rel="noopener" class="sl-lk" onclick="event.stopPropagation()">공식</a>`:'')
+      +`<a href="${mp}" target="_blank" rel="noopener" class="sl-lk" onclick="event.stopPropagation()">지도</a>`;
+    return `<div class="slt-row" onclick="slToggleRow('${id}',this)">`
+      +`<span class="slt-rank">#${i+1}</span>`
+      +`<span class="slt-nm">${h.name}${h.stars?` <span class="slt-st">${'★'.repeat(h.stars)}</span>`:''} ${badge}</span>`
+      +`<span class="slt-pr">${h.price}</span>`
+      +`<span class="slt-sc"><b>${h.ov}</b><small>(${h.cnt})</small></span>`
+      +`<span class="slt-ch">▾</span></div>`
+      +`<div class="slt-det" id="${id}" hidden>`
+      +`<div class="slt-drow">${h.area}</div>`
+      +`<div class="slt-drow">📍 ${h.dist}</div>`
+      +`<div class="slt-scores">${scores}</div>`
+      +(h.why?`<div class="slt-drow">✅ ${h.why}</div>`:'')
+      +(h.cav?`<div class="slt-drow cav">⚠️ ${h.cav}</div>`:'')
+      +(h.vnote?`<div class="slt-drow">${h.vnote}</div>`:'')
+      +`<div class="slt-links">${links}</div></div>`;
+  }).join('')+'</div>';
+}
 function slCard(h,i,L){
   const top=i<3;
   const bk=slBook(h.book,L.ci,L.co),ag=slAgoda(h.agoda,h.name,L.city,L.ci,L.los),ht=slHotels(h.name,L.city,L.ci,L.co),tp=slTrip(h.name,L.city,L.ci,L.co),gg=slGoogle(h.name,L.city,L.ci,L.co),mp=slMaps(h.name,L.city);
@@ -2898,7 +2949,7 @@ function renderHotels(c){
     const L=slForCity(city);
     let inner,count;
     if(L&&!conf(city)){ // 예약 확정된 도시는 후보 그리드 대신 확정 카드만 (후보 데이터는 SL에 보관)
-      inner=`<div class="sl-banner">${L.summary}</div><div class="sl-grid">${L.hotels.map((h,idx)=>slCard(h,idx,L)).join('')}</div>`;
+      inner=`<div class="sl-banner">${L.summary}</div>${slTable(L)}`;
       count=`후보 ${L.hotels.length}곳 · ${L.ci}→${L.co}`;
     }else{
       const cards=c.hotels[city].map(h=>{
