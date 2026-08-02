@@ -2918,7 +2918,7 @@ function renderFoodGuide(){
   }).join('');
   const tabs=`<div class="fg-tabs">${FG_REGIONS.map(r=>`<button class="fg-tab${r.key===fgRegion?' active':''}" data-fgreg="${r.key}" onclick="showFoodRegion(this.dataset.fgreg)">${r.label}</button>`).join('')}<label class="fg-pick-toggle"><input type="checkbox" ${fgPickOnly?'checked':''} onchange="toggleFoodPick(this)">★ 핵심 픽만</label></div>`;
   const nPick=FOOD_GUIDE.route.filter(x=>x.pick).length;
-  const meta=`<div class="food-guide-meta">검증 기준일 총 <b>${FOOD_GUIDE.route.length}개 스톱</b>(★핵심 픽 ${nPick}) — 상세 일정 탭의 동선에 같은 후보가 반영되어 있습니다. 카드의 설명을 누르면 전체 내용이 펼쳐집니다.</div>`;
+  const meta=`<div class="food-guide-meta">총 <b>${FOOD_GUIDE.route.length}개 스톱</b>(★핵심 픽 ${nPick}) — 상세 일정 탭의 동선에 같은 후보가 반영되어 있습니다. 카드의 설명을 누르면 전체 내용이 펼쳐집니다.</div>`;
   const accs=FOOD_GUIDE.groups.map(g=>`<details class="fg-acc" data-reg="${FG_GROUP_REG[g.title]||'all'}"><summary>${g.title}<span class="cnt">${g.items.length}</span></summary><ul>${g.items.map(x=>`<li><strong>${x.n}</strong>${x.d}</li>`).join('')}</ul></details>`).join('');
   const sources=FOOD_GUIDE.sources.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${t}</a>`).join('');
   el.innerHTML=`${meta}${tabs}${daysHtml}<div class="food-route-title" id="fgDictTitle">🧾 음식 사전 — 뭘 주문하지?</div><div class="fg-acc-grid" id="fgDictGrid">${accs}</div><details class="fg-src"><summary>출처 ${FOOD_GUIDE.sources.length}건 보기 ▾</summary><div class="food-source-list">${sources}</div></details>`;
