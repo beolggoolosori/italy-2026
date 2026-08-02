@@ -2280,7 +2280,7 @@ function clearDayMap(){
   currentDayMapItems=[];currentDayRouteItems=[];currentDayAnchorItems=[];
 }
 let recMarkers=[],currentDayMapItems=[],currentDayRouteItems=[],currentDayAnchorItems=[];
-let segFocus=null; // 행 클릭 구간 포커스 상태 ('day:si')
+let segFocus=null,segFocusPair=null; // 행 클릭 구간 포커스 상태 ('day:si') + 해당 스텝 쌍
 function toggleRecs(id,evt){
   if(evt)evt.stopPropagation();
   const el=document.getElementById(id);
@@ -2317,7 +2317,7 @@ function toggleSegRoute(ev,dayNum,si){
   const key=dayNum+':'+si;
   // 다시 클릭(비활성화) → 그날 전체 경로 복원
   if(segFocus===key){
-    segFocus=null;
+    segFocus=null;segFocusPair=null;
     document.querySelectorAll('.sched-row.active-row').forEach(r=>r.classList.remove('active-row'));
     showDayOnMap(day);return;
   }
@@ -2327,13 +2327,13 @@ function toggleSegRoute(ev,dayNum,si){
     if(isCoord(s.coords))flyToPoint(Number(s.coords[0]),Number(s.coords[1]),s.name||'');
     return;
   }
-  segFocus=key;
+  segFocus=key;segFocusPair={prev,cur:s};
   document.querySelectorAll('.sched-row.active-row').forEach(r=>r.classList.remove('active-row'));
   const tr=ev&&(ev.currentTarget&&ev.currentTarget.classList?ev.currentTarget:(ev.target&&ev.target.closest?ev.target.closest('tr'):null));
   if(tr&&tr.classList)tr.classList.add('active-row');
-  // 이 구간만 표시: 전체 라인 제거 + 다른 구간 화살표 숨김
+  // 이 구간만 표시: 전체 라인 교체 + 마커 리프레시(포커스 인지형이라 화살표는 이 구간만 그려짐)
   if(dayLine){dayMap.removeLayer(dayLine);dayLine=null;}
-  dayMarkers.forEach(m=>{if(m._isArrow)dayMap.removeLayer(m);});
+  refreshDayPointMarkers();
   const a=[Number(prev.coords[0]),Number(prev.coords[1])],b=[Number(s.coords[0]),Number(s.coords[1])];
   const rp=realPath([a,b]);const isReal=rp.length>2;
   dayLine=L.polyline(rp,isReal?{color:'#d97706',weight:4,opacity:.85}:{color:'#d97706',weight:3,opacity:.8,dashArray:'6 4'}).addTo(dayMap);
@@ -2406,9 +2406,12 @@ function markerLabelOffsets(points){
 }
 function renderRouteSupportMarkers(routeItems,anchorItems){
   if(!dayMap)return;
-  for(let i=1;i<routeItems.length;i++){
-    const prev=routeItems[i-1],cur=routeItems[i];
-    if(sameCoords(prev,cur))continue;
+  // 구간 포커스 중엔 화살표를 포커스 구간에만 — zoomend 리프레시가 전체 화살표를 되살리던 버그 방지
+  const pairs=[];
+  if(segFocus&&segFocusPair){pairs.push([segFocusPair.prev,segFocusPair.cur]);}
+  else{for(let i=1;i<routeItems.length;i++)pairs.push([routeItems[i-1],routeItems[i]]);}
+  for(const [prev,cur] of pairs){
+    if(!prev||!cur||sameCoords(prev,cur))continue;
     const a=[Number(prev.coords[0]),Number(prev.coords[1])],b=[Number(cur.coords[0]),Number(cur.coords[1])];
     // 화살표는 실경로의 거리 기준 중간 정점에, 방향은 그 지점의 국소 진행방향으로
     const path=realPath([a,b]);
@@ -2466,7 +2469,7 @@ function refreshDayPointMarkers(){
 }
 function showDayOnMap(day){
   if(!initDayMap())return;
-  segFocus=null;
+  segFocus=null;segFocusPair=null;
   document.querySelectorAll('.sched-row.active-row').forEach(r=>r.classList.remove('active-row'));
   clearDayMap();
   const items=day.sched.filter(isMapPoint);
