@@ -1029,17 +1029,18 @@ ul.bk-note li{margin:4px 0;line-height:1.62}
   --green:#0E8A44;--green-soft:#E6F3EA;--red:#CD212A;
   --gold:#B22432;--gold-soft:#FAE9EA;
 }
-/* 트리콜로레 스트라이프 — sticky 네비 상단에 상시 노출 */
-.navbar{border-top:3px solid transparent;border-image:linear-gradient(90deg,#0E8A44 0 33.4%,#F5F1E6 33.4% 66.7%,#CD212A 66.7% 100%) 1}
-.topbar{border-top:4px solid transparent;border-image:linear-gradient(90deg,#0E8A44 0 33.4%,#F5F1E6 33.4% 66.7%,#CD212A 66.7% 100%) 1}
+/* 트리콜로레 스트라이프 — 페이지 최상단 전용 바 (border-image는 하단 보더까지 오염시켜 폐기) */
+.tricolore-bar{height:4px;background:linear-gradient(90deg,#0E8A44 0 33.4%,#F5F1E6 33.4% 66.7%,#CD212A 66.7% 100%)}
+/* 탭 키보드 포커스 링 — 탭 안쪽으로 말아 넣어 밑줄·주변과 충돌 방지 */
+.sec-tab:focus-visible{outline:2px solid var(--brand);outline-offset:-6px;border-radius:10px}
 .brand .flag::before{background:linear-gradient(90deg,#0E8A44 0 33%,#FFFFFF 33% 66%,#CD212A 66% 100%);border:1px solid var(--line);height:10px;width:15px;border-radius:2px}
 /* 레드 액센트 배치 — 작은 면적 위주 */
 .day-num,.fs-dnum,.tr-gday{color:var(--red)}
 .cal-header.sun,.cal-cell.sun .cal-date{color:var(--red)}
 .fs-star{color:var(--red)}
 .fs-slot.s점심{background:#C0392B}
-.bk-tab.now{border-color:var(--red);color:#A61B23}
-.bk-tab.now.active{background:var(--red);border-color:var(--red)}
+.bk-tab.now:not(.active){border-color:var(--red);color:#A61B23}
+.bk-tab.now.active{background:var(--red);border-color:var(--red);color:#fff}
 .btl-chip.crit{border-left-color:var(--red)}
 .btl-dd.soon{color:var(--red)}.btl-dd.today{background:var(--red)}
 #dayMap{border-color:var(--brand)}
@@ -1110,6 +1111,40 @@ html[data-theme="dark"] #dayMap{background:linear-gradient(135deg,#1B1E1A,#23272
 html[data-theme="dark"] .fs-slot.s간식{background:#A8862F}
 html[data-theme="dark"] .book-link{background:var(--brand)}
 html[data-theme="dark"] .book-link:hover{background:var(--brand-d);color:#10130F}
+/* 다크 — 예약 행/뱃지, 예산 타일, 지도 저작권 표시 (라이트 하드코드 보정) */
+html[data-theme="dark"] .bk-row{background:var(--paper-2);border-color:var(--line)}
+html[data-theme="dark"] .bk-row.none{border-left-color:#555}
+html[data-theme="dark"] .bk-when{background:rgba(200,160,60,.16);color:#D8C285}
+html[data-theme="dark"] .bk-status.now{background:rgba(228,96,106,.16);color:#F0A2A6}
+html[data-theme="dark"] .bk-status.wait{background:rgba(200,160,60,.16);color:#D8C285}
+html[data-theme="dark"] .bk-status.done{background:rgba(76,181,119,.16);color:#8FD0A9}
+html[data-theme="dark"] .bk-status.none{background:#2A2F29;color:#9AA095}
+html[data-theme="dark"] .bgt-tile,html[data-theme="dark"] .bgt-group{background:var(--paper-2);border-color:var(--line)}
+html[data-theme="dark"] .bgt-tile.done .v{color:#8FD0A9}
+html[data-theme="dark"] .bgt-tile.lock .v{color:#D8C285}
+html[data-theme="dark"] .bgt-tile.est .v{color:#9AA095}
+html[data-theme="dark"] .bgt-st.done{background:rgba(76,181,119,.16);color:#8FD0A9}
+html[data-theme="dark"] .bgt-st.lock{background:rgba(200,160,60,.16);color:#D8C285}
+html[data-theme="dark"] .bgt-st.est{background:#2A2F29;color:#9AA095}
+html[data-theme="dark"] .bgt-fx{background:rgba(200,160,60,.12);color:#D8C285}
+html[data-theme="dark"] .leaflet-control-attribution{background:rgba(27,30,26,.8)!important;color:#9AA095}
+html[data-theme="dark"] .leaflet-control-attribution a{color:#8FD0A9}
+/* 다크 — 대비 보정 (자동 검수 결과) */
+html[data-theme="dark"] .route-city.overnight{background:#1F6B42;border-color:#1F6B42;box-shadow:none}
+html[data-theme="dark"] .bk-cat{background:#2A2F29;color:#9AA095}
+html[data-theme="dark"] .h-tag{background:#232A21;color:#B7C3A6;border-color:#3A4433}
+html[data-theme="dark"] .hotel-tip{color:#D8B98C}
+html[data-theme="dark"] .hotel-tip strong{color:#E8D3AE}
+html[data-theme="dark"] .book-link,html[data-theme="dark"] .booking-link,html[data-theme="dark"] .h-links a{background:#1F7A48}
+html[data-theme="dark"] .book-link:hover,html[data-theme="dark"] .h-links a:hover{background:#26955A;color:#fff}
+html[data-theme="dark"] .bk-tab.now.active{background:#A62830;border-color:#A62830;color:#fff}
+html[data-theme="dark"] .bk-tab.wait.active{background:#8A6D1A;border-color:#8A6D1A;color:#fff}
+html[data-theme="dark"] .bk-tab.done.active{background:#2E7A50;border-color:#2E7A50;color:#fff}
+html[data-theme="dark"] .bk-tab.none.active{background:#4A4F49;border-color:#4A4F49;color:#fff}
+/* 공통 — 아침/간식 슬롯 뱃지 대비 상향 */
+.fs-slot.s아침{background:#5F9376}
+.fs-slot.s간식{background:#A8862F}
+html[data-theme="dark"] .booking-detail-links a{background:#1F7A48}
 
 </style>
 </head>
@@ -3192,6 +3227,7 @@ function applyTheme(t){
 }
 /* 네비 우측 도구 주입 */
 (function(){
+  const bar=document.createElement('div');bar.className='tricolore-bar';document.body.prepend(bar);
   const st=document.querySelector('.section-tabs');if(!st)return;
   const w=document.createElement('div');w.className='nav-tools';
   ['ko','en','it'].forEach(l=>{
