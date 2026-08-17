@@ -1048,7 +1048,9 @@ ul.bk-note li{margin:4px 0;line-height:1.62}
 .route-arrow{color:var(--olive)}
 .day-block:hover{border-color:#BFD9C8}
 /* 네비 우측 도구 (언어/테마) */
-.nav-tools{margin-left:auto;display:flex;gap:5px;align-items:center;padding:7px 0}
+/* 히어로 최상단 우측 코너 고정 — 네비 탭은 한 줄 유지 */
+.nav-tools{position:absolute;top:12px;right:16px;z-index:5;display:flex;gap:5px;align-items:center}
+@media(max-width:640px){.nav-tools{top:8px;right:10px}.topbar-inner{padding-top:54px}}
 .lang-btn{font-family:inherit;font-size:11px;font-weight:800;letter-spacing:.03em;color:var(--muted);
   background:var(--surface-2);border:1px solid var(--line);border-radius:7px;padding:5px 9px;cursor:pointer;transition:.15s}
 .lang-btn:hover{color:var(--ink)}
@@ -1069,8 +1071,8 @@ html[data-guest] .hotel-tip,
 html[data-guest] .sl-banner,html[data-guest] .sl-disc,html[data-guest] .lc-notes,
 html[data-guest] .booking-detail-row,html[data-guest] .booking-meta,html[data-guest] .food-guide-meta,
 html[data-guest] .rec-desc,html[data-guest] .cal-hint,html[data-guest] .fg-src,html[data-guest] .fg-acc-grid,html[data-guest] #fgDictTitle,
-html[data-guest] #sec-apps,html[data-guest] #sec-budget,html[data-guest] #sec-compare{display:none}
-html[data-guest] .sec-tab[data-sec="apps"],html[data-guest] .sec-tab[data-sec="budget"],html[data-guest] .sec-tab[data-sec="compare"]{display:none}
+html[data-guest] #sec-apps,html[data-guest] #sec-budget,html[data-guest] #sec-compare,html[data-guest] #sec-fashion{display:none}
+html[data-guest] .sec-tab[data-sec="apps"],html[data-guest] .sec-tab[data-sec="budget"],html[data-guest] .sec-tab[data-sec="compare"],html[data-guest] .sec-tab[data-sec="fashion"]{display:none}
 /* ================== DARK MODE ================== */
 html[data-theme="dark"]{color-scheme:dark}
 html[data-theme="dark"]:root{
@@ -3457,10 +3459,10 @@ function applyTheme(t){
   localStorage.setItem('theme',t);
   const b=document.getElementById('themeBtn');if(b)b.textContent=t==='dark'?'☀️':'🌙';
 }
-/* 네비 우측 도구 주입 */
+/* 언어/테마 도구 — 히어로 최상단 우측 코너에 고정 주입 (네비 탭 줄과 분리) */
 (function(){
   const bar=document.createElement('div');bar.className='tricolore-bar';document.body.prepend(bar);
-  const st=document.querySelector('.section-tabs');if(!st)return;
+  const host=document.querySelector('.topbar')||document.body;
   const w=document.createElement('div');w.className='nav-tools';
   ['ko','en','it'].forEach(l=>{
     const b=document.createElement('button');b.type='button';b.className='lang-btn'+(l===LANG?' active':'');b.textContent=l.toUpperCase();
@@ -3470,7 +3472,7 @@ function applyTheme(t){
   const tb=document.createElement('button');tb.type='button';tb.className='theme-btn';tb.id='themeBtn';tb.title='Light / Dark';
   tb.onclick=()=>applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');
   w.appendChild(tb);
-  st.appendChild(w);
+  host.appendChild(w);
   applyTheme(localStorage.getItem('theme')||'light');
 })();
 
